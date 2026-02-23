@@ -94,6 +94,95 @@
     letter-spacing: 0.5px;
   }
 
+  /* HEADER LOGO */
+  .header-logo-row {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 16px;
+  }
+  .header-logo {
+    height: 90px;
+    width: auto;
+    display: block;
+    flex-shrink: 0;
+  }
+  .header-text { flex: 1; }
+
+  /* RACE SCHEDULE */
+  .race-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+  @media (max-width: 700px) {
+    .race-grid { grid-template-columns: 1fr; }
+  }
+  .race-card {
+    background: var(--gray-dark);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .race-number {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 2px;
+  }
+  .race-venue {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.15;
+  }
+  .race-location {
+    font-size: 12px;
+    color: var(--gray-light);
+  }
+  .race-details {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-top: 4px;
+  }
+  .race-detail {
+    font-size: 13px;
+    color: var(--white);
+  }
+  .race-detail span {
+    color: var(--gray-light);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-right: 6px;
+  }
+  .race-maps-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 8px;
+    font-size: 12px;
+    color: var(--orange);
+    text-decoration: none;
+    font-family: 'Barlow Condensed', sans-serif;
+    letter-spacing: 0.5px;
+  }
+  .race-maps-link:hover { text-decoration: underline; }
+  .race-note {
+    margin-top: 4px;
+    font-size: 11px;
+    color: var(--gray-light);
+    font-style: italic;
+  }
+
   /* KICKOFF CARD */
   .kickoff-card {
     background: var(--gray-dark);
@@ -261,7 +350,10 @@
 
 <nav class="site-nav">
   <div class="site-nav-inner">
-    <a href="index.html" class="site-nav-brand">Skyridge Jr Devo</a>
+    <a href="index.html" class="site-nav-brand">
+      <img src="assets/images/skyridge_jr-devo_logo.png" alt="" class="site-nav-logo">
+      Skyridge Jr Devo
+    </a>
     <a href="index.html" class="site-nav-link active">Home</a>
     <a href="tools/worksheet.html" class="site-nav-link">Worksheet</a>
     <a href="tools/tracker.html" class="site-nav-link">Tracker</a>
@@ -272,11 +364,16 @@
 
 <div class="header">
   <div class="header-inner">
-    <div class="header-eyebrow" id="header-eyebrow">Coaching Staff Hub</div>
-    <div class="header-title">Skyridge <span>Jr Devo</span></div>
-    <div class="header-sub" id="header-sub">NICA Utah High School Cycling League &nbsp;·&nbsp; Coaching Staff Resources</div>
-    <div class="header-coach" id="header-coach" style="display:none;">
-      Head Coach: <span id="hc-name"></span>
+    <div class="header-logo-row">
+      <img src="assets/images/skyridge_jr-devo_logo.png" alt="Skyridge Jr Devo Logo" class="header-logo">
+      <div class="header-text">
+        <div class="header-eyebrow" id="header-eyebrow">Coaching Staff Hub</div>
+        <div class="header-title">Skyridge <span>Jr Devo</span></div>
+        <div class="header-sub" id="header-sub">NICA Utah High School Cycling League &nbsp;·&nbsp; Coaching Staff Resources</div>
+        <div class="header-coach" id="header-coach" style="display:none;">
+          Head Coach: <span id="hc-name"></span>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -299,6 +396,12 @@
         </div>
       </div>
     </div>
+  </div>
+
+  <!-- RACE SCHEDULE -->
+  <div class="section-eyebrow">2026 Race Schedule</div>
+  <div class="race-grid" id="race-grid">
+    <div class="loading">Loading race data…</div>
   </div>
 
   <!-- TOOLS -->
@@ -371,6 +474,26 @@
     const essential = roles.filter(r => r.tier === 'essential').length;
     const rec = roles.filter(r => r.tier === 'recommended').length;
     document.getElementById('roles-meta').textContent = `${essential} essential · ${rec} recommended →`;
+
+    // Race schedule
+    const raceGrid = document.getElementById('race-grid');
+    if (s.races && s.races.length > 0) {
+      raceGrid.innerHTML = s.races.map(r => `
+        <div class="race-card">
+          <div class="race-number">Race ${r.number}</div>
+          <div class="race-venue">${r.venue}</div>
+          <div class="race-location">${r.location}</div>
+          <div class="race-details">
+            <div class="race-detail"><span>Date</span>${r.date}</div>
+            <div class="race-detail"><span>Start</span>${r.startTime}</div>
+          </div>
+          <a href="${r.mapsUrl}" target="_blank" rel="noopener" class="race-maps-link">&#x1F4CD; Map &rarr;</a>
+          ${r.notes ? `<div class="race-note">${r.notes}</div>` : ''}
+        </div>
+      `).join('');
+    } else {
+      raceGrid.innerHTML = '<div class="loading">No races scheduled yet.</div>';
+    }
 
     // Key dates
     const datesList = document.getElementById('dates-list');

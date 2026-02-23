@@ -9,19 +9,48 @@
       "phone": "(801) 555-0000"
     },
     "kickoffMeeting": {
-      "date": "February 26, 2026",
-      "time": "7:00 PM",
-      "location": "TBD",
-      "locationDetail": ""
+      "date": "Wednesday, February 25, 2026",
+      "time": "8:00–9:30 PM",
+      "location": "Coach Tap Garage",
+      "locationDetail": "252 E 2200 N, Lehi, UT 84043"
     },
     "keyDates": [
-      { "label": "Coaching Kickoff Meeting", "date": "Feb 26, 2026" },
+      { "label": "Coaching Kickoff Meeting", "date": "Feb 25, 2026" },
       { "label": "NICA Registration Opens", "date": "Apr 1, 2026" },
       { "label": "Practices Begin", "date": "Mid-May 2026" },
-      { "label": "Race 1", "date": "TBD" },
-      { "label": "Race 2", "date": "TBD" },
-      { "label": "Race 3", "date": "TBD" },
+      { "label": "Race 1 — Beaver Mountain", "date": "Aug 22, 2026" },
+      { "label": "Race 2 — Richfield", "date": "Sep 5, 2026" },
+      { "label": "Race 3 — Panguitch", "date": "Sep 26, 2026" },
       { "label": "End of Season", "date": "Oct 2026" }
+    ],
+    "races": [
+      {
+        "number": 1,
+        "venue": "Beaver Mountain Resort",
+        "location": "Logan, UT",
+        "date": "August 22, 2026",
+        "startTime": "2:30 PM",
+        "mapsUrl": "https://www.google.com/maps/search/Beaver+Mountain+Resort+Logan+Utah",
+        "notes": "No camping onsite"
+      },
+      {
+        "number": 2,
+        "venue": "Glenwood Hills",
+        "location": "Richfield, UT",
+        "date": "September 5, 2026",
+        "startTime": "2:30 PM",
+        "mapsUrl": "https://www.google.com/maps/search/Glenwood+Hills+Richfield+Utah",
+        "notes": ""
+      },
+      {
+        "number": 3,
+        "venue": "Red Canyon / Casto Canyon",
+        "location": "Panguitch, UT",
+        "date": "September 26, 2026",
+        "startTime": "2:30 PM",
+        "mapsUrl": "https://www.google.com/maps/search/Casto+Canyon+Trailhead+Panguitch+Utah",
+        "notes": ""
+      }
     ],
     "priorSeasonYear": 2025
   },

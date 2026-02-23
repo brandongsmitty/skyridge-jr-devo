@@ -28,7 +28,14 @@
     line-height: 1.6;
   }
 
+  .print-logo { display: none; }
   @media print {
+    .print-logo {
+      display: block;
+      height: 48px;
+      width: auto;
+      margin-bottom: 12px;
+    }
     body { background: #fff; color: #111; }
     .no-print { display: none !important; }
     .section { border: 1px solid #ccc; background: #fff; }
@@ -510,7 +517,10 @@
 
 <nav class="site-nav no-print">
   <div class="site-nav-inner">
-    <a href="../index.html" class="site-nav-brand">Skyridge Jr Devo</a>
+    <a href="../index.html" class="site-nav-brand">
+      <img src="../assets/images/skyridge_jr-devo_logo.png" alt="" class="site-nav-logo">
+      Skyridge Jr Devo
+    </a>
     <a href="../index.html" class="site-nav-link">Home</a>
     <a href="worksheet.html" class="site-nav-link active">Worksheet</a>
     <a href="tracker.html" class="site-nav-link">Tracker</a>
@@ -521,6 +531,7 @@
 
 <div class="header">
   <div class="header-inner">
+    <img src="../assets/images/skyridge_jr-devo_logo.png" alt="Skyridge Jr Devo" class="print-logo">
     <div class="header-eyebrow" id="header-eyebrow">2026 Season Prep</div>
     <div class="header-title">Skyridge <span>Jr Devo</span></div>
     <div class="header-sub" id="header-sub">NICA Utah High School Cycling League &nbsp;·&nbsp; Coach Pre-Meeting Worksheet</div>

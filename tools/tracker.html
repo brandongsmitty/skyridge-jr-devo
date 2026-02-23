@@ -28,7 +28,14 @@
     line-height: 1.5;
   }
 
+  .print-logo { display: none; }
   @media print {
+    .print-logo {
+      display: block;
+      height: 48px;
+      width: auto;
+      margin-bottom: 12px;
+    }
     body { background:#fff; color:#111; }
     .no-print { display:none !important; }
     .header { background:#1a1a1a !important; }
@@ -288,7 +295,10 @@
 
 <nav class="site-nav no-print">
   <div class="site-nav-inner">
-    <a href="../index.html" class="site-nav-brand">Skyridge Jr Devo</a>
+    <a href="../index.html" class="site-nav-brand">
+      <img src="../assets/images/skyridge_jr-devo_logo.png" alt="" class="site-nav-logo">
+      Skyridge Jr Devo
+    </a>
     <a href="../index.html" class="site-nav-link">Home</a>
     <a href="worksheet.html" class="site-nav-link">Worksheet</a>
     <a href="tracker.html" class="site-nav-link active">Tracker</a>
@@ -299,6 +309,7 @@
 
 <div class="header">
   <div class="header-inner">
+    <img src="../assets/images/skyridge_jr-devo_logo.png" alt="Skyridge Jr Devo" class="print-logo">
     <div class="header-eyebrow" id="header-eyebrow">Head Coach Reference — 2026 Season</div>
     <div class="header-title">Master Role <span>Assignment</span> Tracker</div>
     <div class="header-sub" id="header-sub">Skyridge Jr Devo &nbsp;·&nbsp; Utah High School Cycling League &nbsp;·&nbsp; NICA</div>
