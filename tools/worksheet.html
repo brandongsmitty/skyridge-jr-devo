@@ -989,6 +989,19 @@ Completed: ${new Date().toLocaleDateString('en-US', {month:'long', day:'numeric'
   document.getElementById('copyModal').addEventListener('click', function(e) {
     if (e.target === this) this.classList.remove('active');
   });
+
+  // Make all radio toggle-groups deselectable (click selected option again to clear)
+  document.querySelectorAll('.toggle-group input[type="radio"], .time-options input[type="radio"]').forEach(radio => {
+    radio.addEventListener('click', function() {
+      if (this.dataset.wasChecked === 'true') {
+        this.checked = false;
+        this.dataset.wasChecked = 'false';
+      } else {
+        document.querySelectorAll(`input[name="${this.name}"]`).forEach(r => r.dataset.wasChecked = 'false');
+        this.dataset.wasChecked = 'true';
+      }
+    });
+  });
 </script>
 </body>
 </html>
