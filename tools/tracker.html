@@ -320,11 +320,15 @@
       </div>
       <div class="header-stat">
         <div class="header-stat-num" id="stat-filled">0</div>
-        <div class="header-stat-label">Filled</div>
+        <div class="header-stat-label">Roles Filled</div>
+      </div>
+      <div class="header-stat">
+        <div class="header-stat-num" id="stat-schools-assigned">0</div>
+        <div class="header-stat-label">Schools Assigned</div>
       </div>
       <div class="header-stat">
         <div class="header-stat-num" id="stat-schools">—</div>
-        <div class="header-stat-label">Schools</div>
+        <div class="header-stat-label">Total Schools</div>
       </div>
       <div class="header-stat">
         <div class="header-stat-num" id="stat-coaches">7</div>
@@ -639,6 +643,7 @@
     }).length;
     document.getElementById('schools-progress-fill').style.width = schoolsTotal ? (schoolsAssigned/schoolsTotal*100) + '%' : '0%';
     document.getElementById('schools-progress-pct').textContent = schoolsAssigned + ' / ' + schoolsTotal;
+    document.getElementById('stat-schools-assigned').textContent = schoolsAssigned;
   }
 
   function generateSummary() {
