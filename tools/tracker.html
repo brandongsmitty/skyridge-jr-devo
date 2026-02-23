@@ -344,6 +344,14 @@
     <div class="progress-pct" id="progress-pct">0 / —</div>
   </div>
 
+  <div class="progress-bar-wrap">
+    <div class="progress-bar-label">Schools Assigned</div>
+    <div class="progress-track">
+      <div class="progress-fill" id="schools-progress-fill" style="width:0%"></div>
+    </div>
+    <div class="progress-pct" id="schools-progress-pct">0 / —</div>
+  </div>
+
   <!-- ROLE ASSIGNMENTS -->
   <div class="section">
     <div class="section-header">
@@ -580,6 +588,12 @@
     });
     schoolsTbody.innerHTML = [...elemRows, ...msRows].join('');
 
+    // Attach input listeners for school outreach progress
+    document.querySelectorAll('#schools-table .coach-input').forEach(input => {
+      input.addEventListener('input', updateProgress);
+    });
+
+    updateProgress();
   }).catch(() => {});
 
   function escapeHtml(str) {
@@ -607,6 +621,7 @@
   }
 
   function updateProgress() {
+    // Roles bar
     const filled = document.querySelectorAll('#roles-table .status-filled').length;
     const total = document.querySelectorAll('#roles-table tbody tr').length;
     document.getElementById('stat-filled').textContent = filled;
@@ -614,6 +629,16 @@
     document.getElementById('progress-pct').textContent = filled + ' / ' + total;
     const assignedFilled = Array.from(document.querySelectorAll('#roles-table .assigned-coach')).filter(i=>i.value.trim()).length;
     document.getElementById('roles-count').textContent = assignedFilled + ' of ' + total + ' assigned';
+
+    // Schools bar
+    const schoolRows = document.querySelectorAll('#schools-table tbody tr');
+    const schoolsTotal = schoolRows.length;
+    const schoolsAssigned = Array.from(schoolRows).filter(row => {
+      const input = row.querySelector('input.coach-input');
+      return input && input.value.trim();
+    }).length;
+    document.getElementById('schools-progress-fill').style.width = schoolsTotal ? (schoolsAssigned/schoolsTotal*100) + '%' : '0%';
+    document.getElementById('schools-progress-pct').textContent = schoolsAssigned + ' / ' + schoolsTotal;
   }
 
   function generateSummary() {
