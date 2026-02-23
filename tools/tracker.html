@@ -289,6 +289,29 @@
   }
   .toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
   .divider { height:1px; background:var(--border); margin:16px 0; }
+
+  .stats-strip {
+    background: #111;
+    border-bottom: 1px solid #2a2a2a;
+    position: sticky;
+    top: 46px; /* nav height */
+    z-index: 150;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+  }
+  .stats-strip.visible { opacity: 1; pointer-events: auto; }
+  .stats-strip-inner {
+    max-width: 960px; margin: 0 auto; padding: 0 24px;
+    display: flex; align-items: center; gap: 0; height: 38px;
+  }
+  .strip-stat {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px; color: #888; white-space: nowrap;
+    padding: 0 16px;
+  }
+  .strip-stat span { color: #F26A1B; font-weight: 700; margin-right: 5px; }
+  .strip-divider { width: 1px; height: 16px; background: #2a2a2a; flex-shrink: 0; }
 </style>
 </head>
 <body>
@@ -307,6 +330,18 @@
   </div>
 </nav>
 
+<div class="stats-strip no-print" id="stats-strip">
+  <div class="stats-strip-inner">
+    <div class="strip-stat"><span id="strip-total-roles">—</span> Total Roles</div>
+    <div class="strip-divider"></div>
+    <div class="strip-stat"><span id="strip-roles-filled">0</span> Roles Filled</div>
+    <div class="strip-divider"></div>
+    <div class="strip-stat"><span id="strip-total-schools">—</span> Total Schools</div>
+    <div class="strip-divider"></div>
+    <div class="strip-stat"><span id="strip-schools-assigned">0</span> Schools Assigned</div>
+  </div>
+</div>
+
 <div class="header">
   <div class="header-inner">
     <img src="../assets/images/skyridge_jr-devo_logo.png" alt="Skyridge Jr Devo" class="print-logo">
@@ -323,16 +358,12 @@
         <div class="header-stat-label">Roles Filled</div>
       </div>
       <div class="header-stat">
-        <div class="header-stat-num" id="stat-schools-assigned">0</div>
-        <div class="header-stat-label">Schools Assigned</div>
-      </div>
-      <div class="header-stat">
         <div class="header-stat-num" id="stat-schools">—</div>
         <div class="header-stat-label">Total Schools</div>
       </div>
       <div class="header-stat">
-        <div class="header-stat-num" id="stat-coaches">7</div>
-        <div class="header-stat-label">Coaches</div>
+        <div class="header-stat-num" id="stat-schools-assigned">0</div>
+        <div class="header-stat-label">Schools Assigned</div>
       </div>
     </div>
   </div>
@@ -592,10 +623,9 @@
     });
     schoolsTbody.innerHTML = [...elemRows, ...msRows].join('');
 
-    // Attach input listeners for school outreach progress
-    document.querySelectorAll('#schools-table .coach-input').forEach(input => {
-      input.addEventListener('input', updateProgress);
-    });
+    // Set static strip totals once after load
+    document.getElementById('strip-total-roles').textContent = totalRoles;
+    document.getElementById('strip-total-schools').textContent = schoolCount;
 
     updateProgress();
   }).catch(() => {});
@@ -634,16 +664,16 @@
     const assignedFilled = Array.from(document.querySelectorAll('#roles-table .assigned-coach')).filter(i=>i.value.trim()).length;
     document.getElementById('roles-count').textContent = assignedFilled + ' of ' + total + ' assigned';
 
-    // Schools bar
-    const schoolRows = document.querySelectorAll('#schools-table tbody tr');
-    const schoolsTotal = schoolRows.length;
-    const schoolsAssigned = Array.from(schoolRows).filter(row => {
-      const input = row.querySelector('input.coach-input');
-      return input && input.value.trim();
-    }).length;
+    // Schools bar — count Filled status badges (not coach name inputs)
+    const schoolsTotal = document.querySelectorAll('#schools-table tbody tr').length;
+    const schoolsAssigned = document.querySelectorAll('#schools-table .status-filled').length;
     document.getElementById('schools-progress-fill').style.width = schoolsTotal ? (schoolsAssigned/schoolsTotal*100) + '%' : '0%';
     document.getElementById('schools-progress-pct').textContent = schoolsAssigned + ' / ' + schoolsTotal;
     document.getElementById('stat-schools-assigned').textContent = schoolsAssigned;
+
+    // Sync sticky strip
+    document.getElementById('strip-roles-filled').textContent = filled;
+    document.getElementById('strip-schools-assigned').textContent = schoolsAssigned;
   }
 
   function generateSummary() {
@@ -694,6 +724,12 @@
   document.getElementById('copyModal').addEventListener('click', function(e) {
     if (e.target === this) this.classList.remove('active');
   });
+
+  // Show sticky strip once header-meta scrolls out of view
+  const observer = new IntersectionObserver(([entry]) => {
+    document.getElementById('stats-strip').classList.toggle('visible', !entry.isIntersecting);
+  }, { threshold: 0 });
+  observer.observe(document.querySelector('.header-meta'));
 </script>
 </body>
 </html>
