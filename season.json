@@ -26,29 +26,29 @@
     "races": [
       {
         "number": 1,
-        "venue": "Beaver Mountain Resort",
+        "venue": "Beaver Mountain",
         "location": "Logan, UT",
         "date": "August 22, 2026",
         "startTime": "2:30 PM",
-        "mapsUrl": "https://www.google.com/maps/search/Beaver+Mountain+Resort+Logan+Utah",
+        "mapsUrl": "https://maps.app.goo.gl/JsodyaLQBEbtY3qF7",
         "notes": "No camping onsite"
       },
       {
         "number": 2,
-        "venue": "Glenwood Hills",
+        "venue": "Richfield",
         "location": "Richfield, UT",
         "date": "September 5, 2026",
         "startTime": "2:30 PM",
-        "mapsUrl": "https://www.google.com/maps/search/Glenwood+Hills+Richfield+Utah",
+        "mapsUrl": "https://maps.app.goo.gl/a9JumiNrhChDbiZq9",
         "notes": ""
       },
       {
         "number": 3,
-        "venue": "Red Canyon / Casto Canyon",
+        "venue": "Panguitch",
         "location": "Panguitch, UT",
         "date": "September 26, 2026",
         "startTime": "2:30 PM",
-        "mapsUrl": "https://www.google.com/maps/search/Casto+Canyon+Trailhead+Panguitch+Utah",
+        "mapsUrl": "https://maps.app.goo.gl/V4wTRHqz7kEKderc6",
         "notes": ""
       }
     ],
