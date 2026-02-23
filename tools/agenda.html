@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skyridge Jr Devo — Coaching Staff Kickoff Agenda</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/shared.css">
+<style>
+  :root {
+    --orange: #E85D0C;
+    --orange-light: #F97316;
+    --orange-pale: #FFF0E6;
+    --orange-mid: #FDDCCA;
+    --black: #111111;
+    --gray-dark: #333333;
+    --gray-mid: #666666;
+    --gray-light: #999999;
+    --gray-bg: #F6F4F1;
+    --gray-line: #E4E0DA;
+    --white: #FFFFFF;
+    --green: #2D7D52;
+    --green-pale: #EAF5EE;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--gray-bg);
+    color: var(--gray-dark);
+    font-family: 'Barlow', sans-serif;
+    font-size: 15px;
+    line-height: 1.65;
+  }
+
+  @media print {
+    body { background: #fff; }
+    .page-wrap { padding: 0; }
+    .header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .segment-num { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .cert-box { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .timing-table th { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+
+  .page-wrap {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 20px 60px;
+  }
+
+  .header {
+    background: var(--black);
+    padding: 36px 40px 30px;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 32px;
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--orange) 0%, var(--orange-light) 100%);
+  }
+  .header-accent {
+    position: absolute;
+    top: -30px; right: -30px;
+    width: 180px; height: 180px;
+    border: 24px solid rgba(232,93,12,0.12);
+    border-radius: 50%;
+  }
+  .header-inner { max-width:780px; margin:0 auto; padding:0 20px; }
+  .header-eyebrow {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--orange-light);
+    margin-bottom: 8px;
+  }
+  .header-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 40px;
+    font-weight: 800;
+    line-height: 1;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .header-title span { color: var(--orange-light); }
+  .header-sub {
+    font-size: 13px;
+    color: #aaaaaa;
+    margin-top: 10px;
+  }
+  .header-chips {
+    display: flex;
+    gap: 10px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+  }
+  .chip {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 3px;
+    padding: 5px 12px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #cccccc;
+  }
+  .chip.highlight {
+    background: rgba(232,93,12,0.2);
+    border-color: rgba(232,93,12,0.35);
+    color: var(--orange-light);
+  }
+
+  .pre-note {
+    background: var(--orange-pale);
+    border: 1px solid var(--orange-mid);
+    border-left: 4px solid var(--orange);
+    border-radius: 4px;
+    padding: 14px 18px;
+    font-size: 14px;
+    color: #7a3a10;
+    margin-bottom: 28px;
+    line-height: 1.6;
+  }
+  .pre-note strong { color: var(--orange); }
+
+  .section-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gray-light);
+    margin-bottom: 12px;
+    padding-left: 2px;
+  }
+
+  .agenda-item {
+    background: var(--white);
+    border: 1px solid var(--gray-line);
+    border-radius: 6px;
+    margin-bottom: 14px;
+    overflow: hidden;
+  }
+  .agenda-header {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    border-bottom: 1px solid var(--gray-line);
+  }
+  .segment-num {
+    background: var(--orange);
+    color: #fff;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 12px 16px;
+    min-width: 52px;
+    text-align: center;
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .segment-num.muted { background: #DDDDDD; color: #888; }
+  .segment-title-wrap { padding: 12px 16px; flex: 1; }
+  .segment-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    color: var(--black);
+    line-height: 1.1;
+  }
+  .segment-time { font-size: 12px; color: var(--gray-light); margin-top: 2px; }
+  .segment-duration {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--orange);
+    padding: 12px 18px;
+    text-align: right;
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+  .segment-duration span {
+    display: block;
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--gray-light);
+    text-align: center;
+  }
+  .agenda-body {
+    padding: 16px 20px;
+    font-size: 14px;
+    color: var(--gray-dark);
+    line-height: 1.7;
+  }
+  .agenda-body p + p { margin-top: 10px; }
+  .agenda-body strong { color: var(--black); }
+
+  .role-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 12px;
+  }
+  .role-pill {
+    background: var(--orange-pale);
+    border: 1px solid var(--orange-mid);
+    border-radius: 3px;
+    padding: 4px 10px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #7a3a10;
+  }
+  .role-pill.rec {
+    background: #F4F4F4;
+    border-color: #DDDDDD;
+    color: var(--gray-mid);
+  }
+  .role-type-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin: 12px 0 6px;
+  }
+  .role-type-label.rec { color: var(--gray-light); }
+
+  .school-group { margin-top: 12px; }
+  .school-group-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 6px;
+  }
+  .school-group-label.ms { color: #4A7BBB; }
+  .school-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .school-chip {
+    background: var(--orange-pale);
+    border: 1px solid var(--orange-mid);
+    border-radius: 3px;
+    padding: 4px 10px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #7a3a10;
+  }
+  .school-chip.ms {
+    background: #EEF3FA;
+    border-color: #C8D9EF;
+    color: #2A5080;
+  }
+
+  .cert-box {
+    background: var(--green-pale);
+    border: 1px solid #B5DCCA;
+    border-left: 4px solid var(--green);
+    border-radius: 4px;
+    padding: 14px 18px;
+    font-size: 14px;
+    color: #1a4d31;
+    margin-top: 14px;
+    line-height: 1.65;
+  }
+  .cert-box strong { color: var(--green); }
+
+  hr {
+    border: none;
+    border-top: 1px solid var(--gray-line);
+    margin: 28px 0;
+  }
+
+  .timing-wrap {
+    background: var(--white);
+    border: 1px solid var(--gray-line);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-top: 8px;
+  }
+  .timing-table { width: 100%; border-collapse: collapse; }
+  .timing-table th {
+    background: var(--black);
+    color: #aaa;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 10px 16px;
+    text-align: left;
+  }
+  .timing-table td {
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--gray-line);
+    font-size: 14px;
+  }
+  .timing-table tr:last-child td {
+    border-bottom: none;
+    font-weight: 600;
+    color: var(--black);
+    background: #FAF8F5;
+  }
+  .timing-table tr:nth-child(even) td { background: #FAFAFA; }
+  .timing-table tr:last-child td:last-child { color: var(--orange); }
+  .time-col { color: var(--gray-light); font-size: 13px; }
+  .dur-col {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--orange);
+  }
+
+  .materials-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 8px;
+  }
+  .material-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--white);
+    border: 1px solid var(--gray-line);
+    border-radius: 4px;
+    padding: 10px 14px;
+    font-size: 13px;
+    color: var(--gray-dark);
+  }
+  .material-item::before {
+    content: '';
+    display: block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--orange-mid);
+    border-radius: 3px;
+    flex-shrink: 0;
+  }
+
+  .footer {
+    text-align: center;
+    font-size: 12px;
+    color: var(--gray-light);
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid var(--gray-line);
+  }
+  .footer strong { color: var(--orange); }
+
+  #agenda-segments, #timing-tbody, #materials-list {
+    /* populated by JS */
+  }
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="site-nav-inner">
+    <a href="../index.html" class="site-nav-brand">Skyridge Jr Devo</a>
+    <a href="../index.html" class="site-nav-link">Home</a>
+    <a href="worksheet.html" class="site-nav-link">Worksheet</a>
+    <a href="tracker.html" class="site-nav-link">Tracker</a>
+    <a href="agenda.html" class="site-nav-link active">Agenda</a>
+    <a href="roles.html" class="site-nav-link">Roles</a>
+  </div>
+</nav>
+
+<div class="header">
+  <div class="header-accent"></div>
+  <div class="header-inner">
+    <div class="header-eyebrow" id="header-eyebrow">2026 Season</div>
+    <div class="header-title">Skyridge <span>Jr Devo</span></div>
+    <div class="header-sub" id="header-sub">Coaching Staff Kickoff &nbsp;·&nbsp; Utah High School Cycling League &nbsp;·&nbsp; NICA</div>
+    <div class="header-chips" id="header-chips">
+      <div class="chip highlight">90 Minutes</div>
+      <div class="chip" id="chip-segments">7 Segments</div>
+      <div class="chip" id="chip-roles">10 Roles</div>
+      <div class="chip" id="chip-schools">9 Schools</div>
+    </div>
+  </div>
+</div>
+
+<div class="page-wrap">
+
+  <div class="pre-note">
+    <strong>Before the meeting:</strong> Please complete the Coach Worksheet and bring it with you. It's a quick one — takes about 10 minutes. The info you provide helps us move through role and school assignments efficiently on the day.
+  </div>
+
+  <div class="section-label">Agenda</div>
+
+  <div id="agenda-segments">
+    <div style="color:#999;font-style:italic;font-size:14px;padding:20px 0;">Loading agenda…</div>
+  </div>
+
+  <hr>
+
+  <div class="section-label">Timing at a Glance</div>
+  <div class="timing-wrap">
+    <table class="timing-table">
+      <thead>
+        <tr>
+          <th>Segment</th>
+          <th>Time</th>
+          <th>Duration</th>
+        </tr>
+      </thead>
+      <tbody id="timing-tbody">
+        <tr><td colspan="3" style="color:#999;font-style:italic;">Loading…</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <hr>
+
+  <div class="section-label">Materials to Have on Hand</div>
+  <div class="materials-grid" id="materials-list">
+    <div class="material-item" style="color:#999;font-style:italic;">Loading…</div>
+  </div>
+
+  <div class="footer" id="footer">
+    <strong>Skyridge Jr Devo</strong> &nbsp;·&nbsp; NICA Utah High School Cycling League &nbsp;·&nbsp; 2026 Season
+  </div>
+
+</div>
+
+<script src="../assets/js/season-loader.js"></script>
+<script>
+  function interpolate(str, season) {
+    return str
+      .replace(/\{\{year\}\}/g, season.year)
+      .replace(/\{\{priorSeasonYear\}\}/g, season.priorSeasonYear || (season.year - 1));
+  }
+
+  loadSeason().then(data => {
+    const s = data.season;
+    const roles = data.roles || [];
+    const schools = data.schools || { elementary: [], middle: [] };
+    const segments = (data.agenda && data.agenda.segments) || [];
+    const materials = (data.agenda && data.agenda.materials) || [];
+
+    // Header
+    document.getElementById('header-eyebrow').textContent = `${s.year} Season`;
+    const km = s.kickoffMeeting;
+    if (km && km.date) {
+      const loc = [km.location, km.locationDetail].filter(Boolean).join(' · ') || '';
+      const details = [km.date, km.time, loc].filter(Boolean).join(' &nbsp;·&nbsp; ');
+      document.getElementById('header-sub').innerHTML = `Coaching Staff Kickoff &nbsp;·&nbsp; ${details}`;
+    }
+
+    // Chips
+    const essential = roles.filter(r => r.tier === 'essential');
+    const recommended = roles.filter(r => r.tier === 'recommended');
+    const schoolCount = (schools.elementary || []).length + (schools.middle || []).length;
+    document.getElementById('chip-segments').textContent = `${segments.length} Segments`;
+    document.getElementById('chip-roles').textContent = `${roles.length} Roles`;
+    document.getElementById('chip-schools').textContent = `${schoolCount} Schools`;
+
+    // Build agenda items
+    const segmentsHTML = segments.map((seg, i) => {
+      const num = String(i + 1).padStart(2, '0');
+      const isLast = i === segments.length - 1;
+      const numClass = isLast ? 'segment-num muted' : 'segment-num';
+      const durColor = isLast ? 'style="color:var(--gray-mid);"' : '';
+      const title = interpolate(seg.title, s);
+      const desc = interpolate(seg.description, s);
+
+      // Special segment body content
+      let extraBody = '';
+
+      // Role assignments segment (segment 3, index 2 by typical order — detect by title)
+      if (title.toLowerCase().includes('role assignment')) {
+        extraBody = `
+          <div class="role-type-label">Essential Roles (${essential.length})</div>
+          <div class="role-list">
+            ${essential.map(r => `<span class="role-pill">${r.name}</span>`).join('')}
+          </div>
+          <div class="role-type-label rec">Highly Recommended (${recommended.length})</div>
+          <div class="role-list">
+            ${recommended.map(r => `<span class="role-pill rec">${r.name}</span>`).join('')}
+          </div>`;
+      }
+
+      // School outreach segment — detect by title
+      if (title.toLowerCase().includes('school outreach')) {
+        const elem = schools.elementary || [];
+        const ms = schools.middle || [];
+        const msNote = ms.find(sc => sc.notes);
+        extraBody = `
+          <div class="school-group">
+            <div class="school-group-label">Elementary (${elem.length})</div>
+            <div class="school-chips">
+              ${elem.map(sc => `<span class="school-chip">${sc.name}</span>`).join('')}
+            </div>
+          </div>
+          <div class="school-group" style="margin-top:10px;">
+            <div class="school-group-label ms">Middle Schools (${ms.length})</div>
+            <div class="school-chips">
+              ${ms.map(sc => `<span class="school-chip ms">${sc.name}</span>`).join('')}
+            </div>
+          </div>
+          ${msNote ? `<p style="margin-top:12px;">One note on ${msNote.name}: ${msNote.notes}</p>` : ''}`;
+      }
+
+      // What's next — add cert box
+      if (title.toLowerCase().includes("what's next") || title.toLowerCase().includes('whats next')) {
+        extraBody = `
+          <div class="cert-box">
+            <strong>Ride Leader Certifications:</strong> Practices kick off mid-May, and everyone needs to be current with their NICA ride leader certification before then. If you're not sure where you stand, check your Pitzone status and get ahead of anything that needs to be renewed.
+          </div>
+          <p style="margin-top:14px;">Thanks for being here and for what you give to this team. The riders are lucky to have you.</p>`;
+      }
+
+      return `
+        <div class="agenda-item">
+          <div class="agenda-header">
+            <div class="${numClass}">${num}</div>
+            <div class="segment-title-wrap">
+              <div class="segment-title">${title}</div>
+              <div class="segment-time">${seg.start} – ${seg.end}</div>
+            </div>
+            <div class="segment-duration" ${durColor}>${seg.duration} <span>min</span></div>
+          </div>
+          <div class="agenda-body">
+            <p>${desc}</p>
+            ${extraBody}
+          </div>
+        </div>`;
+    }).join('');
+
+    document.getElementById('agenda-segments').innerHTML = segmentsHTML;
+
+    // Timing table
+    const totalMin = segments.reduce((sum, seg) => sum + (seg.duration || 0), 0);
+    const timingRows = segments.map(seg => {
+      const title = interpolate(seg.title, s);
+      return `
+        <tr>
+          <td>${title}</td>
+          <td class="time-col">${seg.start} – ${seg.end}</td>
+          <td class="dur-col">${seg.duration} min</td>
+        </tr>`;
+    }).join('');
+    document.getElementById('timing-tbody').innerHTML = timingRows + `
+      <tr>
+        <td><strong>Total</strong></td>
+        <td class="time-col"></td>
+        <td class="dur-col">${totalMin} min</td>
+      </tr>`;
+
+    // Materials list
+    document.getElementById('materials-list').innerHTML = materials.map(m =>
+      `<div class="material-item">${interpolate(m, s)}</div>`
+    ).join('');
+
+    // Footer
+    document.getElementById('footer').innerHTML =
+      `<strong>${s.teamName}</strong> &nbsp;·&nbsp; ${s.league} &nbsp;·&nbsp; ${s.year} Season`;
+
+  }).catch(() => {});
+</script>
+</body>
+</html>

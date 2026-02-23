@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skyridge Jr Devo — Master Role Assignment Tracker</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/shared.css">
+<style>
+  :root {
+    --black: #0D0D0D;
+    --orange: #F26A1B;
+    --orange-light: #FF8C42;
+    --white: #F5F0EB;
+    --gray-dark: #1A1A1A;
+    --gray-mid: #242424;
+    --gray-light: #888;
+    --border: #2E2E2E;
+    --green: #3DAA6A;
+    --yellow: #D4A017;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Barlow', sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  @media print {
+    body { background:#fff; color:#111; }
+    .no-print { display:none !important; }
+    .header { background:#1a1a1a !important; }
+    .section { border:1px solid #ccc; background:#fff; }
+    .section-header { background:#f0f0f0 !important; color:#111 !important; }
+    .section-title { color:#111 !important; }
+    th { background:#1a1a1a !important; }
+    td, th { border:1px solid #ccc !important; }
+    input, select { border:1px solid #999 !important; background:#fff !important; color:#111 !important; }
+    .status-badge { border:1px solid #ccc !important; }
+    tr:nth-child(even) { background:#f9f9f9 !important; }
+  }
+
+  .page-wrap { max-width: 960px; margin: 0 auto; padding: 0 24px 80px; }
+
+  .header {
+    background: linear-gradient(135deg, #111 0%, #1c1c1c 60%, #2a1500 100%);
+    border-bottom: 3px solid var(--orange);
+    padding: 32px 40px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content:'';
+    position:absolute; top:-40px; right:-40px;
+    width:200px; height:200px;
+    border:28px solid rgba(242,106,27,0.07);
+    border-radius:50%;
+  }
+  .header-inner { max-width:960px; margin:0 auto; position:relative; }
+  .header-eyebrow {
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:11px; letter-spacing:3px; text-transform:uppercase;
+    color:var(--orange); margin-bottom:6px;
+  }
+  .header-title {
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:38px; font-weight:800; line-height:1;
+    color:var(--white); text-transform:uppercase;
+  }
+  .header-title span { color:var(--orange); }
+  .header-sub { font-size:13px; color:var(--gray-light); margin-top:8px; }
+  .header-meta { display:flex; gap:20px; margin-top:14px; flex-wrap:wrap; }
+  .header-stat {
+    background:rgba(242,106,27,0.1);
+    border:1px solid rgba(242,106,27,0.2);
+    border-radius:4px;
+    padding:8px 16px;
+  }
+  .header-stat-num {
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:22px; font-weight:800; color:var(--orange); line-height:1;
+  }
+  .header-stat-label {
+    font-size:11px; color:var(--gray-light); text-transform:uppercase; letter-spacing:1px;
+  }
+
+  .progress-bar-wrap {
+    background: var(--gray-mid);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 16px 20px;
+    margin-top: 24px;
+    display:flex; align-items:center; gap:16px;
+  }
+  .progress-bar-label {
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:12px; letter-spacing:1.5px; text-transform:uppercase;
+    color:var(--gray-light); white-space:nowrap;
+  }
+  .progress-track {
+    flex:1; height:8px; background:#111; border-radius:4px; overflow:hidden;
+  }
+  .progress-fill {
+    height:100%; background: var(--orange);
+    border-radius:4px; transition:width 0.4s ease;
+  }
+  .progress-pct {
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:16px; font-weight:700; color:var(--orange);
+    white-space:nowrap; min-width:50px; text-align:right;
+  }
+
+  .section {
+    background: var(--gray-dark);
+    border: 1px solid var(--border);
+    border-radius:6px;
+    margin-top:24px;
+    overflow:hidden;
+  }
+  .section-header {
+    background: var(--gray-mid);
+    padding:12px 20px;
+    display:flex; align-items:center; gap:12px;
+    border-bottom:1px solid var(--border);
+  }
+  .section-num {
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:11px; font-weight:700; letter-spacing:2px;
+    color:var(--orange); text-transform:uppercase;
+    background:rgba(242,106,27,0.12);
+    padding:3px 8px; border-radius:2px;
+  }
+  .section-title {
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:17px; font-weight:700; letter-spacing:0.5px;
+    text-transform:uppercase; color:var(--white); flex:1;
+  }
+  .section-count { font-size:12px; color:var(--gray-light); }
+
+  .table-wrap { overflow-x:auto; }
+  table { width:100%; border-collapse:collapse; }
+  th {
+    background:#111; padding:10px 16px;
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:11px; letter-spacing:1.5px; text-transform:uppercase;
+    color:var(--gray-light); text-align:left;
+    border-bottom:1px solid var(--border);
+  }
+  td {
+    padding:10px 16px;
+    border-bottom:1px solid var(--border);
+    vertical-align:middle;
+  }
+  tr:last-child td { border-bottom:none; }
+  tr:hover td { background:rgba(255,255,255,0.02); }
+  tr:nth-child(even) td { background:rgba(255,255,255,0.01); }
+
+  .role-name-cell {
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:15px; font-weight:700; color:var(--white);
+    text-transform:uppercase; letter-spacing:0.3px;
+  }
+  .role-type {
+    display:inline-block;
+    font-size:10px; font-weight:700; letter-spacing:1px;
+    text-transform:uppercase; padding:2px 7px; border-radius:2px;
+    margin-left:8px; vertical-align:middle;
+  }
+  .type-essential { background:rgba(242,106,27,0.15); color:var(--orange); }
+  .type-rec { background:rgba(100,100,100,0.15); color:#888; }
+  .time-note { font-size:11px; color:var(--gray-light); margin-top:3px; }
+
+  input.coach-input, select.coach-select {
+    background:#111; border:1px solid var(--border); border-radius:3px;
+    color:var(--white); font-family:'Barlow',sans-serif; font-size:13px;
+    padding:7px 10px; width:100%; outline:none;
+    transition:border-color 0.15s;
+  }
+  input.coach-input:focus, select.coach-select:focus { border-color:var(--orange); }
+  select.coach-select option { background:#111; }
+
+  .status-badge {
+    display:inline-block;
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:11px; font-weight:700; letter-spacing:1px;
+    text-transform:uppercase; padding:3px 9px; border-radius:2px;
+    cursor:pointer; user-select:none;
+    transition: all 0.15s;
+  }
+  .status-open { background:rgba(100,100,100,0.12); color:#888; border:1px solid #444; }
+  .status-filled { background:rgba(61,170,106,0.12); color:var(--green); border:1px solid rgba(61,170,106,0.3); }
+  .status-tentative { background:rgba(212,160,23,0.12); color:var(--yellow); border:1px solid rgba(212,160,23,0.3); }
+
+  td textarea.notes-input {
+    background:#111; border:1px solid var(--border); border-radius:3px;
+    color:var(--white); font-family:'Barlow',sans-serif; font-size:12px;
+    padding:6px 10px; width:100%; outline:none; resize:none;
+    min-height:36px; line-height:1.4;
+    transition:border-color 0.15s;
+  }
+  td textarea.notes-input:focus { border-color:var(--orange); }
+
+  .school-type-tag {
+    display:inline-block;
+    font-size:10px; font-weight:700; letter-spacing:1px;
+    text-transform:uppercase; padding:2px 6px; border-radius:2px;
+  }
+  .tag-elem { background:rgba(242,106,27,0.1); color:var(--orange); }
+  .tag-ms { background:rgba(80,120,200,0.12); color:#7ba8e8; }
+
+  .material-cell { display:flex; flex-wrap:wrap; gap:4px; }
+  .mat-check {
+    display:flex; align-items:center; gap:4px;
+    font-size:11px; color:var(--gray-light);
+    cursor:pointer; padding:3px 8px;
+    border:1px solid var(--border); border-radius:3px; background:#111;
+    transition:all 0.15s; white-space:nowrap;
+  }
+  .mat-check input { accent-color:var(--orange); cursor:pointer; }
+  .mat-check.checked { border-color:var(--orange); color:var(--white); background:rgba(242,106,27,0.08); }
+  .mat-check input:checked + span { color:var(--white); }
+
+  .action-bar {
+    position:sticky; bottom:0;
+    background:rgba(13,13,13,0.95);
+    backdrop-filter:blur(8px);
+    border-top:1px solid var(--border);
+    padding:14px 20px;
+    display:flex; align-items:center; justify-content:space-between;
+    gap:12px; z-index:100;
+  }
+  .action-info { font-size:13px; color:var(--gray-light); }
+  .action-info strong { color:var(--white); }
+  .btn-group { display:flex; gap:10px; }
+  .btn {
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:13px; font-weight:700; letter-spacing:1.5px;
+    text-transform:uppercase; padding:10px 22px;
+    border-radius:4px; border:none; cursor:pointer; transition:all 0.15s;
+  }
+  .btn-primary { background:var(--orange); color:#fff; }
+  .btn-primary:hover { background:var(--orange-light); }
+  .btn-secondary { background:transparent; border:1px solid var(--border); color:var(--white); }
+  .btn-secondary:hover { border-color:var(--orange); color:var(--orange); }
+
+  .modal-overlay {
+    display:none; position:fixed; inset:0;
+    background:rgba(0,0,0,0.85); z-index:999;
+    align-items:center; justify-content:center;
+  }
+  .modal-overlay.active { display:flex; }
+  .modal {
+    background:var(--gray-dark);
+    border:1px solid var(--border); border-top:3px solid var(--orange);
+    border-radius:8px; padding:28px;
+    max-width:720px; width:90%; max-height:80vh;
+    display:flex; flex-direction:column; gap:16px;
+  }
+  .modal-title {
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:22px; font-weight:800; text-transform:uppercase; color:var(--white);
+  }
+  .modal-sub { font-size:13px; color:var(--gray-light); }
+  .modal-text {
+    background:#111; border:1px solid var(--border); border-radius:4px;
+    padding:16px; font-size:12px; color:var(--white);
+    font-family:monospace; line-height:1.7;
+    overflow-y:auto; flex:1; white-space:pre-wrap;
+  }
+  .modal-actions { display:flex; justify-content:flex-end; gap:10px; }
+
+  .toast {
+    position:fixed; bottom:80px; left:50%;
+    transform:translateX(-50%) translateY(20px);
+    background:var(--orange); color:#fff;
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:14px; font-weight:700; letter-spacing:1px; text-transform:uppercase;
+    padding:12px 24px; border-radius:4px;
+    opacity:0; transition:all 0.3s; z-index:9999; pointer-events:none;
+  }
+  .toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
+  .divider { height:1px; background:var(--border); margin:16px 0; }
+</style>
+</head>
+<body>
+
+<nav class="site-nav no-print">
+  <div class="site-nav-inner">
+    <a href="../index.html" class="site-nav-brand">Skyridge Jr Devo</a>
+    <a href="../index.html" class="site-nav-link">Home</a>
+    <a href="worksheet.html" class="site-nav-link">Worksheet</a>
+    <a href="tracker.html" class="site-nav-link active">Tracker</a>
+    <a href="agenda.html" class="site-nav-link">Agenda</a>
+    <a href="roles.html" class="site-nav-link">Roles</a>
+  </div>
+</nav>
+
+<div class="header">
+  <div class="header-inner">
+    <div class="header-eyebrow" id="header-eyebrow">Head Coach Reference — 2026 Season</div>
+    <div class="header-title">Master Role <span>Assignment</span> Tracker</div>
+    <div class="header-sub" id="header-sub">Skyridge Jr Devo &nbsp;·&nbsp; Utah High School Cycling League &nbsp;·&nbsp; NICA</div>
+    <div class="header-meta">
+      <div class="header-stat">
+        <div class="header-stat-num" id="stat-total">—</div>
+        <div class="header-stat-label">Total Roles</div>
+      </div>
+      <div class="header-stat">
+        <div class="header-stat-num" id="stat-filled">0</div>
+        <div class="header-stat-label">Filled</div>
+      </div>
+      <div class="header-stat">
+        <div class="header-stat-num" id="stat-schools">—</div>
+        <div class="header-stat-label">Schools</div>
+      </div>
+      <div class="header-stat">
+        <div class="header-stat-num" id="stat-coaches">7</div>
+        <div class="header-stat-label">Coaches</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="page-wrap">
+
+  <div class="progress-bar-wrap">
+    <div class="progress-bar-label">Roles Filled</div>
+    <div class="progress-track">
+      <div class="progress-fill" id="progress-fill" style="width:0%"></div>
+    </div>
+    <div class="progress-pct" id="progress-pct">0 / —</div>
+  </div>
+
+  <!-- ROLE ASSIGNMENTS -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <span class="section-title">Role Assignments</span>
+      <span class="section-count" id="roles-count">0 of — assigned</span>
+    </div>
+    <div class="table-wrap">
+      <table id="roles-table">
+        <thead>
+          <tr>
+            <th style="width:28%">Role</th>
+            <th style="width:20%">Assigned Coach</th>
+            <th style="width:13%">Status</th>
+            <th style="width:13%">1:1 Scheduled</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody id="roles-tbody">
+          <tr><td colspan="5" style="color:#888;font-style:italic;padding:20px;">Loading roles…</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- SCHOOL OUTREACH TRACKER -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <span class="section-title">School Outreach Assignments</span>
+      <span class="section-count" id="schools-count">— schools</span>
+    </div>
+    <div class="table-wrap">
+      <table id="schools-table">
+        <thead>
+          <tr>
+            <th style="width:18%">School</th>
+            <th style="width:8%">Type</th>
+            <th style="width:8%">Students</th>
+            <th style="width:18%">Assigned Coach</th>
+            <th style="width:13%">Status</th>
+            <th>Materials to Coordinate</th>
+            <th style="width:14%">Notes</th>
+          </tr>
+        </thead>
+        <tbody id="schools-tbody">
+          <tr><td colspan="7" style="color:#888;font-style:italic;padding:20px;">Loading schools…</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- PARENT KICKOFF SCHEDULING -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <span class="section-title">Parent Kickoff Meeting — Scheduling</span>
+    </div>
+    <div style="padding:20px;">
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;">
+        <div>
+          <label style="display:block;font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--gray-light);margin-bottom:6px;">Proposed Date</label>
+          <input class="coach-input" type="text" placeholder="e.g. Late March / April">
+        </div>
+        <div>
+          <label style="display:block;font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--gray-light);margin-bottom:6px;">Location / Format</label>
+          <input class="coach-input" type="text" placeholder="In-person / Virtual / Hybrid">
+        </div>
+        <div>
+          <label style="display:block;font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--gray-light);margin-bottom:6px;">Lead Coordinator</label>
+          <input class="coach-input" type="text" placeholder="Coach name...">
+        </div>
+      </div>
+      <div style="margin-top:16px;">
+        <label style="display:block;font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--gray-light);margin-bottom:6px;">Agenda Topics Agreed At Coaching Meeting</label>
+        <textarea class="notes-input" rows="3" placeholder="e.g. Season overview, ride leader orientation, registration, race dates..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <span class="section-title">Post-Meeting Summary</span>
+    </div>
+    <div style="padding:20px;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+        <div>
+          <label style="display:block;font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--gray-light);margin-bottom:6px;">Unassigned Roles / Gaps</label>
+          <textarea class="notes-input" rows="3" placeholder="Note any open roles that need follow-up..."></textarea>
+        </div>
+        <div>
+          <label style="display:block;font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--gray-light);margin-bottom:6px;">Key Decisions Made</label>
+          <textarea class="notes-input" rows="3" placeholder="Parent kickoff date agreed, group naming approach, etc..."></textarea>
+        </div>
+        <div>
+          <label style="display:block;font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--gray-light);margin-bottom:6px;">Follow-Up Action Items</label>
+          <textarea class="notes-input" rows="3" placeholder="e.g. Coach X to contact Belmont admin by March 1..."></textarea>
+        </div>
+        <div>
+          <label style="display:block;font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--gray-light);margin-bottom:6px;">Next Touchpoint / Check-In Date</label>
+          <input class="coach-input" type="text" placeholder="e.g. Monthly virtual check-in — March 15">
+          <label style="display:block;font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--gray-light);margin:12px 0 6px;">Meeting Energy (self-assessment)</label>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <label style="cursor:pointer;display:flex;align-items:center;gap:6px;font-size:13px;color:var(--gray-light);">
+              <input type="radio" name="energy" value="High energy" style="accent-color:var(--orange);"> High energy
+            </label>
+            <label style="cursor:pointer;display:flex;align-items:center;gap:6px;font-size:13px;color:var(--gray-light);">
+              <input type="radio" name="energy" value="Good" style="accent-color:var(--orange);"> Good
+            </label>
+            <label style="cursor:pointer;display:flex;align-items:center;gap:6px;font-size:13px;color:var(--gray-light);">
+              <input type="radio" name="energy" value="Mixed" style="accent-color:var(--orange);"> Mixed
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="height:80px;"></div>
+</div>
+
+<!-- ACTION BAR -->
+<div class="action-bar no-print">
+  <div class="action-info"><strong>Master Tracker</strong> — Head Coach use only. Fill during/after the kickoff meeting.</div>
+  <div class="btn-group">
+    <button class="btn btn-secondary" onclick="window.print()">🖨 Print / Save PDF</button>
+    <button class="btn btn-primary" onclick="generateSummary()">📋 Copy Summary</button>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="copyModal">
+  <div class="modal">
+    <div class="modal-title">Assignment Summary</div>
+    <div class="modal-sub">Copy and paste into Google Docs, email to coaching staff, or save as a reference.</div>
+    <div class="modal-text" id="copyText"></div>
+    <div class="modal-actions">
+      <button class="btn btn-secondary" onclick="document.getElementById('copyModal').classList.remove('active')">Close</button>
+      <button class="btn btn-primary" onclick="copyToClipboard()">Copy to Clipboard</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast">Copied!</div>
+
+<script src="../assets/js/season-loader.js"></script>
+<script>
+  let seasonYear = 2026;
+  let teamName = 'Skyridge Jr Devo';
+  let totalRoles = 0;
+
+  const elemMaterials = ['Handout','Newsletter','PA Announcement','Poster','Yard Sign','School Meeting','Media Blast'];
+  const msMaterials   = ['Newsletter','PA Announcement','Poster','Yard Sign','Fence Banner','School Meeting','Media Blast'];
+
+  function makeMaterialsCell(mats) {
+    return `<div class="material-cell">${mats.map(m =>
+      `<label class="mat-check"><input type="checkbox" onchange="toggleMat(this)"><span>${m}</span></label>`
+    ).join('')}</div>`;
+  }
+
+  loadSeason().then(data => {
+    const s = data.season;
+    seasonYear = s.year;
+    teamName = s.teamName || 'Skyridge Jr Devo';
+    const roles = data.roles || [];
+    const schools = data.schools || { elementary: [], middle: [] };
+
+    // Update header
+    document.getElementById('header-eyebrow').textContent = `Head Coach Reference — ${s.year} Season`;
+    document.getElementById('header-sub').innerHTML = `${s.teamName} &nbsp;·&nbsp; ${s.league}`;
+
+    // Stats
+    totalRoles = roles.length;
+    const schoolCount = (schools.elementary || []).length + (schools.middle || []).length;
+    document.getElementById('stat-total').textContent = totalRoles;
+    document.getElementById('stat-schools').textContent = schoolCount;
+    document.getElementById('progress-pct').textContent = `0 / ${totalRoles}`;
+    document.getElementById('roles-count').textContent = `0 of ${totalRoles} assigned`;
+    document.getElementById('schools-count').textContent = `${schoolCount} schools · Elementary + Middle School split`;
+
+    // Render role rows
+    const rolesTbody = document.getElementById('roles-tbody');
+    rolesTbody.innerHTML = roles.map(role => {
+      const tierClass = role.tier === 'essential' ? 'type-essential' : 'type-rec';
+      const tierLabel = role.tier === 'essential' ? 'Essential' : 'Recommended';
+      return `
+        <tr data-role="${escapeAttr(role.name)}">
+          <td>
+            <div class="role-name-cell">${escapeHtml(role.name)} <span class="role-type ${tierClass}">${tierLabel}</span></div>
+            <div class="time-note">${escapeHtml(role.timeCommitment)}</div>
+          </td>
+          <td><input class="coach-input assigned-coach" placeholder="Coach name..." data-role="${escapeAttr(role.name)}"></td>
+          <td><span class="status-badge status-open" onclick="cycleStatus(this)">Open</span></td>
+          <td><input class="coach-input" type="text" placeholder="Date..."></td>
+          <td><textarea class="notes-input" rows="2" placeholder="Notes..."></textarea></td>
+        </tr>`;
+    }).join('');
+
+    // Attach input listeners for progress
+    document.querySelectorAll('#roles-table .assigned-coach').forEach(input => {
+      input.addEventListener('input', updateProgress);
+    });
+
+    // Render school rows
+    const schoolsTbody = document.getElementById('schools-tbody');
+    const elemRows = (schools.elementary || []).map(school => {
+      const students = school.students ? `~${school.students}` : 'N/A';
+      const notes = school.notes || (school.hasPTA && school.ptaContact ? `PTA: ${school.ptaContact}` : '');
+      return `
+        <tr>
+          <td style="font-weight:600;">${escapeHtml(school.name)}</td>
+          <td><span class="school-type-tag tag-elem">Elem</span></td>
+          <td style="color:var(--gray-light);">${students}</td>
+          <td><input class="coach-input" placeholder="Coach name..."></td>
+          <td><span class="status-badge status-open" onclick="cycleStatus(this)">Open</span></td>
+          <td>${makeMaterialsCell(elemMaterials)}</td>
+          <td><input class="coach-input" placeholder="${escapeAttr(notes) || 'Notes...'}"></td>
+        </tr>`;
+    });
+    const msRows = (schools.middle || []).map(school => {
+      const notes = school.notes || '';
+      return `
+        <tr style="border-top:2px solid var(--border);">
+          <td style="font-weight:600;">${escapeHtml(school.name)}</td>
+          <td><span class="school-type-tag tag-ms">Middle</span></td>
+          <td style="color:var(--gray-light);">N/A</td>
+          <td><input class="coach-input" placeholder="Coach name..."></td>
+          <td><span class="status-badge status-open" onclick="cycleStatus(this)">Open</span></td>
+          <td>${makeMaterialsCell(msMaterials)}</td>
+          <td><input class="coach-input" placeholder="${escapeAttr(notes) || 'Notes...'}"></td>
+        </tr>`;
+    });
+    schoolsTbody.innerHTML = [...elemRows, ...msRows].join('');
+
+  }).catch(() => {});
+
+  function escapeHtml(str) {
+    if (!str) return '';
+    return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+  function escapeAttr(str) {
+    if (!str) return '';
+    return String(str).replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+  }
+
+  function cycleStatus(el) {
+    const states = ['open','filled','tentative'];
+    const labels = ['Open','Filled','Tentative'];
+    const cur = states.indexOf(el.dataset.state || 'open');
+    const next = (cur + 1) % 3;
+    el.dataset.state = states[next];
+    el.textContent = labels[next];
+    el.className = 'status-badge status-' + states[next];
+    updateProgress();
+  }
+
+  function toggleMat(cb) {
+    cb.closest('.mat-check').classList.toggle('checked', cb.checked);
+  }
+
+  function updateProgress() {
+    const filled = document.querySelectorAll('#roles-table .status-filled').length;
+    const total = document.querySelectorAll('#roles-table tbody tr').length;
+    document.getElementById('stat-filled').textContent = filled;
+    document.getElementById('progress-fill').style.width = total ? (filled/total*100) + '%' : '0%';
+    document.getElementById('progress-pct').textContent = filled + ' / ' + total;
+    const assignedFilled = Array.from(document.querySelectorAll('#roles-table .assigned-coach')).filter(i=>i.value.trim()).length;
+    document.getElementById('roles-count').textContent = assignedFilled + ' of ' + total + ' assigned';
+  }
+
+  function generateSummary() {
+    const yr = seasonYear;
+    const tn = teamName.toUpperCase();
+    let text = `${tn} — ${yr} ROLE ASSIGNMENT SUMMARY\n${'═'.repeat(56)}\n\n`;
+    text += `ROLE ASSIGNMENTS\n${'─'.repeat(40)}\n`;
+    document.querySelectorAll('#roles-table tbody tr').forEach(row => {
+      const nameCell = row.querySelector('.role-name-cell');
+      if (!nameCell) return;
+      const roleName = nameCell.textContent.replace(/Essential|Recommended/g,'').trim();
+      const coach = row.querySelector('.assigned-coach').value || 'UNASSIGNED';
+      const status = row.querySelector('.status-badge').textContent;
+      const notes = row.querySelector('.notes-input') ? row.querySelector('.notes-input').value : '';
+      text += `${roleName}\n  Coach: ${coach}  |  Status: ${status}\n`;
+      if (notes) text += `  Notes: ${notes}\n`;
+      text += '\n';
+    });
+
+    text += `\nSCHOOL OUTREACH ASSIGNMENTS\n${'─'.repeat(40)}\n`;
+    document.querySelectorAll('#schools-table tbody tr').forEach(row => {
+      const cells = row.querySelectorAll('td');
+      if (cells.length < 5) return;
+      const school = cells[0].textContent.trim();
+      const type = cells[1].textContent.trim();
+      const coachInput = cells[3].querySelector('input');
+      const coach = coachInput ? coachInput.value || 'UNASSIGNED' : 'UNASSIGNED';
+      const statusEl = cells[4].querySelector('.status-badge');
+      const status = statusEl ? statusEl.textContent : '—';
+      const mats = cells[5] ? Array.from(cells[5].querySelectorAll('input:checked')).map(cb => cb.nextElementSibling.textContent).join(', ') || 'None checked yet' : '—';
+      text += `${school} (${type})  →  ${coach}  |  ${status}\n  Materials: ${mats}\n\n`;
+    });
+
+    text += `\n${'─'.repeat(56)}\nGenerated: ${new Date().toLocaleDateString('en-US', {month:'long',day:'numeric',year:'numeric'})}\n`;
+
+    document.getElementById('copyText').textContent = text;
+    document.getElementById('copyModal').classList.add('active');
+  }
+
+  function copyToClipboard() {
+    navigator.clipboard.writeText(document.getElementById('copyText').textContent).then(() => {
+      const t = document.getElementById('toast');
+      t.classList.add('show');
+      setTimeout(()=>t.classList.remove('show'), 2500);
+    });
+  }
+
+  document.getElementById('copyModal').addEventListener('click', function(e) {
+    if (e.target === this) this.classList.remove('active');
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skyridge Jr Devo — Coach Worksheet</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/shared.css">
+<style>
+  :root {
+    --black: #0D0D0D;
+    --orange: #F26A1B;
+    --orange-light: #FF8C42;
+    --white: #F5F0EB;
+    --gray-dark: #1E1E1E;
+    --gray-mid: #2E2E2E;
+    --gray-light: #888;
+    --border: #333;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Barlow', sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  @media print {
+    body { background: #fff; color: #111; }
+    .no-print { display: none !important; }
+    .section { border: 1px solid #ccc; background: #fff; }
+    .section-header { background: #1a1a1a !important; }
+    input, textarea, select { border: 1px solid #999 !important; background: #fff !important; color: #111 !important; }
+    .header { background: #1a1a1a !important; }
+    .badge { background: #F26A1B !important; }
+    .role-card { border: 1px solid #ccc !important; background: #f9f9f9 !important; color: #111 !important; }
+    .role-card label { color: #111 !important; }
+    .role-card small { color: #555 !important; }
+    .school-row { border-bottom: 1px solid #eee !important; }
+    .school-name { color: #111 !important; }
+  }
+
+  .page-wrap {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 0 20px 60px;
+  }
+
+  .header {
+    background: linear-gradient(135deg, #111 0%, #1a1a1a 60%, #2a1500 100%);
+    border-bottom: 3px solid var(--orange);
+    padding: 36px 40px 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 220px; height: 220px;
+    border: 30px solid rgba(242,106,27,0.08);
+    border-radius: 50%;
+  }
+  .header-inner { max-width: 820px; margin: 0 auto; position: relative; }
+  .header-eyebrow {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 8px;
+  }
+  .header-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 42px;
+    font-weight: 800;
+    line-height: 1;
+    color: var(--white);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .header-title span { color: var(--orange); }
+  .header-sub {
+    font-size: 14px;
+    color: var(--gray-light);
+    margin-top: 10px;
+  }
+  .badge {
+    display: inline-block;
+    background: var(--orange);
+    color: #fff;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 2px;
+    margin-top: 14px;
+  }
+
+  .instructions {
+    background: #1a1200;
+    border-left: 4px solid var(--orange);
+    padding: 14px 20px;
+    font-size: 14px;
+    color: #d4a96a;
+    margin: 24px 0 0;
+    border-radius: 0 4px 4px 0;
+  }
+  .instructions strong { color: var(--orange-light); }
+
+  .section {
+    background: var(--gray-dark);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    margin-top: 24px;
+    overflow: hidden;
+  }
+  .section-header {
+    background: var(--gray-mid);
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--orange);
+    text-transform: uppercase;
+    background: rgba(242,106,27,0.12);
+    padding: 3px 8px;
+    border-radius: 2px;
+  }
+  .section-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: var(--white);
+  }
+  .section-body { padding: 24px; }
+
+  .field-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+  .field-group.single { grid-template-columns: 1fr; }
+
+  label.field-label {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--gray-light);
+    margin-bottom: 6px;
+  }
+  input[type="text"], input[type="email"], select, textarea {
+    width: 100%;
+    background: #111;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--white);
+    font-family: 'Barlow', sans-serif;
+    font-size: 14px;
+    padding: 10px 14px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  input[type="text"]:focus, input[type="email"]:focus, select:focus, textarea:focus {
+    border-color: var(--orange);
+  }
+  select option { background: #111; }
+  textarea { resize: vertical; min-height: 80px; }
+
+  .toggle-group {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .toggle-group input[type="radio"] { display: none; }
+  .toggle-group label {
+    cursor: pointer;
+    padding: 8px 18px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.15s;
+    color: var(--gray-light);
+  }
+  .toggle-group input[type="radio"]:checked + label {
+    background: var(--orange);
+    border-color: var(--orange);
+    color: #fff;
+    font-weight: 600;
+  }
+
+  .roles-intro {
+    font-size: 13px;
+    color: var(--gray-light);
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .roles-intro strong { color: var(--white); }
+
+  .roles-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .role-card {
+    background: #111;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    padding: 14px 16px;
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+    position: relative;
+  }
+  .role-card:hover { border-color: #555; }
+  .role-card input[type="checkbox"] {
+    position: absolute;
+    top: 14px; right: 14px;
+    width: 16px; height: 16px;
+    accent-color: var(--orange);
+    cursor: pointer;
+  }
+  .role-card label {
+    cursor: pointer;
+    display: block;
+    padding-right: 24px;
+  }
+  .role-card .role-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--white);
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    margin-bottom: 4px;
+  }
+  .role-card small {
+    font-size: 12px;
+    color: var(--gray-light);
+    line-height: 1.4;
+  }
+  .role-card.selected {
+    border-color: var(--orange);
+    background: rgba(242,106,27,0.07);
+  }
+  .role-essential { border-top: 2px solid var(--orange); }
+  .role-recommended { border-top: 2px solid #555; }
+
+  .tier-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .tier-label.essential { color: var(--orange); }
+  .tier-label.recommended { color: #888; margin-top: 20px; }
+
+  .rank-section {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+  }
+  .rank-label {
+    font-size: 13px;
+    color: var(--gray-light);
+    margin-bottom: 14px;
+  }
+  .rank-label strong { color: var(--white); }
+  .rank-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+  .rank-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--orange);
+    width: 24px;
+    flex-shrink: 0;
+  }
+  .rank-row select { max-width: 320px; }
+
+  .school-group-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin: 20px 0 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid rgba(242,106,27,0.2);
+  }
+  .school-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+    gap: 16px;
+  }
+  .school-row:last-child { border-bottom: none; }
+  .school-name {
+    font-weight: 600;
+    font-size: 14px;
+    min-width: 160px;
+    color: var(--white);
+  }
+  .school-meta {
+    font-size: 12px;
+    color: var(--gray-light);
+    flex: 1;
+  }
+  .school-checkbox-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+  .school-checkbox-wrap input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--orange);
+    cursor: pointer;
+  }
+  .school-checkbox-wrap span {
+    font-size: 13px;
+    color: var(--gray-light);
+  }
+
+  .time-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .time-item {
+    background: #111;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    padding: 16px;
+  }
+  .time-item-label {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--gray-light);
+    margin-bottom: 8px;
+  }
+  .time-options {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .time-options input[type="radio"] { display: none; }
+  .time-options label {
+    cursor: pointer;
+    font-size: 13px;
+    padding: 7px 12px;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    color: var(--gray-light);
+    transition: all 0.15s;
+  }
+  .time-options input[type="radio"]:checked + label {
+    border-color: var(--orange);
+    color: var(--white);
+    background: rgba(242,106,27,0.1);
+  }
+
+  .divider {
+    height: 1px;
+    background: var(--border);
+    margin: 20px 0;
+  }
+
+  .action-bar {
+    position: sticky;
+    bottom: 0;
+    background: rgba(13,13,13,0.95);
+    backdrop-filter: blur(8px);
+    border-top: 1px solid var(--border);
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    z-index: 100;
+  }
+  .action-info {
+    font-size: 13px;
+    color: var(--gray-light);
+  }
+  .action-info strong { color: var(--white); }
+  .btn {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 11px 24px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .btn-primary { background: var(--orange); color: #fff; }
+  .btn-primary:hover { background: var(--orange-light); }
+  .btn-secondary {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--white);
+  }
+  .btn-secondary:hover { border-color: var(--orange); color: var(--orange); }
+  .btn-group { display: flex; gap: 10px; }
+
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    z-index: 999;
+    align-items: center;
+    justify-content: center;
+  }
+  .modal-overlay.active { display: flex; }
+  .modal {
+    background: var(--gray-dark);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--orange);
+    border-radius: 8px;
+    padding: 28px;
+    max-width: 680px;
+    width: 90%;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .modal-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--white);
+  }
+  .modal-sub { font-size: 13px; color: var(--gray-light); }
+  .modal-text {
+    background: #111;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 16px;
+    font-size: 13px;
+    color: var(--white);
+    font-family: monospace;
+    line-height: 1.7;
+    overflow-y: auto;
+    flex: 1;
+    white-space: pre-wrap;
+  }
+  .modal-actions { display: flex; justify-content: flex-end; gap: 10px; }
+
+  .toast {
+    position: fixed;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--orange);
+    color: #fff;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 12px 24px;
+    border-radius: 4px;
+    opacity: 0;
+    transition: all 0.3s;
+    z-index: 9999;
+    pointer-events: none;
+  }
+  .toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<nav class="site-nav no-print">
+  <div class="site-nav-inner">
+    <a href="../index.html" class="site-nav-brand">Skyridge Jr Devo</a>
+    <a href="../index.html" class="site-nav-link">Home</a>
+    <a href="worksheet.html" class="site-nav-link active">Worksheet</a>
+    <a href="tracker.html" class="site-nav-link">Tracker</a>
+    <a href="agenda.html" class="site-nav-link">Agenda</a>
+    <a href="roles.html" class="site-nav-link">Roles</a>
+  </div>
+</nav>
+
+<div class="header">
+  <div class="header-inner">
+    <div class="header-eyebrow" id="header-eyebrow">2026 Season Prep</div>
+    <div class="header-title">Skyridge <span>Jr Devo</span></div>
+    <div class="header-sub" id="header-sub">NICA Utah High School Cycling League &nbsp;·&nbsp; Coach Pre-Meeting Worksheet</div>
+    <div class="badge">Complete Before the Kickoff Meeting</div>
+  </div>
+</div>
+
+<div class="page-wrap">
+
+  <div class="instructions">
+    <strong>Hey coaches — fill this out before our kickoff meeting.</strong> This helps us match roles and school outreach assignments to the right people so we can move fast on the day. No right or wrong answers — we want your honest preferences. Takes about 10 minutes.
+  </div>
+
+  <!-- SECTION 1: COACH INFO -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <span class="section-title">Your Info</span>
+    </div>
+    <div class="section-body">
+      <div class="field-group">
+        <div>
+          <label class="field-label">Full Name</label>
+          <input type="text" id="coach-name" placeholder="First Last">
+        </div>
+        <div>
+          <label class="field-label">Phone / Best Contact</label>
+          <input type="text" id="coach-phone" placeholder="(801) 555-0000">
+        </div>
+      </div>
+      <div class="field-group">
+        <div>
+          <label class="field-label">Email</label>
+          <input type="email" id="coach-email" placeholder="your@email.com">
+        </div>
+        <div>
+          <label class="field-label">Season Status</label>
+          <div class="toggle-group" style="margin-top:8px;">
+            <input type="radio" name="status" id="returning" value="Returning Coach">
+            <label for="returning">Returning Coach</label>
+            <input type="radio" name="status" id="newcoach" value="New Coach">
+            <label for="newcoach">New Coach</label>
+          </div>
+        </div>
+      </div>
+      <div class="field-group single">
+        <div>
+          <label class="field-label" id="years-label">Years Coaching NICA (including 2026)</label>
+          <div class="toggle-group" style="margin-top:8px;">
+            <input type="radio" name="years" id="yr1" value="1st Year">
+            <label for="yr1">1st Year</label>
+            <input type="radio" name="years" id="yr2" value="2nd Year">
+            <label for="yr2">2nd Year</label>
+            <input type="radio" name="years" id="yr3" value="3rd Year">
+            <label for="yr3">3rd Year</label>
+            <input type="radio" name="years" id="yr4" value="4+ Years">
+            <label for="yr4">4+ Years</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: AVAILABILITY -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <span class="section-title">Availability & Capacity</span>
+    </div>
+    <div class="section-body">
+      <div class="time-grid">
+        <div class="time-item">
+          <div class="time-item-label">Pre-Season Hours (April)</div>
+          <div class="time-options">
+            <input type="radio" name="preseason" id="ps1" value="5-10 hrs total">
+            <label for="ps1">5–10 hrs total</label>
+            <input type="radio" name="preseason" id="ps2" value="10-20 hrs total">
+            <label for="ps2">10–20 hrs total</label>
+            <input type="radio" name="preseason" id="ps3" value="20+ hrs total">
+            <label for="ps3">20+ hrs total</label>
+          </div>
+        </div>
+        <div class="time-item">
+          <div class="time-item-label">In-Season Weekly Capacity</div>
+          <div class="time-options">
+            <input type="radio" name="inseason" id="is1" value="Practices only (2-3 hrs/week)">
+            <label for="is1">Practices only (2–3 hrs/wk)</label>
+            <input type="radio" name="inseason" id="is2" value="Practices + 3-5 hrs admin/week">
+            <label for="is2">Practices + 3–5 hrs admin/wk</label>
+            <input type="radio" name="inseason" id="is3" value="Practices + 5+ hrs admin/week">
+            <label for="is3">Practices + 5+ hrs admin/wk</label>
+          </div>
+        </div>
+        <div class="time-item">
+          <div class="time-item-label">Race Weekend Availability</div>
+          <div class="time-options">
+            <input type="radio" name="races" id="rw1" value="All 3 race weekends">
+            <label for="rw1">All 3 race weekends</label>
+            <input type="radio" name="races" id="rw2" value="2 of 3 race weekends">
+            <label for="rw2">2 of 3 race weekends</label>
+            <input type="radio" name="races" id="rw3" value="1 of 3 race weekends">
+            <label for="rw3">1 of 3 race weekends</label>
+          </div>
+        </div>
+        <div class="time-item">
+          <div class="time-item-label">Strengths you bring</div>
+          <div class="time-options">
+            <input type="radio" name="strength" id="st1" value="Organization & systems">
+            <label for="st1">Organization & systems</label>
+            <input type="radio" name="strength" id="st2" value="Communication & relationships">
+            <label for="st2">Communication & relationships</label>
+            <input type="radio" name="strength" id="st3" value="Logistics & race day ops">
+            <label for="st3">Logistics & race day ops</label>
+            <input type="radio" name="strength" id="st4" value="Technical coaching & skills">
+            <label for="st4">Technical coaching & skills</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3: ROLE PREFERENCES (rendered by JS) -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <span class="section-title">Role Preferences</span>
+    </div>
+    <div class="section-body">
+      <div class="roles-intro">
+        <strong>Check any roles you're interested in.</strong> Don't worry about capacity yet — just flag what sounds good to you. We'll figure out the right fit together at the meeting. Essential roles are highlighted in orange at the top.
+      </div>
+      <div id="roles-container">
+        <div style="color:#888;font-style:italic;font-size:14px;">Loading roles…</div>
+      </div>
+      <div class="rank-section">
+        <div class="rank-label"><strong>If you checked multiple roles</strong>, rank your top 3 choices here:</div>
+        <div class="rank-row">
+          <span class="rank-num">1</span>
+          <select id="rank1"><option value="">— Select your top choice —</option></select>
+        </div>
+        <div class="rank-row">
+          <span class="rank-num">2</span>
+          <select id="rank2"><option value="">— Select your second choice —</option></select>
+        </div>
+        <div class="rank-row">
+          <span class="rank-num">3</span>
+          <select id="rank3"><option value="">— Select your third choice —</option></select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4: SCHOOL OUTREACH (rendered by JS) -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <span class="section-title">School Outreach Preferences</span>
+    </div>
+    <div class="section-body">
+      <div class="roles-intro">
+        <strong>Check the schools you'd be willing to own outreach for.</strong> This means connecting with the administration to get flyers, posters, yard signs, and media blasts coordinated. Pick what fits your schedule and connections — we'll balance the load at the meeting.
+      </div>
+      <div id="schools-container">
+        <div style="color:#888;font-style:italic;font-size:14px;">Loading schools…</div>
+      </div>
+      <div class="divider"></div>
+      <div>
+        <label class="field-label">Any existing connections at these schools? (staff, PTA, admin)</label>
+        <textarea id="school-connections" placeholder="e.g. I know the principal at Belmont — happy to lead there."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 5: NOTES -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">05</span>
+      <span class="section-title">Questions & Notes for the Meeting</span>
+    </div>
+    <div class="section-body">
+      <div class="field-group single">
+        <div>
+          <label class="field-label">Anything you want to make sure we cover at the meeting?</label>
+          <textarea id="questions" placeholder="Questions, concerns, ideas, things on your mind…"></textarea>
+        </div>
+      </div>
+      <div class="field-group single">
+        <div>
+          <label class="field-label" id="excited-label">What are you most excited about for this season?</label>
+          <textarea id="excited" placeholder="The stoke is real — let it out."></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="height:80px;"></div>
+</div>
+
+<!-- ACTION BAR -->
+<div class="action-bar no-print">
+  <div class="action-info">Fill out all sections, then <strong>copy your responses</strong> to paste into a doc or email to the head coach.</div>
+  <div class="btn-group">
+    <button class="btn btn-secondary" onclick="window.print()">🖨 Print / Save PDF</button>
+    <button class="btn btn-primary" onclick="generateCopy()">📋 Copy My Responses</button>
+  </div>
+</div>
+
+<!-- COPY MODAL -->
+<div class="modal-overlay" id="copyModal">
+  <div class="modal">
+    <div class="modal-title">Your Worksheet Responses</div>
+    <div class="modal-sub">Copy this text and paste it into a Google Doc, Word doc, or email to your head coach.</div>
+    <div class="modal-text" id="copyText"></div>
+    <div class="modal-actions">
+      <button class="btn btn-secondary" onclick="document.getElementById('copyModal').classList.remove('active')">Close</button>
+      <button class="btn btn-primary" onclick="copyToClipboard()">Copy to Clipboard</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast">Copied to clipboard!</div>
+
+<script src="../assets/js/season-loader.js"></script>
+<script>
+  // Page-scoped season reference
+  let season = null;
+
+  loadSeason().then(data => {
+    season = data.season;
+    const roles = data.roles || [];
+    const schools = data.schools || { elementary: [], middle: [] };
+
+    // Update header
+    document.getElementById('header-eyebrow').textContent = `${season.year} Season Prep`;
+    document.getElementById('years-label').textContent = `Years Coaching NICA (including ${season.year})`;
+    document.getElementById('excited-label').textContent = `What are you most excited about for the ${season.year} season?`;
+
+    // Render role cards
+    const essential = roles.filter(r => r.tier === 'essential');
+    const recommended = roles.filter(r => r.tier === 'recommended');
+
+    let rolesHTML = '';
+    if (essential.length) {
+      rolesHTML += `<div class="tier-label essential">Essential Roles</div>`;
+      rolesHTML += `<div class="roles-grid" id="essential-grid">`;
+      essential.forEach((role, i) => {
+        const cbId = `r-ess-${i}`;
+        rolesHTML += `
+          <div class="role-card role-essential">
+            <input type="checkbox" id="${cbId}" value="${escapeHtml(role.name)}">
+            <label for="${cbId}">
+              <div class="role-name">${escapeHtml(role.name)}</div>
+              <small>${escapeHtml(role.summary)} ${escapeHtml(role.timeCommitment)}.</small>
+            </label>
+          </div>`;
+      });
+      rolesHTML += `</div>`;
+    }
+    if (recommended.length) {
+      rolesHTML += `<div class="tier-label recommended">Highly Recommended Roles</div>`;
+      rolesHTML += `<div class="roles-grid" id="recommended-grid">`;
+      recommended.forEach((role, i) => {
+        const cbId = `r-rec-${i}`;
+        rolesHTML += `
+          <div class="role-card role-recommended">
+            <input type="checkbox" id="${cbId}" value="${escapeHtml(role.name)}">
+            <label for="${cbId}">
+              <div class="role-name">${escapeHtml(role.name)}</div>
+              <small>${escapeHtml(role.summary)} ${escapeHtml(role.timeCommitment)}.</small>
+            </label>
+          </div>`;
+      });
+      rolesHTML += `</div>`;
+    }
+    document.getElementById('roles-container').innerHTML = rolesHTML;
+
+    // Attach checkbox listeners
+    document.querySelectorAll('.role-card input[type="checkbox"]').forEach(cb => {
+      cb.addEventListener('change', function() {
+        this.closest('.role-card').classList.toggle('selected', this.checked);
+        updateRankDropdowns();
+      });
+    });
+
+    // Render school rows
+    const elemSchools = schools.elementary || [];
+    const msSchools = schools.middle || [];
+    let schoolsHTML = '';
+
+    if (elemSchools.length) {
+      schoolsHTML += `<div class="school-group-label">Elementary Schools</div><div id="elem-schools">`;
+      elemSchools.forEach((school, i) => {
+        let meta = `Elementary`;
+        if (school.students) meta += ` · ~${school.students} students`;
+        if (school.hasPTA && school.ptaContact) meta += ` · PTA: ${escapeHtml(school.ptaContact)}`;
+        const cbId = `s-elem-${i}`;
+        schoolsHTML += `
+          <div class="school-row">
+            <div class="school-name">${escapeHtml(school.name)}</div>
+            <div class="school-meta">${meta}</div>
+            <div class="school-checkbox-wrap">
+              <input type="checkbox" id="${cbId}" data-school="${escapeHtml(school.name)}" data-type="Elementary">
+              <span>I can own this</span>
+            </div>
+          </div>`;
+      });
+      schoolsHTML += `</div>`;
+    }
+
+    if (msSchools.length) {
+      schoolsHTML += `<div class="school-group-label">Middle Schools</div><div id="ms-schools">`;
+      msSchools.forEach((school, i) => {
+        let meta = `Middle School`;
+        if (school.notes) meta += ` · ${escapeHtml(school.notes)}`;
+        const cbId = `s-ms-${i}`;
+        schoolsHTML += `
+          <div class="school-row">
+            <div class="school-name">${escapeHtml(school.name)}</div>
+            <div class="school-meta">${meta}</div>
+            <div class="school-checkbox-wrap">
+              <input type="checkbox" id="${cbId}" data-school="${escapeHtml(school.name)}" data-type="Middle School">
+              <span>I can own this</span>
+            </div>
+          </div>`;
+      });
+      schoolsHTML += `</div>`;
+    }
+    document.getElementById('schools-container').innerHTML = schoolsHTML;
+
+  }).catch(() => {});
+
+  function escapeHtml(str) {
+    if (!str) return '';
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  function updateRankDropdowns() {
+    const checked = Array.from(document.querySelectorAll('.role-card input[type="checkbox"]:checked')).map(cb => cb.value);
+    ['rank1','rank2','rank3'].forEach((id, i) => {
+      const sel = document.getElementById(id);
+      const cur = sel.value;
+      const labels = ['— Select your top choice —','— Select your second choice —','— Select your third choice —'];
+      sel.innerHTML = `<option value="">${labels[i]}</option>`;
+      checked.forEach(r => {
+        const opt = document.createElement('option');
+        opt.value = r; opt.textContent = r;
+        if (r === cur) opt.selected = true;
+        sel.appendChild(opt);
+      });
+    });
+  }
+
+  function getRadioVal(name) {
+    const el = document.querySelector(`input[name="${name}"]:checked`);
+    return el ? el.value : '—';
+  }
+
+  function generateCopy() {
+    const yr = season ? season.year : '2026';
+    const teamName = season ? (season.teamName || 'Skyridge Jr Devo').toUpperCase() : 'SKYRIDGE JR DEVO';
+
+    const name = document.getElementById('coach-name').value || '—';
+    const phone = document.getElementById('coach-phone').value || '—';
+    const email = document.getElementById('coach-email').value || '—';
+    const status = getRadioVal('status');
+    const years = getRadioVal('years');
+    const preseason = getRadioVal('preseason');
+    const inseason = getRadioVal('inseason');
+    const races = getRadioVal('races');
+    const strength = getRadioVal('strength');
+
+    const checkedRoles = Array.from(document.querySelectorAll('.role-card input:checked')).map(cb => `  • ${cb.value}`).join('\n') || '  None selected';
+    const r1 = document.getElementById('rank1').value || '—';
+    const r2 = document.getElementById('rank2').value || '—';
+    const r3 = document.getElementById('rank3').value || '—';
+
+    const elemEl = document.getElementById('elem-schools');
+    const msEl = document.getElementById('ms-schools');
+    const elemSchools = elemEl ? Array.from(elemEl.querySelectorAll('input:checked')).map(cb => `  • ${cb.dataset.school}`).join('\n') || '  None selected' : '  None selected';
+    const msSchools = msEl ? Array.from(msEl.querySelectorAll('input:checked')).map(cb => `  • ${cb.dataset.school}`).join('\n') || '  None selected' : '  None selected';
+    const connections = document.getElementById('school-connections').value || '—';
+    const questions = document.getElementById('questions').value || '—';
+    const excited = document.getElementById('excited').value || '—';
+
+    const line52 = '═'.repeat(52);
+    const line52d = '─'.repeat(52);
+    const text = `${teamName} — ${yr} COACH WORKSHEET
+${line52}
+
+SECTION 1: COACH INFO
+─────────────────────
+Name:            ${name}
+Phone:           ${phone}
+Email:           ${email}
+Status:          ${status}
+Years Coaching:  ${years}
+
+SECTION 2: AVAILABILITY & CAPACITY
+────────────────────────────────────
+Pre-Season Hours:        ${preseason}
+In-Season Weekly:        ${inseason}
+Race Weekend Avail.:     ${races}
+Primary Strength:        ${strength}
+
+SECTION 3: ROLE PREFERENCES
+─────────────────────────────
+Interested in:
+${checkedRoles}
+
+Top 3 Rankings:
+  1. ${r1}
+  2. ${r2}
+  3. ${r3}
+
+SECTION 4: SCHOOL OUTREACH
+────────────────────────────
+Elementary Schools I Can Own:
+${elemSchools}
+
+Middle Schools I Can Own:
+${msSchools}
+
+Existing School Connections:
+  ${connections}
+
+SECTION 5: NOTES FOR THE MEETING
+──────────────────────────────────
+Questions / Topics to Cover:
+  ${questions}
+
+Most Excited About:
+  ${excited}
+
+${line52d}
+Completed: ${new Date().toLocaleDateString('en-US', {month:'long', day:'numeric', year:'numeric'})}
+`;
+
+    document.getElementById('copyText').textContent = text;
+    document.getElementById('copyModal').classList.add('active');
+  }
+
+  function copyToClipboard() {
+    const text = document.getElementById('copyText').textContent;
+    navigator.clipboard.writeText(text).then(() => {
+      const toast = document.getElementById('toast');
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2500);
+    });
+  }
+
+  document.getElementById('copyModal').addEventListener('click', function(e) {
+    if (e.target === this) this.classList.remove('active');
+  });
+</script>
+</body>
+</html>

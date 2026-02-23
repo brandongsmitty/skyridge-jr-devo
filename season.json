@@ -1,0 +1,183 @@
+{
+  "season": {
+    "year": 2026,
+    "teamName": "Skyridge Jr Devo",
+    "league": "NICA Utah High School Cycling League",
+    "headCoach": {
+      "name": "Brandon Smith",
+      "email": "brandon@example.com",
+      "phone": "(801) 555-0000"
+    },
+    "kickoffMeeting": {
+      "date": "February 26, 2026",
+      "time": "7:00 PM",
+      "location": "TBD",
+      "locationDetail": ""
+    },
+    "keyDates": [
+      { "label": "Coaching Kickoff Meeting", "date": "Feb 26, 2026" },
+      { "label": "NICA Registration Opens", "date": "Apr 1, 2026" },
+      { "label": "Practices Begin", "date": "Mid-May 2026" },
+      { "label": "Race 1", "date": "TBD" },
+      { "label": "Race 2", "date": "TBD" },
+      { "label": "Race 3", "date": "TBD" },
+      { "label": "End of Season", "date": "Oct 2026" }
+    ],
+    "priorSeasonYear": 2025
+  },
+  "roles": [
+    {
+      "id": "practice-planning",
+      "name": "Practice Planning & Skills Lead",
+      "tier": "essential",
+      "timeCommitment": "3–5 hrs/month + 2–4 hrs/wk during season",
+      "summary": "Weekly practice plans · Monthly skill themes · Season arc.",
+      "description": [
+        "The flow and progression of our Tuesday/Thursday 6–8am practices throughout the season, plus the monthly skill themes that give structure to our development.",
+        "You'll own monthly theme development, practice structure, and communicate the season arc to coaches and families."
+      ],
+      "collaborators": ["Head Coach", "Ride Leader Coord.", "Comm. & Culture Lead", "All Coaches"]
+    },
+    {
+      "id": "ride-leader-coordinator",
+      "name": "Ride Leader Coordinator",
+      "tier": "essential",
+      "timeCommitment": "5–8 hrs pre-season · 2–3 hrs/wk during season",
+      "summary": "Parent volunteer training · Weekly assignments · Certifications.",
+      "description": [
+        "Making sure every practice group has the right ride leaders, and helping parent volunteers feel prepared and confident in their role.",
+        "You'll manage ride leader assignments, track certifications, and run a pre-season training for new parent volunteers."
+      ],
+      "collaborators": ["Practice Planning Lead", "Head Coach", "Ride Group Coord.", "Safety Lead"]
+    },
+    {
+      "id": "race-weekend-captain",
+      "name": "Race Weekend Captain",
+      "tier": "essential",
+      "timeCommitment": "5–10 hrs per race weekend (3 races) + planning",
+      "summary": "Race day logistics · Warm-ups · Staging · Playbook.",
+      "description": [
+        "Making race weekends run smoothly so riders can focus on racing and having fun.",
+        "You'll build warm-up protocols, a staging system, race day role assignments, and communicate expectations to coaches and families."
+      ],
+      "collaborators": ["Head Coach", "Ride Leader Coord.", "Comm. Lead", "Safety Lead", "All Coaches"]
+    },
+    {
+      "id": "comm-culture-lead",
+      "name": "Communication & Culture Lead",
+      "tier": "essential",
+      "timeCommitment": "3–5 hrs/month",
+      "summary": "Family emails · Social media · Recruiting materials · Team culture.",
+      "description": [
+        "Keeping families informed and engaged, plus building a team culture where character development actually happens.",
+        "You'll handle regular family communications, recruiting materials, social media, and plan team culture moments throughout the season."
+      ],
+      "collaborators": ["Head Coach", "Practice Planning Lead", "Race Weekend Captain", "All Role Owners"]
+    },
+    {
+      "id": "registration-roster",
+      "name": "Registration & Roster Manager",
+      "tier": "essential",
+      "timeCommitment": "10–15 hrs in April · 2–3 hrs/month during season",
+      "summary": "Pit Zone registration · Roster management · Practice-ready verification.",
+      "description": [
+        "Making sure everyone is properly registered, rostered, and practice-ready with the league. No one practices or races until they're properly registered.",
+        "You'll manage Pit Zone, track registration completion, follow up with families, and maintain a cleared-to-practice list."
+      ],
+      "collaborators": ["Communication Lead", "Finance/Treasurer", "Head Coach", "NICA/Pit Zone"]
+    },
+    {
+      "id": "ride-group-coordinator",
+      "name": "Ride Group Coordinator",
+      "tier": "essential",
+      "timeCommitment": "5–8 hrs in May · 2–3 hrs/month for adjustments",
+      "summary": "New group naming system · Time trials · Rider placement.",
+      "description": [
+        "A ride group system that makes sense to everyone and helps riders find their right level. Last year's color system created more confusion than clarity — you get to solve that.",
+        "You'll design the group naming/structure, run time trials in early practices, place riders, and adjust groups throughout the season."
+      ],
+      "collaborators": ["Practice Planning Lead", "Ride Leader Coord.", "Communication Lead", "Head Coach"]
+    },
+    {
+      "id": "safety-first-aid",
+      "name": "Safety & First Aid Lead",
+      "tier": "essential",
+      "timeCommitment": "1–2 hrs/week",
+      "summary": "Injury prevention · Documentation · Return-to-play protocols.",
+      "description": [
+        "Keeping everyone safe and knowing what to do when accidents happen. Parents trust us with their kids — you protect that trust.",
+        "You'll handle safety reminders, first aid at practices and races, injury documentation, and walk coaches through protocols."
+      ],
+      "collaborators": ["Head Coach", "Registration Manager", "All Coaches", "Parents"]
+    },
+    {
+      "id": "finance-treasurer",
+      "name": "Finance / Treasurer",
+      "tier": "essential",
+      "timeCommitment": "2–4 hrs/month (heavier April–May)",
+      "summary": "Budget & financial reporting · Registration fees · Fundraising coordination.",
+      "description": [
+        "Team budget, registration fees, fundraising coordination, and financial reporting. Every dollar you manage helps get kids on bikes.",
+        "You'll create the season budget, track expenditures, process team fees, handle reimbursements, and deliver a year-end financial report."
+      ],
+      "collaborators": ["Head Coach", "Fundraising Lead", "All Role Owners", "Families"]
+    },
+    {
+      "id": "equipment-gear",
+      "name": "Equipment & Gear Manager",
+      "tier": "recommended",
+      "timeCommitment": "2–3 hrs/week + race days",
+      "summary": "Loaner bikes · Radios · First aid supplies · Trailer · Race setup.",
+      "description": [
+        "Team equipment, trailer, loaner bikes, radios, first aid supplies, and making sure we have what we need for practices and races.",
+        "You'll maintain inventory, organize the trailer, handle loaner bike checkout, and get everything to practice and race venues."
+      ],
+      "collaborators": ["Finance/Treasurer", "Practice Planning Lead", "Race Weekend Captain", "Safety Lead"]
+    },
+    {
+      "id": "fundraising-sponsorship",
+      "name": "Fundraising & Sponsorship Lead",
+      "tier": "recommended",
+      "timeCommitment": "4–6 hrs/month (heavier pre-season)",
+      "summary": "Sponsor development · Fundraising events · Grant applications.",
+      "description": [
+        "Bringing in resources beyond registration fees to reduce the financial burden on families and enhance what we can offer riders.",
+        "You'll develop sponsor relationships, create sponsorship packages, organize fundraising events, and pursue grants."
+      ],
+      "collaborators": ["Finance/Treasurer", "Communication Lead", "Head Coach"]
+    }
+  ],
+  "schools": {
+    "elementary": [
+      { "name": "Liberty Hills", "students": 150, "hasPTA": false, "ptaContact": "", "notes": "" },
+      { "name": "Fox Hollow", "students": 92, "hasPTA": true, "ptaContact": "Zandra W", "notes": "" },
+      { "name": "Traverse Mountain", "students": 130, "hasPTA": false, "ptaContact": "", "notes": "" },
+      { "name": "Belmont", "students": 150, "hasPTA": false, "ptaContact": "", "notes": "" },
+      { "name": "Eaglecrest", "students": 125, "hasPTA": true, "ptaContact": "Lauren Hardcastle", "notes": "" },
+      { "name": "Segolilly", "students": 125, "hasPTA": false, "ptaContact": "", "notes": "" },
+      { "name": "Freedom", "students": 125, "hasPTA": false, "ptaContact": "", "notes": "" }
+    ],
+    "middle": [
+      { "name": "Lehi Jr", "students": null, "hasPTA": false, "ptaContact": "", "notes": "6th grader open house night — potential tabling opportunity" },
+      { "name": "Viewpoint", "students": null, "hasPTA": false, "ptaContact": "", "notes": "" }
+    ]
+  },
+  "agenda": {
+    "segments": [
+      { "title": "Introductions + Favorite MTB Moment", "start": "0:00", "end": "0:10", "duration": 10, "description": "We'll go around the room. If you're new, introduce yourself. Everyone shares one favorite MTB moment from last season — keep it to a sentence or two. It doesn't have to be impressive. It just has to be real." },
+      { "title": "{{priorSeasonYear}} Season — What Worked", "start": "0:10", "end": "0:15", "duration": 5, "description": "Quick look back before we look forward. We'll highlight a few things that worked well and name one or two things we're building on this season." },
+      { "title": "Role Assignments", "start": "0:15", "end": "0:50", "duration": 35, "description": "This is the heart of the meeting. We'll work through all roles using the worksheets you completed ahead of time. Each role comes with real ownership and the freedom to build it out the way you want. If anything's still open at the end, we'll button it up within 48 hours." },
+      { "title": "School Outreach Assignments", "start": "0:50", "end": "1:05", "duration": 15, "description": "We're split into two groups this year — elementary and middle schools — because the approach and materials differ between them. Each coach will own 1–2 schools. Your worksheet will have flagged any existing connections, which helps a lot here." },
+      { "title": "Parent Kickoff Meeting", "start": "1:05", "end": "1:15", "duration": 10, "description": "We need to get a date on the calendar for the parent kickoff — ideally before registration opens April 1. We'll decide together on timing, format, and who coordinates it. The goal here is just to leave with a date agreed and an owner assigned." },
+      { "title": "{{year}} Recruiting Materials", "start": "1:15", "end": "1:20", "duration": 5, "description": "Quick look at the {{year}} yard signs and posters so everyone knows what we've got. These are the materials that go with your school outreach assignment, so we want you to see them before you walk out the door." },
+      { "title": "What's Next", "start": "1:20", "end": "1:30", "duration": 10, "description": "We'll close by going around the room one more time. Each coach shares their role, their school(s), and their first action item. Keep it quick. Monthly check-ins through the pre-season will keep us all coordinated without a lot of overhead." }
+    ],
+    "materials": [
+      "Coach Worksheets (completed ahead of time)",
+      "Master Role Assignment Tracker",
+      "{{year}} yard signs and posters",
+      "School outreach list with PTA contacts",
+      "{{year}} race calendar (if available)"
+    ]
+  }
+}

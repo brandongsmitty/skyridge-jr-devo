@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skyridge Jr Devo — Coaching Staff Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/shared.css">
+<style>
+  :root {
+    --orange: #F26A1B;
+    --orange-light: #FF8C42;
+    --black: #0D0D0D;
+    --gray-dark: #1A1A1A;
+    --gray-mid: #242424;
+    --gray-light: #888;
+    --white: #F5F0EB;
+    --border: #2E2E2E;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Barlow', sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  .page-wrap {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+  }
+
+  /* HEADER */
+  .header {
+    background: linear-gradient(135deg, #0D0D0D 0%, #1a1a1a 60%, #2a1500 100%);
+    border-bottom: 3px solid var(--orange);
+    padding: 48px 40px 36px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -50px; right: -50px;
+    width: 280px; height: 280px;
+    border: 36px solid rgba(242,106,27,0.07);
+    border-radius: 50%;
+  }
+  .header-inner {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 24px;
+    position: relative;
+  }
+  .header-eyebrow {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 10px;
+  }
+  .header-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 52px;
+    font-weight: 800;
+    line-height: 1;
+    color: var(--white);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .header-title span { color: var(--orange); }
+  .header-sub {
+    font-size: 14px;
+    color: var(--gray-light);
+    margin-top: 12px;
+  }
+  .header-coach {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 18px;
+    background: rgba(242,106,27,0.1);
+    border: 1px solid rgba(242,106,27,0.2);
+    border-radius: 4px;
+    padding: 8px 16px;
+    font-size: 13px;
+    color: var(--orange);
+    font-family: 'Barlow Condensed', sans-serif;
+    letter-spacing: 0.5px;
+  }
+
+  /* KICKOFF CARD */
+  .kickoff-card {
+    background: var(--gray-dark);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--orange);
+    border-radius: 6px;
+    padding: 24px 28px;
+    margin-top: 32px;
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .kickoff-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 6px;
+  }
+  .kickoff-date {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--white);
+    line-height: 1.1;
+  }
+  .kickoff-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 10px;
+  }
+  .kickoff-detail {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .kickoff-detail-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--gray-light);
+  }
+  .kickoff-detail-value {
+    font-size: 14px;
+    color: var(--white);
+    font-weight: 500;
+  }
+
+  /* SECTION */
+  .section-eyebrow {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gray-light);
+    margin: 40px 0 16px;
+  }
+
+  /* TOOL CARDS */
+  .tool-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  @media (max-width: 600px) {
+    .tool-grid { grid-template-columns: 1fr; }
+    .header-title { font-size: 36px; }
+  }
+
+  .tool-card {
+    background: var(--gray-dark);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 24px;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transition: border-color 0.15s, transform 0.1s;
+  }
+  .tool-card:hover {
+    border-color: var(--orange);
+    transform: translateY(-1px);
+  }
+  .tool-card-icon {
+    font-size: 28px;
+    margin-bottom: 4px;
+  }
+  .tool-card-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--white);
+    letter-spacing: 0.3px;
+  }
+  .tool-card-desc {
+    font-size: 13px;
+    color: var(--gray-light);
+    line-height: 1.5;
+  }
+  .tool-card-meta {
+    font-size: 11px;
+    color: var(--orange);
+    font-family: 'Barlow Condensed', sans-serif;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-top: auto;
+    padding-top: 8px;
+  }
+  .tool-card-arrow {
+    color: var(--orange);
+    font-size: 18px;
+    align-self: flex-end;
+    margin-top: -28px;
+  }
+
+  /* KEY DATES */
+  .dates-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .date-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .date-row:last-child { border-bottom: none; }
+  .date-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--orange);
+    flex-shrink: 0;
+  }
+  .date-label {
+    font-size: 14px;
+    color: var(--white);
+    font-weight: 500;
+    flex: 1;
+  }
+  .date-value {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px;
+    color: var(--gray-light);
+    text-align: right;
+  }
+
+  .loading {
+    color: var(--gray-light);
+    font-style: italic;
+    font-size: 14px;
+    padding: 24px 0;
+  }
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="site-nav-inner">
+    <a href="index.html" class="site-nav-brand">Skyridge Jr Devo</a>
+    <a href="index.html" class="site-nav-link active">Home</a>
+    <a href="tools/worksheet.html" class="site-nav-link">Worksheet</a>
+    <a href="tools/tracker.html" class="site-nav-link">Tracker</a>
+    <a href="tools/agenda.html" class="site-nav-link">Agenda</a>
+    <a href="tools/roles.html" class="site-nav-link">Roles</a>
+  </div>
+</nav>
+
+<div class="header">
+  <div class="header-inner">
+    <div class="header-eyebrow" id="header-eyebrow">Coaching Staff Hub</div>
+    <div class="header-title">Skyridge <span>Jr Devo</span></div>
+    <div class="header-sub" id="header-sub">NICA Utah High School Cycling League &nbsp;·&nbsp; Coaching Staff Resources</div>
+    <div class="header-coach" id="header-coach" style="display:none;">
+      Head Coach: <span id="hc-name"></span>
+    </div>
+  </div>
+</div>
+
+<div class="page-wrap">
+
+  <!-- KICKOFF MEETING -->
+  <div class="kickoff-card" id="kickoff-card" style="display:none;">
+    <div>
+      <div class="kickoff-label">Next Meeting — Coaching Staff Kickoff</div>
+      <div class="kickoff-date" id="kickoff-date"></div>
+      <div class="kickoff-details">
+        <div class="kickoff-detail">
+          <span class="kickoff-detail-label">Time</span>
+          <span class="kickoff-detail-value" id="kickoff-time"></span>
+        </div>
+        <div class="kickoff-detail">
+          <span class="kickoff-detail-label">Location</span>
+          <span class="kickoff-detail-value" id="kickoff-location"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOOLS -->
+  <div class="section-eyebrow">Tools</div>
+  <div class="tool-grid">
+    <a href="tools/worksheet.html" class="tool-card">
+      <div class="tool-card-icon">📋</div>
+      <div class="tool-card-title">Coach Worksheet</div>
+      <div class="tool-card-desc">Complete before the kickoff meeting. Share your availability, role preferences, and school outreach interests.</div>
+      <div class="tool-card-meta">For all coaches &rarr;</div>
+    </a>
+    <a href="tools/tracker.html" class="tool-card">
+      <div class="tool-card-icon">📊</div>
+      <div class="tool-card-title">Role Tracker</div>
+      <div class="tool-card-desc">Head coach reference. Track role assignments, school outreach status, and progress toward a fully staffed season.</div>
+      <div class="tool-card-meta">Head coach only &rarr;</div>
+    </a>
+    <a href="tools/agenda.html" class="tool-card">
+      <div class="tool-card-icon">📅</div>
+      <div class="tool-card-title">Kickoff Agenda</div>
+      <div class="tool-card-desc" id="agenda-desc">90-minute agenda for the coaching staff kickoff meeting. Segment-by-segment guide with timing and talking points.</div>
+      <div class="tool-card-meta" id="agenda-meta">View agenda &rarr;</div>
+    </a>
+    <a href="tools/roles.html" class="tool-card">
+      <div class="tool-card-icon">🏔</div>
+      <div class="tool-card-title">Role Descriptions</div>
+      <div class="tool-card-desc">Detailed descriptions for all coaching roles — what each one owns, what it looks like in practice, and how to get started.</div>
+      <div class="tool-card-meta" id="roles-meta">View all roles &rarr;</div>
+    </a>
+  </div>
+
+  <!-- KEY DATES -->
+  <div class="section-eyebrow">Key Dates</div>
+  <div class="dates-list" id="dates-list">
+    <div class="loading">Loading season data…</div>
+  </div>
+
+</div>
+
+<script src="assets/js/season-loader.js"></script>
+<script>
+  loadSeason().then(data => {
+    const s = data.season;
+
+    // Header
+    document.getElementById('header-eyebrow').textContent = `${s.year} Season · Coaching Staff Hub`;
+    document.getElementById('header-sub').innerHTML = `${s.league} &nbsp;·&nbsp; Coaching Staff Resources`;
+    if (s.headCoach && s.headCoach.name) {
+      document.getElementById('hc-name').textContent = s.headCoach.name;
+      document.getElementById('header-coach').style.display = 'inline-flex';
+    }
+
+    // Kickoff card
+    const km = s.kickoffMeeting;
+    if (km && km.date) {
+      document.getElementById('kickoff-date').textContent = km.date;
+      document.getElementById('kickoff-time').textContent = km.time || '—';
+      const loc = [km.location, km.locationDetail].filter(Boolean).join(' · ') || '—';
+      document.getElementById('kickoff-location').textContent = loc;
+      document.getElementById('kickoff-card').style.display = 'flex';
+    }
+
+    // Agenda card meta
+    if (km && km.date) {
+      document.getElementById('agenda-meta').textContent = `${km.date} →`;
+    }
+
+    // Roles meta
+    const roles = data.roles || [];
+    const essential = roles.filter(r => r.tier === 'essential').length;
+    const rec = roles.filter(r => r.tier === 'recommended').length;
+    document.getElementById('roles-meta').textContent = `${essential} essential · ${rec} recommended →`;
+
+    // Key dates
+    const datesList = document.getElementById('dates-list');
+    if (s.keyDates && s.keyDates.length > 0) {
+      datesList.innerHTML = s.keyDates.map(d => `
+        <div class="date-row">
+          <div class="date-dot"></div>
+          <div class="date-label">${d.label}</div>
+          <div class="date-value">${d.date}</div>
+        </div>
+      `).join('');
+    } else {
+      datesList.innerHTML = '<div class="loading">No key dates configured.</div>';
+    }
+  }).catch(() => {});
+</script>
+</body>
+</html>

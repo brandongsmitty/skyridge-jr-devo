@@ -1,0 +1,72 @@
+/* shared.css — Site nav + CSS variables shared across all pages */
+
+/* ─── GOOGLE FONTS (loaded per-page to avoid FOUC; this is a fallback reference) ─── */
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600&display=swap');
+
+/* ─── SITE NAV ─── */
+.site-nav {
+  background: #111111;
+  border-bottom: 2px solid #F26A1B;
+  position: sticky;
+  top: 0;
+  z-index: 200;
+}
+
+.site-nav-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.site-nav-inner::-webkit-scrollbar { display: none; }
+
+.site-nav-brand {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #F26A1B;
+  padding: 12px 20px 12px 0;
+  text-decoration: none;
+  white-space: nowrap;
+  border-right: 1px solid #2a2a2a;
+  margin-right: 8px;
+  flex-shrink: 0;
+}
+
+.site-nav-link {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #888888;
+  padding: 14px 14px;
+  text-decoration: none;
+  white-space: nowrap;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.site-nav-link:hover {
+  color: #F26A1B;
+  border-bottom-color: rgba(242, 106, 27, 0.4);
+}
+
+.site-nav-link.active {
+  color: #F5F0EB;
+  border-bottom-color: #F26A1B;
+}
+
+/* ─── PRINT ─── */
+@media print {
+  .site-nav {
+    display: none;
+  }
+}
