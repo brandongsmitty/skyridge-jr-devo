@@ -1,0 +1,1211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skyridge Jr Devo — Role Assignment Meeting</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/shared.css">
+<style>
+  :root {
+    --orange: #F26A1B;
+    --orange-light: #FF8C42;
+    --orange-pale: #FFF0E6;
+    --orange-mid: #FDDCCA;
+    --black: #0D0D0D;
+    --gray-dark: #333333;
+    --gray-mid: #666666;
+    --gray-light: #999999;
+    --gray-bg: #F6F4F1;
+    --gray-line: #E4E0DA;
+    --white: #FFFFFF;
+    --green: #2D7D52;
+    --green-pale: #EAF5EE;
+    --green-mid: #B8DFCA;
+    --red: #C0392B;
+    --red-pale: #FDEEEC;
+    --red-mid: #F5C6C2;
+    --yellow: #D4890A;
+    --yellow-pale: #FEF7E6;
+    --yellow-mid: #FADFAB;
+    --blue: #3A6EA8;
+    --blue-pale: #EEF3FA;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--gray-bg);
+    font-family: 'Barlow', sans-serif;
+    font-size: 14px;
+    color: var(--gray-dark);
+    line-height: 1.5;
+  }
+
+  /* ── SITE HEADER (dark, matching site pattern) ── */
+  .print-logo { display: none; }
+  @media print {
+    .print-logo { display: block; height: 48px; width: auto; margin-bottom: 12px; }
+    .no-print { display: none !important; }
+    .tabs { display: none; }
+    .page { display: block !important; padding: 16px; }
+    .header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+
+  .header {
+    background: linear-gradient(135deg, #111 0%, #1c1c1c 60%, #2a1500 100%);
+    border-bottom: 3px solid var(--orange);
+    padding: 28px 40px 22px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute; top: -40px; right: -40px;
+    width: 200px; height: 200px;
+    border: 28px solid rgba(242,106,27,0.07);
+    border-radius: 50%;
+  }
+  .header-inner { max-width: 1200px; margin: 0 auto; position: relative; }
+  .header-eyebrow {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--orange); margin-bottom: 6px;
+  }
+  .header-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 36px; font-weight: 800; line-height: 1;
+    color: #F5F0EB; text-transform: uppercase;
+  }
+  .header-title span { color: var(--orange); }
+  .header-sub { font-size: 13px; color: #888; margin-top: 8px; }
+  .header-meta { display: flex; gap: 12px; margin-top: 14px; flex-wrap: wrap; }
+  .header-stat {
+    background: rgba(242,106,27,0.1);
+    border: 1px solid rgba(242,106,27,0.2);
+    border-radius: 4px; padding: 7px 14px;
+  }
+  .header-stat.green {
+    background: rgba(45,125,82,0.12);
+    border-color: rgba(45,125,82,0.3);
+  }
+  .header-stat-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 20px; font-weight: 800; color: var(--orange); line-height: 1;
+  }
+  .header-stat.green .header-stat-num { color: #5dd49a; }
+  .header-stat-label {
+    font-size: 10px; color: #888; text-transform: uppercase; letter-spacing: 1px;
+  }
+
+  /* ── TABS ── */
+  .tabs { background: var(--white); border-bottom: 1px solid var(--gray-line); }
+  .tabs-inner { display: flex; padding: 0 32px; max-width: 1200px; margin: 0 auto; }
+  .tab {
+    font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 700;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    padding: 12px 18px; border-bottom: 2px solid transparent;
+    cursor: pointer; color: var(--gray-light); transition: all 0.15s;
+    white-space: nowrap;
+  }
+  .tab:hover { color: var(--orange); }
+  .tab.active { color: var(--orange); border-bottom-color: var(--orange); }
+
+  /* ── PAGE LAYOUT ── */
+  .page { display: none; padding: 24px 32px 48px; max-width: 1200px; margin: 0 auto; }
+  .page.active { display: block; }
+
+  /* ── SECTION HEADERS ── */
+  .section-head { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+  .section-label {
+    font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 700;
+    letter-spacing: 2.5px; text-transform: uppercase; color: var(--orange); white-space: nowrap;
+  }
+  .section-line { flex: 1; height: 1px; background: var(--gray-line); }
+
+  /* ── ALERT STRIP ── */
+  .alert-row { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+  .alert {
+    display: flex; align-items: flex-start; gap: 10px;
+    border-radius: 5px; padding: 10px 14px; flex: 1; min-width: 220px;
+  }
+  .alert-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+  .alert-title {
+    font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 700;
+    letter-spacing: 1px; text-transform: uppercase; margin-bottom: 3px;
+  }
+  .alert-text { font-size: 12px; line-height: 1.5; }
+  .alert-red { background: var(--red-pale); border: 1px solid var(--red-mid); color: var(--red); }
+  .alert-yellow { background: var(--yellow-pale); border: 1px solid var(--yellow-mid); color: #7a5300; }
+  .alert-green { background: var(--green-pale); border: 1px solid var(--green-mid); color: var(--green); }
+  .alert-blue { background: var(--blue-pale); border: 1px solid #b8cfec; color: var(--blue); }
+
+  /* ── COACH CARDS ── */
+  .coaches-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px; margin-bottom: 28px; }
+  .coach-card { background: var(--white); border: 1px solid var(--gray-line); border-radius: 6px; overflow: hidden; }
+  .coach-card.missing { opacity: 0.55; border-style: dashed; border-color: #ccc; }
+  .coach-card-head {
+    padding: 12px 16px 10px; border-bottom: 1px solid var(--gray-line);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .coach-name {
+    font-family: 'Barlow Condensed', sans-serif; font-size: 17px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.3px; color: var(--black);
+  }
+  .coach-meta { font-size: 11px; color: var(--gray-light); margin-top: 2px; }
+  .coach-status-tag {
+    font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 700;
+    letter-spacing: 1.5px; text-transform: uppercase; padding: 3px 9px; border-radius: 2px;
+  }
+  .tag-ret { background: var(--blue-pale); border: 1px solid #b8cfec; color: var(--blue); }
+  .tag-new { background: var(--green-pale); border: 1px solid var(--green-mid); color: var(--green); }
+  .tag-miss { background: #F0F0F0; border: 1px solid #DDD; color: #AAA; }
+  .coach-card-body { padding: 12px 16px; }
+  .cc-row { display: flex; gap: 6px; align-items: flex-start; margin-bottom: 8px; }
+  .cc-label {
+    font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 700;
+    letter-spacing: 1.5px; text-transform: uppercase; color: var(--gray-light);
+    min-width: 72px; padding-top: 1px; flex-shrink: 0;
+  }
+  .cc-val { font-size: 12px; color: var(--gray-dark); }
+  .rank-chips { display: flex; flex-wrap: wrap; gap: 4px; }
+  .rank-chip { font-size: 11px; padding: 2px 8px; border-radius: 2px; display: flex; align-items: center; gap: 4px; }
+  .rank-1 { background: var(--orange-pale); border: 1px solid var(--orange-mid); color: var(--orange); font-weight: 600; }
+  .rank-2 { background: var(--yellow-pale); border: 1px solid var(--yellow-mid); color: var(--yellow); }
+  .rank-3 { background: var(--blue-pale); border: 1px solid #b8cfec; color: var(--blue); }
+  .rank-int { background: #F4F4F4; border: 1px solid #DDD; color: var(--gray-mid); }
+  .rank-no { background: var(--red-pale); border: 1px solid var(--red-mid); color: var(--red); }
+  .rank-num { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 800; }
+  .school-chips { display: flex; flex-wrap: wrap; gap: 4px; }
+  .school-chip { font-size: 11px; padding: 2px 8px; border-radius: 2px; background: #F4F4F4; border: 1px solid #DDD; color: var(--gray-mid); }
+  .school-chip.pta { background: var(--orange-pale); border-color: var(--orange-mid); color: var(--orange); }
+  .avail-bar { display: flex; align-items: center; gap: 6px; }
+  .avail-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .avail-high { background: var(--green); }
+  .avail-mid { background: var(--yellow); }
+  .avail-low { background: var(--gray-light); }
+  .coach-note {
+    background: var(--gray-bg); border-left: 2px solid var(--gray-line);
+    border-radius: 2px; padding: 7px 10px; font-size: 12px; color: var(--gray-mid);
+    font-style: italic; margin-top: 8px;
+  }
+
+  /* ── ROLE ASSIGNMENT BOARD ── */
+  .role-board { display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
+  .role-row {
+    background: var(--white); border: 1px solid var(--gray-line); border-radius: 6px;
+    display: flex; align-items: stretch; overflow: hidden;
+  }
+  .role-row.assigned { border-left: 3px solid var(--green); }
+  .role-row.conflict { border-left: 3px solid var(--orange); }
+  .role-row.gap { border-left: 3px solid var(--red); }
+  .role-number {
+    font-family: 'Barlow Condensed', sans-serif; font-size: 16px; font-weight: 800;
+    color: var(--orange); padding: 14px 14px;
+    display: flex; align-items: center; min-width: 44px;
+    border-right: 1px solid var(--gray-line); flex-shrink: 0;
+  }
+  .role-row.gap .role-number { color: var(--red); }
+  .role-info { padding: 10px 14px; flex: 0 0 230px; border-right: 1px solid var(--gray-line); }
+  .role-name {
+    font-family: 'Barlow Condensed', sans-serif; font-size: 14px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.3px; color: var(--black); line-height: 1.2;
+  }
+  .role-demand { margin-top: 6px; display: flex; flex-wrap: wrap; gap: 3px; }
+  .demand-tag { font-size: 10px; padding: 2px 7px; border-radius: 2px; font-weight: 600; }
+  .dt-1 { background: var(--orange-pale); border: 1px solid var(--orange-mid); color: var(--orange); }
+  .dt-2 { background: var(--yellow-pale); border: 1px solid var(--yellow-mid); color: var(--yellow); }
+  .dt-3 { background: var(--blue-pale); border: 1px solid #b8cfec; color: var(--blue); }
+  .dt-int { background: #F4F4F4; border: 1px solid #DDD; color: var(--gray-mid); }
+  .dt-no { background: var(--red-pale); border: 1px solid var(--red-mid); color: var(--red); }
+  .role-assign { flex: 1; padding: 10px 14px; display: flex; align-items: center; gap: 14px; }
+  .assign-col { display: flex; flex-direction: column; gap: 4px; flex: 1; }
+  .assign-lbl {
+    font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 700;
+    letter-spacing: 1.5px; text-transform: uppercase; color: var(--gray-light);
+  }
+  select.assign-select {
+    font-family: 'Barlow', sans-serif; font-size: 13px; color: var(--gray-dark);
+    background: var(--gray-bg); border: 1px solid var(--gray-line); border-radius: 4px;
+    padding: 6px 10px; appearance: none; cursor: pointer; width: 100%; outline: none;
+  }
+  select.assign-select:focus { border-color: var(--orange); background: var(--white); }
+  select.assign-select.has-value { background: var(--white); border-color: var(--green); color: var(--black); font-weight: 600; }
+  .role-notes { flex: 0 0 180px; padding: 10px 12px; border-left: 1px solid var(--gray-line); }
+  .notes-input {
+    width: 100%; height: 52px; font-family: 'Barlow', sans-serif; font-size: 12px;
+    color: var(--gray-dark); background: var(--gray-bg); border: 1px solid var(--gray-line);
+    border-radius: 3px; padding: 6px 8px; resize: none; outline: none;
+  }
+  .notes-input:focus { border-color: var(--orange); background: var(--white); }
+
+  /* ── PROGRESS BAR ── */
+  .progress-row { display: flex; gap: 16px; align-items: center; margin-bottom: 20px; }
+  .progress-bar-wrap { flex: 1; height: 6px; background: var(--gray-line); border-radius: 3px; overflow: hidden; }
+  .progress-bar-fill { height: 100%; background: linear-gradient(90deg, var(--orange), var(--orange-light)); border-radius: 3px; transition: width 0.4s ease; }
+  .progress-label { font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 700; color: var(--gray-mid); white-space: nowrap; }
+  #progress-count { color: var(--orange); }
+
+  /* ── CONFLICT MAP ── */
+  .conflict-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; margin-bottom: 24px; }
+  .conflict-card { background: var(--white); border: 1px solid var(--gray-line); border-radius: 5px; padding: 12px 14px; }
+  .conflict-card.hot { border-left: 3px solid var(--red); }
+  .conflict-card.warm { border-left: 3px solid var(--orange); }
+  .conflict-card.clear { border-left: 3px solid var(--green); }
+  .conflict-card.nobody { border-left: 3px solid #CCC; }
+  .cc-role-name {
+    font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.3px; color: var(--black); margin-bottom: 8px; line-height: 1.2;
+  }
+  .cc-coaches { display: flex; flex-direction: column; gap: 3px; }
+  .cc-coach-row { display: flex; align-items: center; gap: 6px; font-size: 11px; }
+  .cc-coach-name { color: var(--gray-dark); }
+  .cc-coach-rank { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 800; padding: 1px 5px; border-radius: 2px; }
+  .r1 { background: var(--orange-pale); color: var(--orange); }
+  .r2 { background: var(--yellow-pale); color: var(--yellow); }
+  .r3 { background: var(--blue-pale); color: var(--blue); }
+  .ri { background: #F0F0F0; color: var(--gray-mid); }
+  .cc-empty { font-size: 12px; color: #BBB; font-style: italic; }
+
+  /* ── SCHOOL MATRIX ── */
+  .school-matrix-wrap { overflow-x: auto; margin-bottom: 28px; }
+  table.school-matrix {
+    border-collapse: collapse; width: 100%;
+    background: var(--white); border: 1px solid var(--gray-line); border-radius: 6px; overflow: hidden;
+  }
+  .school-matrix th {
+    font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 700;
+    letter-spacing: 1.5px; text-transform: uppercase; color: var(--gray-light);
+    background: var(--gray-bg); padding: 9px 12px; text-align: left;
+    border-bottom: 1px solid var(--gray-line); white-space: nowrap;
+  }
+  .school-matrix th.school-col { min-width: 160px; }
+  .school-matrix td { padding: 9px 12px; border-bottom: 1px solid var(--gray-line); font-size: 13px; vertical-align: middle; }
+  .school-matrix tr:last-child td { border-bottom: none; }
+  .school-matrix td.school-name { font-weight: 500; color: var(--black); }
+  .school-matrix td.school-type { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+  .t-elem { color: var(--orange); }
+  .t-mid { color: var(--blue); }
+  .check { font-size: 16px; }
+  .pta-star { font-size: 13px; }
+  .school-assign-cell { min-width: 140px; }
+  select.school-select {
+    font-family: 'Barlow', sans-serif; font-size: 12px; color: var(--gray-dark);
+    background: var(--gray-bg); border: 1px solid var(--gray-line); border-radius: 3px;
+    padding: 4px 8px; appearance: none; cursor: pointer; width: 100%; outline: none;
+  }
+  select.school-select:focus { border-color: var(--orange); }
+  select.school-select.has-value { background: var(--green-pale); border-color: var(--green-mid); color: var(--black); font-weight: 500; }
+
+  /* ── PARKING LOT ── */
+  .parking-lot { background: var(--white); border: 1px solid var(--gray-line); border-radius: 6px; padding: 18px 20px; }
+  .parking-items { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
+  .parking-item {
+    display: flex; align-items: flex-start; gap: 10px; padding: 10px 12px;
+    background: var(--gray-bg); border: 1px solid var(--gray-line); border-radius: 4px;
+  }
+  .parking-bullet {
+    font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 700;
+    letter-spacing: 1px; text-transform: uppercase;
+    padding: 2px 8px; border-radius: 2px; flex-shrink: 0; margin-top: 1px;
+  }
+  .pb-coach { background: var(--blue-pale); border: 1px solid #b8cfec; color: var(--blue); }
+  .pb-mtg { background: var(--orange-pale); border: 1px solid var(--orange-mid); color: var(--orange); }
+  .pb-gap { background: var(--red-pale); border: 1px solid var(--red-mid); color: var(--red); }
+  .parking-text { font-size: 13px; color: var(--gray-dark); line-height: 1.5; }
+  .add-parking { display: flex; gap: 8px; margin-top: 12px; }
+  .parking-input {
+    flex: 1; font-family: 'Barlow', sans-serif; font-size: 13px;
+    background: var(--gray-bg); border: 1px solid var(--gray-line); border-radius: 4px;
+    padding: 8px 12px; outline: none; color: var(--gray-dark);
+  }
+  .parking-input:focus { border-color: var(--orange); background: var(--white); }
+  .btn-add {
+    font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 700;
+    letter-spacing: 1px; text-transform: uppercase;
+    background: var(--orange); color: #fff; border: none; border-radius: 4px;
+    padding: 8px 16px; cursor: pointer;
+  }
+  .btn-add:hover { background: var(--orange-light); }
+
+  /* ── SUMMARY TABLE ── */
+  .summary-table { width: 100%; border-collapse: collapse; }
+  .summary-table th, .summary-table td { padding: 10px 14px; border-bottom: 1px solid var(--gray-line); text-align: left; }
+  .summary-table th {
+    font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 700;
+    letter-spacing: 1.5px; text-transform: uppercase; color: var(--gray-light);
+    background: var(--gray-bg);
+  }
+  .summary-table td { font-size: 13px; background: var(--white); }
+  .summary-table tr:last-child td { border-bottom: none; }
+  .td-role { font-weight: 600; color: var(--black); }
+  .td-owner { color: var(--green); font-weight: 600; }
+  .td-unassigned { color: #BBBBBB; font-style: italic; }
+
+  /* ── ACTION BUTTONS ── */
+  .summary-btn-row { display: flex; gap: 10px; margin-top: 20px; }
+  .btn-primary {
+    font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 700;
+    letter-spacing: 1px; text-transform: uppercase;
+    background: var(--orange); color: #fff; border: none; border-radius: 4px;
+    padding: 10px 20px; cursor: pointer;
+  }
+  .btn-primary:hover { background: var(--orange-light); }
+  .btn-secondary {
+    font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 700;
+    letter-spacing: 1px; text-transform: uppercase;
+    background: var(--white); color: var(--gray-dark); border: 1px solid var(--gray-line); border-radius: 4px;
+    padding: 10px 20px; cursor: pointer;
+  }
+  .btn-secondary:hover { border-color: var(--orange); color: var(--orange); }
+</style>
+</head>
+<body>
+
+<nav class="site-nav no-print">
+  <div class="site-nav-inner">
+    <a href="../index.html" class="site-nav-brand">
+      <img src="../assets/images/skyridge_jr-devo_logo.png" alt="" class="site-nav-logo">
+      Skyridge Jr Devo
+    </a>
+    <a href="../index.html" class="site-nav-link">Home</a>
+    <a href="agenda.html" class="site-nav-link">Agenda</a>
+    <a href="roles.html" class="site-nav-link">Roles</a>
+    <a href="worksheet.html" class="site-nav-link">Worksheet</a>
+    <a href="tracker.html" class="site-nav-link">Tracker</a>
+    <a href="meeting.html" class="site-nav-link active">Meeting</a>
+  </div>
+</nav>
+
+<div class="header">
+  <div class="header-inner">
+    <img src="../assets/images/skyridge_jr-devo_logo.png" alt="Skyridge Jr Devo" class="print-logo">
+    <div class="header-eyebrow">Head Coach Only &nbsp;·&nbsp; 2026 Season</div>
+    <div class="header-title">Role <span>Assignment</span> Meeting</div>
+    <div class="header-sub">Skyridge Jr Devo &nbsp;·&nbsp; Utah High School Cycling League &nbsp;·&nbsp; NICA</div>
+    <div class="header-meta">
+      <div class="header-stat green">
+        <div class="header-stat-num">6</div>
+        <div class="header-stat-label">Responded</div>
+      </div>
+      <div class="header-stat">
+        <div class="header-stat-num">1</div>
+        <div class="header-stat-label">Pending</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="tabs no-print">
+  <div class="tabs-inner">
+    <div class="tab active" onclick="showTab('overview')">Coach Overview</div>
+    <div class="tab" onclick="showTab('assign')">Role Assignment</div>
+    <div class="tab" onclick="showTab('schools')">School Outreach</div>
+    <div class="tab" onclick="showTab('summary')">Meeting Summary</div>
+  </div>
+</div>
+
+<!-- ─── TAB 1: OVERVIEW ─── -->
+<div class="page active" id="tab-overview">
+
+  <div style="margin-bottom: 16px; margin-top: 4px;">
+    <div class="alert-row">
+      <div class="alert alert-red">
+        <div class="alert-icon">🔴</div>
+        <div class="alert-body">
+          <div class="alert-title">Hot Conflict</div>
+          <div class="alert-text">Communication & Culture Lead: 4 coaches want it (Diane #1, Kathy #1, Catharine #1, Brad #2) — resolve this first.</div>
+        </div>
+      </div>
+      <div class="alert alert-yellow">
+        <div class="alert-icon">⚠️</div>
+        <div class="alert-body">
+          <div class="alert-title">Gap Alert</div>
+          <div class="alert-text">Practice Planning & Skills Lead: nobody ranked it in their top 3. Needs a volunteer or creative solution.</div>
+        </div>
+      </div>
+      <div class="alert alert-green">
+        <div class="alert-icon">✅</div>
+        <div class="alert-body">
+          <div class="alert-title">Clear Fits</div>
+          <div class="alert-text">Finance → Brad. Safety → Devan. Race Weekend → Jon. Catharine = PE teacher at Lehi Jr, connections at Viewpoint & Segolilly — lock her in for school outreach.</div>
+        </div>
+      </div>
+      <div class="alert alert-blue">
+        <div class="alert-icon">📋</div>
+        <div class="alert-body">
+          <div class="alert-title">1 Not Submitted</div>
+          <div class="alert-text">1 coach hasn't completed a worksheet — get verbal preferences at the start of the meeting.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-head">
+    <div class="section-label">Coach Responses (6 of 7)</div>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="coaches-grid">
+
+    <!-- Brad -->
+    <div class="coach-card">
+      <div class="coach-card-head">
+        <div>
+          <div class="coach-name">Brad Hardcastle</div>
+          <div class="coach-meta">Returning · 3rd Year · Organization & Systems</div>
+        </div>
+        <div class="coach-status-tag tag-ret">Returning</div>
+      </div>
+      <div class="coach-card-body">
+        <div class="cc-row">
+          <div class="cc-label">Top Roles</div>
+          <div class="rank-chips">
+            <div class="rank-chip rank-1"><span class="rank-num">#1</span> Finance / Treasurer</div>
+            <div class="rank-chip rank-2"><span class="rank-num">#2</span> Comm & Culture</div>
+            <div class="rank-chip rank-3"><span class="rank-num">#3</span> Registration</div>
+          </div>
+        </div>
+        <div class="cc-row">
+          <div class="cc-label">Hard Nos</div>
+          <div class="rank-chips">
+            <div class="rank-chip rank-no">Equipment</div>
+            <div class="rank-chip rank-no">Race Weekend</div>
+          </div>
+        </div>
+        <div class="cc-row">
+          <div class="cc-label">Hours/wk</div>
+          <div class="avail-bar"><div class="avail-dot avail-mid"></div><div class="cc-val">3–5 hrs · All 3 race weekends</div></div>
+        </div>
+        <div class="cc-row">
+          <div class="cc-label">Schools</div>
+          <div class="school-chips">
+            <div class="school-chip">Fox Hollow</div>
+            <div class="school-chip">Eaglecrest</div>
+          </div>
+        </div>
+        <div class="coach-note">"Watching new riders gain confidence and learning to love mountain biking."</div>
+      </div>
+    </div>
+
+    <!-- Diane -->
+    <div class="coach-card">
+      <div class="coach-card-head">
+        <div>
+          <div class="coach-name">Diane Haslam</div>
+          <div class="coach-meta">1st Year · Communication & Relationships</div>
+        </div>
+        <div class="coach-status-tag tag-new">New</div>
+      </div>
+      <div class="coach-card-body">
+        <div class="cc-row">
+          <div class="cc-label">Top Roles</div>
+          <div class="rank-chips">
+            <div class="rank-chip rank-1"><span class="rank-num">#1</span> Comm & Culture</div>
+            <div class="rank-chip rank-2"><span class="rank-num">#2</span> Registration</div>
+            <div class="rank-chip rank-3"><span class="rank-num">#3</span> Ride Leader Coord.</div>
+          </div>
+        </div>
+        <div class="cc-row">
+          <div class="cc-label">Hard Nos</div>
+          <div class="cc-val" style="color: var(--gray-light); font-style: italic;">None stated</div>
+        </div>
+        <div class="cc-row">
+          <div class="cc-label">Hours/wk</div>
+          <div class="avail-bar"><div class="avail-dot avail-mid"></div><div class="cc-val">3–5 hrs · All 3 race weekends</div></div>
+        </div>
+        <div class="cc-row">
+          <div class="cc-label">Schools</div>
+          <div class="school-chips">
+            <div class="school-chip">Segolilly</div>
+            <div class="school-chip">Freedom</div>
+            <div class="school-chip">Lehi Jr</div>
+          </div>
+        </div>
+        <div class="coach-note">"Helping riders feel confident and having fun."</div>
+      </div>
+    </div>
+
+    <!-- Jon -->
+    <div class="coach-card">
+      <div class="coach-card-head">
+        <div>
+          <div class="coach-name">Jon Gale</div>
+          <div class="coach-meta">Returning · 4+ Years · Flexible / Fills Gaps</div>
+        </div>
+        <div class="coach-status-tag tag-ret">Returning</div>
+      </div>
+      <div class="coach-card-body">
+        <div class="cc-row">
+          <div class="cc-label">Interested In</div>
+          <div class="rank-chips">
+            <div class="rank-chip rank-int">Ride Leader Coord.</div>
+            <div class="rank-chip rank-int">Race Weekend</div>
+            <div class="rank-chip rank-int">Registration</div>
+            <div class="rank-chip rank-int">Ride Groups</div>
+            <div class="rank-chip rank-int">Equipment</div>
+            <div class="rank-chip rank-int">Fundraising</div>
+          </div>
+        </div>
+        <div class="cc-row">
+          <div class="cc-label">Hard Nos</div>
+          <div class="cc-val" style="color: var(--gray-light); font-style: italic;">None stated</div>
+        </div>
+        <div class="cc-row">
+          <div class="cc-label">Hours/wk</div>
+          <div class="avail-bar"><div class="avail-dot avail-high"></div><div class="cc-val">5+ hrs · All 3 race weekends</div></div>
+        </div>
+        <div class="cc-row">
+          <div class="cc-label">Schools</div>
+          <div class="cc-val" style="color: var(--gray-light); font-style: italic;">None selected — ask at meeting</div>
+        </div>
+        <div class="coach-note">"I'm glad to fill any gap. Whatever you need."</div>
+      </div>
+    </div>
+
+    <!-- Kathy -->
+    <div class="coach-card">
+      <div class="coach-card-head">
+        <div>
+          <div class="coach-name">Kathy Espenschied</div>
+          <div class="coach-meta">Returning · 3rd Year · Organization & Systems</div>
+        </div>
+        <div class="coach-status-tag tag-ret">Returning</div>
+      </div>
+      <div class="coach-card-body">
+        <div class="cc-row">
+          <div class="cc-label">Top Roles</div>
+          <div class="rank-chips">
+            <div class="rank-chip rank-1"><span class="rank-num">#1</span> Comm & Culture</div>
+            <div class="rank-chip rank-2"><span class="rank-num">#2</span> Registration</div>
+            <div class="rank-chip rank-3"><span class="rank-num">#3</span> Ride Groups</div>
+            <div class="rank-chip rank-int">Finance / Treasurer</div>
+          </div>
+        </div>
+        <div class="cc-row">
+          <div class="cc-label">Hard Nos</div>
+          <div class="cc-val" style="color: var(--gray-light); font-style: italic;">None stated</div>
+        </div>
+        <div class="cc-row">
+          <div class="cc-label">Hours/wk</div>
+          <div class="avail-bar"><div class="avail-dot avail-high"></div><div class="cc-val">5+ hrs · All 3 race weekends</div></div>
+        </div>
+        <div class="cc-row">
+          <div class="cc-label">Schools</div>
+          <div class="school-chips">
+            <div class="school-chip pta">Freedom <span title="PTA connection">⭐</span></div>
+            <div class="school-chip">Eaglecrest</div>
+            <div class="school-chip">Segolilly</div>
+            <div class="school-chip">Lehi Jr</div>
+          </div>
+        </div>
+        <div class="coach-note">"New riders! I love getting to know new kids and opening this world for them."</div>
+      </div>
+    </div>
+
+    <!-- Devan -->
+    <div class="coach-card">
+      <div class="coach-card-head">
+        <div>
+          <div class="coach-name">Devan Griner</div>
+          <div class="coach-meta">New Coach · 1st Year · Technical & Skills</div>
+        </div>
+        <div class="coach-status-tag tag-new">New</div>
+      </div>
+      <div class="coach-card-body">
+        <div class="cc-row">
+          <div class="cc-label">Top Roles</div>
+          <div class="rank-chips">
+            <div class="rank-chip rank-1"><span class="rank-num">#1</span> Safety & First Aid</div>
+            <div class="rank-chip rank-2"><span class="rank-num">#2</span> Ride Leader Coord.</div>
+            <div class="rank-chip rank-3"><span class="rank-num">#3</span> Equipment</div>
+          </div>
+        </div>
+        <div class="cc-row">
+          <div class="cc-label">Hard Nos</div>
+          <div class="cc-val" style="color: var(--gray-light); font-style: italic;">None stated</div>
+        </div>
+        <div class="cc-row">
+          <div class="cc-label">Hours/wk</div>
+          <div class="avail-bar"><div class="avail-dot avail-mid"></div><div class="cc-val">3–5 hrs · All 3 race weekends</div></div>
+        </div>
+        <div class="cc-row">
+          <div class="cc-label">Schools</div>
+          <div class="school-chips">
+            <div class="school-chip">Eaglecrest</div>
+            <div class="school-chip">Viewpoint</div>
+          </div>
+        </div>
+        <div class="coach-note">"So much positive energy!" — kids at Eaglecrest & Viewpoint.</div>
+      </div>
+    </div>
+
+    <!-- Catharine -->
+    <div class="coach-card">
+      <div class="coach-card-head">
+        <div>
+          <div class="coach-name">Catharine Primosch</div>
+          <div class="coach-meta">2nd Year · Communication & Relationships</div>
+        </div>
+        <div class="coach-status-tag tag-ret">Returning</div>
+      </div>
+      <div class="coach-card-body">
+        <div class="cc-row">
+          <div class="cc-label">Top Roles</div>
+          <div class="rank-chips">
+            <div class="rank-chip rank-1"><span class="rank-num">#1</span> Comm & Culture</div>
+            <div class="rank-chip rank-2"><span class="rank-num">#2</span> Ride Groups</div>
+            <div class="rank-chip rank-3"><span class="rank-num">#3</span> Ride Leader Coord.</div>
+          </div>
+        </div>
+        <div class="cc-row">
+          <div class="cc-label">Hard Nos</div>
+          <div class="cc-val" style="color: var(--gray-light); font-style: italic;">None stated</div>
+        </div>
+        <div class="cc-row">
+          <div class="cc-label">Hours/wk</div>
+          <div class="avail-bar"><div class="avail-dot avail-high"></div><div class="cc-val">5+ hrs · All 3 race weekends</div></div>
+        </div>
+        <div class="cc-row">
+          <div class="cc-label">Schools</div>
+          <div class="school-chips">
+            <div class="school-chip pta">Segolilly ⭐</div>
+            <div class="school-chip pta">Lehi Jr ⭐⭐</div>
+            <div class="school-chip pta">Viewpoint ⭐</div>
+          </div>
+        </div>
+        <div class="coach-note">PE teacher at Lehi Jr. Friends with all PE teachers at Viewpoint. Knows the principal + teachers at Segolilly. Can host parent kickoff + fit kit at Lehi Jr gym.</div>
+      </div>
+    </div>
+
+    <!-- Missing -->
+    <div class="coach-card missing">
+      <div class="coach-card-head">
+        <div>
+          <div class="coach-name">Coach 7 — Not Submitted</div>
+          <div class="coach-meta">Get verbal preferences at start of meeting</div>
+        </div>
+        <div class="coach-status-tag tag-miss">Pending</div>
+      </div>
+      <div class="coach-card-body">
+        <div class="cc-row"><div class="cc-label">Top Roles</div><div class="cc-val" style="color:#BBB; font-style:italic;">— ask at meeting</div></div>
+        <div class="cc-row"><div class="cc-label">Schools</div><div class="cc-val" style="color:#BBB; font-style:italic;">— ask at meeting</div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- CONFLICT MAP -->
+  <div class="section-head">
+    <div class="section-label">Demand Map — Where the Conflicts Are</div>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="conflict-row">
+    <div class="conflict-card hot">
+      <div class="cc-role-name">Communication & Culture Lead</div>
+      <div class="cc-coaches">
+        <div class="cc-coach-row"><span class="cc-coach-rank r1">#1</span><span class="cc-coach-name">Diane Haslam</span></div>
+        <div class="cc-coach-row"><span class="cc-coach-rank r1">#1</span><span class="cc-coach-name">Kathy Espenschied</span></div>
+        <div class="cc-coach-row"><span class="cc-coach-rank r1">#1</span><span class="cc-coach-name">Catharine Primosch</span></div>
+        <div class="cc-coach-row"><span class="cc-coach-rank r2">#2</span><span class="cc-coach-name">Brad Hardcastle</span></div>
+      </div>
+    </div>
+    <div class="conflict-card warm">
+      <div class="cc-role-name">Registration & Roster Manager</div>
+      <div class="cc-coaches">
+        <div class="cc-coach-row"><span class="cc-coach-rank r2">#2</span><span class="cc-coach-name">Diane Haslam</span></div>
+        <div class="cc-coach-row"><span class="cc-coach-rank r2">#2</span><span class="cc-coach-name">Kathy Espenschied</span></div>
+        <div class="cc-coach-row"><span class="cc-coach-rank r3">#3</span><span class="cc-coach-name">Brad Hardcastle</span></div>
+      </div>
+    </div>
+    <div class="conflict-card clear">
+      <div class="cc-role-name">Finance / Treasurer</div>
+      <div class="cc-coaches">
+        <div class="cc-coach-row"><span class="cc-coach-rank r1">#1</span><span class="cc-coach-name">Brad Hardcastle</span></div>
+        <div class="cc-coach-row"><span class="cc-coach-rank ri">int.</span><span class="cc-coach-name">Kathy Espenschied</span></div>
+      </div>
+    </div>
+    <div class="conflict-card clear">
+      <div class="cc-role-name">Safety & First Aid Lead</div>
+      <div class="cc-coaches">
+        <div class="cc-coach-row"><span class="cc-coach-rank r1">#1</span><span class="cc-coach-name">Devan Griner</span></div>
+      </div>
+    </div>
+    <div class="conflict-card warm">
+      <div class="cc-role-name">Ride Leader Coordinator</div>
+      <div class="cc-coaches">
+        <div class="cc-coach-row"><span class="cc-coach-rank r2">#2</span><span class="cc-coach-name">Devan Griner</span></div>
+        <div class="cc-coach-row"><span class="cc-coach-rank r3">#3</span><span class="cc-coach-name">Diane Haslam</span></div>
+        <div class="cc-coach-row"><span class="cc-coach-rank r3">#3</span><span class="cc-coach-name">Catharine Primosch</span></div>
+        <div class="cc-coach-row"><span class="cc-coach-rank ri">int.</span><span class="cc-coach-name">Jon Gale</span></div>
+      </div>
+    </div>
+    <div class="conflict-card warm">
+      <div class="cc-role-name">Ride Group Coordinator</div>
+      <div class="cc-coaches">
+        <div class="cc-coach-row"><span class="cc-coach-rank r2">#2</span><span class="cc-coach-name">Catharine Primosch</span></div>
+        <div class="cc-coach-row"><span class="cc-coach-rank r3">#3</span><span class="cc-coach-name">Kathy Espenschied</span></div>
+        <div class="cc-coach-row"><span class="cc-coach-rank ri">int.</span><span class="cc-coach-name">Jon Gale</span></div>
+      </div>
+    </div>
+    <div class="conflict-card clear">
+      <div class="cc-role-name">Equipment & Gear Manager</div>
+      <div class="cc-coaches">
+        <div class="cc-coach-row"><span class="cc-coach-rank r3">#3</span><span class="cc-coach-name">Devan Griner</span></div>
+        <div class="cc-coach-row"><span class="cc-coach-rank ri">int.</span><span class="cc-coach-name">Jon Gale</span></div>
+      </div>
+    </div>
+    <div class="conflict-card clear">
+      <div class="cc-role-name">Race Weekend Captain</div>
+      <div class="cc-coaches">
+        <div class="cc-coach-row"><span class="cc-coach-rank ri">int.</span><span class="cc-coach-name">Jon Gale</span></div>
+        <div class="cc-coach-row" style="opacity:0.5"><span style="font-size:10px;padding:1px 5px;background:#fef0ef;border:1px solid #f9c8c5;color:#c0392b;border-radius:2px;font-weight:700;">NO</span><span class="cc-coach-name" style="font-size:11px;color:#999"> Brad Hardcastle</span></div>
+      </div>
+    </div>
+    <div class="conflict-card nobody">
+      <div class="cc-role-name">Practice Planning & Skills Lead</div>
+      <div class="cc-coaches">
+        <div class="cc-empty">⚠️ No one listed this in their top 3</div>
+      </div>
+    </div>
+    <div class="conflict-card clear">
+      <div class="cc-role-name">Fundraising & Sponsorship Lead</div>
+      <div class="cc-coaches">
+        <div class="cc-coach-row"><span class="cc-coach-rank ri">int.</span><span class="cc-coach-name">Jon Gale</span></div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /overview -->
+
+
+<!-- ─── TAB 2: ASSIGNMENT BOARD ─── -->
+<div class="page" id="tab-assign">
+
+  <div class="progress-row">
+    <div class="progress-label">Roles Assigned: <span id="progress-count">0</span> / 10</div>
+    <div class="progress-bar-wrap">
+      <div class="progress-bar-fill" id="progress-bar" style="width:0%"></div>
+    </div>
+  </div>
+
+  <div class="section-head">
+    <div class="section-label">Essential Roles (8)</div>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="role-board" id="role-board"></div>
+
+  <div class="section-head" style="margin-top:8px;">
+    <div class="section-label">Highly Recommended Roles (2)</div>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="role-board" id="role-board-rec"></div>
+
+  <div class="summary-btn-row">
+    <button class="btn-primary" onclick="showTab('summary')">View Full Summary →</button>
+    <button class="btn-secondary" onclick="window.print()">Print / Save PDF</button>
+  </div>
+
+</div><!-- /assign -->
+
+
+<!-- ─── TAB 3: SCHOOLS ─── -->
+<div class="page" id="tab-schools">
+
+  <div class="alert-row" style="margin-bottom:16px;">
+    <div class="alert alert-yellow">
+      <div class="alert-icon">⚠️</div>
+      <div class="alert-body">
+        <div class="alert-title">Overlap: Segolilly</div>
+        <div class="alert-text">Diane, Kathy, and Catharine all listed Segolilly. Catharine knows the principal — strong case for her taking point here.</div>
+      </div>
+    </div>
+    <div class="alert alert-yellow">
+      <div class="alert-icon">⚠️</div>
+      <div class="alert-body">
+        <div class="alert-title">Overlap: Lehi Jr & Freedom</div>
+        <div class="alert-text">Lehi Jr: Diane, Kathy & Catharine all listed it — Catharine works there. Freedom: Diane & Kathy. Resolve in the meeting.</div>
+      </div>
+    </div>
+    <div class="alert alert-green">
+      <div class="alert-icon">✅</div>
+      <div class="alert-body">
+        <div class="alert-title">Exceptional Connections</div>
+        <div class="alert-text">Catharine = PE teacher at Lehi Jr, friends with all PE staff at Viewpoint, knows principal + teachers at Segolilly. She can also host the parent kickoff + fit kit at Lehi Jr gym.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-head">
+    <div class="section-label">School Assignments</div>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="school-matrix-wrap">
+    <table class="school-matrix">
+      <thead>
+        <tr>
+          <th class="school-col">School</th>
+          <th>Type</th>
+          <th>Brad</th>
+          <th>Diane</th>
+          <th>Jon</th>
+          <th>Kathy</th>
+          <th>Devan</th>
+          <th>Catharine</th>
+          <th>Coach 7</th>
+          <th style="min-width:160px;">Assign Primary</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="school-name">Liberty Hills</td>
+          <td class="school-type t-elem">Elem.</td>
+          <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+          <td class="school-assign-cell"><select class="school-select" onchange="handleSchoolChange(this)" data-school="liberty-hills"><option value="">— Unassigned —</option><option>Brad</option><option>Diane</option><option>Jon</option><option>Kathy</option><option>Devan</option><option>Catharine</option><option>Coach 7</option></select></td>
+        </tr>
+        <tr>
+          <td class="school-name">Fox Hollow</td>
+          <td class="school-type t-elem">Elem.</td>
+          <td class="check">✓</td><td></td><td></td><td></td><td></td><td></td><td></td>
+          <td class="school-assign-cell"><select class="school-select" onchange="handleSchoolChange(this)" data-school="fox-hollow"><option value="">— Unassigned —</option><option>Brad</option><option>Diane</option><option>Jon</option><option>Kathy</option><option>Devan</option><option>Catharine</option><option>Coach 7</option></select></td>
+        </tr>
+        <tr>
+          <td class="school-name">Traverse Mountain</td>
+          <td class="school-type t-elem">Elem.</td>
+          <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+          <td class="school-assign-cell"><select class="school-select" onchange="handleSchoolChange(this)" data-school="traverse"><option value="">— Unassigned —</option><option>Brad</option><option>Diane</option><option>Jon</option><option>Kathy</option><option>Devan</option><option>Catharine</option><option>Coach 7</option></select></td>
+        </tr>
+        <tr>
+          <td class="school-name">Belmont</td>
+          <td class="school-type t-elem">Elem.</td>
+          <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+          <td class="school-assign-cell"><select class="school-select" onchange="handleSchoolChange(this)" data-school="belmont"><option value="">— Unassigned —</option><option>Brad</option><option>Diane</option><option>Jon</option><option>Kathy</option><option>Devan</option><option>Catharine</option><option>Coach 7</option></select></td>
+        </tr>
+        <tr>
+          <td class="school-name">Eaglecrest</td>
+          <td class="school-type t-elem">Elem.</td>
+          <td class="check" style="color:var(--orange)">✓</td>
+          <td></td><td></td>
+          <td class="check" style="color:var(--orange)">✓</td>
+          <td class="check" style="color:var(--orange)">✓</td>
+          <td></td><td></td>
+          <td class="school-assign-cell"><select class="school-select" onchange="handleSchoolChange(this)" data-school="eaglecrest"><option value="">— Unassigned —</option><option>Brad</option><option>Diane</option><option>Jon</option><option>Kathy</option><option>Devan</option><option>Catharine</option><option>Coach 7</option></select></td>
+        </tr>
+        <tr>
+          <td class="school-name">Segolilly</td>
+          <td class="school-type t-elem">Elem.</td>
+          <td></td>
+          <td class="check" style="color:var(--orange)">✓</td>
+          <td></td>
+          <td class="check" style="color:var(--orange)">✓</td>
+          <td></td>
+          <td class="check pta-star" style="color:var(--orange)" title="Knows principal + teachers">✓⭐</td>
+          <td></td>
+          <td class="school-assign-cell"><select class="school-select" onchange="handleSchoolChange(this)" data-school="segolilly"><option value="">— Unassigned —</option><option>Brad</option><option>Diane</option><option>Jon</option><option>Kathy</option><option>Devan</option><option>Catharine</option><option>Coach 7</option></select></td>
+        </tr>
+        <tr>
+          <td class="school-name">Freedom <span class="pta-star" title="Kathy on PTA">⭐</span></td>
+          <td class="school-type t-elem">Elem.</td>
+          <td></td>
+          <td class="check" style="color:var(--orange)">✓</td>
+          <td></td>
+          <td class="check pta-star" style="color:var(--orange)">✓⭐</td>
+          <td></td><td></td><td></td>
+          <td class="school-assign-cell"><select class="school-select" onchange="handleSchoolChange(this)" data-school="freedom"><option value="">— Unassigned —</option><option>Brad</option><option>Diane</option><option>Jon</option><option>Kathy</option><option>Devan</option><option>Catharine</option><option>Coach 7</option></select></td>
+        </tr>
+        <tr>
+          <td class="school-name">Lehi Jr <span class="pta-star" title="Catharine is PE teacher here">⭐⭐</span></td>
+          <td class="school-type t-mid">Middle</td>
+          <td></td>
+          <td class="check" style="color:var(--orange)">✓</td>
+          <td></td>
+          <td class="check" style="color:var(--orange)">✓</td>
+          <td></td>
+          <td class="check pta-star" style="color:var(--green)" title="PE teacher here — strongest connection">✓⭐⭐</td>
+          <td></td>
+          <td class="school-assign-cell"><select class="school-select" onchange="handleSchoolChange(this)" data-school="lehi-jr"><option value="">— Unassigned —</option><option>Brad</option><option>Diane</option><option>Jon</option><option>Kathy</option><option>Devan</option><option>Catharine</option><option>Coach 7</option></select></td>
+        </tr>
+        <tr>
+          <td class="school-name">Viewpoint</td>
+          <td class="school-type t-mid">Middle</td>
+          <td></td><td></td><td></td><td></td>
+          <td class="check">✓</td>
+          <td class="check pta-star" title="Friends with all PE teachers">✓⭐</td>
+          <td></td>
+          <td class="school-assign-cell"><select class="school-select" onchange="handleSchoolChange(this)" data-school="viewpoint"><option value="">— Unassigned —</option><option>Brad</option><option>Diane</option><option>Jon</option><option>Kathy</option><option>Devan</option><option>Catharine</option><option>Coach 7</option></select></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:12px;color:var(--gray-light);margin-top:8px;">✓ = volunteered · ⭐ = existing connection · Orange ✓ = multiple coaches interested in same school</p>
+
+</div><!-- /schools -->
+
+
+<!-- ─── TAB 4: SUMMARY ─── -->
+<div class="page" id="tab-summary">
+
+  <div class="section-head">
+    <div class="section-label">Role Assignment Summary</div>
+    <div class="section-line"></div>
+  </div>
+
+  <div style="background:var(--white);border:1px solid var(--gray-line);border-radius:6px;overflow:hidden;margin-bottom:24px;">
+    <table class="summary-table" id="summary-table">
+      <thead>
+        <tr>
+          <th style="width:32px;">#</th>
+          <th>Role</th>
+          <th>Primary Owner</th>
+          <th>Backup</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody id="summary-tbody"></tbody>
+    </table>
+  </div>
+
+  <div class="section-head">
+    <div class="section-label">School Outreach Summary</div>
+    <div class="section-line"></div>
+  </div>
+  <div style="background:var(--white);border:1px solid var(--gray-line);border-radius:6px;overflow:hidden;margin-bottom:24px;">
+    <table class="summary-table">
+      <thead><tr><th>School</th><th>Type</th><th>Assigned To</th></tr></thead>
+      <tbody id="school-summary-tbody"></tbody>
+    </table>
+  </div>
+
+  <div class="section-head">
+    <div class="section-label">Parking Lot</div>
+    <div class="section-line"></div>
+  </div>
+  <div class="parking-lot">
+    <div class="parking-items" id="parking-items">
+      <div class="parking-item">
+        <div class="parking-bullet pb-coach">Catharine</div>
+        <div class="parking-text"><strong>Catharine</strong> can host the parent kickoff meeting + fit kit at Lehi Jr gym (locker rooms available). Raised the question about camping/hotel logistics for Beaver Mountain — no onsite camping.</div>
+      </div>
+      <div class="parking-item">
+        <div class="parking-bullet pb-coach">Brad</div>
+        <div class="parking-text"><strong>Brad</strong> suggests parent meeting on Mon 3/23 or 3/30, 7–8pm. Lehi Jr auditorium is confirmed as a viable venue (same format as last year).</div>
+      </div>
+      <div class="parking-item">
+        <div class="parking-bullet pb-mtg">Action</div>
+        <div class="parking-text">Schedule a prep meeting 1 week before the parent kickoff to make sure the coaching staff is aligned going in.</div>
+      </div>
+      <div class="parking-item">
+        <div class="parking-bullet pb-gap">Gap</div>
+        <div class="parking-text"><strong>Practice Planning & Skills Lead</strong> has no clear owner from worksheets — needs a volunteer or split ownership solution.</div>
+      </div>
+      <div class="parking-item">
+        <div class="parking-bullet pb-mtg">Action</div>
+        <div class="parking-text">Get verbal role preferences from Coach 7 (1 coach who didn't submit worksheet) before the role assignment discussion begins.</div>
+      </div>
+    </div>
+    <div class="add-parking">
+      <input class="parking-input" id="parking-input" type="text" placeholder="Add a note, action item, or parking lot item…" />
+      <button class="btn-add" onclick="addParking()">+ Add</button>
+    </div>
+  </div>
+
+  <div class="summary-btn-row">
+    <button class="btn-primary" onclick="window.print()">Print / Save PDF</button>
+    <button class="btn-secondary" onclick="copyTextSummary()">Copy Text Summary</button>
+  </div>
+
+</div><!-- /summary -->
+
+
+<script>
+  const coaches = ['Brad', 'Diane', 'Jon', 'Kathy', 'Devan', 'Catharine', 'Coach 7'];
+
+  const roles = [
+    { id: 'practice', num: '01', name: 'Practice Planning & Skills Lead', essential: true,
+      demand: [{ coach: 'Brad', rank: null, label: null },{ coach: 'Diane', rank: null, label: null },{ coach: 'Jon', rank: null, label: null },{ coach: 'Kathy', rank: null, label: null },{ coach: 'Devan', rank: null, label: null }], status: 'gap' },
+    { id: 'rideLeader', num: '02', name: 'Ride Leader Coordinator', essential: true,
+      demand: [{ coach: 'Devan', rank: 2, label: '#2' },{ coach: 'Diane', rank: 3, label: '#3' },{ coach: 'Jon', rank: 'int', label: 'INT' }], status: 'open' },
+    { id: 'race', num: '03', name: 'Race Weekend Captain', essential: true,
+      demand: [{ coach: 'Jon', rank: 'int', label: 'INT' },{ coach: 'Brad', rank: 'no', label: 'NO' }], status: 'open' },
+    { id: 'comm', num: '04', name: 'Communication & Culture Lead', essential: true,
+      demand: [{ coach: 'Diane', rank: 1, label: '#1' },{ coach: 'Kathy', rank: 1, label: '#1' },{ coach: 'Brad', rank: 2, label: '#2' }], status: 'conflict' },
+    { id: 'roster', num: '05', name: 'Registration & Roster Manager', essential: true,
+      demand: [{ coach: 'Diane', rank: 2, label: '#2' },{ coach: 'Kathy', rank: 2, label: '#2' },{ coach: 'Brad', rank: 3, label: '#3' }], status: 'conflict' },
+    { id: 'groups', num: '06', name: 'Ride Group Coordinator', essential: true,
+      demand: [{ coach: 'Kathy', rank: 3, label: '#3' },{ coach: 'Jon', rank: 'int', label: 'INT' }], status: 'open' },
+    { id: 'safety', num: '07', name: 'Safety & First Aid Lead', essential: true,
+      demand: [{ coach: 'Devan', rank: 1, label: '#1' }], status: 'open' },
+    { id: 'finance', num: '08', name: 'Finance / Treasurer', essential: true,
+      demand: [{ coach: 'Brad', rank: 1, label: '#1' },{ coach: 'Kathy', rank: 'int', label: 'INT' }], status: 'open' },
+    { id: 'equipment', num: '09', name: 'Equipment & Gear Manager', essential: false,
+      demand: [{ coach: 'Devan', rank: 3, label: '#3' },{ coach: 'Jon', rank: 'int', label: 'INT' }], status: 'open' },
+    { id: 'fundraising', num: '10', name: 'Fundraising & Sponsorship Lead', essential: false,
+      demand: [{ coach: 'Jon', rank: 'int', label: 'INT' }], status: 'open' },
+  ];
+
+  const assignments = {};
+  const schoolAssignments = {};
+  roles.forEach(r => { assignments[r.id] = { primary: '', backup: '', notes: '' }; });
+
+  function rankClass(rank) {
+    if (rank === 1) return 'dt-1';
+    if (rank === 2) return 'dt-2';
+    if (rank === 3) return 'dt-3';
+    if (rank === 'int') return 'dt-int';
+    if (rank === 'no') return 'dt-no';
+    return 'dt-int';
+  }
+
+  function buildRoleRow(role) {
+    const asgn = assignments[role.id];
+    const demandHtml = role.demand.map(d => {
+      if (!d.label) return '';
+      return `<span class="demand-tag ${rankClass(d.rank)}">${d.coach} ${d.label}</span>`;
+    }).join('');
+    const statusClass = asgn.primary ? 'assigned' : role.status === 'conflict' ? 'conflict' : role.status === 'gap' ? 'gap' : '';
+    const coachOptions = coaches.map(c => `<option value="${c}" ${asgn.primary===c?'selected':''}>${c}</option>`).join('');
+    const backupOptions = coaches.map(c => `<option value="${c}" ${asgn.backup===c?'selected':''}>${c}</option>`).join('');
+    return `
+    <div class="role-row ${statusClass}" id="rr-${role.id}">
+      <div class="role-number">${role.num}</div>
+      <div class="role-info">
+        <div class="role-name">${role.name}</div>
+        <div class="role-demand">${demandHtml || '<span style="font-size:11px;color:#BBB;font-style:italic;">No preferences submitted</span>'}</div>
+      </div>
+      <div class="role-assign">
+        <div class="assign-col">
+          <div class="assign-lbl">Primary Owner</div>
+          <select class="assign-select ${asgn.primary?'has-value':''}" onchange="setAssignment('${role.id}','primary',this.value)">
+            <option value="">— Select —</option>${coachOptions}
+          </select>
+        </div>
+        <div class="assign-col">
+          <div class="assign-lbl">Backup</div>
+          <select class="assign-select ${asgn.backup?'has-value':''}" onchange="setAssignment('${role.id}','backup',this.value)">
+            <option value="">— Optional —</option>${backupOptions}
+          </select>
+        </div>
+      </div>
+      <div class="role-notes">
+        <div class="assign-lbl">Notes</div>
+        <textarea class="notes-input" placeholder="Support needed, constraints…" oninput="setAssignment('${role.id}','notes',this.value)">${asgn.notes}</textarea>
+      </div>
+    </div>`;
+  }
+
+  function renderBoard() {
+    document.getElementById('role-board').innerHTML = roles.filter(r => r.essential).map(buildRoleRow).join('');
+    document.getElementById('role-board-rec').innerHTML = roles.filter(r => !r.essential).map(buildRoleRow).join('');
+    updateProgress();
+    updateSummary();
+  }
+
+  function setAssignment(roleId, field, value) {
+    assignments[roleId][field] = value;
+    const asgn = assignments[roleId];
+    const row = document.getElementById('rr-'+roleId);
+    if (row) {
+      row.classList.remove('assigned','conflict','gap');
+      if (asgn.primary) {
+        row.classList.add('assigned');
+      } else {
+        const role = roles.find(r => r.id === roleId);
+        if (role.status === 'conflict') row.classList.add('conflict');
+        if (role.status === 'gap') row.classList.add('gap');
+      }
+      row.querySelectorAll('.assign-select').forEach(sel => sel.classList.toggle('has-value', !!sel.value));
+    }
+    updateProgress();
+    updateSummary();
+  }
+
+  function updateProgress() {
+    const assigned = Object.values(assignments).filter(a => a.primary).length;
+    document.getElementById('progress-count').textContent = assigned;
+    document.getElementById('progress-bar').style.width = (assigned/10*100)+'%';
+  }
+
+  function updateSummary() {
+    const tbody = document.getElementById('summary-tbody');
+    if (!tbody) return;
+    tbody.innerHTML = roles.map(r => {
+      const asgn = assignments[r.id];
+      return `<tr>
+        <td>${r.num}</td>
+        <td class="td-role">${r.name}</td>
+        <td class="${asgn.primary ? 'td-owner' : 'td-unassigned'}">${asgn.primary || '—'}</td>
+        <td style="color:var(--gray-mid)">${asgn.backup || '—'}</td>
+        <td style="color:var(--gray-mid);font-size:12px">${asgn.notes || ''}</td>
+      </tr>`;
+    }).join('');
+
+    const schoolNames = [
+      {id:'liberty-hills',name:'Liberty Hills',type:'Elementary'},
+      {id:'fox-hollow',name:'Fox Hollow',type:'Elementary'},
+      {id:'traverse',name:'Traverse Mountain',type:'Elementary'},
+      {id:'belmont',name:'Belmont',type:'Elementary'},
+      {id:'eaglecrest',name:'Eaglecrest',type:'Elementary'},
+      {id:'segolilly',name:'Segolilly',type:'Elementary'},
+      {id:'freedom',name:'Freedom',type:'Elementary'},
+      {id:'lehi-jr',name:'Lehi Jr',type:'Middle School'},
+      {id:'viewpoint',name:'Viewpoint',type:'Middle School'},
+    ];
+    const sbody = document.getElementById('school-summary-tbody');
+    if (sbody) sbody.innerHTML = schoolNames.map(s => `<tr>
+      <td class="td-role">${s.name}</td>
+      <td style="font-size:12px;color:var(--gray-mid)">${s.type}</td>
+      <td class="${schoolAssignments[s.id] ? 'td-owner' : 'td-unassigned'}">${schoolAssignments[s.id] || '—'}</td>
+    </tr>`).join('');
+  }
+
+  function handleSchoolChange(sel) {
+    schoolAssignments[sel.dataset.school] = sel.value;
+    sel.classList.toggle('has-value', !!sel.value);
+    updateSummary();
+  }
+
+  function addParking() {
+    const input = document.getElementById('parking-input');
+    const text = input.value.trim();
+    if (!text) return;
+    const item = document.createElement('div');
+    item.className = 'parking-item';
+    item.innerHTML = `<div class="parking-bullet pb-mtg">Note</div><div class="parking-text">${text}</div>`;
+    document.getElementById('parking-items').appendChild(item);
+    input.value = '';
+  }
+
+  document.getElementById('parking-input').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') addParking();
+  });
+
+  function copyTextSummary() {
+    let text = 'SKYRIDGE JR DEVO — 2026 ROLE ASSIGNMENTS\n\n';
+    roles.forEach(r => {
+      const a = assignments[r.id];
+      text += `${r.num}. ${r.name}\n`;
+      text += `   Primary: ${a.primary || 'Unassigned'}\n`;
+      text += `   Backup:  ${a.backup || '—'}\n`;
+      if (a.notes) text += `   Notes:   ${a.notes}\n`;
+      text += '\n';
+    });
+    navigator.clipboard.writeText(text).then(() => alert('Summary copied to clipboard'));
+  }
+
+  function showTab(id) {
+    document.querySelectorAll('.tab').forEach((t,i) => {
+      t.classList.toggle('active', ['overview','assign','schools','summary'][i] === id);
+    });
+    document.querySelectorAll('.page').forEach(p => {
+      p.classList.toggle('active', p.id === 'tab-'+id);
+    });
+    if (id === 'assign') renderBoard();
+    if (id === 'summary') updateSummary();
+  }
+
+  renderBoard();
+</script>
+</body>
+</html>
