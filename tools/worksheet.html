@@ -381,6 +381,29 @@
     gap: 6px;
   }
   .time-options input[type="radio"] { display: none; }
+  .time-options input[type="checkbox"] { display: none; }
+  .time-options input[type="checkbox"] + label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .time-options input[type="checkbox"] + label::after {
+    content: '';
+    width: 14px; height: 14px;
+    border: 1px solid #555;
+    border-radius: 2px;
+    flex-shrink: 0;
+    margin-left: 8px;
+  }
+  .time-options input[type="checkbox"]:checked + label::after {
+    content: '✓';
+    background: var(--orange);
+    border-color: var(--orange);
+    color: #fff;
+    font-size: 10px;
+    text-align: center;
+    line-height: 14px;
+  }
   .time-options label {
     cursor: pointer;
     font-size: 13px;
