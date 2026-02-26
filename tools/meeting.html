@@ -6,6 +6,10 @@
 <title>Skyridge Jr Devo — Role Assignment Meeting</title>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/css/shared.css">
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+<script src="../assets/js/firebase-config.js"></script>
+<script src="../assets/js/meeting-store.js"></script>
 <style>
   :root {
     --orange: #F26A1B;
@@ -1045,6 +1049,9 @@
   const schoolAssignments = {};
   roles.forEach(r => { assignments[r.id] = { primary: '', backup: '', notes: '' }; });
 
+  // ── Firebase init ─────────────────────────────────────────────────────────
+  MeetingStore.init();
+
   function rankClass(rank) {
     if (rank === 1) return 'dt-1';
     if (rank === 2) return 'dt-2';
@@ -1113,6 +1120,12 @@
       }
       row.querySelectorAll('.assign-select').forEach(sel => sel.classList.toggle('has-value', !!sel.value));
     }
+    // Save to Firebase
+    if (field === 'notes') {
+      MeetingStore.saveRoleAssignmentDebounced(roleId, asgn);
+    } else {
+      MeetingStore.saveRoleAssignment(roleId, asgn);
+    }
     updateProgress();
     updateSummary();
   }
@@ -1159,7 +1172,20 @@
   function handleSchoolChange(sel) {
     schoolAssignments[sel.dataset.school] = sel.value;
     sel.classList.toggle('has-value', !!sel.value);
+    MeetingStore.saveSchoolAssignment(sel.dataset.school, sel.value);
     updateSummary();
+  }
+
+  function getParkingItems() {
+    return Array.from(document.querySelectorAll('#parking-items .parking-item')).map(item => {
+      const bullet = item.querySelector('.parking-bullet');
+      const text   = item.querySelector('.parking-text');
+      return {
+        type:  bullet ? bullet.className.replace('parking-bullet ', '').trim() : 'pb-mtg',
+        label: bullet ? bullet.textContent : 'Note',
+        text:  text   ? text.textContent : ''
+      };
+    });
   }
 
   function addParking() {
@@ -1171,6 +1197,7 @@
     item.innerHTML = `<div class="parking-bullet pb-mtg">Note</div><div class="parking-text">${text}</div>`;
     document.getElementById('parking-items').appendChild(item);
     input.value = '';
+    MeetingStore.saveParking(getParkingItems());
   }
 
   document.getElementById('parking-input').addEventListener('keydown', function(e) {
@@ -1201,7 +1228,45 @@
     if (id === 'summary') updateSummary();
   }
 
-  renderBoard();
+  // ── Load saved data from Firebase, then render ────────────────────────────
+  (async function initFromFirebase() {
+    if (MeetingStore.isReady()) {
+      // Restore role assignments
+      const savedRoles = await MeetingStore.loadRoleAssignmentsOnce();
+      Object.keys(savedRoles).forEach(roleId => {
+        if (assignments[roleId]) Object.assign(assignments[roleId], savedRoles[roleId]);
+      });
+
+      // Restore school assignments
+      const savedSchools = await MeetingStore.loadSchoolAssignmentsOnce();
+      Object.keys(savedSchools).forEach(slug => {
+        if (savedSchools[slug]) schoolAssignments[slug] = savedSchools[slug];
+      });
+
+      // Restore parking lot (replace static seed items if Firebase has data)
+      const savedParking = await MeetingStore.loadParkingOnce();
+      if (savedParking && savedParking.length > 0) {
+        const parkingEl = document.getElementById('parking-items');
+        parkingEl.innerHTML = savedParking.map(item =>
+          `<div class="parking-item">
+            <div class="parking-bullet ${item.type || 'pb-mtg'}">${item.label || 'Note'}</div>
+            <div class="parking-text">${item.text || ''}</div>
+          </div>`
+        ).join('');
+      }
+    }
+
+    renderBoard();
+
+    // Restore school dropdowns (static HTML elements, set after DOM is ready)
+    Object.keys(schoolAssignments).forEach(slug => {
+      const sel = document.querySelector(`[data-school="${slug}"]`);
+      if (sel && schoolAssignments[slug]) {
+        sel.value = schoolAssignments[slug];
+        sel.classList.toggle('has-value', !!sel.value);
+      }
+    });
+  })();
 </script>
 </body>
 </html>
