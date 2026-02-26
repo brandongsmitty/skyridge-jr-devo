@@ -237,6 +237,40 @@
   }
   .notes-input:focus { border-color: var(--orange); background: var(--white); }
 
+  /* ── LOCK FEATURE ── */
+  .role-lock { display: flex; align-items: center; justify-content: center; padding: 10px 10px; border-left: 1px solid var(--gray-line); flex-shrink: 0; }
+  .lock-btn {
+    background: none; border: 1px solid var(--gray-line); border-radius: 4px; cursor: pointer;
+    font-size: 13px; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center;
+    color: var(--gray-light); transition: all 0.15s;
+  }
+  .lock-btn:hover { border-color: var(--green); background: var(--green-pale); }
+  .lock-btn.is-locked { background: var(--green-pale); border-color: var(--green-mid); color: var(--green); }
+  .role-row.locked { background: #f9fdfb; }
+  .role-row.locked .assign-select[disabled],
+  .role-row.locked .notes-input[disabled] { opacity: 0.65; cursor: not-allowed; }
+  .school-lock-btn {
+    background: none; border: 1px solid var(--gray-line); border-radius: 4px; cursor: pointer;
+    font-size: 12px; width: 28px; height: 28px; display: inline-flex; align-items: center; justify-content: center;
+    color: var(--gray-light); transition: all 0.15s; vertical-align: middle; margin-left: 6px;
+  }
+  .school-lock-btn:hover { border-color: var(--green); background: var(--green-pale); }
+  .school-lock-btn.is-locked { background: var(--green-pale); border-color: var(--green-mid); color: var(--green); }
+  .school-row-locked td { background: #f9fdfb; }
+  .lock-all-row { display: flex; gap: 8px; margin-bottom: 14px; justify-content: flex-end; }
+  .btn-lock-all {
+    font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 1px;
+    text-transform: uppercase; padding: 6px 14px; border-radius: 4px; cursor: pointer; border: 1px solid var(--green-mid);
+    background: var(--green-pale); color: var(--green); transition: all 0.15s;
+  }
+  .btn-lock-all:hover { background: var(--green); color: var(--white); }
+  .btn-unlock-all {
+    font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 1px;
+    text-transform: uppercase; padding: 6px 14px; border-radius: 4px; cursor: pointer; border: 1px solid var(--gray-line);
+    background: var(--white); color: var(--gray-mid); transition: all 0.15s;
+  }
+  .btn-unlock-all:hover { border-color: var(--gray-mid); color: var(--gray-dark); }
+
   /* ── PROGRESS BAR ── */
   .progress-row { display: flex; gap: 16px; align-items: center; margin-bottom: 20px; }
   .progress-bar-wrap { flex: 1; height: 6px; background: var(--gray-line); border-radius: 3px; overflow: hidden; }
@@ -794,6 +828,11 @@
     </div>
   </div>
 
+  <div class="lock-all-row">
+    <button class="btn-unlock-all" onclick="unlockAllRoles()">Unlock All</button>
+    <button class="btn-lock-all" onclick="lockAllRoles()">🔒 Lock All Roles</button>
+  </div>
+
   <div class="section-head">
     <div class="section-label">Essential Roles (8)</div>
     <div class="section-line"></div>
@@ -848,6 +887,11 @@
     <div class="section-line"></div>
   </div>
 
+  <div class="lock-all-row">
+    <button class="btn-unlock-all" onclick="unlockAllSchools()">Unlock All</button>
+    <button class="btn-lock-all" onclick="lockAllSchools()">🔒 Lock All Schools</button>
+  </div>
+
   <div class="school-matrix-wrap">
     <table class="school-matrix">
       <thead>
@@ -862,34 +906,39 @@
           <th>Devan</th>
           <th>Catharine</th>
           <th style="min-width:160px;">Assign Primary</th>
+          <th style="width:36px;"></th>
         </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr id="sr-liberty-hills">
           <td class="school-name">Liberty Hills</td>
           <td class="school-type t-elem">Elem.</td>
           <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
           <td class="school-assign-cell"><select class="school-select" onchange="handleSchoolChange(this)" data-school="liberty-hills"><option value="">— Unassigned —</option><option>Brandon</option><option>Brad</option><option>Diane</option><option>Jon</option><option>Kathy</option><option>Devan</option><option>Catharine</option></select></td>
+          <td><button class="school-lock-btn" onclick="toggleSchoolLock('liberty-hills')" title="Lock assignment">🔓</button></td>
         </tr>
-        <tr>
+        <tr id="sr-fox-hollow">
           <td class="school-name">Fox Hollow</td>
           <td class="school-type t-elem">Elem.</td>
           <td></td><td class="check">✓</td><td></td><td></td><td></td><td></td><td></td>
           <td class="school-assign-cell"><select class="school-select" onchange="handleSchoolChange(this)" data-school="fox-hollow"><option value="">— Unassigned —</option><option>Brandon</option><option>Brad</option><option>Diane</option><option>Jon</option><option>Kathy</option><option>Devan</option><option>Catharine</option></select></td>
+          <td><button class="school-lock-btn" onclick="toggleSchoolLock('fox-hollow')" title="Lock assignment">🔓</button></td>
         </tr>
-        <tr>
+        <tr id="sr-traverse">
           <td class="school-name">Traverse Mountain</td>
           <td class="school-type t-elem">Elem.</td>
           <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
           <td class="school-assign-cell"><select class="school-select" onchange="handleSchoolChange(this)" data-school="traverse"><option value="">— Unassigned —</option><option>Brandon</option><option>Brad</option><option>Diane</option><option>Jon</option><option>Kathy</option><option>Devan</option><option>Catharine</option></select></td>
+          <td><button class="school-lock-btn" onclick="toggleSchoolLock('traverse')" title="Lock assignment">🔓</button></td>
         </tr>
-        <tr>
+        <tr id="sr-belmont">
           <td class="school-name">Belmont</td>
           <td class="school-type t-elem">Elem.</td>
           <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
           <td class="school-assign-cell"><select class="school-select" onchange="handleSchoolChange(this)" data-school="belmont"><option value="">— Unassigned —</option><option>Brandon</option><option>Brad</option><option>Diane</option><option>Jon</option><option>Kathy</option><option>Devan</option><option>Catharine</option></select></td>
+          <td><button class="school-lock-btn" onclick="toggleSchoolLock('belmont')" title="Lock assignment">🔓</button></td>
         </tr>
-        <tr>
+        <tr id="sr-eaglecrest">
           <td class="school-name">Eaglecrest</td>
           <td class="school-type t-elem">Elem.</td>
           <td></td>
@@ -899,8 +948,9 @@
           <td class="check" style="color:var(--orange)">✓</td>
           <td></td>
           <td class="school-assign-cell"><select class="school-select" onchange="handleSchoolChange(this)" data-school="eaglecrest"><option value="">— Unassigned —</option><option>Brandon</option><option>Brad</option><option>Diane</option><option>Jon</option><option>Kathy</option><option>Devan</option><option>Catharine</option></select></td>
+          <td><button class="school-lock-btn" onclick="toggleSchoolLock('eaglecrest')" title="Lock assignment">🔓</button></td>
         </tr>
-        <tr>
+        <tr id="sr-segolilly">
           <td class="school-name">Segolilly</td>
           <td class="school-type t-elem">Elem.</td>
           <td></td><td></td>
@@ -910,8 +960,9 @@
           <td></td>
           <td class="check pta-star" style="color:var(--orange)" title="Knows principal + teachers">✓⭐</td>
           <td class="school-assign-cell"><select class="school-select" onchange="handleSchoolChange(this)" data-school="segolilly"><option value="">— Unassigned —</option><option>Brandon</option><option>Brad</option><option>Diane</option><option>Jon</option><option>Kathy</option><option>Devan</option><option>Catharine</option></select></td>
+          <td><button class="school-lock-btn" onclick="toggleSchoolLock('segolilly')" title="Lock assignment">🔓</button></td>
         </tr>
-        <tr>
+        <tr id="sr-freedom">
           <td class="school-name">Freedom <span class="pta-star" title="Kathy on PTA">⭐</span></td>
           <td class="school-type t-elem">Elem.</td>
           <td></td><td></td>
@@ -920,8 +971,9 @@
           <td class="check pta-star" style="color:var(--orange)">✓⭐</td>
           <td></td><td></td>
           <td class="school-assign-cell"><select class="school-select" onchange="handleSchoolChange(this)" data-school="freedom"><option value="">— Unassigned —</option><option>Brandon</option><option>Brad</option><option>Diane</option><option>Jon</option><option>Kathy</option><option>Devan</option><option>Catharine</option></select></td>
+          <td><button class="school-lock-btn" onclick="toggleSchoolLock('freedom')" title="Lock assignment">🔓</button></td>
         </tr>
-        <tr>
+        <tr id="sr-lehi-jr">
           <td class="school-name">Lehi Jr <span class="pta-star" title="Catharine is PE teacher here">⭐⭐</span></td>
           <td class="school-type t-mid">Middle</td>
           <td></td><td></td>
@@ -931,14 +983,16 @@
           <td></td>
           <td class="check pta-star" style="color:var(--green)" title="PE teacher here — strongest connection">✓⭐⭐</td>
           <td class="school-assign-cell"><select class="school-select" onchange="handleSchoolChange(this)" data-school="lehi-jr"><option value="">— Unassigned —</option><option>Brandon</option><option>Brad</option><option>Diane</option><option>Jon</option><option>Kathy</option><option>Devan</option><option>Catharine</option></select></td>
+          <td><button class="school-lock-btn" onclick="toggleSchoolLock('lehi-jr')" title="Lock assignment">🔓</button></td>
         </tr>
-        <tr>
+        <tr id="sr-viewpoint">
           <td class="school-name">Viewpoint</td>
           <td class="school-type t-mid">Middle</td>
           <td></td><td></td><td></td><td></td><td></td>
           <td class="check">✓</td>
           <td class="check pta-star" title="Friends with all PE teachers">✓⭐</td>
           <td class="school-assign-cell"><select class="school-select" onchange="handleSchoolChange(this)" data-school="viewpoint"><option value="">— Unassigned —</option><option>Brandon</option><option>Brad</option><option>Diane</option><option>Jon</option><option>Kathy</option><option>Devan</option><option>Catharine</option></select></td>
+          <td><button class="school-lock-btn" onclick="toggleSchoolLock('viewpoint')" title="Lock assignment">🔓</button></td>
         </tr>
       </tbody>
     </table>
@@ -1022,15 +1076,15 @@
     { id: 'practice', num: '01', name: 'Practice Planning & Skills Lead', essential: true,
       demand: [{ coach: 'Brandon', rank: 1, label: '#1' }], status: 'open' },
     { id: 'rideLeader', num: '02', name: 'Ride Leader Coordinator', essential: true,
-      demand: [{ coach: 'Devan', rank: 2, label: '#2' },{ coach: 'Diane', rank: 3, label: '#3' },{ coach: 'Jon', rank: 'int', label: 'INT' }], status: 'open' },
+      demand: [{ coach: 'Devan', rank: 2, label: '#2' },{ coach: 'Diane', rank: 3, label: '#3' },{ coach: 'Catharine', rank: 3, label: '#3' },{ coach: 'Jon', rank: 'int', label: 'INT' }], status: 'open' },
     { id: 'race', num: '03', name: 'Race Weekend Captain', essential: true,
       demand: [{ coach: 'Jon', rank: 'int', label: 'INT' },{ coach: 'Brad', rank: 'no', label: 'NO' }], status: 'open' },
     { id: 'comm', num: '04', name: 'Communication & Culture Lead', essential: true,
-      demand: [{ coach: 'Diane', rank: 1, label: '#1' },{ coach: 'Kathy', rank: 1, label: '#1' },{ coach: 'Brad', rank: 2, label: '#2' }], status: 'conflict' },
+      demand: [{ coach: 'Diane', rank: 1, label: '#1' },{ coach: 'Kathy', rank: 1, label: '#1' },{ coach: 'Catharine', rank: 1, label: '#1' },{ coach: 'Brad', rank: 2, label: '#2' }], status: 'conflict' },
     { id: 'roster', num: '05', name: 'Registration & Roster Manager', essential: true,
       demand: [{ coach: 'Diane', rank: 2, label: '#2' },{ coach: 'Kathy', rank: 2, label: '#2' },{ coach: 'Brad', rank: 3, label: '#3' }], status: 'conflict' },
     { id: 'groups', num: '06', name: 'Ride Group Coordinator', essential: true,
-      demand: [{ coach: 'Kathy', rank: 3, label: '#3' },{ coach: 'Jon', rank: 'int', label: 'INT' }], status: 'open' },
+      demand: [{ coach: 'Catharine', rank: 2, label: '#2' },{ coach: 'Kathy', rank: 3, label: '#3' },{ coach: 'Jon', rank: 'int', label: 'INT' }], status: 'open' },
     { id: 'safety', num: '07', name: 'Safety & First Aid Lead', essential: true,
       demand: [{ coach: 'Devan', rank: 1, label: '#1' }], status: 'open' },
     { id: 'finance', num: '08', name: 'Finance / Treasurer', essential: true,
@@ -1041,9 +1095,46 @@
       demand: [{ coach: 'Jon', rank: 'int', label: 'INT' }], status: 'open' },
   ];
 
+  const defaultAssignments = {
+    practice:    { primary: 'Brandon',   backup: 'Devan',   notes: '' },
+    rideLeader:  { primary: 'Jon',       backup: 'Devan',   notes: '' },
+    race:        { primary: 'Jenae',     backup: 'Diane',   notes: '' },
+    comm:        { primary: 'Catharine', backup: 'Diane',   notes: '' },
+    roster:      { primary: 'Kathy',     backup: 'Diane',   notes: '' },
+    groups:      { primary: 'Kathy',     backup: 'Diane',   notes: '' },
+    safety:      { primary: 'Devan',     backup: '',        notes: '' },
+    finance:     { primary: 'Brad',      backup: 'Brandon', notes: '' },
+    equipment:   { primary: 'Devan',     backup: 'Jon',     notes: '' },
+    fundraising: { primary: 'Jon',       backup: 'Brad',    notes: '' },
+  };
   const assignments = {};
   const schoolAssignments = {};
-  roles.forEach(r => { assignments[r.id] = { primary: '', backup: '', notes: '' }; });
+  const lockedRoles = {};
+  const lockedSchools = {};
+  roles.forEach(r => {
+    assignments[r.id] = Object.assign({ primary: '', backup: '', notes: '' }, defaultAssignments[r.id] || {});
+  });
+
+  const STORAGE_KEY = 'skyridge-meeting-2026';
+
+  function saveState() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ assignments, schoolAssignments, lockedRoles, lockedSchools }));
+  }
+
+  function loadState() {
+    try {
+      const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
+      if (!saved) return;
+      if (saved.assignments) roles.forEach(r => {
+        if (saved.assignments[r.id]) Object.assign(assignments[r.id], saved.assignments[r.id]);
+      });
+      if (saved.schoolAssignments) Object.assign(schoolAssignments, saved.schoolAssignments);
+      if (saved.lockedRoles) Object.assign(lockedRoles, saved.lockedRoles);
+      if (saved.lockedSchools) Object.assign(lockedSchools, saved.lockedSchools);
+    } catch(e) {}
+  }
+
+  loadState();
 
   function rankClass(rank) {
     if (rank === 1) return 'dt-1';
@@ -1056,12 +1147,16 @@
 
   function buildRoleRow(role) {
     const asgn = assignments[role.id];
+    const isLocked = !!lockedRoles[role.id];
     const demandHtml = role.demand.map(d => {
       if (!d.label) return '';
       return `<span class="demand-tag ${rankClass(d.rank)}">${d.coach} ${d.label}</span>`;
     }).join('');
-    const statusClass = asgn.primary ? 'assigned' : role.status === 'conflict' ? 'conflict' : role.status === 'gap' ? 'gap' : '';
-    const coachOptions = coaches.map(c => `<option value="${c}" ${asgn.primary===c?'selected':''}>${c}</option>`).join('');
+    const statusClass = (isLocked ? 'locked ' : '') + (asgn.primary ? 'assigned' : role.status === 'conflict' ? 'conflict' : role.status === 'gap' ? 'gap' : '');
+    const dis = isLocked ? 'disabled' : '';
+    // Race Weekend Captain gets Jenae as an extra option (she's not on coaching staff)
+    const primaryList = role.id === 'race' ? ['Jenae', ...coaches] : coaches;
+    const coachOptions = primaryList.map(c => `<option value="${c}" ${asgn.primary===c?'selected':''}>${c}</option>`).join('');
     const backupOptions = coaches.map(c => `<option value="${c}" ${asgn.backup===c?'selected':''}>${c}</option>`).join('');
     return `
     <div class="role-row ${statusClass}" id="rr-${role.id}">
@@ -1073,20 +1168,23 @@
       <div class="role-assign">
         <div class="assign-col">
           <div class="assign-lbl">Primary Owner</div>
-          <select class="assign-select ${asgn.primary?'has-value':''}" onchange="setAssignment('${role.id}','primary',this.value)">
+          <select class="assign-select ${asgn.primary?'has-value':''}" onchange="setAssignment('${role.id}','primary',this.value)" ${dis}>
             <option value="">— Select —</option>${coachOptions}
           </select>
         </div>
         <div class="assign-col">
           <div class="assign-lbl">Backup</div>
-          <select class="assign-select ${asgn.backup?'has-value':''}" onchange="setAssignment('${role.id}','backup',this.value)">
+          <select class="assign-select ${asgn.backup?'has-value':''}" onchange="setAssignment('${role.id}','backup',this.value)" ${dis}>
             <option value="">— Optional —</option>${backupOptions}
           </select>
         </div>
       </div>
       <div class="role-notes">
         <div class="assign-lbl">Notes</div>
-        <textarea class="notes-input" placeholder="Support needed, constraints…" oninput="setAssignment('${role.id}','notes',this.value)">${asgn.notes}</textarea>
+        <textarea class="notes-input" placeholder="Support needed, constraints…" oninput="setAssignment('${role.id}','notes',this.value)" ${dis}>${asgn.notes}</textarea>
+      </div>
+      <div class="role-lock">
+        <button class="lock-btn ${isLocked?'is-locked':''}" onclick="toggleRoleLock('${role.id}')" title="${isLocked?'Unlock':'Lock'} assignment">${isLocked?'🔒':'🔓'}</button>
       </div>
     </div>`;
   }
@@ -1099,6 +1197,7 @@
   }
 
   function setAssignment(roleId, field, value) {
+    if (lockedRoles[roleId]) return;
     assignments[roleId][field] = value;
     const asgn = assignments[roleId];
     const row = document.getElementById('rr-'+roleId);
@@ -1115,6 +1214,25 @@
     }
     updateProgress();
     updateSummary();
+    saveState();
+  }
+
+  function toggleRoleLock(roleId) {
+    lockedRoles[roleId] = !lockedRoles[roleId];
+    saveState();
+    renderBoard();
+  }
+
+  function lockAllRoles() {
+    roles.forEach(r => { lockedRoles[r.id] = true; });
+    saveState();
+    renderBoard();
+  }
+
+  function unlockAllRoles() {
+    roles.forEach(r => { lockedRoles[r.id] = false; });
+    saveState();
+    renderBoard();
   }
 
   function updateProgress() {
@@ -1157,9 +1275,69 @@
   }
 
   function handleSchoolChange(sel) {
-    schoolAssignments[sel.dataset.school] = sel.value;
+    const sid = sel.dataset.school;
+    if (lockedSchools[sid]) return;
+    schoolAssignments[sid] = sel.value;
     sel.classList.toggle('has-value', !!sel.value);
     updateSummary();
+    saveState();
+  }
+
+  function toggleSchoolLock(schoolId) {
+    lockedSchools[schoolId] = !lockedSchools[schoolId];
+    const row = document.getElementById('sr-'+schoolId);
+    if (row) {
+      const sel = row.querySelector('.school-select');
+      const btn = row.querySelector('.school-lock-btn');
+      const isLocked = lockedSchools[schoolId];
+      if (sel) { sel.disabled = isLocked; sel.style.opacity = isLocked ? '0.6' : '1'; sel.style.cursor = isLocked ? 'not-allowed' : 'pointer'; }
+      if (btn) { btn.textContent = isLocked ? '🔒' : '🔓'; btn.classList.toggle('is-locked', isLocked); btn.title = isLocked ? 'Unlock assignment' : 'Lock assignment'; }
+      row.classList.toggle('school-row-locked', isLocked);
+    }
+    saveState();
+  }
+
+  function lockAllSchools() {
+    document.querySelectorAll('.school-select').forEach(sel => {
+      const sid = sel.dataset.school;
+      lockedSchools[sid] = true;
+      sel.disabled = true; sel.style.opacity = '0.6'; sel.style.cursor = 'not-allowed';
+      const row = document.getElementById('sr-'+sid);
+      if (row) {
+        const btn = row.querySelector('.school-lock-btn');
+        if (btn) { btn.textContent = '🔒'; btn.classList.add('is-locked'); btn.title = 'Unlock assignment'; }
+        row.classList.add('school-row-locked');
+      }
+    });
+    saveState();
+  }
+
+  function unlockAllSchools() {
+    document.querySelectorAll('.school-select').forEach(sel => {
+      const sid = sel.dataset.school;
+      lockedSchools[sid] = false;
+      sel.disabled = false; sel.style.opacity = '1'; sel.style.cursor = 'pointer';
+      const row = document.getElementById('sr-'+sid);
+      if (row) {
+        const btn = row.querySelector('.school-lock-btn');
+        if (btn) { btn.textContent = '🔓'; btn.classList.remove('is-locked'); btn.title = 'Lock assignment'; }
+        row.classList.remove('school-row-locked');
+      }
+    });
+    saveState();
+  }
+
+  function applySchoolLockStates() {
+    Object.entries(lockedSchools).forEach(([sid, isLocked]) => {
+      if (!isLocked) return;
+      const row = document.getElementById('sr-'+sid);
+      if (!row) return;
+      const sel = row.querySelector('.school-select');
+      const btn = row.querySelector('.school-lock-btn');
+      if (sel) { sel.disabled = true; sel.style.opacity = '0.6'; sel.style.cursor = 'not-allowed'; }
+      if (btn) { btn.textContent = '🔒'; btn.classList.add('is-locked'); btn.title = 'Unlock assignment'; }
+      row.classList.add('school-row-locked');
+    });
   }
 
   function addParking() {
@@ -1178,7 +1356,10 @@
   });
 
   function copyTextSummary() {
-    let text = 'SKYRIDGE JR DEVO — 2026 ROLE ASSIGNMENTS\n\n';
+    const line56 = '═'.repeat(56);
+    const line40 = '─'.repeat(40);
+    let text = `SKYRIDGE JR DEVO — 2026 ROLE ASSIGNMENTS\n${line56}\n\n`;
+    text += `ROLE ASSIGNMENTS\n${line40}\n`;
     roles.forEach(r => {
       const a = assignments[r.id];
       text += `${r.num}. ${r.name}\n`;
@@ -1187,6 +1368,24 @@
       if (a.notes) text += `   Notes:   ${a.notes}\n`;
       text += '\n';
     });
+    const schoolNames = [
+      {id:'liberty-hills', name:'Liberty Hills',       type:'Elementary'},
+      {id:'fox-hollow',    name:'Fox Hollow',          type:'Elementary'},
+      {id:'traverse',      name:'Traverse Mountain',   type:'Elementary'},
+      {id:'belmont',       name:'Belmont',             type:'Elementary'},
+      {id:'eaglecrest',    name:'Eaglecrest',          type:'Elementary'},
+      {id:'segolilly',     name:'Segolilly',           type:'Elementary'},
+      {id:'freedom',       name:'Freedom',             type:'Elementary'},
+      {id:'lehi-jr',       name:'Lehi Jr',             type:'Middle School'},
+      {id:'viewpoint',     name:'Viewpoint',           type:'Middle School'},
+    ];
+    text += `\nSCHOOL OUTREACH ASSIGNMENTS\n${line40}\n`;
+    schoolNames.forEach(s => {
+      const assigned = schoolAssignments[s.id] || 'Unassigned';
+      text += `${s.name} (${s.type})\n   Assigned To: ${assigned}\n\n`;
+    });
+    text += `${line56}\n`;
+    text += `Generated: ${new Date().toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'})}\n`;
     navigator.clipboard.writeText(text).then(() => alert('Summary copied to clipboard'));
   }
 
@@ -1198,10 +1397,26 @@
       p.classList.toggle('active', p.id === 'tab-'+id);
     });
     if (id === 'assign') renderBoard();
+    if (id === 'schools') {
+      // restore saved school dropdown values and lock states
+      document.querySelectorAll('.school-select').forEach(sel => {
+        const sid = sel.dataset.school;
+        if (schoolAssignments[sid]) { sel.value = schoolAssignments[sid]; sel.classList.add('has-value'); }
+      });
+      applySchoolLockStates();
+    }
     if (id === 'summary') updateSummary();
   }
 
   renderBoard();
+  // restore school dropdown values on initial load if schools tab is visible
+  setTimeout(() => {
+    document.querySelectorAll('.school-select').forEach(sel => {
+      const sid = sel.dataset.school;
+      if (schoolAssignments[sid]) { sel.value = schoolAssignments[sid]; sel.classList.add('has-value'); }
+    });
+    applySchoolLockStates();
+  }, 0);
 </script>
 </body>
 </html>
