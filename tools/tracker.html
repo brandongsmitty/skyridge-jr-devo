@@ -204,14 +204,14 @@
   .status-filled { background:rgba(61,170,106,0.12); color:var(--green); border:1px solid rgba(61,170,106,0.3); }
   .status-tentative { background:rgba(212,160,23,0.12); color:var(--yellow); border:1px solid rgba(212,160,23,0.3); }
 
-  td textarea.notes-input {
+  textarea.notes-input {
     background:#111; border:1px solid var(--border); border-radius:3px;
     color:var(--white); font-family:'Barlow',sans-serif; font-size:12px;
     padding:6px 10px; width:100%; outline:none; resize:none;
     min-height:36px; line-height:1.4;
     transition:border-color 0.15s;
   }
-  td textarea.notes-input:focus { border-color:var(--orange); }
+  textarea.notes-input:focus { border-color:var(--orange); }
 
   .school-type-tag {
     display:inline-block;
@@ -319,8 +319,8 @@
 
   /* Larger resizable textareas for sections 03 and 04 */
   textarea.notes-large {
-    min-height: 120px;
-    resize: vertical;
+    min-height: 120px !important;
+    resize: vertical !important;
   }
 
   /* Firebase sync status indicator */
@@ -365,7 +365,10 @@
 <div class="header">
   <div class="header-inner">
     <img src="../assets/images/skyridge_jr-devo_logo.png" alt="Skyridge Jr Devo" class="print-logo">
-    <div class="header-eyebrow" id="header-eyebrow">Head Coach Reference — 2026 Season</div>
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+      <div class="header-eyebrow" id="header-eyebrow">Head Coach Reference — 2026 Season</div>
+      <span class="sync-badge sync-offline" id="sync-status">⬤ Offline</span>
+    </div>
     <div class="header-title">Master Role <span>Assignment</span> Tracker</div>
     <div class="header-sub" id="header-sub">Skyridge Jr Devo &nbsp;·&nbsp; Utah High School Cycling League &nbsp;·&nbsp; NICA</div>
     <div class="header-meta">
@@ -692,6 +695,21 @@
 
   // ── Firebase subscription setup ───────────────────────────────────────────
   function setupFirebaseSubscriptions() {
+    // 0. Connection status indicator
+    if (MeetingStore.isReady()) {
+      firebase.database().ref('.info/connected').on('value', snap => {
+        const badge = document.getElementById('sync-status');
+        if (!badge) return;
+        if (snap.val() === true) {
+          badge.textContent = '⬤ Live';
+          badge.className = 'sync-badge sync-live';
+        } else {
+          badge.textContent = '⬤ Offline';
+          badge.className = 'sync-badge sync-offline';
+        }
+      });
+    }
+
     // 1. Tracker role overrides (status, notes, 1:1) — load first so they're
     //    cached before role_assignments fires and potentially overwrites statuses
     MeetingStore.onTrackerRoleOverrides(data => {
