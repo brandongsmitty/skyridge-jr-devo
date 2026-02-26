@@ -6,6 +6,10 @@
 <title>Skyridge Jr Devo — Master Role Assignment Tracker</title>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/css/shared.css">
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+<script src="../assets/js/firebase-config.js"></script>
+<script src="../assets/js/meeting-store.js"></script>
 <style>
   :root {
     --black: #0D0D0D;
@@ -312,6 +316,21 @@
   }
   .strip-stat span { color: #F26A1B; font-weight: 700; margin-right: 5px; }
   .strip-divider { width: 1px; height: 16px; background: #2a2a2a; flex-shrink: 0; }
+
+  /* Larger resizable textareas for sections 03 and 04 */
+  textarea.notes-large {
+    min-height: 120px;
+    resize: vertical;
+  }
+
+  /* Firebase sync status indicator */
+  .sync-badge {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-size: 11px; font-weight: 600; letter-spacing: 0.5px;
+    padding: 3px 10px; border-radius: 2px;
+  }
+  .sync-live { background: rgba(61,170,106,0.12); color: #3DAA6A; border: 1px solid rgba(61,170,106,0.25); }
+  .sync-offline { background: rgba(136,136,136,0.12); color: #888; border: 1px solid #444; }
 </style>
 </head>
 <body>
@@ -450,20 +469,20 @@
       <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;">
         <div>
           <label style="display:block;font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--gray-light);margin-bottom:6px;">Proposed Date</label>
-          <input class="coach-input" type="text" placeholder="e.g. Late March / April">
+          <input class="coach-input" id="kickoff-date" type="text" placeholder="e.g. Late March / April">
         </div>
         <div>
           <label style="display:block;font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--gray-light);margin-bottom:6px;">Location / Format</label>
-          <input class="coach-input" type="text" placeholder="In-person / Virtual / Hybrid">
+          <input class="coach-input" id="kickoff-location" type="text" placeholder="In-person / Virtual / Hybrid">
         </div>
         <div>
           <label style="display:block;font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--gray-light);margin-bottom:6px;">Lead Coordinator</label>
-          <input class="coach-input" type="text" placeholder="Coach name...">
+          <input class="coach-input" id="kickoff-coordinator" type="text" placeholder="Coach name...">
         </div>
       </div>
       <div style="margin-top:16px;">
         <label style="display:block;font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--gray-light);margin-bottom:6px;">Agenda Topics Agreed At Coaching Meeting</label>
-        <textarea class="notes-input" rows="3" placeholder="e.g. Season overview, ride leader orientation, registration, race dates..."></textarea>
+        <textarea class="notes-input notes-large" id="kickoff-agenda" rows="5" placeholder="e.g. Season overview, ride leader orientation, registration, race dates..."></textarea>
       </div>
     </div>
   </div>
@@ -478,19 +497,19 @@
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
         <div>
           <label style="display:block;font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--gray-light);margin-bottom:6px;">Unassigned Roles / Gaps</label>
-          <textarea class="notes-input" rows="3" placeholder="Note any open roles that need follow-up..."></textarea>
+          <textarea class="notes-input notes-large" id="pm-unassigned" rows="6" placeholder="Note any open roles that need follow-up..."></textarea>
         </div>
         <div>
           <label style="display:block;font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--gray-light);margin-bottom:6px;">Key Decisions Made</label>
-          <textarea class="notes-input" rows="3" placeholder="Parent kickoff date agreed, group naming approach, etc..."></textarea>
+          <textarea class="notes-input notes-large" id="pm-decisions" rows="6" placeholder="Parent kickoff date agreed, group naming approach, etc..."></textarea>
         </div>
         <div>
           <label style="display:block;font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--gray-light);margin-bottom:6px;">Follow-Up Action Items</label>
-          <textarea class="notes-input" rows="3" placeholder="e.g. Coach X to contact Belmont admin by March 1..."></textarea>
+          <textarea class="notes-input notes-large" id="pm-followup" rows="6" placeholder="e.g. Coach X to contact Belmont admin by March 1..."></textarea>
         </div>
         <div>
           <label style="display:block;font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--gray-light);margin-bottom:6px;">Next Touchpoint / Check-In Date</label>
-          <input class="coach-input" type="text" placeholder="e.g. Monthly virtual check-in — March 15">
+          <input class="coach-input" id="pm-touchpoint" type="text" placeholder="e.g. Monthly virtual check-in — March 15">
           <label style="display:block;font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--gray-light);margin:12px 0 6px;">Meeting Energy (self-assessment)</label>
           <div style="display:flex;gap:8px;flex-wrap:wrap;">
             <label style="cursor:pointer;display:flex;align-items:center;gap:6px;font-size:13px;color:var(--gray-light);">
@@ -537,12 +556,45 @@
 
 <script src="../assets/js/season-loader.js"></script>
 <script>
+  // ── Role name → Firebase ID mapping (matches meeting.html roles array) ────
+  const ROLE_NAME_TO_ID = {
+    'Practice Planning & Skills Lead':  'practice',
+    'Ride Leader Coordinator':          'rideLeader',
+    'Race Weekend Captain':             'race',
+    'Communication & Culture Lead':     'comm',
+    'Registration & Roster Manager':    'roster',
+    'Ride Group Coordinator':           'groups',
+    'Safety & First Aid Lead':          'safety',
+    'Finance / Treasurer':              'finance',
+    'Equipment & Gear Manager':         'equipment',
+    'Fundraising & Sponsorship Lead':   'fundraising',
+  };
+
+  // ── School name → Firebase slug mapping ──────────────────────────────────
+  const SCHOOL_NAME_TO_SLUG = {
+    'Liberty Hills':      'liberty-hills',
+    'Fox Hollow':         'fox-hollow',
+    'Traverse Mountain':  'traverse',
+    'Belmont':            'belmont',
+    'Eaglecrest':         'eaglecrest',
+    'Segolilly':          'segolilly',
+    'Freedom':            'freedom',
+    'Lehi Jr':            'lehi-jr',
+    'Viewpoint':          'viewpoint',
+  };
+
   let seasonYear = 2026;
   let teamName = 'Skyridge Jr Devo';
   let totalRoles = 0;
 
+  // Cached Firebase data (so real-time role listener can respect saved overrides)
+  let cachedRoleOverrides   = {};
+  let cachedSchoolOverrides = {};
+
   const elemMaterials = ['Handout','Newsletter','PA Announcement','Poster','Yard Sign','School Meeting','Media Blast'];
   const msMaterials   = ['Newsletter','PA Announcement','Poster','Yard Sign','Fence Banner','School Meeting','Media Blast'];
+
+  MeetingStore.init();
 
   function makeMaterialsCell(mats) {
     return `<div class="material-cell">${mats.map(m =>
@@ -570,67 +622,242 @@
     document.getElementById('roles-count').textContent = `0 of ${totalRoles} assigned`;
     document.getElementById('schools-count').textContent = `${schoolCount} schools · Elementary + Middle School split`;
 
-    // Render role rows
+    // Render role rows with data-role-id for Firebase lookup
     const rolesTbody = document.getElementById('roles-tbody');
     rolesTbody.innerHTML = roles.map(role => {
+      const roleId   = ROLE_NAME_TO_ID[role.name] || '';
       const tierClass = role.tier === 'essential' ? 'type-essential' : 'type-rec';
       const tierLabel = role.tier === 'essential' ? 'Essential' : 'Recommended';
       return `
-        <tr data-role="${escapeAttr(role.name)}">
+        <tr data-role="${escapeAttr(role.name)}" data-role-id="${roleId}">
           <td>
             <div class="role-name-cell">${escapeHtml(role.name)} <span class="role-type ${tierClass}">${tierLabel}</span></div>
             <div class="time-note">${escapeHtml(role.timeCommitment)}</div>
           </td>
-          <td><input class="coach-input assigned-coach" placeholder="Coach name..." data-role="${escapeAttr(role.name)}"></td>
+          <td><input class="coach-input assigned-coach" placeholder="Coach name..." data-role-id="${roleId}"></td>
           <td><span class="status-badge status-open" onclick="cycleStatus(this)">Open</span></td>
-          <td><input class="coach-input" type="text" placeholder="Date..."></td>
-          <td><textarea class="notes-input" rows="2" placeholder="Notes..."></textarea></td>
+          <td><input class="coach-input role-oneone" type="text" placeholder="Date..." data-role-id="${roleId}" oninput="saveRoleOverride('${roleId}')"></td>
+          <td><textarea class="notes-input role-notes" rows="2" placeholder="Notes..." data-role-id="${roleId}" oninput="saveRoleOverride('${roleId}')"></textarea></td>
         </tr>`;
     }).join('');
+
+    // Render school rows with data-school-slug for Firebase lookup
+    const schoolsTbody = document.getElementById('schools-tbody');
+    const elemRows = (schools.elementary || []).map(school => {
+      const slug     = SCHOOL_NAME_TO_SLUG[school.name] || school.name.toLowerCase().replace(/\s+/g,'-');
+      const students = school.students ? `~${school.students}` : 'N/A';
+      const notesPlh = school.notes || (school.hasPTA && school.ptaContact ? `PTA: ${school.ptaContact}` : '') || 'Notes...';
+      return `
+        <tr data-school-slug="${slug}">
+          <td style="font-weight:600;">${escapeHtml(school.name)}</td>
+          <td><span class="school-type-tag tag-elem">Elem</span></td>
+          <td style="color:var(--gray-light);">${students}</td>
+          <td><input class="coach-input school-coach" placeholder="Coach name..." data-school-slug="${slug}"></td>
+          <td><span class="status-badge status-open" onclick="cycleStatus(this)">Open</span></td>
+          <td>${makeMaterialsCell(elemMaterials)}</td>
+          <td><input class="coach-input school-notes" placeholder="${escapeAttr(notesPlh)}" data-school-slug="${slug}" oninput="saveSchoolOverride('${slug}')"></td>
+        </tr>`;
+    });
+    const msRows = (schools.middle || []).map(school => {
+      const slug     = SCHOOL_NAME_TO_SLUG[school.name] || school.name.toLowerCase().replace(/\s+/g,'-');
+      const notesPlh = school.notes || 'Notes...';
+      return `
+        <tr style="border-top:2px solid var(--border);" data-school-slug="${slug}">
+          <td style="font-weight:600;">${escapeHtml(school.name)}</td>
+          <td><span class="school-type-tag tag-ms">Middle</span></td>
+          <td style="color:var(--gray-light);">N/A</td>
+          <td><input class="coach-input school-coach" placeholder="Coach name..." data-school-slug="${slug}"></td>
+          <td><span class="status-badge status-open" onclick="cycleStatus(this)">Open</span></td>
+          <td>${makeMaterialsCell(msMaterials)}</td>
+          <td><input class="coach-input school-notes" placeholder="${escapeAttr(notesPlh)}" data-school-slug="${slug}" oninput="saveSchoolOverride('${slug}')"></td>
+        </tr>`;
+    });
+    schoolsTbody.innerHTML = [...elemRows, ...msRows].join('');
 
     // Attach input listeners for progress
     document.querySelectorAll('#roles-table .assigned-coach').forEach(input => {
       input.addEventListener('input', updateProgress);
     });
 
-    // Render school rows
-    const schoolsTbody = document.getElementById('schools-tbody');
-    const elemRows = (schools.elementary || []).map(school => {
-      const students = school.students ? `~${school.students}` : 'N/A';
-      const notes = school.notes || (school.hasPTA && school.ptaContact ? `PTA: ${school.ptaContact}` : '');
-      return `
-        <tr>
-          <td style="font-weight:600;">${escapeHtml(school.name)}</td>
-          <td><span class="school-type-tag tag-elem">Elem</span></td>
-          <td style="color:var(--gray-light);">${students}</td>
-          <td><input class="coach-input" placeholder="Coach name..."></td>
-          <td><span class="status-badge status-open" onclick="cycleStatus(this)">Open</span></td>
-          <td>${makeMaterialsCell(elemMaterials)}</td>
-          <td><input class="coach-input" placeholder="${escapeAttr(notes) || 'Notes...'}"></td>
-        </tr>`;
-    });
-    const msRows = (schools.middle || []).map(school => {
-      const notes = school.notes || '';
-      return `
-        <tr style="border-top:2px solid var(--border);">
-          <td style="font-weight:600;">${escapeHtml(school.name)}</td>
-          <td><span class="school-type-tag tag-ms">Middle</span></td>
-          <td style="color:var(--gray-light);">N/A</td>
-          <td><input class="coach-input" placeholder="Coach name..."></td>
-          <td><span class="status-badge status-open" onclick="cycleStatus(this)">Open</span></td>
-          <td>${makeMaterialsCell(msMaterials)}</td>
-          <td><input class="coach-input" placeholder="${escapeAttr(notes) || 'Notes...'}"></td>
-        </tr>`;
-    });
-    schoolsTbody.innerHTML = [...elemRows, ...msRows].join('');
-
-    // Set static strip totals once after load
+    // Strip totals
     document.getElementById('strip-total-roles').textContent = totalRoles;
     document.getElementById('strip-total-schools').textContent = schoolCount;
 
     updateProgress();
+
+    // ── Firebase subscriptions (all set up after rows are rendered) ─────────
+    setupFirebaseSubscriptions();
+
   }).catch(() => {});
 
+  // ── Firebase subscription setup ───────────────────────────────────────────
+  function setupFirebaseSubscriptions() {
+    // 1. Tracker role overrides (status, notes, 1:1) — load first so they're
+    //    cached before role_assignments fires and potentially overwrites statuses
+    MeetingStore.onTrackerRoleOverrides(data => {
+      cachedRoleOverrides = data || {};
+      Object.keys(cachedRoleOverrides).forEach(roleId => {
+        applyRoleOverride(roleId, cachedRoleOverrides[roleId]);
+      });
+      updateProgress();
+    });
+
+    // 2. Tracker school overrides (status, notes)
+    MeetingStore.onTrackerSchoolOverrides(data => {
+      cachedSchoolOverrides = data || {};
+      Object.keys(cachedSchoolOverrides).forEach(slug => {
+        applySchoolOverride(slug, cachedSchoolOverrides[slug]);
+      });
+      updateProgress();
+    });
+
+    // 3. Role assignments from meeting (live) — populates coach names + auto-status
+    MeetingStore.onRoleAssignments(data => {
+      Object.keys(data).forEach(roleId => {
+        const asgn = data[roleId];
+        const row = document.querySelector(`#roles-tbody tr[data-role-id="${roleId}"]`);
+        if (!row) return;
+        const coachInput = row.querySelector('.assigned-coach');
+        if (coachInput && asgn.primary !== undefined) coachInput.value = asgn.primary || '';
+
+        // Auto-set badge: filled if assigned, open if unassigned — but only if
+        // no manual override is saved in tracker_data
+        const override = cachedRoleOverrides[roleId];
+        if (!override || !override.status) {
+          const badge = row.querySelector('.status-badge');
+          if (badge) applyStatus(badge, asgn.primary ? 'filled' : 'open');
+        }
+      });
+      updateProgress();
+    });
+
+    // 4. School assignments from meeting (live)
+    MeetingStore.onSchoolAssignments(data => {
+      Object.keys(data).forEach(slug => {
+        const row = document.querySelector(`#schools-tbody tr[data-school-slug="${slug}"]`);
+        if (!row) return;
+        const coachInput = row.querySelector('.school-coach');
+        if (coachInput && data[slug] !== undefined) coachInput.value = data[slug] || '';
+
+        const override = cachedSchoolOverrides[slug];
+        if (!override || !override.status) {
+          const badge = row.querySelector('.status-badge');
+          if (badge) applyStatus(badge, data[slug] ? 'filled' : 'open');
+        }
+      });
+      updateProgress();
+    });
+
+    // 5. Kickoff scheduling fields (Section 03)
+    MeetingStore.onKickoff(data => {
+      setVal('kickoff-date',        data.proposedDate);
+      setVal('kickoff-location',    data.location);
+      setVal('kickoff-coordinator', data.coordinator);
+      setVal('kickoff-agenda',      data.agendaTopics);
+    });
+
+    // 6. Post-meeting summary fields (Section 04)
+    MeetingStore.onPostMeeting(data => {
+      setVal('pm-unassigned', data.unassignedRoles);
+      setVal('pm-decisions',  data.keyDecisions);
+      setVal('pm-followup',   data.followUp);
+      setVal('pm-touchpoint', data.nextTouchpoint);
+      if (data.energy) {
+        const radio = document.querySelector(`input[name="energy"][value="${data.energy}"]`);
+        if (radio) radio.checked = true;
+      }
+    });
+  }
+
+  function setVal(id, value) {
+    const el = document.getElementById(id);
+    if (el && value !== undefined && value !== null) el.value = value;
+  }
+
+  function applyStatus(badge, state) {
+    const labels = { open: 'Open', filled: 'Filled', tentative: 'Tentative' };
+    if (!labels[state]) return;
+    badge.dataset.state = state;
+    badge.textContent = labels[state];
+    badge.className = 'status-badge status-' + state;
+  }
+
+  function applyRoleOverride(roleId, override) {
+    const row = document.querySelector(`#roles-tbody tr[data-role-id="${roleId}"]`);
+    if (!row) return;
+    if (override.status) applyStatus(row.querySelector('.status-badge'), override.status);
+    if (override.notes    !== undefined) { const el = row.querySelector('.role-notes');  if (el) el.value = override.notes; }
+    if (override.oneOnOne !== undefined) { const el = row.querySelector('.role-oneone'); if (el) el.value = override.oneOnOne; }
+  }
+
+  function applySchoolOverride(slug, override) {
+    const row = document.querySelector(`#schools-tbody tr[data-school-slug="${slug}"]`);
+    if (!row) return;
+    if (override.status) applyStatus(row.querySelector('.status-badge'), override.status);
+    if (override.notes !== undefined) { const el = row.querySelector('.school-notes'); if (el) el.value = override.notes; }
+  }
+
+  // ── Tracker-specific save functions ──────────────────────────────────────
+  function saveRoleOverride(roleId) {
+    if (!roleId) return;
+    const row = document.querySelector(`#roles-tbody tr[data-role-id="${roleId}"]`);
+    if (!row) return;
+    const badge   = row.querySelector('.status-badge');
+    const notesEl = row.querySelector('.role-notes');
+    const oneoneEl = row.querySelector('.role-oneone');
+    cachedRoleOverrides[roleId] = {
+      status:   badge    ? (badge.dataset.state || 'open') : 'open',
+      notes:    notesEl  ? notesEl.value  : '',
+      oneOnOne: oneoneEl ? oneoneEl.value : '',
+    };
+    MeetingStore.saveRoleOverrideDebounced(roleId, cachedRoleOverrides[roleId]);
+  }
+
+  function saveSchoolOverride(slug) {
+    if (!slug) return;
+    const row = document.querySelector(`#schools-tbody tr[data-school-slug="${slug}"]`);
+    if (!row) return;
+    const badge   = row.querySelector('.status-badge');
+    const notesEl = row.querySelector('.school-notes');
+    cachedSchoolOverrides[slug] = {
+      status: badge   ? (badge.dataset.state || 'open') : 'open',
+      notes:  notesEl ? notesEl.value : '',
+    };
+    MeetingStore.saveSchoolOverrideDebounced(slug, cachedSchoolOverrides[slug]);
+  }
+
+  function saveKickoffFields() {
+    MeetingStore.saveKickoffDebounced({
+      proposedDate: document.getElementById('kickoff-date')?.value        || '',
+      location:     document.getElementById('kickoff-location')?.value    || '',
+      coordinator:  document.getElementById('kickoff-coordinator')?.value || '',
+      agendaTopics: document.getElementById('kickoff-agenda')?.value      || '',
+    });
+  }
+
+  function savePostMeetingFields() {
+    const energyEl = document.querySelector('input[name="energy"]:checked');
+    MeetingStore.savePostMeetingDebounced({
+      unassignedRoles: document.getElementById('pm-unassigned')?.value || '',
+      keyDecisions:    document.getElementById('pm-decisions')?.value  || '',
+      followUp:        document.getElementById('pm-followup')?.value   || '',
+      nextTouchpoint:  document.getElementById('pm-touchpoint')?.value || '',
+      energy:          energyEl ? energyEl.value : '',
+    });
+  }
+
+  // Section 03 & 04 input listeners (static HTML elements, safe to attach now)
+  ['kickoff-date','kickoff-location','kickoff-coordinator','kickoff-agenda'].forEach(id => {
+    document.getElementById(id)?.addEventListener('input', saveKickoffFields);
+  });
+  ['pm-unassigned','pm-decisions','pm-followup','pm-touchpoint'].forEach(id => {
+    document.getElementById(id)?.addEventListener('input', savePostMeetingFields);
+  });
+  document.querySelectorAll('input[name="energy"]').forEach(r => {
+    r.addEventListener('change', savePostMeetingFields);
+  });
+
+  // ── Utilities ─────────────────────────────────────────────────────────────
   function escapeHtml(str) {
     if (!str) return '';
     return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
@@ -642,12 +869,14 @@
 
   function cycleStatus(el) {
     const states = ['open','filled','tentative'];
-    const labels = ['Open','Filled','Tentative'];
     const cur = states.indexOf(el.dataset.state || 'open');
-    const next = (cur + 1) % 3;
-    el.dataset.state = states[next];
-    el.textContent = labels[next];
-    el.className = 'status-badge status-' + states[next];
+    applyStatus(el, states[(cur + 1) % 3]);
+    // Save override so manual status changes persist
+    const row = el.closest('tr');
+    if (row) {
+      if (row.dataset.roleId)     saveRoleOverride(row.dataset.roleId);
+      else if (row.dataset.schoolSlug) saveSchoolOverride(row.dataset.schoolSlug);
+    }
     updateProgress();
   }
 
@@ -658,21 +887,21 @@
   function updateProgress() {
     // Roles bar
     const filled = document.querySelectorAll('#roles-table .status-filled').length;
-    const total = document.querySelectorAll('#roles-table tbody tr').length;
+    const total  = document.querySelectorAll('#roles-table tbody tr').length;
     document.getElementById('stat-filled').textContent = filled;
     document.getElementById('progress-fill').style.width = total ? (filled/total*100) + '%' : '0%';
     document.getElementById('progress-pct').textContent = filled + ' / ' + total;
     const assignedFilled = Array.from(document.querySelectorAll('#roles-table .assigned-coach')).filter(i=>i.value.trim()).length;
     document.getElementById('roles-count').textContent = assignedFilled + ' of ' + total + ' assigned';
 
-    // Schools bar — count Filled status badges (not coach name inputs)
-    const schoolsTotal = document.querySelectorAll('#schools-table tbody tr').length;
+    // Schools bar
+    const schoolsTotal    = document.querySelectorAll('#schools-table tbody tr').length;
     const schoolsAssigned = document.querySelectorAll('#schools-table .status-filled').length;
     document.getElementById('schools-progress-fill').style.width = schoolsTotal ? (schoolsAssigned/schoolsTotal*100) + '%' : '0%';
     document.getElementById('schools-progress-pct').textContent = schoolsAssigned + ' / ' + schoolsTotal;
     document.getElementById('stat-schools-assigned').textContent = schoolsAssigned;
 
-    // Sync sticky strip
+    // Sticky strip
     document.getElementById('strip-roles-filled').textContent = filled;
     document.getElementById('strip-schools-assigned').textContent = schoolsAssigned;
   }
@@ -686,9 +915,9 @@
       const nameCell = row.querySelector('.role-name-cell');
       if (!nameCell) return;
       const roleName = nameCell.textContent.replace(/Essential|Recommended/g,'').trim();
-      const coach = row.querySelector('.assigned-coach').value || 'UNASSIGNED';
-      const status = row.querySelector('.status-badge').textContent;
-      const notes = row.querySelector('.notes-input') ? row.querySelector('.notes-input').value : '';
+      const coach  = row.querySelector('.assigned-coach')?.value || 'UNASSIGNED';
+      const status = row.querySelector('.status-badge')?.textContent || '—';
+      const notes  = row.querySelector('.role-notes')?.value || '';
       text += `${roleName}\n  Coach: ${coach}  |  Status: ${status}\n`;
       if (notes) text += `  Notes: ${notes}\n`;
       text += '\n';
@@ -699,17 +928,14 @@
       const cells = row.querySelectorAll('td');
       if (cells.length < 5) return;
       const school = cells[0].textContent.trim();
-      const type = cells[1].textContent.trim();
-      const coachInput = cells[3].querySelector('input');
-      const coach = coachInput ? coachInput.value || 'UNASSIGNED' : 'UNASSIGNED';
-      const statusEl = cells[4].querySelector('.status-badge');
-      const status = statusEl ? statusEl.textContent : '—';
-      const mats = cells[5] ? Array.from(cells[5].querySelectorAll('input:checked')).map(cb => cb.nextElementSibling.textContent).join(', ') || 'None checked yet' : '—';
+      const type   = cells[1].textContent.trim();
+      const coach  = cells[3].querySelector('input')?.value || 'UNASSIGNED';
+      const status = cells[4].querySelector('.status-badge')?.textContent || '—';
+      const mats   = cells[5] ? Array.from(cells[5].querySelectorAll('input:checked')).map(cb => cb.nextElementSibling.textContent).join(', ') || 'None checked yet' : '—';
       text += `${school} (${type})  →  ${coach}  |  ${status}\n  Materials: ${mats}\n\n`;
     });
 
     text += `\n${'─'.repeat(56)}\nGenerated: ${new Date().toLocaleDateString('en-US', {month:'long',day:'numeric',year:'numeric'})}\n`;
-
     document.getElementById('copyText').textContent = text;
     document.getElementById('copyModal').classList.add('active');
   }
