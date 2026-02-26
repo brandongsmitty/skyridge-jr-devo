@@ -101,7 +101,14 @@
   }
 
   /* ── TABS ── */
-  .tabs { background: var(--white); border-bottom: 1px solid var(--gray-line); }
+  .tabs {
+    background: var(--white);
+    border-bottom: 1px solid var(--gray-line);
+    position: sticky;
+    top: 46px;
+    z-index: 100;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+  }
   .tabs-inner { display: flex; padding: 0 32px; max-width: 1200px; margin: 0 auto; }
   .tab {
     font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 700;
@@ -348,7 +355,16 @@
   .pb-coach { background: var(--blue-pale); border: 1px solid #b8cfec; color: var(--blue); }
   .pb-mtg { background: var(--orange-pale); border: 1px solid var(--orange-mid); color: var(--orange); }
   .pb-gap { background: var(--red-pale); border: 1px solid var(--red-mid); color: var(--red); }
-  .parking-text { font-size: 13px; color: var(--gray-dark); line-height: 1.5; }
+  .parking-text { font-size: 13px; color: var(--gray-dark); line-height: 1.5; flex: 1; }
+  .parking-check { flex-shrink: 0; margin-top: 3px; accent-color: var(--green); cursor: pointer; }
+  .parking-item.done .parking-text { text-decoration: line-through; opacity: 0.5; }
+  .parking-item.done .parking-bullet { opacity: 0.4; }
+  .parking-delete {
+    margin-left: auto; flex-shrink: 0; background: none; border: none;
+    color: var(--gray-light); font-size: 18px; cursor: pointer; padding: 0 4px;
+    line-height: 1; opacity: 0.45; transition: opacity 0.15s, color 0.15s;
+  }
+  .parking-delete:hover { opacity: 1; color: var(--red); }
   .add-parking { display: flex; gap: 8px; margin-top: 12px; }
   .parking-input {
     flex: 1; font-family: 'Barlow', sans-serif; font-size: 13px;
@@ -1047,16 +1063,22 @@
   <div class="parking-lot">
     <div class="parking-items" id="parking-items">
       <div class="parking-item">
+        <input type="checkbox" class="parking-check" onchange="toggleParkingDone(this)">
         <div class="parking-bullet pb-coach">Catharine</div>
         <div class="parking-text"><strong>Catharine</strong> can host the parent kickoff meeting + fit kit at Lehi Jr gym (locker rooms available). Raised the question about camping/hotel logistics for Beaver Mountain — no onsite camping.</div>
+        <button class="parking-delete" onclick="deleteParking(this)" title="Remove">×</button>
       </div>
       <div class="parking-item">
+        <input type="checkbox" class="parking-check" onchange="toggleParkingDone(this)">
         <div class="parking-bullet pb-coach">Brad</div>
         <div class="parking-text"><strong>Brad</strong> suggests parent meeting on Mon 3/23 or 3/30, 7–8pm. Lehi Jr auditorium is confirmed as a viable venue (same format as last year).</div>
+        <button class="parking-delete" onclick="deleteParking(this)" title="Remove">×</button>
       </div>
       <div class="parking-item">
+        <input type="checkbox" class="parking-check" onchange="toggleParkingDone(this)">
         <div class="parking-bullet pb-mtg">Action</div>
         <div class="parking-text">Schedule a prep meeting 1 week before the parent kickoff to make sure the coaching staff is aligned going in.</div>
+        <button class="parking-delete" onclick="deleteParking(this)" title="Remove">×</button>
       </div>
     </div>
     <div class="add-parking">
@@ -1374,10 +1396,12 @@
     return Array.from(document.querySelectorAll('#parking-items .parking-item')).map(item => {
       const bullet = item.querySelector('.parking-bullet');
       const text   = item.querySelector('.parking-text');
+      const check  = item.querySelector('.parking-check');
       return {
-        type:  bullet ? bullet.className.replace('parking-bullet ', '').trim() : 'pb-mtg',
-        label: bullet ? bullet.textContent : 'Note',
-        text:  text   ? text.textContent : ''
+        type:      bullet ? bullet.className.replace('parking-bullet ', '').trim() : 'pb-mtg',
+        label:     bullet ? bullet.textContent : 'Note',
+        text:      text   ? text.textContent : '',
+        completed: check  ? check.checked : false
       };
     });
   }
@@ -1388,9 +1412,20 @@
     if (!text) return;
     const item = document.createElement('div');
     item.className = 'parking-item';
-    item.innerHTML = `<div class="parking-bullet pb-mtg">Note</div><div class="parking-text">${text}</div>`;
+    item.innerHTML = `<input type="checkbox" class="parking-check" onchange="toggleParkingDone(this)"><div class="parking-bullet pb-mtg">Note</div><div class="parking-text"></div><button class="parking-delete" onclick="deleteParking(this)" title="Remove">×</button>`;
+    item.querySelector('.parking-text').textContent = text;
     document.getElementById('parking-items').appendChild(item);
     input.value = '';
+    MeetingStore.saveParking(getParkingItems());
+  }
+
+  function toggleParkingDone(cb) {
+    cb.closest('.parking-item').classList.toggle('done', cb.checked);
+    MeetingStore.saveParking(getParkingItems());
+  }
+
+  function deleteParking(btn) {
+    btn.closest('.parking-item').remove();
     MeetingStore.saveParking(getParkingItems());
   }
 
@@ -1479,12 +1514,14 @@
       const savedParking = await MeetingStore.loadParkingOnce();
       if (savedParking && savedParking.length > 0) {
         const parkingEl = document.getElementById('parking-items');
-        parkingEl.innerHTML = savedParking.map(item =>
-          `<div class="parking-item">
-            <div class="parking-bullet ${item.type || 'pb-mtg'}">${item.label || 'Note'}</div>
-            <div class="parking-text">${item.text || ''}</div>
-          </div>`
-        ).join('');
+        parkingEl.innerHTML = '';
+        savedParking.forEach(p => {
+          const el = document.createElement('div');
+          el.className = 'parking-item' + (p.completed ? ' done' : '');
+          el.innerHTML = `<input type="checkbox" class="parking-check" onchange="toggleParkingDone(this)"${p.completed ? ' checked' : ''}><div class="parking-bullet ${p.type || 'pb-mtg'}">${p.label || 'Note'}</div><div class="parking-text"></div><button class="parking-delete" onclick="deleteParking(this)" title="Remove">×</button>`;
+          el.querySelector('.parking-text').textContent = p.text || '';
+          parkingEl.appendChild(el);
+        });
       }
     }
 

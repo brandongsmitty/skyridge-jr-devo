@@ -206,6 +206,12 @@
   .status-filled { background:rgba(61,170,106,0.12); color:var(--green); border:1px solid rgba(61,170,106,0.3); }
   .status-tentative { background:rgba(212,160,23,0.12); color:var(--yellow); border:1px solid rgba(212,160,23,0.3); }
 
+  tr[data-role-locked="1"] .status-badge,
+  tr[data-school-locked="1"] .status-badge {
+    cursor: not-allowed;
+    opacity: 0.7;
+  }
+
   textarea.notes-input {
     background:#111; border:1px solid var(--border); border-radius:3px;
     color:var(--white); font-family:'Barlow',sans-serif; font-size:12px;
@@ -777,13 +783,21 @@
         const isLocked = !!asgn.locked;
         if (coachSelect) coachSelect.disabled = isLocked;
         if (lockIcon)    lockIcon.style.display = isLocked ? 'inline' : 'none';
+        row.dataset.roleLocked = isLocked ? '1' : '';
 
-        // Auto-set badge: filled if assigned, open if unassigned — but only if
-        // no manual override is saved in tracker_data
-        const override = cachedRoleOverrides[roleId];
-        if (!override || !override.status) {
-          const badge = row.querySelector('.status-badge');
-          if (badge) applyStatus(badge, asgn.primary ? 'filled' : 'open');
+        // Auto-set badge:
+        // - locked + coach assigned → always FILLED (override doesn't matter)
+        // - otherwise → respect manual override, or auto-set from assignment
+        const badge = row.querySelector('.status-badge');
+        if (badge) {
+          if (isLocked && asgn.primary) {
+            applyStatus(badge, 'filled');
+          } else {
+            const override = cachedRoleOverrides[roleId];
+            if (!override || !override.status) {
+              applyStatus(badge, asgn.primary ? 'filled' : 'open');
+            }
+          }
         }
       });
       updateProgress();
@@ -816,6 +830,13 @@
         const isLocked    = !!data[slug];
         if (coachSelect) coachSelect.disabled = isLocked;
         if (lockIcon)    lockIcon.style.display = isLocked ? 'inline' : 'none';
+        row.dataset.schoolLocked = isLocked ? '1' : '';
+
+        // Auto-set badge when locked+assigned
+        if (isLocked && coachSelect && coachSelect.value) {
+          const badge = row.querySelector('.status-badge');
+          if (badge) applyStatus(badge, 'filled');
+        }
       });
     });
 
@@ -959,11 +980,13 @@
   }
 
   function cycleStatus(el) {
+    const row = el.closest('tr');
+    // Frozen when locked from meeting tool
+    if (row && (row.dataset.roleLocked || row.dataset.schoolLocked)) return;
     const states = ['open','filled','tentative'];
     const cur = states.indexOf(el.dataset.state || 'open');
     applyStatus(el, states[(cur + 1) % 3]);
     // Save override so manual status changes persist
-    const row = el.closest('tr');
     if (row) {
       if (row.dataset.roleId)     saveRoleOverride(row.dataset.roleId);
       else if (row.dataset.schoolSlug) saveSchoolOverride(row.dataset.schoolSlug);
