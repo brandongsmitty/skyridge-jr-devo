@@ -390,7 +390,8 @@
     color: var(--gray-light);
     transition: all 0.15s;
   }
-  .time-options input[type="radio"]:checked + label {
+  .time-options input[type="radio"]:checked + label,
+  .time-options input[type="checkbox"]:checked + label {
     border-color: var(--orange);
     color: var(--white);
     background: rgba(242,106,27,0.1);
@@ -640,13 +641,13 @@
         <div class="time-item">
           <div class="time-item-label">Strengths you bring</div>
           <div class="time-options">
-            <input type="radio" name="strength" id="st1" value="Organization & systems">
+            <input type="checkbox" id="st1" value="Organization & systems">
             <label for="st1">Organization & systems</label>
-            <input type="radio" name="strength" id="st2" value="Communication & relationships">
+            <input type="checkbox" id="st2" value="Communication & relationships">
             <label for="st2">Communication & relationships</label>
-            <input type="radio" name="strength" id="st3" value="Logistics & race day ops">
+            <input type="checkbox" id="st3" value="Logistics & race day ops">
             <label for="st3">Logistics & race day ops</label>
-            <input type="radio" name="strength" id="st4" value="Technical coaching & skills">
+            <input type="checkbox" id="st4" value="Technical coaching & skills">
             <label for="st4">Technical coaching & skills</label>
           </div>
         </div>
@@ -906,7 +907,8 @@
     const preseason = getRadioVal('preseason');
     const inseason = getRadioVal('inseason');
     const races = getRadioVal('races');
-    const strength = getRadioVal('strength');
+    const strengthVals = Array.from(document.querySelectorAll('#st1,#st2,#st3,#st4')).filter(cb => cb.checked).map(cb => cb.value);
+    const strength = strengthVals.length ? strengthVals.join(', ') : '—';
 
     const checkedRoles = Array.from(document.querySelectorAll('.role-card input:checked')).map(cb => `  • ${cb.value}`).join('\n') || '  None selected';
     const r1 = document.getElementById('rank1').value || '—';
