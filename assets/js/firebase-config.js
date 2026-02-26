@@ -9,7 +9,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 const FIREBASE_CONFIG = {
-  apiKey:            "AIzaSyAGN3iKlPSbvULPYMBi7PxqGjbU6NuMeYo",
+  apiKey:            "AIzaSyD4PkUKYgb0VLiZBe6vYsb50dy0p_YOKQw",
   authDomain:        "skyridge-jr-devo.firebaseapp.com",
   databaseURL:       "https://skyridge-jr-devo-default-rtdb.firebaseio.com",
   projectId:         "skyridge-jr-devo",
