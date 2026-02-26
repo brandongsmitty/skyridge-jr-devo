@@ -47,7 +47,8 @@ const MeetingStore = (() => {
     ref(`role_assignments/${roleId}`).set({
       primary: data.primary || '',
       backup:  data.backup  || '',
-      notes:   data.notes   || ''
+      notes:   data.notes   || '',
+      locked:  data.locked  ? true : false
     });
   }
 
@@ -75,6 +76,26 @@ const MeetingStore = (() => {
     ref('school_assignments').on('value', snap => {
       callback(snap.val() || {});
     });
+  }
+
+  // ── School Lock State ────────────────────────────────────────────────────
+  // Stored as: school_locked/{schoolSlug} = true/false
+
+  function saveSchoolLocked(slug, locked) {
+    if (!isReady()) return;
+    ref(`school_locked/${slug}`).set(locked ? true : false);
+  }
+
+  function onSchoolLocked(callback) {
+    if (!isReady()) return;
+    ref('school_locked').on('value', snap => {
+      callback(snap.val() || {});
+    });
+  }
+
+  function loadSchoolLockedOnce() {
+    if (!isReady()) return Promise.resolve({});
+    return ref('school_locked').once('value').then(snap => snap.val() || {});
   }
 
   // ── Parking Lot ──────────────────────────────────────────────────────────
@@ -191,6 +212,9 @@ const MeetingStore = (() => {
     saveSchoolAssignment,
     onSchoolAssignments,
     loadSchoolAssignmentsOnce,
+    saveSchoolLocked,
+    onSchoolLocked,
+    loadSchoolLockedOnce,
     saveParking,
     onParking,
     loadParkingOnce,

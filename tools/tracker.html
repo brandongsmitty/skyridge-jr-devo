@@ -183,14 +183,16 @@
   .type-rec { background:rgba(100,100,100,0.15); color:#888; }
   .time-note { font-size:11px; color:var(--gray-light); margin-top:3px; }
 
-  input.coach-input, select.coach-select {
+  input.coach-input, select.coach-input, select.coach-select {
     background:#111; border:1px solid var(--border); border-radius:3px;
     color:var(--white); font-family:'Barlow',sans-serif; font-size:13px;
     padding:7px 10px; width:100%; outline:none;
     transition:border-color 0.15s;
   }
-  input.coach-input:focus, select.coach-select:focus { border-color:var(--orange); }
-  select.coach-select option { background:#111; }
+  input.coach-input:focus, select.coach-input:focus, select.coach-select:focus { border-color:var(--orange); }
+  select.coach-input option, select.coach-select option { background:#111; color:var(--white); }
+  select.coach-input:disabled { opacity:0.55; cursor:not-allowed; }
+  input[type="date"].coach-input::-webkit-calendar-picker-indicator { filter: invert(0.7); cursor:pointer; }
 
   .status-badge {
     display:inline-block;
@@ -591,8 +593,9 @@
   let totalRoles = 0;
 
   // Cached Firebase data (so real-time role listener can respect saved overrides)
-  let cachedRoleOverrides   = {};
-  let cachedSchoolOverrides = {};
+  let cachedRoleOverrides    = {};
+  let cachedSchoolOverrides  = {};
+  let cachedRoleAssignments  = {}; // for saveCoachFromTracker
 
   const elemMaterials = ['Handout','Newsletter','PA Announcement','Poster','Yard Sign','School Meeting','Media Blast'];
   const msMaterials   = ['Newsletter','PA Announcement','Poster','Yard Sign','Fence Banner','School Meeting','Media Blast'];
@@ -626,6 +629,10 @@
     document.getElementById('schools-count').textContent = `${schoolCount} schools · Elementary + Middle School split`;
 
     // Render role rows with data-role-id for Firebase lookup
+    const coachOptions = (data.coaches || []).map(c =>
+      `<option value="${escapeAttr(c)}">${escapeHtml(c)}</option>`
+    ).join('');
+
     const rolesTbody = document.getElementById('roles-tbody');
     rolesTbody.innerHTML = roles.map(role => {
       const roleId   = ROLE_NAME_TO_ID[role.name] || '';
@@ -637,9 +644,17 @@
             <div class="role-name-cell">${escapeHtml(role.name)} <span class="role-type ${tierClass}">${tierLabel}</span></div>
             <div class="time-note">${escapeHtml(role.timeCommitment)}</div>
           </td>
-          <td><input class="coach-input assigned-coach" placeholder="Coach name..." data-role-id="${roleId}"></td>
+          <td>
+            <div style="display:flex;align-items:center;gap:6px;">
+              <select class="coach-input assigned-coach" data-role-id="${roleId}" onchange="saveCoachFromTracker('${roleId}')">
+                <option value="">— Unassigned —</option>
+                ${coachOptions}
+              </select>
+              <span class="lock-icon" id="lock-role-${roleId}" style="display:none;font-size:14px;" title="Locked in meeting">🔒</span>
+            </div>
+          </td>
           <td><span class="status-badge status-open" onclick="cycleStatus(this)">Open</span></td>
-          <td><input class="coach-input role-oneone" type="text" placeholder="Date..." data-role-id="${roleId}" oninput="saveRoleOverride('${roleId}')"></td>
+          <td><input class="coach-input role-oneone" type="date" data-role-id="${roleId}" onchange="saveRoleOverride('${roleId}')"></td>
           <td><textarea class="notes-input role-notes" rows="2" placeholder="Notes..." data-role-id="${roleId}" oninput="saveRoleOverride('${roleId}')"></textarea></td>
         </tr>`;
     }).join('');
@@ -655,7 +670,15 @@
           <td style="font-weight:600;">${escapeHtml(school.name)}</td>
           <td><span class="school-type-tag tag-elem">Elem</span></td>
           <td style="color:var(--gray-light);">${students}</td>
-          <td><input class="coach-input school-coach" placeholder="Coach name..." data-school-slug="${slug}"></td>
+          <td>
+            <div style="display:flex;align-items:center;gap:6px;">
+              <select class="coach-input school-coach" data-school-slug="${slug}" onchange="saveSchoolCoachFromTracker('${slug}')">
+                <option value="">— Unassigned —</option>
+                ${coachOptions}
+              </select>
+              <span class="lock-icon" id="lock-school-${slug}" style="display:none;font-size:14px;" title="Locked in meeting">🔒</span>
+            </div>
+          </td>
           <td><span class="status-badge status-open" onclick="cycleStatus(this)">Open</span></td>
           <td>${makeMaterialsCell(elemMaterials)}</td>
           <td><input class="coach-input school-notes" placeholder="${escapeAttr(notesPlh)}" data-school-slug="${slug}" oninput="saveSchoolOverride('${slug}')"></td>
@@ -669,7 +692,15 @@
           <td style="font-weight:600;">${escapeHtml(school.name)}</td>
           <td><span class="school-type-tag tag-ms">Middle</span></td>
           <td style="color:var(--gray-light);">N/A</td>
-          <td><input class="coach-input school-coach" placeholder="Coach name..." data-school-slug="${slug}"></td>
+          <td>
+            <div style="display:flex;align-items:center;gap:6px;">
+              <select class="coach-input school-coach" data-school-slug="${slug}" onchange="saveSchoolCoachFromTracker('${slug}')">
+                <option value="">— Unassigned —</option>
+                ${coachOptions}
+              </select>
+              <span class="lock-icon" id="lock-school-${slug}" style="display:none;font-size:14px;" title="Locked in meeting">🔒</span>
+            </div>
+          </td>
           <td><span class="status-badge status-open" onclick="cycleStatus(this)">Open</span></td>
           <td>${makeMaterialsCell(msMaterials)}</td>
           <td><input class="coach-input school-notes" placeholder="${escapeAttr(notesPlh)}" data-school-slug="${slug}" oninput="saveSchoolOverride('${slug}')"></td>
@@ -677,9 +708,9 @@
     });
     schoolsTbody.innerHTML = [...elemRows, ...msRows].join('');
 
-    // Attach input listeners for progress
-    document.querySelectorAll('#roles-table .assigned-coach').forEach(input => {
-      input.addEventListener('input', updateProgress);
+    // Attach change listeners for progress (select fires 'change' not 'input')
+    document.querySelectorAll('#roles-table .assigned-coach').forEach(sel => {
+      sel.addEventListener('change', updateProgress);
     });
 
     // Strip totals
@@ -729,14 +760,23 @@
       updateProgress();
     });
 
-    // 3. Role assignments from meeting (live) — populates coach names + auto-status
+    // 3. Role assignments from meeting (live) — populates coach names + lock + auto-status
     MeetingStore.onRoleAssignments(data => {
+      cachedRoleAssignments = data;
       Object.keys(data).forEach(roleId => {
         const asgn = data[roleId];
         const row = document.querySelector(`#roles-tbody tr[data-role-id="${roleId}"]`);
         if (!row) return;
-        const coachInput = row.querySelector('.assigned-coach');
-        if (coachInput && asgn.primary !== undefined) coachInput.value = asgn.primary || '';
+        const coachSelect = row.querySelector('.assigned-coach');
+        const lockIcon    = document.getElementById(`lock-role-${roleId}`);
+
+        // Populate dropdown
+        if (coachSelect && asgn.primary !== undefined) coachSelect.value = asgn.primary || '';
+
+        // Apply lock state
+        const isLocked = !!asgn.locked;
+        if (coachSelect) coachSelect.disabled = isLocked;
+        if (lockIcon)    lockIcon.style.display = isLocked ? 'inline' : 'none';
 
         // Auto-set badge: filled if assigned, open if unassigned — but only if
         // no manual override is saved in tracker_data
@@ -754,8 +794,8 @@
       Object.keys(data).forEach(slug => {
         const row = document.querySelector(`#schools-tbody tr[data-school-slug="${slug}"]`);
         if (!row) return;
-        const coachInput = row.querySelector('.school-coach');
-        if (coachInput && data[slug] !== undefined) coachInput.value = data[slug] || '';
+        const coachSelect = row.querySelector('.school-coach');
+        if (coachSelect && data[slug] !== undefined) coachSelect.value = data[slug] || '';
 
         const override = cachedSchoolOverrides[slug];
         if (!override || !override.status) {
@@ -764,6 +804,19 @@
         }
       });
       updateProgress();
+    });
+
+    // 4b. School lock states from meeting (live)
+    MeetingStore.onSchoolLocked(data => {
+      Object.keys(data).forEach(slug => {
+        const row = document.querySelector(`#schools-tbody tr[data-school-slug="${slug}"]`);
+        if (!row) return;
+        const coachSelect = row.querySelector('.school-coach');
+        const lockIcon    = document.getElementById(`lock-school-${slug}`);
+        const isLocked    = !!data[slug];
+        if (coachSelect) coachSelect.disabled = isLocked;
+        if (lockIcon)    lockIcon.style.display = isLocked ? 'inline' : 'none';
+      });
     });
 
     // 5. Kickoff scheduling fields (Section 03)
@@ -813,6 +866,26 @@
     if (!row) return;
     if (override.status) applyStatus(row.querySelector('.status-badge'), override.status);
     if (override.notes !== undefined) { const el = row.querySelector('.school-notes'); if (el) el.value = override.notes; }
+  }
+
+  // ── Write-back from tracker → Firebase role_assignments ──────────────────
+  function saveCoachFromTracker(roleId) {
+    if (!roleId) return;
+    const row = document.querySelector(`#roles-tbody tr[data-role-id="${roleId}"]`);
+    if (!row) return;
+    const select = row.querySelector('.assigned-coach');
+    if (!select || select.disabled) return; // locked — don't overwrite
+    const current = cachedRoleAssignments[roleId] || { backup: '', notes: '', locked: false };
+    MeetingStore.saveRoleAssignment(roleId, { ...current, primary: select.value });
+  }
+
+  function saveSchoolCoachFromTracker(slug) {
+    if (!slug) return;
+    const row = document.querySelector(`#schools-tbody tr[data-school-slug="${slug}"]`);
+    if (!row) return;
+    const select = row.querySelector('.school-coach');
+    if (!select || select.disabled) return; // locked — don't overwrite
+    MeetingStore.saveSchoolAssignment(slug, select.value);
   }
 
   // ── Tracker-specific save functions ──────────────────────────────────────

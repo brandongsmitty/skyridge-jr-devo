@@ -1074,7 +1074,7 @@
 
 
 <script>
-  const coaches = ['Brandon', 'Brad', 'Diane', 'Jon', 'Kathy', 'Devan', 'Catharine'];
+  const coaches = ['Brandon', 'Brad', 'Diane', 'Jon', 'Kathy', 'Jenae', 'Devan', 'Catharine'];
 
   const roles = [
     { id: 'practice', num: '01', name: 'Practice Planning & Skills Lead', essential: true,
@@ -1232,18 +1232,31 @@
 
   function toggleRoleLock(roleId) {
     lockedRoles[roleId] = !lockedRoles[roleId];
+    if (MeetingStore.isReady() && assignments[roleId]) {
+      MeetingStore.saveRoleAssignment(roleId, { ...assignments[roleId], locked: lockedRoles[roleId] });
+    }
     saveState();
     renderBoard();
   }
 
   function lockAllRoles() {
-    roles.forEach(r => { lockedRoles[r.id] = true; });
+    roles.forEach(r => {
+      lockedRoles[r.id] = true;
+      if (MeetingStore.isReady() && assignments[r.id]) {
+        MeetingStore.saveRoleAssignment(r.id, { ...assignments[r.id], locked: true });
+      }
+    });
     saveState();
     renderBoard();
   }
 
   function unlockAllRoles() {
-    roles.forEach(r => { lockedRoles[r.id] = false; });
+    roles.forEach(r => {
+      lockedRoles[r.id] = false;
+      if (MeetingStore.isReady() && assignments[r.id]) {
+        MeetingStore.saveRoleAssignment(r.id, { ...assignments[r.id], locked: false });
+      }
+    });
     saveState();
     renderBoard();
   }
@@ -1308,6 +1321,7 @@
       if (btn) { btn.textContent = isLocked ? '🔒' : '🔓'; btn.classList.toggle('is-locked', isLocked); btn.title = isLocked ? 'Unlock assignment' : 'Lock assignment'; }
       row.classList.toggle('school-row-locked', isLocked);
     }
+    MeetingStore.saveSchoolLocked(schoolId, lockedSchools[schoolId]);
     saveState();
   }
 
@@ -1322,6 +1336,7 @@
         if (btn) { btn.textContent = '🔒'; btn.classList.add('is-locked'); btn.title = 'Unlock assignment'; }
         row.classList.add('school-row-locked');
       }
+      MeetingStore.saveSchoolLocked(sid, true);
     });
     saveState();
   }
@@ -1337,6 +1352,7 @@
         if (btn) { btn.textContent = '🔓'; btn.classList.remove('is-locked'); btn.title = 'Lock assignment'; }
         row.classList.remove('school-row-locked');
       }
+      MeetingStore.saveSchoolLocked(sid, false);
     });
     saveState();
   }
@@ -1438,16 +1454,25 @@
   // ── Load saved data from Firebase, then render ────────────────────────────
   (async function initFromFirebase() {
     if (MeetingStore.isReady()) {
-      // Restore role assignments
+      // Restore role assignments (including locked state)
       const savedRoles = await MeetingStore.loadRoleAssignmentsOnce();
       Object.keys(savedRoles).forEach(roleId => {
-        if (assignments[roleId]) Object.assign(assignments[roleId], savedRoles[roleId]);
+        if (assignments[roleId]) {
+          Object.assign(assignments[roleId], savedRoles[roleId]);
+          if (savedRoles[roleId].locked) lockedRoles[roleId] = true;
+        }
       });
 
       // Restore school assignments
       const savedSchools = await MeetingStore.loadSchoolAssignmentsOnce();
       Object.keys(savedSchools).forEach(slug => {
         if (savedSchools[slug]) schoolAssignments[slug] = savedSchools[slug];
+      });
+
+      // Restore school lock states
+      const savedSchoolLocks = await MeetingStore.loadSchoolLockedOnce();
+      Object.keys(savedSchoolLocks).forEach(slug => {
+        if (savedSchoolLocks[slug]) lockedSchools[slug] = true;
       });
 
       // Restore parking lot (replace static seed items if Firebase has data)
