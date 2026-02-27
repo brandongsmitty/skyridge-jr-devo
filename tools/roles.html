@@ -201,7 +201,23 @@
   .final-note p:last-child { margin-bottom:0; }
   .footer { text-align:center; font-size:12px; color:var(--gray-light); margin-top:32px; }
   .footer strong { color:var(--orange); }
+
+  /* ── PRIMARY OWNER BADGE (live from Tracker) ── */
+  .primary-owner-tag {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+    background: var(--gray-bg); border: 1px solid var(--gray-line);
+    color: var(--gray-light); border-radius: 3px; padding: 3px 9px;
+    white-space: nowrap;
+  }
+  .primary-owner-tag.has-owner {
+    background: var(--orange-pale); border-color: var(--orange-mid); color: var(--orange);
+  }
 </style>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+<script src="../assets/js/firebase-config.js"></script>
+<script src="../assets/js/meeting-store.js"></script>
 </head>
 <body>
 
@@ -212,11 +228,10 @@
       Skyridge Jr Devo
     </a>
     <a href="../index.html" class="site-nav-link">Home</a>
-    <a href="agenda.html" class="site-nav-link">Agenda</a>
+    <a href="agenda.html" class="site-nav-link">Agendas</a>
     <a href="roles.html" class="site-nav-link active">Roles</a>
-    <a href="worksheet.html" class="site-nav-link">Worksheet</a>
     <a href="tracker.html" class="site-nav-link">Tracker</a>
-    <a href="meeting.html" class="site-nav-link">Meeting</a>
+    <a href="meeting.html" class="site-nav-link">Meetings</a>
   </div>
 </nav>
 
@@ -330,7 +345,41 @@
 
     document.getElementById('roles-container').innerHTML = html;
 
+    // Inject primary owners live from Firebase Tracker
+    MeetingStore.init();
+    if (MeetingStore.isReady()) {
+      MeetingStore.onRoleAssignments(assignments => {
+        roles.forEach((role, idx) => {
+          const roleId = ROLE_NAME_TO_ID[role.name];
+          if (!roleId) return;
+          const asgn = assignments[roleId];
+          const card = document.getElementById(`role-${idx}`);
+          if (!card) return;
+          const ownerEl = card.querySelector('.primary-owner-tag');
+          if (!ownerEl) return;
+          const owner = asgn && asgn.primary;
+          ownerEl.textContent = owner ? `Lead: ${owner}` : 'Unassigned';
+          ownerEl.classList.toggle('has-owner', !!owner);
+        });
+      });
+    }
+
   }).catch(() => {});
+
+  // Role name → Firebase ID (must match tracker.html and meeting.html)
+  const ROLE_NAME_TO_ID = {
+    'Practice Planning & Skills Lead':  'practice',
+    'Ride Leader Coordinator':          'rideLeader',
+    'Race Weekend Captain':             'race',
+    'Communication & Culture Lead':     'comm',
+    'Registration & Roster Manager':    'roster',
+    'Ride Group Coordinator':           'groups',
+    'Safety & First Aid Lead':          'safety',
+    'Finance / Treasurer':              'finance',
+    'Equipment & Gear Manager':         'equipment',
+    'Fundraising & Sponsorship Lead':   'fundraising',
+    'GRiT Coach Lead':                  'grit',
+  };
 
   function renderRoleCard(role, globalIndex, isRec) {
     const numStr = String(globalIndex + 1).padStart(2, '0');
@@ -355,6 +404,7 @@
           <div class="role-title-wrap">
             <div class="role-title">${role.name}</div>
           </div>
+          <div class="primary-owner-tag">Unassigned</div>
           <div class="${badgeClass}">${badgeLabel}</div>
         </div>
         <div class="role-body">

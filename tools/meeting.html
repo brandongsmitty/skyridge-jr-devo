@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Skyridge Jr Devo — Role Assignment Meeting</title>
+<title>Skyridge Jr Devo — Meetings</title>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/css/shared.css">
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
@@ -105,7 +105,7 @@
     background: var(--white);
     border-bottom: 1px solid var(--gray-line);
     position: sticky;
-    top: 46px;
+    top: 84px; /* 46px site-nav + ~38px meeting-switcher */
     z-index: 100;
     box-shadow: 0 2px 6px rgba(0,0,0,0.06);
   }
@@ -463,6 +463,140 @@
     opacity: 0; transition: all 0.3s; z-index: 9999; pointer-events: none;
   }
   .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  /* ── MEETING SWITCHER (outer: Coach vs Parent) ── */
+  .meeting-switcher {
+    background: #111;
+    border-bottom: 1px solid #2a2a2a;
+    position: sticky;
+    top: 46px;
+    z-index: 200;
+  }
+  .meeting-switcher-inner {
+    display: flex;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 32px;
+    gap: 0;
+  }
+  .msw {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px; font-weight: 700;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    padding: 11px 20px;
+    background: transparent; border: none;
+    border-bottom: 2px solid transparent;
+    color: #666; cursor: pointer;
+    transition: color 0.15s, border-color 0.15s;
+    white-space: nowrap;
+  }
+  .msw:hover { color: var(--orange-light); }
+  .msw.active { color: var(--orange); border-bottom-color: var(--orange); }
+
+  /* ── TOP-LEVEL PAGES ── */
+  .top-page { display: none; }
+  .top-page.active { display: block; }
+
+  /* ── PARENT KICKOFF TAB ── */
+  .parent-header {
+    background: linear-gradient(135deg, #111 0%, #1a1a1a 60%, #2a1500 100%);
+    border-bottom: 3px solid var(--orange);
+    padding: 36px 40px 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .parent-header::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 220px; height: 220px;
+    border: 30px solid rgba(242,106,27,0.08);
+    border-radius: 50%;
+  }
+  .parent-header-inner { max-width: 1200px; margin: 0 auto; position: relative; }
+  .parent-header-eyebrow {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--orange); margin-bottom: 6px;
+  }
+  .parent-header-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 32px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase;
+    color: #F5F0EB; line-height: 1.1;
+  }
+  .parent-header-title span { color: var(--orange); }
+  .parent-header-sub { font-size: 13px; color: #888; margin-top: 6px; }
+  .parent-header-meta {
+    display: flex; gap: 20px; margin-top: 14px; flex-wrap: wrap;
+  }
+  .parent-meta-item {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px; letter-spacing: 0.5px; text-transform: uppercase;
+    color: #aaa;
+  }
+  .parent-meta-item strong { color: #F5F0EB; }
+
+  .parent-page-wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 28px 32px 60px;
+  }
+  .parent-section-head {
+    display: flex; align-items: center; gap: 12px; margin-bottom: 16px; margin-top: 28px;
+  }
+  .parent-section-head:first-child { margin-top: 0; }
+  .parent-section-label {
+    font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 700;
+    letter-spacing: 2.5px; text-transform: uppercase; color: var(--orange); white-space: nowrap;
+  }
+  .parent-section-line { flex: 1; height: 1px; background: var(--gray-line); }
+
+  .parent-notes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 14px;
+    margin-bottom: 28px;
+  }
+  .parent-note-card {
+    background: var(--white);
+    border: 1px solid var(--gray-line);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .parent-note-card-head {
+    background: var(--gray-bg);
+    border-bottom: 1px solid var(--gray-line);
+    padding: 10px 14px;
+  }
+  .parent-note-card-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px; font-weight: 700; letter-spacing: 0.5px;
+    color: var(--gray-dark);
+  }
+  .parent-note-card textarea {
+    display: block; width: 100%; min-height: 70px;
+    padding: 10px 14px; border: none; background: transparent;
+    font-family: 'Barlow', sans-serif; font-size: 13px;
+    color: var(--gray-dark); resize: vertical; line-height: 1.5;
+  }
+  .parent-note-card textarea:focus { outline: none; background: #fdf9f5; }
+  .parent-note-card textarea::placeholder { color: #bbb; }
+
+  .canva-embed-wrap {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    border-radius: 6px;
+    border: 1px solid var(--gray-line);
+    background: #1a1a1a;
+  }
+  .canva-embed-wrap iframe {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    border: none;
+  }
 </style>
 </head>
 <body>
@@ -474,13 +608,21 @@
       Skyridge Jr Devo
     </a>
     <a href="../index.html" class="site-nav-link">Home</a>
-    <a href="agenda.html" class="site-nav-link">Agenda</a>
+    <a href="agenda.html" class="site-nav-link">Agendas</a>
     <a href="roles.html" class="site-nav-link">Roles</a>
-    <a href="worksheet.html" class="site-nav-link">Worksheet</a>
     <a href="tracker.html" class="site-nav-link">Tracker</a>
-    <a href="meeting.html" class="site-nav-link active">Meeting</a>
+    <a href="meeting.html" class="site-nav-link active">Meetings</a>
   </div>
 </nav>
+
+<div class="meeting-switcher no-print">
+  <div class="meeting-switcher-inner">
+    <button class="msw active" onclick="switchTopMeeting('coach')" id="msw-coach">🎿 Coach Role Assignment &amp; Kickoff</button>
+    <button class="msw" onclick="switchTopMeeting('parent')" id="msw-parent">🎉 Parent / Rider Kickoff</button>
+  </div>
+</div>
+
+<div id="top-coach" class="top-page active">
 
 <div class="header">
   <div class="header-inner">
@@ -987,28 +1129,28 @@
           <td class="school-name">Liberty Hills</td>
           <td class="school-type t-elem">Elem.</td>
           <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-          <td class="school-assign-cell"><select class="school-select" onchange="handleSchoolChange(this)" data-school="liberty-hills"><option value="">— Unassigned —</option><option>Brandon</option><option>Brad</option><option>Diane</option><option>Jon</option><option>Kathy</option><option>Devan</option><option>Catharine</option></select></td>
+          <td class="school-assign-cell"><select class="school-select" onchange="handleSchoolChange(this)" data-school="liberty-hills"><option value="">— Unassigned —</option><option>Brandon</option><option>Brad</option><option>Diane</option><option>Jon</option><option>Kathy</option><option>Jenae</option><option>Devan</option><option>Catharine</option></select></td>
           <td><button class="school-lock-btn" onclick="toggleSchoolLock('liberty-hills')" title="Lock assignment">🔓</button></td>
         </tr>
         <tr id="sr-fox-hollow">
           <td class="school-name">Fox Hollow</td>
           <td class="school-type t-elem">Elem.</td>
           <td></td><td class="check">✓</td><td></td><td></td><td></td><td></td><td></td>
-          <td class="school-assign-cell"><select class="school-select" onchange="handleSchoolChange(this)" data-school="fox-hollow"><option value="">— Unassigned —</option><option>Brandon</option><option>Brad</option><option>Diane</option><option>Jon</option><option>Kathy</option><option>Devan</option><option>Catharine</option></select></td>
+          <td class="school-assign-cell"><select class="school-select" onchange="handleSchoolChange(this)" data-school="fox-hollow"><option value="">— Unassigned —</option><option>Brandon</option><option>Brad</option><option>Diane</option><option>Jon</option><option>Kathy</option><option>Jenae</option><option>Devan</option><option>Catharine</option></select></td>
           <td><button class="school-lock-btn" onclick="toggleSchoolLock('fox-hollow')" title="Lock assignment">🔓</button></td>
         </tr>
         <tr id="sr-traverse">
           <td class="school-name">Traverse Mountain</td>
           <td class="school-type t-elem">Elem.</td>
           <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-          <td class="school-assign-cell"><select class="school-select" onchange="handleSchoolChange(this)" data-school="traverse"><option value="">— Unassigned —</option><option>Brandon</option><option>Brad</option><option>Diane</option><option>Jon</option><option>Kathy</option><option>Devan</option><option>Catharine</option></select></td>
+          <td class="school-assign-cell"><select class="school-select" onchange="handleSchoolChange(this)" data-school="traverse"><option value="">— Unassigned —</option><option>Brandon</option><option>Brad</option><option>Diane</option><option>Jon</option><option>Kathy</option><option>Jenae</option><option>Devan</option><option>Catharine</option></select></td>
           <td><button class="school-lock-btn" onclick="toggleSchoolLock('traverse')" title="Lock assignment">🔓</button></td>
         </tr>
         <tr id="sr-belmont">
           <td class="school-name">Belmont</td>
           <td class="school-type t-elem">Elem.</td>
           <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-          <td class="school-assign-cell"><select class="school-select" onchange="handleSchoolChange(this)" data-school="belmont"><option value="">— Unassigned —</option><option>Brandon</option><option>Brad</option><option>Diane</option><option>Jon</option><option>Kathy</option><option>Devan</option><option>Catharine</option></select></td>
+          <td class="school-assign-cell"><select class="school-select" onchange="handleSchoolChange(this)" data-school="belmont"><option value="">— Unassigned —</option><option>Brandon</option><option>Brad</option><option>Diane</option><option>Jon</option><option>Kathy</option><option>Jenae</option><option>Devan</option><option>Catharine</option></select></td>
           <td><button class="school-lock-btn" onclick="toggleSchoolLock('belmont')" title="Lock assignment">🔓</button></td>
         </tr>
         <tr id="sr-eaglecrest">
@@ -1020,7 +1162,7 @@
           <td class="check" style="color:var(--orange)">✓</td>
           <td class="check" style="color:var(--orange)">✓</td>
           <td></td>
-          <td class="school-assign-cell"><select class="school-select" onchange="handleSchoolChange(this)" data-school="eaglecrest"><option value="">— Unassigned —</option><option>Brandon</option><option>Brad</option><option>Diane</option><option>Jon</option><option>Kathy</option><option>Devan</option><option>Catharine</option></select></td>
+          <td class="school-assign-cell"><select class="school-select" onchange="handleSchoolChange(this)" data-school="eaglecrest"><option value="">— Unassigned —</option><option>Brandon</option><option>Brad</option><option>Diane</option><option>Jon</option><option>Kathy</option><option>Jenae</option><option>Devan</option><option>Catharine</option></select></td>
           <td><button class="school-lock-btn" onclick="toggleSchoolLock('eaglecrest')" title="Lock assignment">🔓</button></td>
         </tr>
         <tr id="sr-segolilly">
@@ -1032,7 +1174,7 @@
           <td class="check" style="color:var(--orange)">✓</td>
           <td></td>
           <td class="check pta-star" style="color:var(--orange)" title="Knows principal + teachers">✓⭐</td>
-          <td class="school-assign-cell"><select class="school-select" onchange="handleSchoolChange(this)" data-school="segolilly"><option value="">— Unassigned —</option><option>Brandon</option><option>Brad</option><option>Diane</option><option>Jon</option><option>Kathy</option><option>Devan</option><option>Catharine</option></select></td>
+          <td class="school-assign-cell"><select class="school-select" onchange="handleSchoolChange(this)" data-school="segolilly"><option value="">— Unassigned —</option><option>Brandon</option><option>Brad</option><option>Diane</option><option>Jon</option><option>Kathy</option><option>Jenae</option><option>Devan</option><option>Catharine</option></select></td>
           <td><button class="school-lock-btn" onclick="toggleSchoolLock('segolilly')" title="Lock assignment">🔓</button></td>
         </tr>
         <tr id="sr-freedom">
@@ -1043,7 +1185,7 @@
           <td></td>
           <td class="check pta-star" style="color:var(--orange)">✓⭐</td>
           <td></td><td></td>
-          <td class="school-assign-cell"><select class="school-select" onchange="handleSchoolChange(this)" data-school="freedom"><option value="">— Unassigned —</option><option>Brandon</option><option>Brad</option><option>Diane</option><option>Jon</option><option>Kathy</option><option>Devan</option><option>Catharine</option></select></td>
+          <td class="school-assign-cell"><select class="school-select" onchange="handleSchoolChange(this)" data-school="freedom"><option value="">— Unassigned —</option><option>Brandon</option><option>Brad</option><option>Diane</option><option>Jon</option><option>Kathy</option><option>Jenae</option><option>Devan</option><option>Catharine</option></select></td>
           <td><button class="school-lock-btn" onclick="toggleSchoolLock('freedom')" title="Lock assignment">🔓</button></td>
         </tr>
         <tr id="sr-lehi-jr">
@@ -1055,7 +1197,7 @@
           <td class="check" style="color:var(--orange)">✓</td>
           <td></td>
           <td class="check pta-star" style="color:var(--green)" title="PE teacher here — strongest connection">✓⭐⭐</td>
-          <td class="school-assign-cell"><select class="school-select" onchange="handleSchoolChange(this)" data-school="lehi-jr"><option value="">— Unassigned —</option><option>Brandon</option><option>Brad</option><option>Diane</option><option>Jon</option><option>Kathy</option><option>Devan</option><option>Catharine</option></select></td>
+          <td class="school-assign-cell"><select class="school-select" onchange="handleSchoolChange(this)" data-school="lehi-jr"><option value="">— Unassigned —</option><option>Brandon</option><option>Brad</option><option>Diane</option><option>Jon</option><option>Kathy</option><option>Jenae</option><option>Devan</option><option>Catharine</option></select></td>
           <td><button class="school-lock-btn" onclick="toggleSchoolLock('lehi-jr')" title="Lock assignment">🔓</button></td>
         </tr>
         <tr id="sr-viewpoint">
@@ -1064,7 +1206,7 @@
           <td></td><td></td><td></td><td></td><td></td>
           <td class="check">✓</td>
           <td class="check pta-star" title="Friends with all PE teachers">✓⭐</td>
-          <td class="school-assign-cell"><select class="school-select" onchange="handleSchoolChange(this)" data-school="viewpoint"><option value="">— Unassigned —</option><option>Brandon</option><option>Brad</option><option>Diane</option><option>Jon</option><option>Kathy</option><option>Devan</option><option>Catharine</option></select></td>
+          <td class="school-assign-cell"><select class="school-select" onchange="handleSchoolChange(this)" data-school="viewpoint"><option value="">— Unassigned —</option><option>Brandon</option><option>Brad</option><option>Diane</option><option>Jon</option><option>Kathy</option><option>Jenae</option><option>Devan</option><option>Catharine</option></select></td>
           <td><button class="school-lock-btn" onclick="toggleSchoolLock('viewpoint')" title="Lock assignment">🔓</button></td>
         </tr>
       </tbody>
@@ -1147,6 +1289,50 @@
 
 </div><!-- /summary -->
 
+</div><!-- /top-coach -->
+
+<!-- ─────────────────────────────────────────────── -->
+<!-- PARENT / RIDER KICKOFF                          -->
+<!-- ─────────────────────────────────────────────── -->
+<div id="top-parent" class="top-page">
+
+  <div class="parent-header">
+    <div class="parent-header-inner">
+      <div class="parent-header-eyebrow">Parent &amp; Rider Meeting &nbsp;·&nbsp; 2026 Season</div>
+      <div class="parent-header-title">Parent / <span>Rider</span> Kickoff</div>
+      <div class="parent-header-sub">Skyridge Jr Devo &nbsp;·&nbsp; Utah High School Cycling League &nbsp;·&nbsp; NICA</div>
+      <div class="parent-header-meta">
+        <div class="parent-meta-item"><strong id="pkdate">Thursday, March 26, 2026</strong></div>
+        <div class="parent-meta-item" id="pktime">7:00–8:00 PM MST</div>
+        <div class="parent-meta-item" id="pklocation">Lehi Jr High Auditorium</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="parent-page-wrap">
+
+    <div class="parent-section-head">
+      <div class="parent-section-label">Presenter Notes</div>
+      <div class="parent-section-line"></div>
+    </div>
+    <div class="parent-notes-grid" id="parent-notes-grid">
+      <!-- Cards injected by JS from season.json parentKickoff.sections -->
+    </div>
+
+    <div class="parent-section-head">
+      <div class="parent-section-label">Presentation</div>
+      <div class="parent-section-line"></div>
+    </div>
+    <div class="canva-embed-wrap">
+      <iframe id="parent-canva-embed"
+        src="https://www.canva.com/design/DAHAxXW_Kik/x5pVBCJiP5I7oXDPhFdlqg/view?embed"
+        allowfullscreen loading="lazy"
+        title="2026 Season Kickoff Presentation"></iframe>
+    </div>
+
+  </div>
+</div><!-- /top-parent -->
+
 <!-- ── COPY SUMMARY MODAL ── -->
 <div class="modal-overlay" id="copyModal">
   <div class="modal">
@@ -1186,6 +1372,8 @@
       demand: [{ coach: 'Devan', rank: 3, label: '#3' },{ coach: 'Jon', rank: 'int', label: 'INT' }], status: 'open' },
     { id: 'fundraising', num: '10', name: 'Fundraising & Sponsorship Lead', essential: false,
       demand: [{ coach: 'Jon', rank: 'int', label: 'INT' }], status: 'open' },
+    { id: 'grit', num: '11', name: 'GRiT Coach Lead', essential: false,
+      demand: [{ coach: 'Diane', rank: 1, label: '#1' }], status: 'open' },
   ];
 
   const defaultAssignments = {
@@ -1199,6 +1387,7 @@
     finance:     { primary: 'Brad',      backup: 'Brandon', notes: '' },
     equipment:   { primary: 'Devan',     backup: 'Jon',     notes: '' },
     fundraising: { primary: 'Jon',       backup: 'Brad',    notes: '' },
+    grit:        { primary: 'Diane',     backup: '',        notes: '' },
   };
   const assignments = {};
   const schoolAssignments = {};
@@ -1563,6 +1752,16 @@
     if (id === 'summary') updateSummary();
   }
 
+  // ── Top-level meeting switcher (Coach vs Parent/Rider) ────────────────────
+  function switchTopMeeting(id) {
+    document.querySelectorAll('.top-page').forEach(p => {
+      p.classList.toggle('active', p.id === 'top-' + id);
+    });
+    document.querySelectorAll('.msw').forEach(b => {
+      b.classList.toggle('active', b.id === 'msw-' + id);
+    });
+  }
+
   // ── Load saved data from Firebase, then render ────────────────────────────
   (async function initFromFirebase() {
     if (MeetingStore.isReady()) {
@@ -1613,7 +1812,60 @@
       }
     });
     applySchoolLockStates();
+
+    // ── Build parent kickoff section cards from season.json ──────────────────
+    try {
+      const seasonData = await fetch('../season.json').then(r => r.json());
+      const pk = seasonData.season && seasonData.season.parentKickoff;
+      if (pk && pk.sections) {
+        const grid = document.getElementById('parent-notes-grid');
+        grid.innerHTML = '';
+        pk.sections.forEach(s => {
+          const card = document.createElement('div');
+          card.className = 'parent-note-card';
+          const titleEl = document.createElement('div');
+          titleEl.className = 'parent-note-card-head';
+          const titleInner = document.createElement('div');
+          titleInner.className = 'parent-note-card-title';
+          titleInner.textContent = s.title;
+          titleEl.appendChild(titleInner);
+          const ta = document.createElement('textarea');
+          ta.className = 'parent-note-input';
+          ta.dataset.section = s.id;
+          ta.placeholder = 'Presenter notes for ' + s.title + '…';
+          ta.addEventListener('input', () => handleParentNote(s.id, ta.value));
+          card.appendChild(titleEl);
+          card.appendChild(ta);
+          grid.appendChild(card);
+        });
+        if (pk.date) document.getElementById('pkdate').textContent = pk.date;
+        if (pk.time) document.getElementById('pktime').textContent = pk.time;
+        if (pk.location) document.getElementById('pklocation').textContent = pk.location;
+        if (pk.canvaEmbedUrl) document.getElementById('parent-canva-embed').src = pk.canvaEmbedUrl;
+      }
+    } catch(e) { console.warn('Parent kickoff load failed', e); }
+
+    // ── Load and sync parent kickoff notes from Firebase ─────────────────────
+    if (MeetingStore.isReady()) {
+      const parentNotes = await MeetingStore.loadParentNotesOnce();
+      document.querySelectorAll('.parent-note-input').forEach(ta => {
+        const sid = ta.dataset.section;
+        if (parentNotes[sid]) ta.value = parentNotes[sid];
+      });
+      MeetingStore.onParentNotes(notes => {
+        document.querySelectorAll('.parent-note-input').forEach(ta => {
+          const sid = ta.dataset.section;
+          if (notes[sid] !== undefined) ta.value = notes[sid];
+        });
+      });
+    }
   })();
+
+  function handleParentNote(sectionId, value) {
+    if (MeetingStore.isReady()) {
+      MeetingStore.saveParentNoteDebounced(sectionId, value);
+    }
+  }
 </script>
 </body>
 </html>

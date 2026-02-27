@@ -185,6 +185,30 @@ const MeetingStore = (() => {
     });
   }
 
+  // ── Parent/Rider Kickoff Presenter Notes ─────────────────────────────────
+  // Stored as: parent_kickoff_notes/{sectionId} = string
+
+  function saveParentNote(sectionId, text) {
+    if (!isReady()) return;
+    ref(`parent_kickoff_notes/${sectionId}`).set(text || '');
+  }
+
+  function saveParentNoteDebounced(sectionId, text) {
+    debounce(`pnote_${sectionId}`, () => saveParentNote(sectionId, text));
+  }
+
+  function onParentNotes(callback) {
+    if (!isReady()) return;
+    ref('parent_kickoff_notes').on('value', snap => {
+      callback(snap.val() || {});
+    });
+  }
+
+  function loadParentNotesOnce() {
+    if (!isReady()) return Promise.resolve({});
+    return ref('parent_kickoff_notes').once('value').then(snap => snap.val() || {});
+  }
+
   // ── One-time loads (Promises) — used by meeting.html init ─────────────────
   function loadRoleAssignmentsOnce() {
     if (!isReady()) return Promise.resolve({});
@@ -230,5 +254,9 @@ const MeetingStore = (() => {
     savePostMeeting,
     savePostMeetingDebounced,
     onPostMeeting,
+    saveParentNote,
+    saveParentNoteDebounced,
+    onParentNotes,
+    loadParentNotesOnce,
   };
 })();

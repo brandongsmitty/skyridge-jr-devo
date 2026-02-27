@@ -355,11 +355,10 @@
       Skyridge Jr Devo
     </a>
     <a href="index.html" class="site-nav-link active">Home</a>
-    <a href="tools/agenda.html" class="site-nav-link">Agenda</a>
+    <a href="tools/agenda.html" class="site-nav-link">Agendas</a>
     <a href="tools/roles.html" class="site-nav-link">Roles</a>
-    <a href="tools/worksheet.html" class="site-nav-link">Worksheet</a>
     <a href="tools/tracker.html" class="site-nav-link">Tracker</a>
-    <a href="tools/meeting.html" class="site-nav-link">Meeting</a>
+    <a href="tools/meeting.html" class="site-nav-link">Meetings</a>
   </div>
 </nav>
 
@@ -384,7 +383,7 @@
   <!-- KICKOFF MEETING -->
   <div class="kickoff-card" id="kickoff-card" style="display:none;">
     <div>
-      <div class="kickoff-label">Next Meeting — Coaching Staff Kickoff</div>
+      <div class="kickoff-label" id="kickoff-label">Next Meeting</div>
       <div class="kickoff-date" id="kickoff-date"></div>
       <div class="kickoff-details">
         <div class="kickoff-detail">
@@ -410,21 +409,15 @@
   <div class="tool-grid">
     <a href="tools/agenda.html" class="tool-card">
       <div class="tool-card-icon">📅</div>
-      <div class="tool-card-title">Kickoff Agenda</div>
-      <div class="tool-card-desc" id="agenda-desc">90-minute agenda for the coaching staff kickoff meeting. Segment-by-segment guide with timing and talking points.</div>
-      <div class="tool-card-meta" id="agenda-meta">View agenda &rarr;</div>
+      <div class="tool-card-title">Agendas</div>
+      <div class="tool-card-desc" id="agenda-desc">Coach Kickoff &amp; Parent/Rider Kickoff agendas. Segment-by-segment guides with timing, talking points, and presentation slides.</div>
+      <div class="tool-card-meta" id="agenda-meta">View agendas &rarr;</div>
     </a>
     <a href="tools/roles.html" class="tool-card">
       <div class="tool-card-icon">🏔</div>
       <div class="tool-card-title">Role Descriptions</div>
       <div class="tool-card-desc">Detailed descriptions for all coaching roles — what each one owns, what it looks like in practice, and how to get started.</div>
       <div class="tool-card-meta" id="roles-meta">View all roles &rarr;</div>
-    </a>
-    <a href="tools/worksheet.html" class="tool-card">
-      <div class="tool-card-icon">📋</div>
-      <div class="tool-card-title">Coach Worksheet</div>
-      <div class="tool-card-desc">Complete before the kickoff meeting. Share your availability, role preferences, and school outreach interests.</div>
-      <div class="tool-card-meta">For all coaches &rarr;</div>
     </a>
     <a href="tools/tracker.html" class="tool-card">
       <div class="tool-card-icon">📊</div>
@@ -434,8 +427,8 @@
     </a>
     <a href="tools/meeting.html" class="tool-card">
       <div class="tool-card-icon">🗂</div>
-      <div class="tool-card-title">Assignment Meeting</div>
-      <div class="tool-card-desc">Head coach facilitation tool for the role assignment meeting. Coach overview, conflict map, live assignment board, school matrix, and parking lot.</div>
+      <div class="tool-card-title">Meetings</div>
+      <div class="tool-card-desc">Head coach facilitation tools for the Coach Role Assignment Kickoff and the Parent/Rider Kickoff. Live assignment board, presenter notes, and more.</div>
       <div class="tool-card-meta">Head coach only &rarr;</div>
     </a>
   </div>
@@ -464,6 +457,7 @@
     // Kickoff card
     const km = s.kickoffMeeting;
     if (km && km.date) {
+      document.getElementById('kickoff-label').textContent = `Next Meeting — ${km.label || 'Coaching Staff Kickoff'}`;
       document.getElementById('kickoff-date').textContent = km.date;
       document.getElementById('kickoff-time').textContent = km.time || '—';
       const loc = [km.location, km.locationDetail].filter(Boolean).join(' · ') || '—';

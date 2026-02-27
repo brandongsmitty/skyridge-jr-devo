@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Skyridge Jr Devo — Coaching Staff Kickoff Agenda</title>
+<title>Skyridge Jr Devo — Agendas</title>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/css/shared.css">
 <style>
@@ -363,6 +363,75 @@
   #agenda-segments, #timing-tbody, #materials-list {
     /* populated by JS */
   }
+
+  /* ── AGENDA TABS (two-meeting switcher) ── */
+  .agenda-tabs {
+    background: #1a1a1a;
+    border-bottom: 1px solid #2e2e2e;
+    position: sticky;
+    top: 46px;
+    z-index: 100;
+  }
+  .agenda-tabs-inner {
+    max-width: 960px; margin: 0 auto; padding: 0 24px;
+    display: flex; gap: 0;
+  }
+  .atab {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+    color: #888; padding: 12px 18px; border: none; background: none;
+    border-bottom: 2px solid transparent; cursor: pointer; transition: all 0.15s;
+    white-space: nowrap;
+  }
+  .atab:hover { color: #F5F0EB; }
+  .atab.active { color: #F5F0EB; border-bottom-color: #F26A1B; }
+
+  /* ── AGENDA PAGES ── */
+  .agenda-page { display: none; }
+  .agenda-page.active { display: block; }
+
+  /* ── PARENT KICKOFF PAGE ── */
+  .parent-header {
+    background: var(--black);
+    padding: 36px 40px 30px;
+    position: relative; overflow: hidden; margin-bottom: 32px;
+  }
+  .parent-header::after {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--orange) 0%, var(--orange-light) 100%);
+  }
+  .parent-header-inner { max-width: 780px; margin: 0 auto; padding: 0 20px; }
+  .parent-meeting-card {
+    background: rgba(242,106,27,0.08);
+    border: 1px solid rgba(242,106,27,0.2);
+    border-radius: 6px;
+    padding: 16px 20px;
+    margin-top: 18px;
+    display: flex; gap: 24px; flex-wrap: wrap;
+  }
+  .parent-meeting-detail { display: flex; flex-direction: column; gap: 2px; }
+  .parent-meeting-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: #888;
+  }
+  .parent-meeting-value { font-size: 14px; color: #F5F0EB; font-weight: 500; }
+  .parent-page-wrap { max-width: 780px; margin: 0 auto; padding: 0 20px 60px; }
+  .canva-section-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--gray-light); margin-bottom: 12px; padding-left: 2px;
+  }
+  .canva-embed-wrap {
+    position: relative; width: 100%; padding-bottom: 56.25%;
+    border-radius: 6px; overflow: hidden;
+    border: 1px solid var(--gray-line);
+    background: #111; margin-bottom: 32px;
+  }
+  .canva-embed-wrap iframe {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    border: none;
+  }
 </style>
 </head>
 <body>
@@ -374,13 +443,23 @@
       Skyridge Jr Devo
     </a>
     <a href="../index.html" class="site-nav-link">Home</a>
-    <a href="agenda.html" class="site-nav-link active">Agenda</a>
+    <a href="agenda.html" class="site-nav-link active">Agendas</a>
     <a href="roles.html" class="site-nav-link">Roles</a>
-    <a href="worksheet.html" class="site-nav-link">Worksheet</a>
     <a href="tracker.html" class="site-nav-link">Tracker</a>
-    <a href="meeting.html" class="site-nav-link">Meeting</a>
+    <a href="meeting.html" class="site-nav-link">Meetings</a>
   </div>
 </nav>
+
+<!-- ── AGENDA TAB SWITCHER ── -->
+<div class="agenda-tabs">
+  <div class="agenda-tabs-inner">
+    <button class="atab active" onclick="switchAgenda('coach')" id="atab-coach">🎿 Coach Kickoff</button>
+    <button class="atab" onclick="switchAgenda('parent')" id="atab-parent">🎉 Parent / Rider Kickoff</button>
+  </div>
+</div>
+
+<!-- ── COACH KICKOFF AGENDA ── -->
+<div id="agenda-coach" class="agenda-page active">
 
 <div class="header">
   <div class="header-accent"></div>
@@ -439,6 +518,51 @@
   </div>
 
 </div>
+
+</div><!-- /agenda-coach -->
+
+<!-- ── PARENT/RIDER KICKOFF AGENDA ── -->
+<div id="agenda-parent" class="agenda-page">
+
+  <div class="parent-header">
+    <div class="parent-header-inner">
+      <div class="header-eyebrow" id="parent-eyebrow">2026 Season · Parent &amp; Rider Kickoff</div>
+      <div class="header-title">Skyridge <span>Jr Devo</span></div>
+      <div class="header-sub">Parent / Rider Kickoff Meeting &nbsp;·&nbsp; NICA Utah High School Cycling League</div>
+      <div class="parent-meeting-card">
+        <div class="parent-meeting-detail">
+          <span class="parent-meeting-label">Date</span>
+          <span class="parent-meeting-value" id="parent-date">Thursday, March 26, 2026</span>
+        </div>
+        <div class="parent-meeting-detail">
+          <span class="parent-meeting-label">Time</span>
+          <span class="parent-meeting-value" id="parent-time">7:00–8:00 PM MST</span>
+        </div>
+        <div class="parent-meeting-detail">
+          <span class="parent-meeting-label">Location</span>
+          <span class="parent-meeting-value" id="parent-location">Lehi Jr High Auditorium</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="parent-page-wrap">
+    <div class="canva-section-label">2026 Season Kickoff Presentation</div>
+    <div class="canva-embed-wrap">
+      <iframe
+        id="parent-canva-embed"
+        src="https://www.canva.com/design/DAHAxXW_Kik/x5pVBCJiP5I7oXDPhFdlqg/view?embed"
+        allowfullscreen
+        loading="lazy"
+        title="2026 Season Kickoff Presentation"
+      ></iframe>
+    </div>
+    <div class="footer" id="parent-footer">
+      <strong>Skyridge Jr Devo</strong> &nbsp;·&nbsp; NICA Utah High School Cycling League &nbsp;·&nbsp; 2026 Season
+    </div>
+  </div>
+
+</div><!-- /agenda-parent -->
 
 <script src="../assets/js/season-loader.js"></script>
 <script>
@@ -573,7 +697,28 @@
     document.getElementById('footer').innerHTML =
       `<strong>${s.teamName}</strong> &nbsp;·&nbsp; ${s.league} &nbsp;·&nbsp; ${s.year} Season`;
 
+    // Populate parent kickoff tab from season.json
+    const pk = data.season.parentKickoff;
+    if (pk) {
+      if (pk.date)     document.getElementById('parent-date').textContent = pk.date;
+      if (pk.time)     document.getElementById('parent-time').textContent = pk.time;
+      if (pk.location) document.getElementById('parent-location').textContent = pk.location;
+      if (pk.canvaEmbedUrl) document.getElementById('parent-canva-embed').src = pk.canvaEmbedUrl;
+      document.getElementById('parent-eyebrow').textContent = `${s.year} Season · Parent & Rider Kickoff`;
+      document.getElementById('parent-footer').innerHTML =
+        `<strong>${s.teamName}</strong> &nbsp;·&nbsp; ${s.league} &nbsp;·&nbsp; ${s.year} Season`;
+    }
+
   }).catch(() => {});
+
+  function switchAgenda(id) {
+    document.querySelectorAll('.agenda-page').forEach(p => {
+      p.classList.toggle('active', p.id === 'agenda-' + id);
+    });
+    document.querySelectorAll('.atab').forEach(b => {
+      b.classList.toggle('active', b.id === 'atab-' + id);
+    });
+  }
 </script>
 </body>
 </html>

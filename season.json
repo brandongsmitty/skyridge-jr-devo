@@ -10,9 +10,10 @@
       "phone": ""
     },
     "kickoffMeeting": {
-      "date": "Wednesday, February 25, 2026",
-      "time": "8:00–9:30 PM",
-      "location": "Coach Tap Garage",
+      "label": "Parent/Rider Kickoff",
+      "date": "Thursday, March 26, 2026",
+      "time": "7:00–8:00 PM MST",
+      "location": "Lehi Jr High Auditorium",
       "locationDetail": ""
     },
     "keyDates": [
@@ -24,6 +25,21 @@
       { "label": "Race 3 — Panguitch", "date": "Sep 26, 2026" },
       { "label": "End of Season", "date": "Oct 2026" }
     ],
+    "parentKickoff": {
+      "date": "Thursday, March 26, 2026",
+      "time": "7:00–8:00 PM MST",
+      "location": "Lehi Jr High Auditorium",
+      "canvaEmbedUrl": "https://www.canva.com/design/DAHAxXW_Kik/x5pVBCJiP5I7oXDPhFdlqg/view?embed",
+      "sections": [
+        { "id": "welcome",      "title": "Welcome & Introductions" },
+        { "id": "overview",     "title": "2026 Season Overview" },
+        { "id": "team",         "title": "Coaching Staff & Team Structure" },
+        { "id": "registration", "title": "Registration & Fees" },
+        { "id": "practices",    "title": "Practice Schedule & Locations" },
+        { "id": "races",        "title": "Race Calendar" },
+        { "id": "qa",           "title": "Q&A & Next Steps" }
+      ]
+    },
     "races": [
       {
         "number": 1,
@@ -175,6 +191,18 @@
         "You'll develop sponsor relationships, create sponsorship packages, organize fundraising events, and pursue grants."
       ],
       "collaborators": ["Finance/Treasurer", "Communication Lead", "Head Coach"]
+    },
+    {
+      "id": "grit-coach",
+      "name": "GRiT Coach Lead",
+      "tier": "recommended",
+      "timeCommitment": "~2–6 hrs/month during season",
+      "summary": "Recruit and support girls and female coaches through NICA's GRiT program.",
+      "description": [
+        "The GRiT Coach Lead reports to the League GRiT Coordinator and champions inclusivity on the team. You'll plan or facilitate at least one recruitment activity per season at the team or regional level, serve as the primary contact for all GRiT-related matters, and relay updates from league coordinators to the coaching staff.",
+        "Day-to-day, this role is about making practices, rides, and events genuinely welcoming to girls and female coaches — culturally, not just procedurally. Optional paths include attending leadership training, mentoring other coaches on GRiT activities, and sharing event content with league coordinators. Requires NICA Level 1+ license."
+      ],
+      "collaborators": ["League GRiT Coordinator", "Head Coach", "Comm. & Culture Lead", "All Coaches"]
     }
   ],
   "schools": {
