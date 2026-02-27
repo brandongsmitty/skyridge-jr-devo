@@ -453,13 +453,56 @@
 <!-- ── AGENDA TAB SWITCHER ── -->
 <div class="agenda-tabs">
   <div class="agenda-tabs-inner">
-    <button class="atab active" onclick="switchAgenda('coach')" id="atab-coach">🎿 Coach Kickoff</button>
-    <button class="atab" onclick="switchAgenda('parent')" id="atab-parent">🎉 Parent / Rider Kickoff</button>
+    <button class="atab active" onclick="switchAgenda('parent')" id="atab-parent">🎉 Parent / Rider Kickoff</button>
+    <button class="atab" onclick="switchAgenda('coach')" id="atab-coach">🎿 Coach Kickoff</button>
   </div>
 </div>
 
+<!-- ── PARENT/RIDER KICKOFF AGENDA ── -->
+<div id="agenda-parent" class="agenda-page active">
+
+  <div class="parent-header">
+    <div class="parent-header-inner">
+      <div class="header-eyebrow" id="parent-eyebrow">2026 Season · Parent &amp; Rider Kickoff</div>
+      <div class="header-title">Skyridge <span>Jr Devo</span></div>
+      <div class="header-sub">Parent / Rider Kickoff Meeting &nbsp;·&nbsp; NICA Utah High School Cycling League</div>
+      <div class="parent-meeting-card">
+        <div class="parent-meeting-detail">
+          <span class="parent-meeting-label">Date</span>
+          <span class="parent-meeting-value" id="parent-date">Thursday, March 26, 2026</span>
+        </div>
+        <div class="parent-meeting-detail">
+          <span class="parent-meeting-label">Time</span>
+          <span class="parent-meeting-value" id="parent-time">7:00–8:00 PM MST</span>
+        </div>
+        <div class="parent-meeting-detail">
+          <span class="parent-meeting-label">Location</span>
+          <span class="parent-meeting-value" id="parent-location">Lehi Jr High Auditorium</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="parent-page-wrap">
+    <div class="canva-section-label">2026 Season Kickoff Presentation</div>
+    <div class="canva-embed-wrap">
+      <iframe
+        id="parent-canva-embed"
+        src="https://www.canva.com/design/DAHAxXW_Kik/x5pVBCJiP5I7oXDPhFdlqg/view?embed"
+        allowfullscreen
+        loading="lazy"
+        title="2026 Season Kickoff Presentation"
+      ></iframe>
+    </div>
+    <div class="footer" id="parent-footer">
+      <strong>Skyridge Jr Devo</strong> &nbsp;·&nbsp; NICA Utah High School Cycling League &nbsp;·&nbsp; 2026 Season
+    </div>
+  </div>
+
+</div><!-- /agenda-parent -->
+
 <!-- ── COACH KICKOFF AGENDA ── -->
-<div id="agenda-coach" class="agenda-page active">
+<div id="agenda-coach" class="agenda-page">
 
 <div class="header">
   <div class="header-accent"></div>
@@ -520,49 +563,6 @@
 </div>
 
 </div><!-- /agenda-coach -->
-
-<!-- ── PARENT/RIDER KICKOFF AGENDA ── -->
-<div id="agenda-parent" class="agenda-page">
-
-  <div class="parent-header">
-    <div class="parent-header-inner">
-      <div class="header-eyebrow" id="parent-eyebrow">2026 Season · Parent &amp; Rider Kickoff</div>
-      <div class="header-title">Skyridge <span>Jr Devo</span></div>
-      <div class="header-sub">Parent / Rider Kickoff Meeting &nbsp;·&nbsp; NICA Utah High School Cycling League</div>
-      <div class="parent-meeting-card">
-        <div class="parent-meeting-detail">
-          <span class="parent-meeting-label">Date</span>
-          <span class="parent-meeting-value" id="parent-date">Thursday, March 26, 2026</span>
-        </div>
-        <div class="parent-meeting-detail">
-          <span class="parent-meeting-label">Time</span>
-          <span class="parent-meeting-value" id="parent-time">7:00–8:00 PM MST</span>
-        </div>
-        <div class="parent-meeting-detail">
-          <span class="parent-meeting-label">Location</span>
-          <span class="parent-meeting-value" id="parent-location">Lehi Jr High Auditorium</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="parent-page-wrap">
-    <div class="canva-section-label">2026 Season Kickoff Presentation</div>
-    <div class="canva-embed-wrap">
-      <iframe
-        id="parent-canva-embed"
-        src="https://www.canva.com/design/DAHAxXW_Kik/x5pVBCJiP5I7oXDPhFdlqg/view?embed"
-        allowfullscreen
-        loading="lazy"
-        title="2026 Season Kickoff Presentation"
-      ></iframe>
-    </div>
-    <div class="footer" id="parent-footer">
-      <strong>Skyridge Jr Devo</strong> &nbsp;·&nbsp; NICA Utah High School Cycling League &nbsp;·&nbsp; 2026 Season
-    </div>
-  </div>
-
-</div><!-- /agenda-parent -->
 
 <script src="../assets/js/season-loader.js"></script>
 <script>
