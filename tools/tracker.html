@@ -811,10 +811,19 @@
         const coachSelect = row.querySelector('.school-coach');
         if (coachSelect && data[slug] !== undefined) coachSelect.value = data[slug] || '';
 
-        const override = cachedSchoolOverrides[slug];
-        if (!override || !override.status) {
-          const badge = row.querySelector('.status-badge');
-          if (badge) applyStatus(badge, data[slug] ? 'filled' : 'open');
+        // Badge logic mirrors role assignments:
+        // locked + coach assigned → always FILLED; otherwise respect override
+        const badge = row.querySelector('.status-badge');
+        if (badge) {
+          const isLocked = row.dataset.schoolLocked === '1';
+          if (isLocked && data[slug]) {
+            applyStatus(badge, 'filled');
+          } else {
+            const override = cachedSchoolOverrides[slug];
+            if (!override || !override.status) {
+              applyStatus(badge, data[slug] ? 'filled' : 'open');
+            }
+          }
         }
       });
       updateProgress();
