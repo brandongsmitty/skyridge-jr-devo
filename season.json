@@ -18,7 +18,10 @@
     },
     "keyDates": [
       { "label": "Coaching Kickoff Meeting", "date": "Feb 25, 2026" },
-      { "label": "NICA Registration Opens", "date": "Apr 1, 2026" },
+      { "label": "Parent/Rider Kickoff", "date": "Mar 26, 2026" },
+      { "label": "NICA Registration Opens", "date": "Mar 30, 2026" },
+      { "label": "Fit Kit Night", "date": "Apr 23, 2026 · 3–6 PM MST" },
+      { "label": "Breakfast and Bike Fit", "date": "May 2, 2026 · 8–10 AM MST" },
       { "label": "Practices Begin", "date": "Mid-May 2026" },
       { "label": "Race 1 — Beaver Mountain", "date": "Aug 22, 2026" },
       { "label": "Race 2 — Richfield", "date": "Sep 5, 2026" },
@@ -73,6 +76,42 @@
   },
   "roles": [
     {
+      "id": "comm-culture-lead",
+      "name": "Communication & Culture Lead",
+      "tier": "essential",
+      "timeCommitment": "3–5 hrs/month",
+      "summary": "Family emails · Social media · Recruiting materials · Team culture.",
+      "description": [
+        "Keeping families informed and engaged, plus building a team culture where character development actually happens.",
+        "You'll handle regular family communications, recruiting materials, social media, and plan team culture moments throughout the season."
+      ],
+      "collaborators": ["Head Coach", "Practice Planning Lead", "Race Weekend Captain", "All Role Owners"]
+    },
+    {
+      "id": "finance-treasurer",
+      "name": "Finance / Treasurer",
+      "tier": "essential",
+      "timeCommitment": "2–4 hrs/month (heavier April–May)",
+      "summary": "Budget & financial reporting · Registration fees · Fundraising coordination.",
+      "description": [
+        "Team budget, registration fees, fundraising coordination, and financial reporting. Every dollar you manage helps get kids on bikes.",
+        "You'll create the season budget, track expenditures, process team fees, handle reimbursements, and deliver a year-end financial report."
+      ],
+      "collaborators": ["Head Coach", "Fundraising Lead", "All Role Owners", "Families"]
+    },
+    {
+      "id": "grit-coach",
+      "name": "GRiT Coach Lead",
+      "tier": "essential",
+      "timeCommitment": "~2–6 hrs/month during season",
+      "summary": "Recruit and support girls and female coaches through NICA's GRiT program.",
+      "description": [
+        "The GRiT Coach Lead reports to the League GRiT Coordinator and champions inclusivity on the team. You'll plan or facilitate at least one recruitment activity per season at the team or regional level, serve as the primary contact for all GRiT-related matters, and relay updates from league coordinators to the coaching staff.",
+        "Day-to-day, this role is about making practices, rides, and events genuinely welcoming to girls and female coaches — culturally, not just procedurally. Optional paths include attending leadership training, mentoring other coaches on GRiT activities, and sharing event content with league coordinators. Requires NICA Level 1+ license."
+      ],
+      "collaborators": ["League GRiT Coordinator", "Head Coach", "Comm. & Culture Lead", "All Coaches"]
+    },
+    {
       "id": "practice-planning",
       "name": "Practice Planning & Skills Lead",
       "tier": "essential",
@@ -85,18 +124,6 @@
       "collaborators": ["Head Coach", "Ride Leader Coord.", "Comm. & Culture Lead", "All Coaches"]
     },
     {
-      "id": "ride-leader-coordinator",
-      "name": "Ride Leader Coordinator",
-      "tier": "essential",
-      "timeCommitment": "5–8 hrs pre-season · 2–3 hrs/wk during season",
-      "summary": "Parent volunteer training · Weekly assignments · Certifications.",
-      "description": [
-        "Making sure every practice group has the right ride leaders, and helping parent volunteers feel prepared and confident in their role.",
-        "You'll manage ride leader assignments, track certifications, and run a pre-season training for new parent volunteers."
-      ],
-      "collaborators": ["Practice Planning Lead", "Head Coach", "Ride Group Coord.", "Safety Lead"]
-    },
-    {
       "id": "race-weekend-captain",
       "name": "Race Weekend Captain",
       "tier": "essential",
@@ -107,18 +134,6 @@
         "You'll build warm-up protocols, a staging system, race day role assignments, and communicate expectations to coaches and families."
       ],
       "collaborators": ["Head Coach", "Ride Leader Coord.", "Comm. Lead", "Safety Lead", "All Coaches"]
-    },
-    {
-      "id": "comm-culture-lead",
-      "name": "Communication & Culture Lead",
-      "tier": "essential",
-      "timeCommitment": "3–5 hrs/month",
-      "summary": "Family emails · Social media · Recruiting materials · Team culture.",
-      "description": [
-        "Keeping families informed and engaged, plus building a team culture where character development actually happens.",
-        "You'll handle regular family communications, recruiting materials, social media, and plan team culture moments throughout the season."
-      ],
-      "collaborators": ["Head Coach", "Practice Planning Lead", "Race Weekend Captain", "All Role Owners"]
     },
     {
       "id": "registration-roster",
@@ -145,6 +160,18 @@
       "collaborators": ["Practice Planning Lead", "Ride Leader Coord.", "Communication Lead", "Head Coach"]
     },
     {
+      "id": "ride-leader-coordinator",
+      "name": "Ride Leader Coordinator",
+      "tier": "essential",
+      "timeCommitment": "5–8 hrs pre-season · 2–3 hrs/wk during season",
+      "summary": "Parent volunteer training · Weekly assignments · Certifications.",
+      "description": [
+        "Making sure every practice group has the right ride leaders, and helping parent volunteers feel prepared and confident in their role.",
+        "You'll manage ride leader assignments, track certifications, and run a pre-season training for new parent volunteers."
+      ],
+      "collaborators": ["Practice Planning Lead", "Head Coach", "Ride Group Coord.", "Safety Lead"]
+    },
+    {
       "id": "safety-first-aid",
       "name": "Safety & First Aid Lead",
       "tier": "essential",
@@ -155,18 +182,6 @@
         "You'll handle safety reminders, first aid at practices and races, injury documentation, and walk coaches through protocols."
       ],
       "collaborators": ["Head Coach", "Registration Manager", "All Coaches", "Parents"]
-    },
-    {
-      "id": "finance-treasurer",
-      "name": "Finance / Treasurer",
-      "tier": "essential",
-      "timeCommitment": "2–4 hrs/month (heavier April–May)",
-      "summary": "Budget & financial reporting · Registration fees · Fundraising coordination.",
-      "description": [
-        "Team budget, registration fees, fundraising coordination, and financial reporting. Every dollar you manage helps get kids on bikes.",
-        "You'll create the season budget, track expenditures, process team fees, handle reimbursements, and deliver a year-end financial report."
-      ],
-      "collaborators": ["Head Coach", "Fundraising Lead", "All Role Owners", "Families"]
     },
     {
       "id": "equipment-gear",
@@ -191,29 +206,17 @@
         "You'll develop sponsor relationships, create sponsorship packages, organize fundraising events, and pursue grants."
       ],
       "collaborators": ["Finance/Treasurer", "Communication Lead", "Head Coach"]
-    },
-    {
-      "id": "grit-coach",
-      "name": "GRiT Coach Lead",
-      "tier": "recommended",
-      "timeCommitment": "~2–6 hrs/month during season",
-      "summary": "Recruit and support girls and female coaches through NICA's GRiT program.",
-      "description": [
-        "The GRiT Coach Lead reports to the League GRiT Coordinator and champions inclusivity on the team. You'll plan or facilitate at least one recruitment activity per season at the team or regional level, serve as the primary contact for all GRiT-related matters, and relay updates from league coordinators to the coaching staff.",
-        "Day-to-day, this role is about making practices, rides, and events genuinely welcoming to girls and female coaches — culturally, not just procedurally. Optional paths include attending leadership training, mentoring other coaches on GRiT activities, and sharing event content with league coordinators. Requires NICA Level 1+ license."
-      ],
-      "collaborators": ["League GRiT Coordinator", "Head Coach", "Comm. & Culture Lead", "All Coaches"]
     }
   ],
   "schools": {
     "elementary": [
-      { "name": "Liberty Hills", "students": 150, "hasPTA": false, "ptaContact": "", "notes": "" },
-      { "name": "Fox Hollow", "students": 92, "hasPTA": true, "ptaContact": "Zandra W", "notes": "" },
-      { "name": "Traverse Mountain", "students": 130, "hasPTA": false, "ptaContact": "", "notes": "" },
       { "name": "Belmont", "students": 150, "hasPTA": false, "ptaContact": "", "notes": "" },
       { "name": "Eaglecrest", "students": 125, "hasPTA": true, "ptaContact": "Lauren Hardcastle", "notes": "" },
+      { "name": "Fox Hollow", "students": 92, "hasPTA": true, "ptaContact": "Zandra W", "notes": "" },
+      { "name": "Freedom", "students": 125, "hasPTA": false, "ptaContact": "", "notes": "" },
+      { "name": "Liberty Hills", "students": 150, "hasPTA": false, "ptaContact": "", "notes": "" },
       { "name": "Segolilly", "students": 125, "hasPTA": false, "ptaContact": "", "notes": "" },
-      { "name": "Freedom", "students": 125, "hasPTA": false, "ptaContact": "", "notes": "" }
+      { "name": "Traverse Mountain", "students": 130, "hasPTA": false, "ptaContact": "", "notes": "" }
     ],
     "middle": [
       { "name": "Lehi Jr", "students": null, "hasPTA": false, "ptaContact": "", "notes": "6th grader open house night — potential tabling opportunity" },
