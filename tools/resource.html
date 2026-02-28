@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resource — Skyridge Jr Devo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/shared.css">
+  <script src="../assets/js/theme.js"></script>
+  <style>
+    :root {
+      --orange:      #F26A1B;
+      --orange-pale: rgba(242,106,27,0.10);
+      --orange-mid:  rgba(242,106,27,0.22);
+      --black:       #0D0D0D;
+      --bg:          #111111;
+      --bg-card:     #1A1A1A;
+      --bg-input:    #242424;
+      --bg-input2:   #1E1E1E;
+      --text:        #F5F0EB;
+      --text-muted:  #888888;
+      --text-faint:  #555555;
+      --border:      rgba(255,255,255,0.07);
+      --border-mid:  #2a2a2a;
+      --green:       #2D7D52;
+      --green-pale:  rgba(45,125,82,0.12);
+      --blue:        #3A6EA8;
+      --blue-pale:   rgba(58,110,168,0.12);
+      --red:         #C0392B;
+      --red-pale:    rgba(192,57,43,0.12);
+    }
+    [data-theme="light"] {
+      --bg:          #F5F0EB;
+      --bg-card:     #FFFFFF;
+      --bg-input:    #F0ECE7;
+      --bg-input2:   #F8F5F2;
+      --text:        #111111;
+      --text-muted:  #666666;
+      --text-faint:  #999999;
+      --border:      #E4E0DA;
+      --border-mid:  #D5D0CB;
+      --orange:      #D95E18;
+      --orange-pale: rgba(217,94,24,0.08);
+      --orange-mid:  rgba(217,94,24,0.18);
+      --green:       #1E6B3F;
+      --green-pale:  rgba(30,107,63,0.10);
+      --blue:        #2A5A8E;
+      --blue-pale:   rgba(42,90,142,0.10);
+      --red:         #A93226;
+      --red-pale:    rgba(169,50,38,0.08);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Barlow', sans-serif;
+      min-height: 100vh;
+    }
+
+    /* ── Resource header ── */
+    .res-header {
+      background: linear-gradient(135deg, #0D0D0D 0%, #1a1a1a 60%, #2a1500 100%);
+      border-bottom: 3px solid var(--orange);
+      padding: 24px 24px 28px;
+      position: relative;
+      overflow: hidden;
+    }
+    .res-header::after {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 220px; height: 220px;
+      background: radial-gradient(circle, rgba(242,106,27,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .res-header-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      position: relative;
+    }
+    .back-link {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--orange);
+      text-decoration: none;
+      opacity: 0.8;
+      display: inline-block;
+      margin-bottom: 12px;
+    }
+    .back-link:hover { opacity: 1; }
+
+    .res-meta-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+    .res-date {
+      font-size: 13px;
+      color: #888;
+    }
+
+    .res-title-wrap { margin-bottom: 4px; }
+    .res-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 36px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: #F5F0EB;
+      cursor: pointer;
+      line-height: 1.1;
+      border-bottom: 1px dashed transparent;
+      transition: border-color 0.15s;
+      display: inline-block;
+    }
+    .res-title:hover { border-bottom-color: rgba(255,255,255,0.3); }
+    .res-title-input {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 36px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: #F5F0EB;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid var(--orange);
+      border-radius: 4px;
+      padding: 2px 8px;
+      outline: none;
+      width: 100%;
+    }
+    .res-desc {
+      font-size: 13px;
+      color: #888;
+      margin-top: 6px;
+      line-height: 1.5;
+    }
+
+    /* ── Type badges ── */
+    .type-badge {
+      display: inline-block;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 2px;
+    }
+    .type-badge.event     { background: var(--orange-pale); color: var(--orange); border: 1px solid var(--orange-mid); }
+    .type-badge.reference { background: var(--green-pale);  color: var(--green);  border: 1px solid rgba(45,125,82,0.25); }
+    .type-badge.meeting   { background: var(--blue-pale);   color: var(--blue);   border: 1px solid rgba(58,110,168,0.25); }
+
+    /* ── Page body ── */
+    .page-body {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 28px 24px 60px;
+    }
+
+    /* ── Section cards ── */
+    .section-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      margin-bottom: 16px;
+      overflow: hidden;
+    }
+    .section-card-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 16px 12px;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg-input2);
+    }
+    .section-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--text);
+      cursor: pointer;
+      border-bottom: 1px dashed transparent;
+      transition: border-color 0.15s;
+    }
+    .section-title:hover { border-bottom-color: var(--text-faint); }
+    .section-title-input {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      background: var(--bg-input);
+      border: 1px solid var(--orange);
+      border-radius: 3px;
+      color: var(--text);
+      padding: 3px 8px;
+      outline: none;
+      min-width: 200px;
+    }
+    .btn-delete-section {
+      background: transparent;
+      border: none;
+      color: var(--text-faint);
+      font-size: 18px;
+      cursor: pointer;
+      padding: 0 4px;
+      line-height: 1;
+      transition: color 0.12s;
+    }
+    .btn-delete-section:hover { color: var(--red); }
+
+    /* ── Notes area ── */
+    .section-notes-area {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    .area-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-faint);
+    }
+    .section-label-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+    .save-indicator {
+      font-size: 11px;
+      color: var(--green);
+      opacity: 0;
+      transition: opacity 0.3s;
+      font-family: 'Barlow Condensed', sans-serif;
+    }
+    .save-indicator.visible { opacity: 1; }
+    .notes-input {
+      width: 100%;
+      min-height: 90px;
+      resize: vertical;
+      background: var(--bg-input);
+      border: 1px solid var(--border-mid);
+      border-radius: 4px;
+      color: var(--text);
+      font-family: 'Barlow', sans-serif;
+      font-size: 14px;
+      line-height: 1.6;
+      padding: 10px 12px;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+    .notes-input:focus { border-color: var(--orange); background: var(--bg-input2); }
+    .notes-input::placeholder { color: var(--text-faint); }
+
+    /* ── Docs area ── */
+    .section-docs-area { padding: 14px 16px; }
+    .docs-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    /* ── Doc card ── */
+    .doc-card {
+      background: var(--bg-input2);
+      border: 1px solid var(--border-mid);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .doc-card-head {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+    }
+    .doc-type-icon { font-size: 16px; flex-shrink: 0; }
+    .doc-title {
+      flex: 1;
+      font-size: 13px;
+      color: var(--text);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .doc-card-actions {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+    .btn-doc-link,
+    .btn-doc-embed,
+    .btn-doc-delete {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      background: transparent;
+      border: 1px solid var(--border-mid);
+      border-radius: 3px;
+      color: var(--text-muted);
+      padding: 3px 8px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.12s;
+      white-space: nowrap;
+    }
+    .btn-doc-link:hover   { border-color: var(--orange); color: var(--orange); }
+    .btn-doc-embed:hover  { border-color: var(--orange); color: var(--orange); }
+    .btn-doc-delete:hover { border-color: var(--red); color: var(--red); }
+    .btn-doc-embed.active { background: var(--orange-pale); border-color: var(--orange); color: var(--orange); }
+
+    /* ── Embed frame ── */
+    .doc-embed-wrap {
+      border-top: 1px solid var(--border-mid);
+      background: #fff;
+    }
+    .doc-embed-frame {
+      width: 100%;
+      display: block;
+      border: none;
+    }
+
+    /* ── Add doc form ── */
+    .add-doc-form { margin-top: 6px; }
+    .add-doc-url-row { display: flex; gap: 8px; }
+    .doc-url-input {
+      flex: 1;
+      background: var(--bg-input);
+      border: 1px solid var(--border-mid);
+      border-radius: 4px;
+      color: var(--text);
+      font-family: 'Barlow', sans-serif;
+      font-size: 13px;
+      padding: 8px 12px;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+    .doc-url-input:focus { border-color: var(--orange); }
+    .doc-url-input::placeholder { color: var(--text-faint); font-size: 12px; }
+    .btn-add-doc {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      background: var(--orange);
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      padding: 8px 16px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: opacity 0.15s;
+    }
+    .btn-add-doc:hover { opacity: 0.85; }
+
+    .add-doc-extra {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 6px;
+    }
+    .doc-type-preview {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      background: var(--orange-pale);
+      border: 1px solid var(--orange-mid);
+      color: var(--orange);
+      border-radius: 2px;
+      padding: 2px 8px;
+      white-space: nowrap;
+    }
+    .doc-title-input {
+      flex: 1;
+      background: var(--bg-input);
+      border: 1px solid var(--border-mid);
+      border-radius: 4px;
+      color: var(--text);
+      font-family: 'Barlow', sans-serif;
+      font-size: 13px;
+      padding: 6px 10px;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+    .doc-title-input:focus { border-color: var(--orange); }
+    .doc-title-input::placeholder { color: var(--text-faint); }
+
+    /* ── Add section button ── */
+    .add-section-row { margin-top: 8px; }
+    .btn-add-section {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      background: transparent;
+      border: 1px dashed var(--border-mid);
+      color: var(--text-muted);
+      border-radius: 4px;
+      padding: 10px 20px;
+      cursor: pointer;
+      width: 100%;
+      transition: all 0.15s;
+    }
+    .btn-add-section:hover {
+      border-color: var(--orange);
+      color: var(--orange);
+      background: var(--orange-pale);
+    }
+
+    /* ── Error / not-found state ── */
+    .error-state {
+      text-align: center;
+      padding: 60px 24px;
+      color: var(--text-muted);
+    }
+    .error-state p { font-size: 15px; margin-bottom: 16px; }
+    .error-state a {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--orange);
+      text-decoration: none;
+    }
+    .error-state a:hover { text-decoration: underline; }
+
+    /* ── Loading state ── */
+    .loading-state {
+      text-align: center;
+      padding: 60px 24px;
+      color: var(--text-faint);
+      font-size: 13px;
+    }
+
+    /* ── Toast ── */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--orange);
+      color: #fff;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      padding: 10px 20px;
+      border-radius: 4px;
+      opacity: 0;
+      transition: opacity 0.2s;
+      pointer-events: none;
+      z-index: 300;
+      white-space: nowrap;
+    }
+    .toast.show { opacity: 1; }
+
+    @media (max-width: 600px) {
+      .res-header { padding: 20px 16px 24px; }
+      .page-body { padding: 20px 16px 48px; }
+      .res-title { font-size: 28px; }
+      .doc-card-head { flex-wrap: wrap; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="site-nav no-print">
+  <div class="site-nav-inner">
+    <a href="../index.html" class="site-nav-brand">
+      <img src="../assets/images/skyridge_jr-devo_logo.png" alt="" class="site-nav-logo">
+      Skyridge Jr Devo
+    </a>
+    <a href="../index.html" class="site-nav-link">Home</a>
+    <a href="agenda.html" class="site-nav-link">Agendas</a>
+    <a href="roles.html" class="site-nav-link">Roles</a>
+    <a href="tracker.html" class="site-nav-link">Tracker</a>
+    <a href="meeting.html" class="site-nav-link">Meetings</a>
+    <a href="resources.html" class="site-nav-link active">Resources</a>
+  </div>
+</nav>
+
+<div class="res-header" id="res-header" style="display:none">
+  <div class="res-header-inner">
+    <a href="resources.html" class="back-link">← Resources</a>
+    <div class="res-meta-row">
+      <span class="type-badge" id="res-type-badge">EVENT</span>
+      <span class="res-date" id="res-date"></span>
+    </div>
+    <div class="res-title-wrap">
+      <h1 class="res-title" id="res-title" title="Click to rename">Untitled Resource</h1>
+    </div>
+    <p class="res-desc" id="res-desc"></p>
+  </div>
+</div>
+
+<div class="page-body">
+  <div class="loading-state" id="loading-state">Loading…</div>
+  <div class="error-state" id="error-state" style="display:none">
+    <p>Resource not found.</p>
+    <a href="resources.html">← Return to Resources</a>
+  </div>
+
+  <div id="main-content" style="display:none">
+    <div class="sections-list" id="sections-list"></div>
+    <div class="add-section-row">
+      <button class="btn-add-section" onclick="addSection()">+ Add Section</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+<script src="../assets/js/firebase-config.js"></script>
+<script src="../assets/js/meeting-store.js"></script>
+<script>
+  'use strict';
+
+  // ── Resource ID from URL ─────────────────────────────────────────────────
+  const resourceId = new URLSearchParams(window.location.search).get('id');
+
+  let allSections = {};
+  let resourceLoaded = false;
+  const notesDebounceTimers = {};
+
+  // ── Utility ──────────────────────────────────────────────────────────────
+  function escHtml(str) {
+    return String(str || '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2000);
+  }
+
+  // ── URL / doc type helpers ────────────────────────────────────────────────
+  function detectType(url) {
+    try {
+      const u = new URL(url);
+      if (u.hostname.includes('docs.google.com')) {
+        if (u.pathname.includes('/document/'))     return 'googleDoc';
+        if (u.pathname.includes('/presentation/')) return 'googleSlides';
+      }
+      if (u.hostname.includes('drive.google.com') && u.pathname.includes('/file/')) return 'pdf';
+      if (u.pathname.match(/\.pdf$/i)) return 'pdf';
+    } catch (e) {}
+    return 'link';
+  }
+
+  function toEmbedUrl(url, type) {
+    const m = url.match(/\/d\/([a-zA-Z0-9_-]+)/);
+    const id = m ? m[1] : null;
+    if (type === 'googleDoc')    return id ? `https://docs.google.com/document/d/${id}/preview` : null;
+    if (type === 'googleSlides') return id ? `https://docs.google.com/presentation/d/${id}/embed?start=false&loop=false` : null;
+    if (type === 'pdf' && id)    return `https://drive.google.com/file/d/${id}/preview`;
+    if (type === 'pdf')          return `https://docs.google.com/viewer?url=${encodeURIComponent(url)}&embedded=true`;
+    return null;
+  }
+
+  function typeIcon(type) {
+    return { googleDoc: '📄', googleSlides: '📊', pdf: '📑', link: '🔗' }[type] || '🔗';
+  }
+
+  function typeLabel(type) {
+    return { googleDoc: 'Google Doc', googleSlides: 'Google Slides', pdf: 'PDF', link: 'Link' }[type] || type;
+  }
+
+  function embedHeight(type) {
+    return { googleDoc: '500px', googleSlides: '450px', pdf: '600px' }[type] || '500px';
+  }
+
+  // ── Init ─────────────────────────────────────────────────────────────────
+  if (!resourceId) {
+    document.getElementById('loading-state').style.display = 'none';
+    document.getElementById('error-state').style.display = 'block';
+  } else {
+    MeetingStore.init();
+
+    if (!MeetingStore.isReady()) {
+      document.getElementById('loading-state').textContent = 'Unable to connect to database.';
+    } else {
+      // Listen for resource metadata
+      MeetingStore.ref(`resources/${resourceId}`).on('value', snap => {
+        const data = snap.val();
+        if (!data) {
+          document.getElementById('loading-state').style.display = 'none';
+          document.getElementById('error-state').style.display = 'block';
+          return;
+        }
+        document.getElementById('loading-state').style.display = 'none';
+        document.getElementById('res-header').style.display = 'block';
+        document.getElementById('main-content').style.display = 'block';
+        renderResource(data);
+      });
+
+      // Listen for sections
+      MeetingStore.ref(`resources/${resourceId}/sections`).on('value', snap => {
+        const raw = snap.val();
+
+        // Seed default section on first load if empty
+        if (!raw && !resourceLoaded) {
+          resourceLoaded = true;
+          MeetingStore.ref(`resources/${resourceId}/sections`).push({
+            title: 'Notes',
+            order: 0,
+            notes: '',
+            docs: {}
+          });
+          return;
+        }
+        resourceLoaded = true;
+
+        allSections = raw || {};
+        renderSections(allSections);
+      });
+    }
+  }
+
+  // ── renderResource ────────────────────────────────────────────────────────
+  function renderResource(data) {
+    document.title = (data.title || 'Untitled') + ' — Skyridge Jr Devo';
+
+    // Type badge
+    const badge = document.getElementById('res-type-badge');
+    const typeMap = { event: 'Event', reference: 'Reference', meeting: 'Meeting' };
+    badge.textContent = typeMap[data.type] || (data.type || 'Event');
+    badge.className = 'type-badge ' + (data.type || 'event');
+
+    // Date
+    const dateEl = document.getElementById('res-date');
+    dateEl.textContent = data.date || '';
+
+    // Title — only update if not currently being edited
+    const titleEl = document.getElementById('res-title');
+    if (titleEl.tagName === 'H1') {
+      titleEl.textContent = data.title || 'Untitled Resource';
+    }
+
+    // Description
+    const descEl = document.getElementById('res-desc');
+    if (data.description) {
+      descEl.textContent = data.description;
+      descEl.style.display = 'block';
+    } else {
+      descEl.style.display = 'none';
+    }
+
+    // Wire up title editing (only once)
+    if (!titleEl.dataset.editable) {
+      titleEl.dataset.editable = '1';
+      makeResTitleEditable(titleEl);
+    }
+  }
+
+  // ── makeResTitleEditable ──────────────────────────────────────────────────
+  function makeResTitleEditable(el) {
+    el.addEventListener('click', () => {
+      const input = document.createElement('input');
+      input.className = 'res-title-input';
+      input.value = el.textContent;
+      el.replaceWith(input);
+      input.focus();
+      input.select();
+
+      const save = () => {
+        const val = input.value.trim() || 'Untitled Resource';
+        MeetingStore.ref(`resources/${resourceId}/title`).set(val);
+        // Firebase listener will update the h1 via renderResource
+      };
+
+      input.addEventListener('blur', save);
+      input.addEventListener('keydown', e => {
+        if (e.key === 'Enter')  { input.blur(); }
+        if (e.key === 'Escape') { input.value = el.textContent; input.blur(); }
+      });
+    });
+  }
+
+  // ── renderSections ────────────────────────────────────────────────────────
+  function renderSections(sectionsData) {
+    const list = document.getElementById('sections-list');
+
+    const sorted = Object.entries(sectionsData)
+      .sort(([, a], [, b]) => (a.order || 0) - (b.order || 0));
+
+    // Determine which section IDs currently exist in the DOM
+    const existingIds = new Set(
+      Array.from(list.querySelectorAll('.section-card'))
+           .map(el => el.dataset.sectionId)
+    );
+    const incomingIds = new Set(sorted.map(([id]) => id));
+
+    // Remove sections no longer present
+    existingIds.forEach(id => {
+      if (!incomingIds.has(id)) {
+        const el = list.querySelector(`[data-section-id="${id}"]`);
+        if (el) el.remove();
+      }
+    });
+
+    // Add or update sections
+    sorted.forEach(([sectionId, section], idx) => {
+      const existing = list.querySelector(`[data-section-id="${sectionId}"]`);
+      if (existing) {
+        // Update title if not being edited
+        const titleEl = existing.querySelector('.section-title');
+        if (titleEl && titleEl.tagName === 'H2') {
+          titleEl.textContent = section.title || 'Untitled';
+        }
+        // Update notes if textarea not focused
+        const textarea = existing.querySelector('.notes-input');
+        if (textarea && document.activeElement !== textarea) {
+          textarea.value = section.notes || '';
+        }
+        // Update docs
+        renderDocs(sectionId, section.docs || {});
+      } else {
+        const card = buildSectionCard(sectionId, section);
+        // Insert in sorted position
+        const cards = list.querySelectorAll('.section-card');
+        if (idx < cards.length) {
+          list.insertBefore(card, cards[idx]);
+        } else {
+          list.appendChild(card);
+        }
+      }
+    });
+  }
+
+  // ── buildSectionCard ──────────────────────────────────────────────────────
+  function buildSectionCard(sectionId, section) {
+    const card = document.createElement('div');
+    card.className = 'section-card';
+    card.dataset.sectionId = sectionId;
+
+    card.innerHTML = `
+      <div class="section-card-head">
+        <h2 class="section-title" data-section-id="${escHtml(sectionId)}" title="Click to rename">${escHtml(section.title || 'Untitled')}</h2>
+        <button class="btn-delete-section" title="Delete section">×</button>
+      </div>
+      <div class="section-notes-area">
+        <div class="section-label-row">
+          <span class="area-label">NOTES</span>
+          <span class="save-indicator" id="save-${escHtml(sectionId)}"></span>
+        </div>
+        <textarea class="notes-input" placeholder="Add notes here…">${escHtml(section.notes || '')}</textarea>
+      </div>
+      <div class="section-docs-area">
+        <div class="area-label">DOCUMENTS</div>
+        <div class="docs-list" id="docs-${escHtml(sectionId)}"></div>
+        <div class="add-doc-form" id="add-form-${escHtml(sectionId)}">
+          <div class="add-doc-url-row">
+            <input type="url" class="doc-url-input"
+                   placeholder="Paste a Google Doc, Drive, Slides, or PDF link…"
+                   data-section="${escHtml(sectionId)}">
+            <button class="btn-add-doc">Add</button>
+          </div>
+          <div class="add-doc-extra" id="add-extra-${escHtml(sectionId)}" style="display:none">
+            <span class="doc-type-preview" id="type-preview-${escHtml(sectionId)}"></span>
+            <input type="text" class="doc-title-input" placeholder="Title (optional)" data-section="${escHtml(sectionId)}">
+          </div>
+        </div>
+      </div>
+    `;
+
+    // Wire up section title editing
+    const titleEl = card.querySelector('.section-title');
+    makeSectionTitleEditable(titleEl, sectionId);
+
+    // Wire up delete section button
+    card.querySelector('.btn-delete-section').addEventListener('click', () => {
+      deleteSection(sectionId);
+    });
+
+    // Wire up notes textarea
+    const textarea = card.querySelector('.notes-input');
+    textarea.addEventListener('input', () => saveNotes(sectionId, textarea.value));
+
+    // Wire up URL input preview
+    const urlInput = card.querySelector('.doc-url-input');
+    urlInput.addEventListener('input', () => previewDocType(sectionId, urlInput.value));
+
+    // Wire up Add Doc button
+    card.querySelector('.btn-add-doc').addEventListener('click', () => addDoc(sectionId));
+
+    // Allow Enter in URL input to submit
+    urlInput.addEventListener('keydown', e => {
+      if (e.key === 'Enter') addDoc(sectionId);
+    });
+
+    // Render existing docs
+    renderDocs(sectionId, section.docs || {}, card);
+
+    return card;
+  }
+
+  // ── makeSectionTitleEditable ──────────────────────────────────────────────
+  function makeSectionTitleEditable(el, sectionId) {
+    el.addEventListener('click', () => {
+      const input = document.createElement('input');
+      input.className = 'section-title-input';
+      input.value = el.textContent;
+      el.replaceWith(input);
+      input.focus();
+      input.select();
+
+      const save = () => {
+        const val = input.value.trim() || 'Untitled';
+        MeetingStore.ref(`resources/${resourceId}/sections/${sectionId}/title`).set(val);
+        // Firebase listener will re-render; restore h2 locally if needed
+        const h2 = document.createElement('h2');
+        h2.className = 'section-title';
+        h2.dataset.sectionId = sectionId;
+        h2.title = 'Click to rename';
+        h2.textContent = val;
+        input.replaceWith(h2);
+        makeSectionTitleEditable(h2, sectionId);
+      };
+
+      input.addEventListener('blur', save);
+      input.addEventListener('keydown', e => {
+        if (e.key === 'Enter')  { input.blur(); }
+        if (e.key === 'Escape') { input.value = el.textContent; input.blur(); }
+      });
+    });
+  }
+
+  // ── saveNotes ─────────────────────────────────────────────────────────────
+  function saveNotes(sectionId, value) {
+    clearTimeout(notesDebounceTimers[sectionId]);
+    notesDebounceTimers[sectionId] = setTimeout(() => {
+      if (!MeetingStore.isReady()) return;
+      MeetingStore.ref(`resources/${resourceId}/sections/${sectionId}/notes`).set(value || '');
+
+      const indicator = document.getElementById(`save-${sectionId}`);
+      if (indicator) {
+        indicator.textContent = 'Saved ✓';
+        indicator.classList.add('visible');
+        setTimeout(() => indicator.classList.remove('visible'), 2000);
+      }
+    }, 600);
+  }
+
+  // ── addSection ────────────────────────────────────────────────────────────
+  function addSection() {
+    if (!MeetingStore.isReady()) return;
+    const maxOrder = Object.values(allSections).reduce((m, s) => Math.max(m, s.order || 0), -1);
+    MeetingStore.ref(`resources/${resourceId}/sections`).push({
+      title: 'New Section',
+      order: maxOrder + 1,
+      notes: '',
+      docs: {}
+    });
+  }
+
+  // ── deleteSection ─────────────────────────────────────────────────────────
+  function deleteSection(sectionId) {
+    if (!confirm('Delete this section and all its notes and documents?')) return;
+    MeetingStore.ref(`resources/${resourceId}/sections/${sectionId}`).remove();
+  }
+
+  // ── previewDocType ────────────────────────────────────────────────────────
+  function previewDocType(sectionId, url) {
+    const extraEl   = document.getElementById(`add-extra-${sectionId}`);
+    const previewEl = document.getElementById(`type-preview-${sectionId}`);
+    if (!extraEl || !previewEl) return;
+
+    const trimmed = url.trim();
+    if (!trimmed) {
+      extraEl.style.display = 'none';
+      return;
+    }
+
+    const type = detectType(trimmed);
+    previewEl.textContent = typeLabel(type);
+    extraEl.style.display = 'flex';
+  }
+
+  // ── addDoc ────────────────────────────────────────────────────────────────
+  function addDoc(sectionId) {
+    if (!MeetingStore.isReady()) return;
+    const form = document.getElementById(`add-form-${sectionId}`);
+    if (!form) return;
+
+    const urlInput   = form.querySelector('.doc-url-input');
+    const titleInput = form.querySelector('.doc-title-input');
+    const url = urlInput.value.trim();
+    if (!url) { urlInput.focus(); return; }
+
+    const type  = detectType(url);
+    const title = (titleInput ? titleInput.value.trim() : '') || '';
+
+    MeetingStore.ref(`resources/${resourceId}/sections/${sectionId}/docs`).push({ url, type, title });
+
+    urlInput.value = '';
+    if (titleInput) titleInput.value = '';
+    const extraEl = document.getElementById(`add-extra-${sectionId}`);
+    if (extraEl) extraEl.style.display = 'none';
+  }
+
+  // ── deleteDoc ─────────────────────────────────────────────────────────────
+  function deleteDoc(sectionId, docId) {
+    MeetingStore.ref(`resources/${resourceId}/sections/${sectionId}/docs/${docId}`).remove();
+  }
+
+  // ── toggleEmbed ───────────────────────────────────────────────────────────
+  function toggleEmbed(sectionId, docId, embedUrl, btn) {
+    const card = document.querySelector(
+      `[data-section-id="${sectionId}"] [data-doc-id="${docId}"]`
+    );
+    if (!card) return;
+
+    const existing = card.querySelector('.doc-embed-wrap');
+    if (existing) {
+      existing.remove();
+      btn.classList.remove('active');
+      btn.textContent = '▼ Embed';
+    } else {
+      const type   = btn.dataset.docType || 'link';
+      const height = embedHeight(type);
+      const wrap   = document.createElement('div');
+      wrap.className = 'doc-embed-wrap';
+
+      if (type === 'googleSlides') {
+        // Use padding-bottom aspect ratio trick for slides
+        wrap.style.position = 'relative';
+        wrap.style.paddingBottom = '56.25%';
+        wrap.style.height = '0';
+        const iframe = document.createElement('iframe');
+        iframe.src = embedUrl;
+        iframe.className = 'doc-embed-frame';
+        iframe.loading = 'lazy';
+        iframe.setAttribute('allow', 'autoplay');
+        iframe.style.position = 'absolute';
+        iframe.style.top = '0';
+        iframe.style.left = '0';
+        iframe.style.height = '100%';
+        wrap.appendChild(iframe);
+      } else {
+        const iframe = document.createElement('iframe');
+        iframe.src = embedUrl;
+        iframe.className = 'doc-embed-frame';
+        iframe.loading = 'lazy';
+        iframe.setAttribute('allow', 'autoplay');
+        iframe.style.height = height;
+        wrap.appendChild(iframe);
+      }
+
+      card.appendChild(wrap);
+      btn.classList.add('active');
+      btn.textContent = '▲ Embed';
+    }
+  }
+
+  // ── renderDocs ────────────────────────────────────────────────────────────
+  function renderDocs(sectionId, docsData, cardEl) {
+    const container = cardEl
+      ? cardEl.querySelector(`#docs-${sectionId}`)
+      : document.getElementById(`docs-${sectionId}`);
+    if (!container) return;
+
+    const existingDocIds = new Set(
+      Array.from(container.querySelectorAll('.doc-card')).map(el => el.dataset.docId)
+    );
+    const incomingDocIds = new Set(Object.keys(docsData));
+
+    // Remove deleted docs
+    existingDocIds.forEach(docId => {
+      if (!incomingDocIds.has(docId)) {
+        const el = container.querySelector(`[data-doc-id="${docId}"]`);
+        if (el) el.remove();
+      }
+    });
+
+    // Add new docs (preserve order)
+    Object.entries(docsData).forEach(([docId, doc]) => {
+      if (!existingDocIds.has(docId)) {
+        const docCard = buildDocCard(sectionId, docId, doc);
+        container.appendChild(docCard);
+      }
+    });
+  }
+
+  // ── buildDocCard ──────────────────────────────────────────────────────────
+  function buildDocCard(sectionId, docId, doc) {
+    const card = document.createElement('div');
+    card.className = 'doc-card';
+    card.dataset.docId = docId;
+
+    const type     = doc.type || detectType(doc.url || '');
+    const icon     = typeIcon(type);
+    const embedUrl = toEmbedUrl(doc.url || '', type);
+    let displayTitle = doc.title || '';
+    if (!displayTitle) {
+      try { displayTitle = new URL(doc.url).hostname; } catch (e) { displayTitle = doc.url || ''; }
+    }
+
+    const embedBtnHtml = embedUrl
+      ? `<button class="btn-doc-embed" data-doc-type="${escHtml(type)}"
+              onclick="toggleEmbed('${escHtml(sectionId)}','${escHtml(docId)}','${escHtml(embedUrl)}',this)"
+              title="Show/hide embed">▼ Embed</button>`
+      : '';
+
+    card.innerHTML = `
+      <div class="doc-card-head">
+        <span class="doc-type-icon">${icon}</span>
+        <span class="doc-title" title="${escHtml(doc.url || '')}">${escHtml(displayTitle)}</span>
+        <div class="doc-card-actions">
+          <a href="${escHtml(doc.url || '#')}" target="_blank" rel="noopener" class="btn-doc-link" title="Open in new tab">↗</a>
+          ${embedBtnHtml}
+          <button class="btn-doc-delete" title="Remove">×</button>
+        </div>
+      </div>
+    `;
+
+    card.querySelector('.btn-doc-delete').addEventListener('click', () => {
+      deleteDoc(sectionId, docId);
+    });
+
+    return card;
+  }
+</script>
+</body>
+</html>

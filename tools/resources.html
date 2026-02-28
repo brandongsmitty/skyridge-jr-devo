@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resources — Skyridge Jr Devo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/shared.css">
+  <script src="../assets/js/theme.js"></script>
+  <style>
+    :root {
+      --orange:       #F26A1B;
+      --orange-pale:  rgba(242,106,27,0.10);
+      --orange-mid:   rgba(242,106,27,0.22);
+      --black:        #0D0D0D;
+      --bg:           #111111;
+      --bg-card:      #1A1A1A;
+      --bg-input:     #242424;
+      --bg-input2:    #1E1E1E;
+      --text:         #F5F0EB;
+      --text-muted:   #888888;
+      --text-faint:   #555555;
+      --border:       rgba(255,255,255,0.07);
+      --border-mid:   #2a2a2a;
+      --green:        #2D7D52;
+      --green-pale:   rgba(45,125,82,0.12);
+      --blue:         #3A6EA8;
+      --blue-pale:    rgba(58,110,168,0.12);
+      --red:          #C0392B;
+    }
+    [data-theme="light"] {
+      --bg:           #F5F0EB;
+      --bg-card:      #FFFFFF;
+      --bg-input:     #F0ECE7;
+      --bg-input2:    #F8F5F2;
+      --text:         #111111;
+      --text-muted:   #666666;
+      --text-faint:   #999999;
+      --border:       #E4E0DA;
+      --border-mid:   #D5D0CB;
+      --orange:       #D95E18;
+      --orange-pale:  rgba(217,94,24,0.08);
+      --orange-mid:   rgba(217,94,24,0.18);
+      --green:        #1E6B3F;
+      --green-pale:   rgba(30,107,63,0.10);
+      --blue:         #2A5A8E;
+      --blue-pale:    rgba(42,90,142,0.10);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Barlow', sans-serif;
+      min-height: 100vh;
+    }
+
+    /* ── Header ── */
+    .page-header {
+      background: linear-gradient(135deg, #0D0D0D 0%, #1a1a1a 60%, #2a1500 100%);
+      border-bottom: 3px solid var(--orange);
+      padding: 32px 24px 28px;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-header::after {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 220px; height: 220px;
+      background: radial-gradient(circle, rgba(242,106,27,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .header-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      position: relative;
+    }
+    .header-eyebrow {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 6px;
+    }
+    .header-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 38px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #F5F0EB;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .header-title span { color: var(--orange); }
+    .header-sub {
+      font-size: 13px;
+      color: #888;
+      letter-spacing: 0.3px;
+    }
+
+    /* ── Page body ── */
+    .page-body {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 28px 24px 60px;
+    }
+
+    /* ── Controls row ── */
+    .controls-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+    .filter-tabs {
+      display: flex;
+      gap: 4px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      padding: 3px;
+    }
+    .filter-btn {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      background: transparent;
+      border: none;
+      border-radius: 3px;
+      padding: 5px 14px;
+      cursor: pointer;
+      transition: background 0.12s, color 0.12s;
+    }
+    .filter-btn:hover { color: var(--text); }
+    .filter-btn.active {
+      background: var(--orange);
+      color: #fff;
+    }
+    .btn-new {
+      margin-left: auto;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      background: var(--orange);
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      padding: 8px 18px;
+      cursor: pointer;
+      transition: opacity 0.15s;
+      white-space: nowrap;
+    }
+    .btn-new:hover { opacity: 0.85; }
+
+    /* ── Resources grid ── */
+    .resources-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+    }
+
+    /* ── Resource card ── */
+    .resource-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 20px;
+      text-decoration: none;
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      transition: border-color 0.15s, transform 0.1s;
+      cursor: pointer;
+      position: relative;
+    }
+    .resource-card:hover {
+      border-color: var(--orange);
+      transform: translateY(-1px);
+    }
+
+    .type-badge {
+      display: inline-block;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 2px;
+      align-self: flex-start;
+    }
+    .type-badge.event     { background: var(--orange-pale); color: var(--orange); border: 1px solid var(--orange-mid); }
+    .type-badge.reference { background: var(--green-pale);  color: var(--green);  border: 1px solid rgba(45,125,82,0.25); }
+    .type-badge.meeting   { background: var(--blue-pale);   color: var(--blue);   border: 1px solid rgba(58,110,168,0.25); }
+
+    .resource-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      line-height: 1.2;
+    }
+    .resource-date {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+    .resource-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.5;
+      flex-grow: 1;
+    }
+    .resource-meta-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 4px;
+    }
+    .resource-counts {
+      font-size: 11px;
+      color: var(--text-faint);
+    }
+    .resource-open {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--orange);
+    }
+
+    /* ── Section header ── */
+    .section-head {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+      margin-top: 32px;
+    }
+    .section-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--orange);
+      white-space: nowrap;
+    }
+    .section-line {
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── Empty state ── */
+    .empty-state {
+      text-align: center;
+      padding: 60px 24px;
+      color: var(--text-muted);
+    }
+    .empty-state p {
+      font-size: 15px;
+      margin-bottom: 20px;
+    }
+    .empty-state .btn-new {
+      display: inline-block;
+    }
+
+    /* ── Loading state ── */
+    .loading-state {
+      text-align: center;
+      padding: 60px 24px;
+      color: var(--text-faint);
+      font-size: 13px;
+    }
+
+    /* ── Modal ── */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.75);
+      z-index: 500;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal {
+      background: #1A1A1A;
+      border: 1px solid #333;
+      border-top: 3px solid var(--orange);
+      border-radius: 6px;
+      width: 100%;
+      max-width: 480px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+    }
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 20px 14px;
+      border-bottom: 1px solid #2a2a2a;
+    }
+    .modal-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: #F5F0EB;
+    }
+    .modal-close {
+      background: transparent;
+      border: none;
+      color: #666;
+      font-size: 20px;
+      cursor: pointer;
+      line-height: 1;
+      padding: 2px 6px;
+      border-radius: 3px;
+    }
+    .modal-close:hover { color: #fff; }
+    .modal-body { padding: 20px; display: flex; flex-direction: column; gap: 16px; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+    }
+    .label-hint {
+      font-weight: 400;
+      letter-spacing: 0;
+      text-transform: none;
+      color: #555;
+      font-size: 10px;
+    }
+    .form-group input,
+    .form-group textarea {
+      background: #242424;
+      border: 1px solid #333;
+      border-radius: 4px;
+      color: #F5F0EB;
+      font-family: 'Barlow', sans-serif;
+      font-size: 14px;
+      padding: 9px 12px;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: var(--orange);
+    }
+    .form-group input::placeholder { color: #555; }
+
+    /* Type selector */
+    .type-selector {
+      display: flex;
+      gap: 6px;
+    }
+    .type-btn {
+      flex: 1;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      background: #242424;
+      border: 1px solid #333;
+      color: #888;
+      border-radius: 4px;
+      padding: 8px 6px;
+      cursor: pointer;
+      transition: all 0.12s;
+      text-align: center;
+    }
+    .type-btn:hover { border-color: #555; color: #ccc; }
+    .type-btn.active.event     { background: var(--orange-pale); border-color: var(--orange); color: var(--orange); }
+    .type-btn.active.reference { background: var(--green-pale);  border-color: var(--green);  color: var(--green); }
+    .type-btn.active.meeting   { background: var(--blue-pale);   border-color: var(--blue);   color: var(--blue); }
+
+    .modal-footer {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      padding: 14px 20px 18px;
+      border-top: 1px solid #2a2a2a;
+    }
+    .btn-cancel {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      background: transparent;
+      border: 1px solid #333;
+      color: #888;
+      border-radius: 4px;
+      padding: 8px 16px;
+      cursor: pointer;
+    }
+    .btn-cancel:hover { border-color: #555; color: #ccc; }
+    .btn-create {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      background: var(--orange);
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      padding: 8px 20px;
+      cursor: pointer;
+      transition: opacity 0.15s;
+    }
+    .btn-create:hover { opacity: 0.85; }
+    .btn-create:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    @media (max-width: 600px) {
+      .page-header { padding: 24px 16px 20px; }
+      .page-body { padding: 20px 16px 48px; }
+      .header-title { font-size: 30px; }
+      .resources-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="site-nav no-print">
+  <div class="site-nav-inner">
+    <a href="../index.html" class="site-nav-brand">
+      <img src="../assets/images/skyridge_jr-devo_logo.png" alt="" class="site-nav-logo">
+      Skyridge Jr Devo
+    </a>
+    <a href="../index.html" class="site-nav-link">Home</a>
+    <a href="agenda.html" class="site-nav-link">Agendas</a>
+    <a href="roles.html" class="site-nav-link">Roles</a>
+    <a href="tracker.html" class="site-nav-link">Tracker</a>
+    <a href="meeting.html" class="site-nav-link">Meetings</a>
+    <a href="resources.html" class="site-nav-link active">Resources</a>
+  </div>
+</nav>
+
+<div class="page-header">
+  <div class="header-inner">
+    <div class="header-eyebrow">Coaching Staff · 2026 Season</div>
+    <div class="header-title">Re<span>sources</span></div>
+    <div class="header-sub">Notes and documents from coaching events, summits, clinics, and reference materials</div>
+  </div>
+</div>
+
+<div class="page-body">
+
+  <div class="controls-row">
+    <div class="filter-tabs">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="event">Events</button>
+      <button class="filter-btn" data-filter="reference">References</button>
+      <button class="filter-btn" data-filter="meeting">Meetings</button>
+    </div>
+    <button class="btn-new" onclick="openModal()">+ New Resource</button>
+  </div>
+
+  <div class="loading-state" id="loading-state">Loading…</div>
+  <div class="empty-state" id="empty-state" style="display:none">
+    <p>No resources yet. Add your first one to get started.</p>
+    <button class="btn-new" onclick="openModal()">+ New Resource</button>
+  </div>
+
+  <div id="events-section" style="display:none">
+    <div class="section-head">
+      <div class="section-label">Events &amp; Meetings</div>
+      <div class="section-line"></div>
+    </div>
+    <div class="resources-grid" id="events-grid"></div>
+  </div>
+
+  <div id="references-section" style="display:none">
+    <div class="section-head">
+      <div class="section-label">Reference Materials</div>
+      <div class="section-line"></div>
+    </div>
+    <div class="resources-grid" id="references-grid"></div>
+  </div>
+
+</div><!-- /page-body -->
+
+<!-- ── New Resource Modal ── -->
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">New Resource</div>
+      <button class="modal-close" onclick="closeModal()">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label>Title</label>
+        <input type="text" id="new-title" placeholder="e.g. NICA Coaches Summit 2026" maxlength="120">
+      </div>
+      <div class="form-group">
+        <label>Type</label>
+        <div class="type-selector">
+          <button class="type-btn event active" data-type="event" onclick="selectType('event')">📅 Event</button>
+          <button class="type-btn reference" data-type="reference" onclick="selectType('reference')">📚 Reference</button>
+          <button class="type-btn meeting" data-type="meeting" onclick="selectType('meeting')">💬 Meeting</button>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Date <span class="label-hint">— leave blank for evergreen</span></label>
+        <input type="text" id="new-date" placeholder="e.g. Feb 2026 or March 15, 2026" maxlength="60">
+      </div>
+      <div class="form-group">
+        <label>Description <span class="label-hint">— optional</span></label>
+        <input type="text" id="new-desc" placeholder="Short summary (shown on card)" maxlength="140">
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-cancel" onclick="closeModal()">Cancel</button>
+      <button class="btn-create" id="btn-create" onclick="createResource()">Create →</button>
+    </div>
+  </div>
+</div>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+<script src="../assets/js/firebase-config.js"></script>
+<script src="../assets/js/meeting-store.js"></script>
+<script>
+  'use strict';
+
+  MeetingStore.init();
+
+  let allResources = {}; // keyed by resourceId
+  let activeFilter  = 'all';
+  let selectedType  = 'event';
+
+  // ── Firebase listener ────────────────────────────────────────────────────
+  if (MeetingStore.isReady()) {
+    MeetingStore.ref('resources').on('value', snap => {
+      allResources = snap.val() || {};
+      render();
+    });
+  } else {
+    document.getElementById('loading-state').textContent = 'Unable to connect to database.';
+  }
+
+  // ── Render ───────────────────────────────────────────────────────────────
+  function render() {
+    document.getElementById('loading-state').style.display = 'none';
+
+    const ids = Object.keys(allResources);
+    if (ids.length === 0) {
+      document.getElementById('empty-state').style.display = 'block';
+      document.getElementById('events-section').style.display = 'none';
+      document.getElementById('references-section').style.display = 'none';
+      return;
+    }
+
+    document.getElementById('empty-state').style.display = 'none';
+
+    // Sort by createdAt descending
+    const sorted = ids
+      .map(id => ({ id, ...allResources[id] }))
+      .sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+
+    // Separate references from events+meetings
+    const refs    = sorted.filter(r => r.type === 'reference');
+    const nonRefs = sorted.filter(r => r.type !== 'reference');
+
+    // Apply filter
+    const filterMatch = (r) => {
+      if (activeFilter === 'all') return true;
+      if (activeFilter === 'event')     return r.type === 'event';
+      if (activeFilter === 'reference') return r.type === 'reference';
+      if (activeFilter === 'meeting')   return r.type === 'meeting';
+      return true;
+    };
+
+    const filteredNonRefs = nonRefs.filter(filterMatch);
+    const filteredRefs    = refs.filter(filterMatch);
+
+    const eventsSection = document.getElementById('events-section');
+    const refsSection   = document.getElementById('references-section');
+    const eventsGrid    = document.getElementById('events-grid');
+    const refsGrid      = document.getElementById('references-grid');
+
+    if (filteredNonRefs.length > 0) {
+      eventsGrid.innerHTML = filteredNonRefs.map(buildCard).join('');
+      eventsSection.style.display = 'block';
+    } else {
+      eventsSection.style.display = 'none';
+    }
+
+    if (filteredRefs.length > 0) {
+      refsGrid.innerHTML = filteredRefs.map(buildCard).join('');
+      refsSection.style.display = 'block';
+    } else {
+      refsSection.style.display = 'none';
+    }
+
+    // If nothing matches filter, show empty message
+    if (filteredNonRefs.length === 0 && filteredRefs.length === 0) {
+      eventsSection.style.display = 'none';
+      refsSection.style.display = 'none';
+      document.getElementById('empty-state').style.display = 'block';
+      document.querySelector('#empty-state p').textContent = 'No resources match this filter.';
+    } else {
+      document.querySelector('#empty-state p').textContent = 'No resources yet. Add your first one to get started.';
+    }
+  }
+
+  function countSectionsAndDocs(resource) {
+    const sections = resource.sections || {};
+    const sectionCount = Object.keys(sections).length;
+    let docCount = 0;
+    Object.values(sections).forEach(s => {
+      docCount += Object.keys(s.docs || {}).length;
+    });
+    return { sectionCount, docCount };
+  }
+
+  function buildCard(r) {
+    const { sectionCount, docCount } = countSectionsAndDocs(r);
+    const typeName = { event: 'Event', reference: 'Reference', meeting: 'Meeting' }[r.type] || r.type;
+    const countStr = [
+      sectionCount ? `${sectionCount} section${sectionCount !== 1 ? 's' : ''}` : '',
+      docCount     ? `${docCount} doc${docCount !== 1 ? 's' : ''}` : ''
+    ].filter(Boolean).join(' · ') || 'No content yet';
+
+    return `
+      <div class="resource-card" onclick="openResource('${escHtml(r.id)}')">
+        <span class="type-badge ${escHtml(r.type)}">${escHtml(typeName)}</span>
+        <div class="resource-title">${escHtml(r.title || 'Untitled')}</div>
+        ${r.date ? `<div class="resource-date">${escHtml(r.date)}</div>` : ''}
+        ${r.description ? `<div class="resource-desc">${escHtml(r.description)}</div>` : ''}
+        <div class="resource-meta-row">
+          <span class="resource-counts">${countStr}</span>
+          <span class="resource-open">Open →</span>
+        </div>
+      </div>`;
+  }
+
+  function openResource(id) {
+    window.location.href = `resource.html?id=${encodeURIComponent(id)}`;
+  }
+
+  // ── Filter buttons ────────────────────────────────────────────────────────
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeFilter = btn.dataset.filter;
+      render();
+    });
+  });
+
+  // ── Modal ─────────────────────────────────────────────────────────────────
+  function openModal() {
+    document.getElementById('new-title').value = '';
+    document.getElementById('new-date').value  = '';
+    document.getElementById('new-desc').value  = '';
+    selectType('event');
+    document.getElementById('modal-overlay').classList.add('open');
+    setTimeout(() => document.getElementById('new-title').focus(), 50);
+  }
+
+  function closeModal() {
+    document.getElementById('modal-overlay').classList.remove('open');
+  }
+
+  document.getElementById('modal-overlay').addEventListener('click', e => {
+    if (e.target === document.getElementById('modal-overlay')) closeModal();
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeModal();
+  });
+
+  function selectType(type) {
+    selectedType = type;
+    document.querySelectorAll('.type-btn').forEach(b => {
+      b.classList.toggle('active', b.dataset.type === type);
+    });
+  }
+
+  function createResource() {
+    const title = document.getElementById('new-title').value.trim();
+    if (!title) {
+      document.getElementById('new-title').focus();
+      return;
+    }
+    if (!MeetingStore.isReady()) return;
+
+    const btn = document.getElementById('btn-create');
+    btn.disabled = true;
+    btn.textContent = 'Creating…';
+
+    const data = {
+      title,
+      type:        selectedType,
+      date:        document.getElementById('new-date').value.trim(),
+      description: document.getElementById('new-desc').value.trim(),
+      createdAt:   Date.now()
+    };
+
+    const newRef = MeetingStore.ref('resources').push();
+    newRef.set(data, err => {
+      if (err) {
+        btn.disabled = false;
+        btn.textContent = 'Create →';
+        alert('Error saving. Please try again.');
+        return;
+      }
+      closeModal();
+      window.location.href = `resource.html?id=${encodeURIComponent(newRef.key)}`;
+    });
+  }
+
+  // Allow Enter to submit modal
+  document.getElementById('new-desc').addEventListener('keydown', e => {
+    if (e.key === 'Enter') createResource();
+  });
+
+  // ── Utility ───────────────────────────────────────────────────────────────
+  function escHtml(str) {
+    return String(str || '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+</script>
+</body>
+</html>

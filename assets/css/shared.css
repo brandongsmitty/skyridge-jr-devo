@@ -74,6 +74,28 @@
   border-bottom-color: #F26A1B;
 }
 
+/* ─── THEME TOGGLE BUTTON ─── */
+.theme-toggle {
+  margin-left: auto;
+  flex-shrink: 0;
+  background: transparent;
+  border: 1px solid #2a2a2a;
+  border-radius: 4px;
+  color: #666;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: border-color 0.15s, color 0.15s;
+}
+.theme-toggle:hover {
+  border-color: #F26A1B;
+  color: #F26A1B;
+}
+
 /* ─── PRINT ─── */
 @media print {
   .site-nav {
