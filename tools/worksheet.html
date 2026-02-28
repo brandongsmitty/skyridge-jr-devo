@@ -28,7 +28,6 @@
       --gray-light:   #666666;
       --border:       #E4E0DA;
     }
-
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
@@ -545,6 +544,28 @@
   .toast.show {
     opacity: 1;
     transform: translateX(-50%) translateY(0);
+  }
+
+  /* ── Light mode: element overrides (must be LAST to win cascade) ── */
+  [data-theme="light"] .header-title { color: #F5F0EB; }
+  [data-theme="light"] .header-sub   { color: #B8B0A8; }
+  [data-theme="light"] input[type="text"],
+  [data-theme="light"] input[type="email"],
+  [data-theme="light"] select,
+  [data-theme="light"] textarea {
+    background: #ffffff; border-color: #cccccc; color: #111111;
+  }
+  [data-theme="light"] select option {
+    background: #ffffff; color: #111111;
+  }
+  [data-theme="light"] .role-card {
+    background: #ffffff; border-color: #e4e0da;
+  }
+  [data-theme="light"] .time-item {
+    background: #ffffff; border-color: #e4e0da;
+  }
+  [data-theme="light"] .modal-text {
+    background: #f5f2ee; border-color: #cccccc; color: #111111;
   }
 </style>
 </head>

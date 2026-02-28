@@ -38,7 +38,6 @@
   --green:        #2D7D52;
   --green-pale:   #EAF5EE;
 }
-
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
@@ -448,6 +447,9 @@
     position: absolute; top: 0; left: 0; width: 100%; height: 100%;
     border: none;
   }
+
+  /* ── Light mode: element overrides (must be LAST to win cascade) ── */
+  [data-theme="light"] .canva-embed-wrap { background: #ddd8d2; }
 </style>
 </head>
 <body>

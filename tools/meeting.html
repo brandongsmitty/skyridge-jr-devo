@@ -622,6 +622,17 @@
     width: 100%; height: 100%;
     border: none;
   }
+
+  /* ── Light mode: element overrides (must be LAST to win cascade) ── */
+  [data-theme="light"] .meeting-switcher {
+    background: #ece8e3; border-bottom-color: #d4d0ca;
+  }
+  [data-theme="light"] .msw { color: #777; }
+  [data-theme="light"] .msw:hover { color: var(--orange-light); }
+  [data-theme="light"] .msw.active { color: var(--orange); border-bottom-color: var(--orange); }
+  [data-theme="light"] .modal-text {
+    background: #f5f2ee; border-color: #cccccc; color: #111111;
+  }
 </style>
 </head>
 <body>

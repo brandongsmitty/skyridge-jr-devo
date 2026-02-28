@@ -355,6 +355,11 @@
     font-size: 14px;
     padding: 24px 0;
   }
+
+  /* ── Light mode: element overrides (must be LAST to win cascade) ── */
+  [data-theme="light"] .header-title { color: #F5F0EB; }
+  [data-theme="light"] .header-sub   { color: #B8B0A8; }
+  [data-theme="light"] .tool-card    { box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
 </style>
 </head>
 <body>

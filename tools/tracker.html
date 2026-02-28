@@ -352,6 +352,37 @@
   }
   .sync-live { background: rgba(242,106,27,0.12); color: #F26A1B; border: 1px solid rgba(242,106,27,0.3); }
   .sync-offline { background: rgba(136,136,136,0.12); color: #888; border: 1px solid #444; }
+
+  /* ── Light mode: element overrides (must be LAST to win cascade) ── */
+  [data-theme="light"] .header-title { color: #F5F0EB; }
+  [data-theme="light"] .header-sub   { color: #B8B0A8; }
+  [data-theme="light"] input.coach-input,
+  [data-theme="light"] select.coach-input,
+  [data-theme="light"] select.coach-select {
+    background: #ffffff; border-color: #cccccc; color: #111111;
+  }
+  [data-theme="light"] select.coach-input option,
+  [data-theme="light"] select.coach-select option {
+    background: #ffffff; color: #111111;
+  }
+  [data-theme="light"] textarea.notes-input {
+    background: #ffffff; border-color: #cccccc; color: #111111;
+  }
+  [data-theme="light"] .mat-check {
+    background: #f5f2ee; border-color: #cccccc; color: #555555;
+  }
+  [data-theme="light"] .mat-check.checked {
+    background: rgba(217,94,24,0.08);
+  }
+  [data-theme="light"] th {
+    background: #e8e4de; color: #555555;
+  }
+  [data-theme="light"] .stats-strip {
+    background: #ece8e3; border-color: #d4d0ca;
+  }
+  [data-theme="light"] .modal-text {
+    background: #f5f2ee; border-color: #cccccc; color: #111111;
+  }
 </style>
 </head>
 <body>
