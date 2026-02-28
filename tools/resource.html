@@ -544,6 +544,16 @@
   const notesDebounceTimers = {};
 
   // ── Utility ──────────────────────────────────────────────────────────────
+  function formatDate(str) {
+    if (!str) return '';
+    const m = str.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+    if (m) {
+      const d = new Date(+m[1], +m[2] - 1, +m[3]);
+      return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+    }
+    return str;
+  }
+
   function escHtml(str) {
     return String(str || '')
       .replace(/&/g, '&amp;')
@@ -654,7 +664,7 @@
 
     // Date
     const dateEl = document.getElementById('res-date');
-    dateEl.textContent = data.date || '';
+    dateEl.textContent = formatDate(data.date);
 
     // Title — only update if not currently being edited
     const titleEl = document.getElementById('res-title');

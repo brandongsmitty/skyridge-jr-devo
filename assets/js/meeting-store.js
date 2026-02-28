@@ -229,6 +229,7 @@ const MeetingStore = (() => {
   return {
     init,
     isReady,
+    ref,
     saveRoleAssignment,
     saveRoleAssignmentDebounced,
     onRoleAssignments,

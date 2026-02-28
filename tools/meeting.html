@@ -13,29 +13,53 @@
 <script src="../assets/js/meeting-store.js"></script>
 <style>
   :root {
-    --orange: #F26A1B;
-    --orange-light: #FF8C42;
-    --orange-pale: #FFF0E6;
-    --orange-mid: #FDDCCA;
-    --black: #0D0D0D;
-    --gray-dark: #333333;
-    --gray-mid: #666666;
-    --gray-light: #999999;
-    --gray-bg: #F6F4F1;
-    --gray-line: #E4E0DA;
-    --white: #FFFFFF;
-    --green: #2D7D52;
-    --green-pale: #EAF5EE;
-    --green-mid: #B8DFCA;
-    --red: #C0392B;
-    --red-pale: #FDEEEC;
-    --red-mid: #F5C6C2;
-    --yellow: #D4890A;
-    --yellow-pale: #FEF7E6;
-    --yellow-mid: #FADFAB;
-    --blue: #3A6EA8;
-    --blue-pale: #EEF3FA;
-  }
+  --orange:       #F26A1B;
+  --orange-light: #FF8C42;
+  --orange-pale:  rgba(242,106,27,0.12);
+  --orange-mid:   rgba(242,106,27,0.22);
+  --black:        #111111;
+  --gray-dark:    #1A1A1A;
+  --gray-mid:     #888888;
+  --gray-light:   #555555;
+  --gray-bg:      #111111;
+  --gray-line:    rgba(255,255,255,0.08);
+  --white:        #F5F0EB;
+  --green:        #2D7D52;
+  --green-pale:   rgba(45,125,82,0.12);
+  --green-mid:    rgba(45,125,82,0.25);
+  --red:          #C0392B;
+  --red-pale:     rgba(192,57,43,0.12);
+  --red-mid:      rgba(192,57,43,0.25);
+  --yellow:       #D4890A;
+  --yellow-pale:  rgba(212,137,10,0.12);
+  --yellow-mid:   rgba(212,137,10,0.25);
+  --blue:         #3A6EA8;
+  --blue-pale:    rgba(58,110,168,0.12);
+}
+[data-theme="light"] {
+  --orange:       #E85D0C;
+  --orange-light: #F97316;
+  --orange-pale:  #FFF0E6;
+  --orange-mid:   #FDDCCA;
+  --black:        #111111;
+  --gray-dark:    #333333;
+  --gray-mid:     #666666;
+  --gray-light:   #999999;
+  --gray-bg:      #F6F4F1;
+  --gray-line:    #E4E0DA;
+  --white:        #FFFFFF;
+  --green:        #2D7D52;
+  --green-pale:   #EAF5EE;
+  --green-mid:    #B8DFCA;
+  --red:          #C0392B;
+  --red-pale:     #FDEEEC;
+  --red-mid:      #F5C6C2;
+  --yellow:       #D4890A;
+  --yellow-pale:  #FEF7E6;
+  --yellow-mid:   #FADFAB;
+  --blue:         #3A6EA8;
+  --blue-pale:    #EEF3FA;
+}
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
     background: var(--gray-bg);
