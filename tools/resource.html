@@ -245,6 +245,33 @@
       font-family: 'Barlow Condensed', sans-serif;
     }
     .save-indicator.visible { opacity: 1; }
+    /* ── Notes edit/preview tabs ── */
+    .notes-tabs {
+      display: flex;
+      gap: 2px;
+      margin-left: 8px;
+    }
+    .notes-tab {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 3px 9px;
+      border-radius: 3px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      background: transparent;
+      color: var(--text-faint);
+      transition: all 0.15s;
+    }
+    .notes-tab:hover { color: var(--text-muted); }
+    .notes-tab.active {
+      background: var(--bg-input);
+      border-color: var(--border-mid);
+      color: var(--orange);
+    }
+
     .notes-input {
       width: 100%;
       min-height: 90px;
@@ -262,6 +289,90 @@
     }
     .notes-input:focus { border-color: var(--orange); background: var(--bg-input2); }
     .notes-input::placeholder { color: var(--text-faint); }
+
+    /* ── Markdown rendered preview ── */
+    .notes-preview {
+      min-height: 60px;
+      padding: 10px 12px;
+      background: var(--bg-input);
+      border: 1px solid var(--border-mid);
+      border-radius: 4px;
+      color: var(--text);
+      font-family: 'Barlow', sans-serif;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+    .notes-preview.empty {
+      color: var(--text-faint);
+      font-style: italic;
+    }
+    /* Markdown element styles scoped to preview */
+    .notes-preview h1, .notes-preview h2, .notes-preview h3,
+    .notes-preview h4, .notes-preview h5, .notes-preview h6 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text);
+      margin: 14px 0 6px;
+      line-height: 1.2;
+    }
+    .notes-preview h1 { font-size: 20px; }
+    .notes-preview h2 { font-size: 17px; color: var(--orange); }
+    .notes-preview h3 { font-size: 14px; color: var(--text-muted); }
+    .notes-preview h1:first-child, .notes-preview h2:first-child,
+    .notes-preview h3:first-child { margin-top: 0; }
+    .notes-preview p { margin: 0 0 8px; }
+    .notes-preview p:last-child { margin-bottom: 0; }
+    .notes-preview ul, .notes-preview ol {
+      padding-left: 20px;
+      margin: 4px 0 8px;
+    }
+    .notes-preview li { margin-bottom: 3px; }
+    .notes-preview li > ul, .notes-preview li > ol { margin: 3px 0 2px; }
+    .notes-preview strong { color: var(--text); font-weight: 600; }
+    .notes-preview em { color: var(--text-muted); font-style: italic; }
+    .notes-preview code {
+      font-family: 'Menlo', 'Consolas', monospace;
+      font-size: 12px;
+      background: var(--bg-input2);
+      border: 1px solid var(--border-mid);
+      border-radius: 3px;
+      padding: 1px 5px;
+      color: var(--orange);
+    }
+    .notes-preview pre {
+      background: var(--bg-input2);
+      border: 1px solid var(--border-mid);
+      border-radius: 4px;
+      padding: 10px 12px;
+      overflow-x: auto;
+      margin: 6px 0;
+    }
+    .notes-preview pre code {
+      background: none;
+      border: none;
+      padding: 0;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+    .notes-preview blockquote {
+      border-left: 3px solid var(--orange);
+      padding-left: 12px;
+      margin: 6px 0;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+    .notes-preview hr {
+      border: none;
+      border-top: 1px solid var(--border-mid);
+      margin: 10px 0;
+    }
+    .notes-preview a {
+      color: var(--orange);
+      text-decoration: underline;
+    }
+    .notes-preview a:hover { color: var(--text); }
 
     /* ── Docs area ── */
     .section-docs-area { padding: 14px 16px; }
@@ -529,6 +640,7 @@
 <div class="toast" id="toast"></div>
 
 <!-- Firebase -->
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 <script src="../assets/js/firebase-config.js"></script>
@@ -747,6 +859,18 @@
         const textarea = existing.querySelector('.notes-input');
         if (textarea && document.activeElement !== textarea) {
           textarea.value = section.notes || '';
+          // Refresh preview if currently shown
+          const preview = existing.querySelector('.notes-preview');
+          if (preview && preview.style.display !== 'none') {
+            const md = (section.notes || '').trim();
+            if (md) {
+              preview.classList.remove('empty');
+              preview.innerHTML = marked.parse(md);
+            } else {
+              preview.classList.add('empty');
+              preview.innerHTML = '<em>Nothing to preview yet.</em>';
+            }
+          }
         }
         // Update docs
         renderDocs(sectionId, section.docs || {});
@@ -777,9 +901,14 @@
       <div class="section-notes-area">
         <div class="section-label-row">
           <span class="area-label">NOTES</span>
+          <div class="notes-tabs">
+            <button class="notes-tab active" data-tab="edit">Edit</button>
+            <button class="notes-tab" data-tab="preview">Preview</button>
+          </div>
           <span class="save-indicator" id="save-${escHtml(sectionId)}"></span>
         </div>
-        <textarea class="notes-input" placeholder="Add notes here…">${escHtml(section.notes || '')}</textarea>
+        <textarea class="notes-input" placeholder="Supports markdown: **bold**, *italic*, # Heading, - lists, \`code\`, > quotes…">${escHtml(section.notes || '')}</textarea>
+        <div class="notes-preview" style="display:none"></div>
       </div>
       <div class="section-docs-area">
         <div class="area-label">DOCUMENTS</div>
@@ -808,8 +937,39 @@
       deleteSection(sectionId);
     });
 
-    // Wire up notes textarea
+    // Wire up notes textarea + markdown preview tabs
     const textarea = card.querySelector('.notes-input');
+    const preview  = card.querySelector('.notes-preview');
+    const editTab  = card.querySelector('.notes-tab[data-tab="edit"]');
+    const prevTab  = card.querySelector('.notes-tab[data-tab="preview"]');
+
+    function renderPreview() {
+      const md = textarea.value.trim();
+      if (md) {
+        preview.classList.remove('empty');
+        preview.innerHTML = marked.parse(md);
+      } else {
+        preview.classList.add('empty');
+        preview.innerHTML = '<em>Nothing to preview yet.</em>';
+      }
+    }
+
+    editTab.addEventListener('click', () => {
+      editTab.classList.add('active');
+      prevTab.classList.remove('active');
+      textarea.style.display = '';
+      preview.style.display  = 'none';
+      textarea.focus();
+    });
+
+    prevTab.addEventListener('click', () => {
+      prevTab.classList.add('active');
+      editTab.classList.remove('active');
+      textarea.style.display = 'none';
+      preview.style.display  = '';
+      renderPreview();
+    });
+
     textarea.addEventListener('input', () => saveNotes(sectionId, textarea.value));
 
     // Wire up URL input preview
