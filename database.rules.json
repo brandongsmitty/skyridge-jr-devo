@@ -1,0 +1,8 @@
+{
+  "rules": {
+    "skyridge-jr-devo": {
+      ".read": "auth != null",
+      ".write": "auth != null"
+    }
+  }
+}
