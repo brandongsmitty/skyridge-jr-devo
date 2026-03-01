@@ -1811,14 +1811,29 @@
   // ── Load saved data from Firebase, then render ────────────────────────────
   (async function initFromFirebase() {
     if (MeetingStore.isReady()) {
+      // Wait for Firebase Auth state to be confirmed before reading from RTDB.
+      // RTDB rules require auth != null; calling .once() before auth resolves
+      // causes a silent PERMISSION_DENIED that leaves all reads returning empty.
+      await new Promise(resolve => {
+        const unsub = firebase.auth().onAuthStateChanged(user => {
+          if (user) { unsub(); resolve(); }
+        });
+      });
+
       // Restore role assignments (including locked state)
       const savedRoles = await MeetingStore.loadRoleAssignmentsOnce();
+      const hasFirebaseRoles = Object.keys(savedRoles).length > 0;
       Object.keys(savedRoles).forEach(roleId => {
         if (assignments[roleId]) {
           Object.assign(assignments[roleId], savedRoles[roleId]);
           if (savedRoles[roleId].locked) lockedRoles[roleId] = true;
         }
       });
+      // If Firebase has no role data yet, write the current assignments so that
+      // roles.html and tracker.html (which read only from Firebase) can display them.
+      if (!hasFirebaseRoles) {
+        roles.forEach(r => MeetingStore.saveRoleAssignment(r.id, assignments[r.id]));
+      }
 
       // Restore school assignments
       const savedSchools = await MeetingStore.loadSchoolAssignmentsOnce();
