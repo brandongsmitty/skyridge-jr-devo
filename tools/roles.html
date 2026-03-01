@@ -391,12 +391,8 @@
     document.getElementById('roles-container').innerHTML = html;
 
     // Inject primary + backup owners live from Firebase Tracker
-    // Wait for auth state to be confirmed before reading the database —
-    // rules require auth != null and the RTDB SDK does not retry a listener
-    // that was cancelled due to permission denied on the initial request.
-    firebase.auth().onAuthStateChanged(user => {
-      if (!user || !MeetingStore.isReady()) return;
-      MeetingStore.onRoleAssignments(assignments => {
+    // auth.js guarantees user is authenticated before page JS runs — subscribe directly.
+    MeetingStore.onRoleAssignments(assignments => {
         roles.forEach((role, idx) => {
           const roleId = ROLE_NAME_TO_ID[role.name];
           if (!roleId) return;
@@ -428,7 +424,6 @@
           }
         });
       });
-    });
 
   }).catch(() => {});
 

@@ -1811,15 +1811,7 @@
   // ── Load saved data from Firebase, then render ────────────────────────────
   (async function initFromFirebase() {
     if (MeetingStore.isReady()) {
-      // Wait for Firebase Auth state to be confirmed before reading from RTDB.
-      // RTDB rules require auth != null; calling .once() before auth resolves
-      // causes a silent PERMISSION_DENIED that leaves all reads returning empty.
-      await new Promise(resolve => {
-        const unsub = firebase.auth().onAuthStateChanged(user => {
-          if (user) { unsub(); resolve(); }
-        });
-      });
-
+      // auth.js guarantees user is authenticated before page JS runs — read directly.
       // Restore role assignments (including locked state)
       const savedRoles = await MeetingStore.loadRoleAssignmentsOnce();
       const hasFirebaseRoles = Object.keys(savedRoles).length > 0;

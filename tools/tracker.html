@@ -774,13 +774,8 @@
     updateProgress();
 
     // ── Firebase subscriptions (all set up after rows are rendered) ─────────
-    // Wait for auth state to be confirmed before reading the database —
-    // rules require auth != null and the RTDB SDK does not retry a listener
-    // that was cancelled due to permission denied on the initial request.
-    firebase.auth().onAuthStateChanged(user => {
-      if (!user || !MeetingStore.isReady()) return;
-      setupFirebaseSubscriptions();
-    });
+    // auth.js guarantees user is authenticated before page JS runs — subscribe directly.
+    setupFirebaseSubscriptions();
 
   }).catch(() => {});
 
