@@ -48,16 +48,26 @@ const SkyridgeAuth = (() => {
     badge.id = 'auth-user-badge';
     badge.style.cssText = 'display:flex;align-items:center;gap:8px;flex-shrink:0;';
 
-    const email = document.createElement('span');
-    email.textContent = user.email;
-    email.style.cssText = [
-      'font-size:11px',
-      'color:#666',
-      'font-family:Barlow,sans-serif',
-      'white-space:nowrap',
-      'max-width:160px',
-      'overflow:hidden',
-      'text-overflow:ellipsis',
+    // Avatar circle: use first name initial from displayName, fall back to email prefix
+    const firstName = (user.displayName || user.email).split(/[\s@]/)[0];
+    const initial = firstName.charAt(0).toUpperCase();
+
+    const avatar = document.createElement('span');
+    avatar.textContent = initial;
+    avatar.style.cssText = [
+      'display:inline-flex', 'align-items:center', 'justify-content:center',
+      'width:26px', 'height:26px', 'border-radius:50%',
+      'background:#2d7a3a', 'color:#fff',
+      'font-family:"Barlow Condensed",sans-serif', 'font-size:13px', 'font-weight:700',
+      'flex-shrink:0',
+    ].join(';');
+
+    // First name label
+    const nameEl = document.createElement('span');
+    nameEl.textContent = firstName;
+    nameEl.style.cssText = [
+      'font-family:"Barlow Condensed",sans-serif', 'font-size:13px', 'font-weight:600',
+      'color:#aaa', 'letter-spacing:0.3px', 'white-space:nowrap',
     ].join(';');
 
     // Reuse the existing .theme-toggle class for a consistent button style.
@@ -67,7 +77,8 @@ const SkyridgeAuth = (() => {
     btn.style.marginLeft = '0';
     btn.addEventListener('click', signOut);
 
-    badge.appendChild(email);
+    badge.appendChild(avatar);
+    badge.appendChild(nameEl);
     badge.appendChild(btn);
     nav.appendChild(badge);
   }
