@@ -44,41 +44,32 @@ const SkyridgeAuth = (() => {
     const nav = document.querySelector('.site-nav-inner');
     if (!nav) return;
 
+    // Sits to the right of the theme toggle; margin-left:8px gives uniform gap.
     const badge = document.createElement('div');
     badge.id = 'auth-user-badge';
-    badge.style.cssText = 'display:flex;align-items:center;gap:8px;flex-shrink:0;';
+    badge.style.cssText = 'display:flex;align-items:center;gap:8px;flex-shrink:0;margin-left:8px;';
 
-    // Avatar circle: use first name initial from displayName, fall back to email prefix
     const firstName = (user.displayName || user.email).split(/[\s@]/)[0];
-    const initial = firstName.charAt(0).toUpperCase();
 
-    const avatar = document.createElement('span');
-    avatar.textContent = initial;
-    avatar.style.cssText = [
-      'display:inline-flex', 'align-items:center', 'justify-content:center',
-      'width:26px', 'height:26px', 'border-radius:50%',
-      'background:#2d7a3a', 'color:#fff',
-      'font-family:"Barlow Condensed",sans-serif', 'font-size:13px', 'font-weight:700',
-      'flex-shrink:0',
+    // Name pill — visually identical to .theme-toggle (same border, font, size).
+    const namePill = document.createElement('span');
+    namePill.textContent = firstName;
+    namePill.style.cssText = [
+      'display:inline-flex', 'align-items:center',
+      'background:transparent', 'border:1px solid #2a2a2a', 'border-radius:4px',
+      'color:#666',
+      'font-family:"Barlow Condensed",sans-serif', 'font-size:11px', 'font-weight:600',
+      'letter-spacing:0.5px', 'padding:5px 10px', 'white-space:nowrap',
     ].join(';');
 
-    // First name label
-    const nameEl = document.createElement('span');
-    nameEl.textContent = firstName;
-    nameEl.style.cssText = [
-      'font-family:"Barlow Condensed",sans-serif', 'font-size:13px', 'font-weight:600',
-      'color:#aaa', 'letter-spacing:0.3px', 'white-space:nowrap',
-    ].join(';');
-
-    // Reuse the existing .theme-toggle class for a consistent button style.
+    // Sign Out pill — reuse .theme-toggle class; clear the auto margin it carries.
     const btn = document.createElement('button');
     btn.textContent = 'Sign Out';
     btn.className = 'theme-toggle';
     btn.style.marginLeft = '0';
     btn.addEventListener('click', signOut);
 
-    badge.appendChild(avatar);
-    badge.appendChild(nameEl);
+    badge.appendChild(namePill);
     badge.appendChild(btn);
     nav.appendChild(badge);
   }
