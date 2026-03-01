@@ -338,6 +338,8 @@
 
 <script src="../assets/js/season-loader.js"></script>
 <script>
+  MeetingStore.init();
+
   loadSeason().then(data => {
     const s = data.season;
     const roles = data.roles || [];
@@ -389,41 +391,38 @@
     document.getElementById('roles-container').innerHTML = html;
 
     // Inject primary + backup owners live from Firebase Tracker
-    // Wait for auth state to be confirmed before reading the database
-    MeetingStore.init();
-    firebase.auth().onAuthStateChanged(user => {
-      if (!user || !MeetingStore.isReady()) return;
-      MeetingStore.onRoleAssignments(assignments => {
-        roles.forEach((role, idx) => {
-          const roleId = ROLE_NAME_TO_ID[role.name];
-          if (!roleId) return;
-          const asgn = assignments[roleId];
-          const card = document.getElementById(`role-${idx}`);
-          if (!card) return;
-          const pillsEl = card.querySelector('.owner-pills');
-          if (!pillsEl) return;
-          const lead   = asgn && asgn.primary;
-          const backup = asgn && asgn.backup;
-          pillsEl.innerHTML = '';
-          if (lead) {
-            const p = document.createElement('div');
-            p.className = 'owner-pill lead-pill';
-            p.textContent = '\u25cf ' + lead;
-            pillsEl.appendChild(p);
-          }
-          if (backup) {
-            const p = document.createElement('div');
-            p.className = 'owner-pill backup-pill';
-            p.textContent = '\u25cb ' + backup + ' (bkp)';
-            pillsEl.appendChild(p);
-          }
-          if (!lead && !backup) {
-            const p = document.createElement('div');
-            p.className = 'owner-pill unassigned-pill';
-            p.textContent = 'Unassigned';
-            pillsEl.appendChild(p);
-          }
-        });
+    // auth.js already guarantees the user is authenticated — subscribe directly,
+    // matching the same pattern used in tracker.html.
+    MeetingStore.onRoleAssignments(assignments => {
+      roles.forEach((role, idx) => {
+        const roleId = ROLE_NAME_TO_ID[role.name];
+        if (!roleId) return;
+        const asgn = assignments[roleId];
+        const card = document.getElementById(`role-${idx}`);
+        if (!card) return;
+        const pillsEl = card.querySelector('.owner-pills');
+        if (!pillsEl) return;
+        const lead   = asgn && asgn.primary;
+        const backup = asgn && asgn.backup;
+        pillsEl.innerHTML = '';
+        if (lead) {
+          const p = document.createElement('div');
+          p.className = 'owner-pill lead-pill';
+          p.textContent = '\u25cf ' + lead;
+          pillsEl.appendChild(p);
+        }
+        if (backup) {
+          const p = document.createElement('div');
+          p.className = 'owner-pill backup-pill';
+          p.textContent = '\u25cb ' + backup + ' (bkp)';
+          pillsEl.appendChild(p);
+        }
+        if (!lead && !backup) {
+          const p = document.createElement('div');
+          p.className = 'owner-pill unassigned-pill';
+          p.textContent = 'Unassigned';
+          pillsEl.appendChild(p);
+        }
       });
     });
 
