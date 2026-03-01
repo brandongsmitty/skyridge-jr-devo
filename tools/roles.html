@@ -391,38 +391,42 @@
     document.getElementById('roles-container').innerHTML = html;
 
     // Inject primary + backup owners live from Firebase Tracker
-    // auth.js already guarantees the user is authenticated — subscribe directly,
-    // matching the same pattern used in tracker.html.
-    MeetingStore.onRoleAssignments(assignments => {
-      roles.forEach((role, idx) => {
-        const roleId = ROLE_NAME_TO_ID[role.name];
-        if (!roleId) return;
-        const asgn = assignments[roleId];
-        const card = document.getElementById(`role-${idx}`);
-        if (!card) return;
-        const pillsEl = card.querySelector('.owner-pills');
-        if (!pillsEl) return;
-        const lead   = asgn && asgn.primary;
-        const backup = asgn && asgn.backup;
-        pillsEl.innerHTML = '';
-        if (lead) {
-          const p = document.createElement('div');
-          p.className = 'owner-pill lead-pill';
-          p.textContent = '\u25cf ' + lead;
-          pillsEl.appendChild(p);
-        }
-        if (backup) {
-          const p = document.createElement('div');
-          p.className = 'owner-pill backup-pill';
-          p.textContent = '\u25cb ' + backup + ' (bkp)';
-          pillsEl.appendChild(p);
-        }
-        if (!lead && !backup) {
-          const p = document.createElement('div');
-          p.className = 'owner-pill unassigned-pill';
-          p.textContent = 'Unassigned';
-          pillsEl.appendChild(p);
-        }
+    // Wait for auth state to be confirmed before reading the database —
+    // rules require auth != null and the RTDB SDK does not retry a listener
+    // that was cancelled due to permission denied on the initial request.
+    firebase.auth().onAuthStateChanged(user => {
+      if (!user || !MeetingStore.isReady()) return;
+      MeetingStore.onRoleAssignments(assignments => {
+        roles.forEach((role, idx) => {
+          const roleId = ROLE_NAME_TO_ID[role.name];
+          if (!roleId) return;
+          const asgn = assignments[roleId];
+          const card = document.getElementById(`role-${idx}`);
+          if (!card) return;
+          const pillsEl = card.querySelector('.owner-pills');
+          if (!pillsEl) return;
+          const lead   = asgn && asgn.primary;
+          const backup = asgn && asgn.backup;
+          pillsEl.innerHTML = '';
+          if (lead) {
+            const p = document.createElement('div');
+            p.className = 'owner-pill lead-pill';
+            p.textContent = '\u25cf ' + lead;
+            pillsEl.appendChild(p);
+          }
+          if (backup) {
+            const p = document.createElement('div');
+            p.className = 'owner-pill backup-pill';
+            p.textContent = '\u25cb ' + backup + ' (bkp)';
+            pillsEl.appendChild(p);
+          }
+          if (!lead && !backup) {
+            const p = document.createElement('div');
+            p.className = 'owner-pill unassigned-pill';
+            p.textContent = 'Unassigned';
+            pillsEl.appendChild(p);
+          }
+        });
       });
     });
 
