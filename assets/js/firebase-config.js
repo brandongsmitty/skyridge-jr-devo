@@ -1,11 +1,19 @@
 // ─────────────────────────────────────────────────────────────────────────────
 //  Firebase Configuration — Skyridge Jr Devo
 //
-//  If you need to enable Realtime Database:
-//  1. Go to https://console.firebase.google.com → skyridge-jr-devo project
-//  2. Build → Realtime Database → Create database
+//  SETUP CHECKLIST (Firebase Console → skyridge-jr-devo project)
+//
+//  1. Realtime Database
+//     Build → Realtime Database → Create database
 //     → Choose us-central1 → Start in "test mode"
-//  3. Once created, the databaseURL below will be live.
+//     Then immediately update the rules (see database.rules.json):
+//       { "rules": { "skyridge-jr-devo": { ".read": "auth != null", ".write": "auth != null" } } }
+//
+//  2. Authentication — Google Sign-In
+//     Build → Authentication → Sign-in method → Google → Enable
+//     Add your domain to the Authorized domains list if hosting outside Firebase.
+//
+//  Both steps are required for the auth guard (auth.js) to work correctly.
 // ─────────────────────────────────────────────────────────────────────────────
 
 const FIREBASE_CONFIG = {
