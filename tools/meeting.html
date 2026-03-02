@@ -383,7 +383,8 @@
   .pb-coach { background: var(--blue-pale); border: 1px solid #b8cfec; color: var(--blue); }
   .pb-mtg { background: var(--orange-pale); border: 1px solid var(--orange-mid); color: var(--orange); }
   .pb-gap { background: var(--red-pale); border: 1px solid var(--red-mid); color: var(--red); }
-  .parking-text { font-size: 13px; color: var(--gray-dark); line-height: 1.5; flex: 1; }
+  .parking-text { font-size: 13px; color: var(--white); line-height: 1.5; flex: 1; }
+  [data-theme="light"] .parking-text { color: var(--gray-dark); }
   .parking-check { flex-shrink: 0; margin-top: 3px; accent-color: var(--green); cursor: pointer; }
   .parking-item.done .parking-text { text-decoration: line-through; opacity: 0.5; }
   .parking-item.done .parking-bullet { opacity: 0.4; }
@@ -397,8 +398,9 @@
   .parking-input {
     flex: 1; font-family: 'Barlow', sans-serif; font-size: 13px;
     background: var(--gray-bg); border: 1px solid var(--gray-line); border-radius: 4px;
-    padding: 8px 12px; outline: none; color: var(--gray-dark);
+    padding: 8px 12px; outline: none; color: var(--white);
   }
+  [data-theme="light"] .parking-input { color: var(--gray-dark); }
   .parking-input:focus { border-color: var(--orange); background: var(--white); }
   .btn-add {
     font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 700;
@@ -599,8 +601,9 @@
   .parent-note-card-title {
     font-family: 'Barlow Condensed', sans-serif;
     font-size: 13px; font-weight: 700; letter-spacing: 0.5px;
-    color: var(--gray-dark);
+    color: var(--white);
   }
+  [data-theme="light"] .parent-note-card-title { color: var(--gray-dark); }
   .parent-note-card textarea {
     display: block; width: 100%; min-height: 70px;
     padding: 10px 14px; border: none; background: transparent;
