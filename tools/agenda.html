@@ -14,23 +14,23 @@
 <script src="../assets/js/auth.js"></script>
 <style>
   :root {
-  --orange:       #F26A1B;
-  --orange-light: #FF8C42;
-  --orange-pale:  rgba(242,106,27,0.12);
-  --orange-mid:   rgba(242,106,27,0.22);
+  --orange:       #E74302;
+  --orange-light: #f68026;
+  --orange-pale:  rgba(231,67,2,0.12);
+  --orange-mid:   rgba(231,67,2,0.22);
   --black:        #111111;
   --gray-dark:    #1A1A1A;
   --gray-mid:     #888888;
   --gray-light:   #555555;
   --gray-bg:      #111111;
   --gray-line:    rgba(255,255,255,0.08);
-  --white:        #F5F0EB;
+  --white:        #FFFFFF;
   --green:        #2D7D52;
   --green-pale:   rgba(45,125,82,0.12);
 }
 [data-theme="light"] {
-  --orange:       #E85D0C;
-  --orange-light: #F97316;
+  --orange:       #E74302;
+  --orange-light: #f68026;
   --orange-pale:  #FFF0E6;
   --orange-mid:   #FDDCCA;
   --black:        #111111;
@@ -86,7 +86,7 @@
     position: absolute;
     top: -30px; right: -30px;
     width: 180px; height: 180px;
-    border: 24px solid rgba(232,93,12,0.12);
+    border: 24px solid rgba(231,67,2,0.12);
     border-radius: 50%;
   }
   .header-inner { max-width:780px; margin:0 auto; padding:0 20px; }
@@ -131,8 +131,8 @@
     color: #cccccc;
   }
   .chip.highlight {
-    background: rgba(232,93,12,0.2);
-    border-color: rgba(232,93,12,0.35);
+    background: rgba(231,67,2,0.2);
+    border-color: rgba(231,67,2,0.35);
     color: var(--orange-light);
   }
 
@@ -403,8 +403,8 @@
     border-bottom: 2px solid transparent; cursor: pointer; transition: all 0.15s;
     white-space: nowrap;
   }
-  .atab:hover { color: #F5F0EB; }
-  .atab.active { color: #F5F0EB; border-bottom-color: #F26A1B; }
+  .atab:hover { color: #FFFFFF; }
+  .atab.active { color: #FFFFFF; border-bottom-color: #E74302; }
 
   /* ── AGENDA PAGES ── */
   .agenda-page { display: none; }
@@ -423,8 +423,8 @@
   }
   .parent-header-inner { max-width: 780px; margin: 0 auto; padding: 0 20px; }
   .parent-meeting-card {
-    background: rgba(242,106,27,0.08);
-    border: 1px solid rgba(242,106,27,0.2);
+    background: rgba(231,67,2,0.08);
+    border: 1px solid rgba(231,67,2,0.2);
     border-radius: 6px;
     padding: 16px 20px;
     margin-top: 18px;
@@ -435,7 +435,7 @@
     font-family: 'Barlow Condensed', sans-serif;
     font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: #888;
   }
-  .parent-meeting-value { font-size: 14px; color: #F5F0EB; font-weight: 500; }
+  .parent-meeting-value { font-size: 14px; color: #FFFFFF; font-weight: 500; }
   .parent-page-wrap { max-width: 780px; margin: 0 auto; padding: 0 20px 60px; }
   .canva-section-label {
     font-family: 'Barlow Condensed', sans-serif;

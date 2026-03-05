@@ -17,9 +17,9 @@
 <style>
   :root {
     --black: #0D0D0D;
-    --orange: #F26A1B;
-    --orange-light: #FF8C42;
-    --white: #F5F0EB;
+    --orange: #E74302;
+    --orange-light: #f68026;
+    --white: #FFFFFF;
     --gray-dark: #1A1A1A;
     --gray-mid: #242424;
     --gray-light: #888;
@@ -28,9 +28,9 @@
     --yellow: #D4A017;
   }
     [data-theme="light"] {
-      --orange:       #D95E18;
-      --orange-light: #E87733;
-      --black:        #F5F0EB;
+      --orange:       #E74302;
+      --orange-light: #f68026;
+      --black:        #FFFFFF;
       --gray-dark:    #FFFFFF;
       --gray-mid:     #F0ECE7;
       --white:        #111111;
@@ -72,7 +72,7 @@
   .page-wrap { max-width: 960px; margin: 0 auto; padding: 0 24px 80px; }
 
   .header {
-    background: linear-gradient(135deg, #111 0%, #1c1c1c 60%, #2a1500 100%);
+    background: linear-gradient(135deg, #111 0%, #1c1c1c 60%, #280c00 100%);
     border-bottom: 3px solid var(--orange);
     padding: 32px 40px 24px;
     position: relative;
@@ -82,7 +82,7 @@
     content:'';
     position:absolute; top:-40px; right:-40px;
     width:200px; height:200px;
-    border:28px solid rgba(242,106,27,0.07);
+    border:28px solid rgba(231,67,2,0.07);
     border-radius:50%;
   }
   .header-inner { max-width:960px; margin:0 auto; position:relative; }
@@ -100,8 +100,8 @@
   .header-sub { font-size:13px; color:var(--gray-light); margin-top:8px; }
   .header-meta { display:flex; gap:20px; margin-top:14px; flex-wrap:wrap; }
   .header-stat {
-    background:rgba(242,106,27,0.1);
-    border:1px solid rgba(242,106,27,0.2);
+    background:rgba(231,67,2,0.1);
+    border:1px solid rgba(231,67,2,0.2);
     border-radius:4px;
     padding:8px 16px;
   }
@@ -156,7 +156,7 @@
     font-family:'Barlow Condensed',sans-serif;
     font-size:11px; font-weight:700; letter-spacing:2px;
     color:var(--orange); text-transform:uppercase;
-    background:rgba(242,106,27,0.12);
+    background:rgba(231,67,2,0.12);
     padding:3px 8px; border-radius:2px;
   }
   .section-title {
@@ -195,7 +195,7 @@
     text-transform:uppercase; padding:2px 7px; border-radius:2px;
     margin-left:8px; vertical-align:middle;
   }
-  .type-essential { background:rgba(242,106,27,0.15); color:var(--orange); }
+  .type-essential { background:rgba(231,67,2,0.15); color:var(--orange); }
   .type-rec { background:rgba(100,100,100,0.15); color:#888; }
   .time-note { font-size:11px; color:var(--gray-light); margin-top:3px; }
 
@@ -242,7 +242,7 @@
     font-size:10px; font-weight:700; letter-spacing:1px;
     text-transform:uppercase; padding:2px 6px; border-radius:2px;
   }
-  .tag-elem { background:rgba(242,106,27,0.1); color:var(--orange); }
+  .tag-elem { background:rgba(231,67,2,0.1); color:var(--orange); }
   .tag-ms { background:rgba(80,120,200,0.12); color:#7ba8e8; }
 
   .material-cell { display:flex; flex-wrap:wrap; gap:4px; }
@@ -254,7 +254,7 @@
     transition:all 0.15s; white-space:nowrap;
   }
   .mat-check input { accent-color:var(--orange); cursor:pointer; }
-  .mat-check.checked { border-color:var(--orange); color:var(--white); background:rgba(242,106,27,0.08); }
+  .mat-check.checked { border-color:var(--orange); color:var(--white); background:rgba(231,67,2,0.08); }
   .mat-check input:checked + span { color:var(--white); }
 
   .action-bar {
@@ -338,7 +338,7 @@
     font-size: 13px; color: #888; white-space: nowrap;
     padding: 0 16px;
   }
-  .strip-stat span { color: #F26A1B; font-weight: 700; margin-right: 5px; }
+  .strip-stat span { color: #E74302; font-weight: 700; margin-right: 5px; }
   .strip-divider { width: 1px; height: 16px; background: #2a2a2a; flex-shrink: 0; }
 
   /* Larger resizable textareas for sections 03 and 04 */
@@ -353,11 +353,11 @@
     font-size: 11px; font-weight: 600; letter-spacing: 0.5px;
     padding: 3px 10px; border-radius: 2px;
   }
-  .sync-live { background: rgba(242,106,27,0.12); color: #F26A1B; border: 1px solid rgba(242,106,27,0.3); }
+  .sync-live { background: rgba(231,67,2,0.12); color: #E74302; border: 1px solid rgba(231,67,2,0.3); }
   .sync-offline { background: rgba(136,136,136,0.12); color: #888; border: 1px solid #444; }
 
   /* ── Light mode: element overrides (must be LAST to win cascade) ── */
-  [data-theme="light"] .header-title { color: #F5F0EB; }
+  [data-theme="light"] .header-title { color: #FFFFFF; }
   [data-theme="light"] .header-sub   { color: #B8B0A8; }
   [data-theme="light"] input.coach-input,
   [data-theme="light"] select.coach-input,
@@ -375,7 +375,7 @@
     background: #f5f2ee; border-color: #cccccc; color: #555555;
   }
   [data-theme="light"] .mat-check.checked {
-    background: rgba(217,94,24,0.08);
+    background: rgba(231,67,2,0.08);
   }
   [data-theme="light"] th {
     background: #e8e4de; color: #555555;

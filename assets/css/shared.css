@@ -6,7 +6,7 @@
 /* ─── SITE NAV ─── */
 .site-nav {
   background: #111111;
-  border-bottom: 2px solid #F26A1B;
+  border-bottom: 2px solid #E74302;
   position: sticky;
   top: 0;
   z-index: 200;
@@ -30,7 +30,7 @@
   font-weight: 800;
   letter-spacing: 1.5px;
   text-transform: uppercase;
-  color: #F26A1B;
+  color: #E74302;
   padding: 8px 20px 8px 0;
   text-decoration: none;
   white-space: nowrap;
@@ -65,13 +65,13 @@
 }
 
 .site-nav-link:hover {
-  color: #F26A1B;
-  border-bottom-color: rgba(242, 106, 27, 0.4);
+  color: #E74302;
+  border-bottom-color: rgba(231, 67, 2, 0.4);
 }
 
 .site-nav-link.active {
-  color: #F5F0EB;
-  border-bottom-color: #F26A1B;
+  color: #FFFFFF;
+  border-bottom-color: #E74302;
 }
 
 /* ─── THEME TOGGLE BUTTON ─── */
@@ -92,8 +92,8 @@
   transition: border-color 0.15s, color 0.15s;
 }
 .theme-toggle:hover {
-  border-color: #F26A1B;
-  color: #F26A1B;
+  border-color: #E74302;
+  color: #E74302;
 }
 
 /* ─── PRINT ─── */

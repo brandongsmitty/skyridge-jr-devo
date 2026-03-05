@@ -10,20 +10,20 @@
 <script src="assets/js/theme.js"></script>
 <style>
   :root {
-    --orange: #F26A1B;
-    --orange-light: #FF8C42;
+    --orange: #E74302;
+    --orange-light: #f68026;
     --black: #0D0D0D;
     --gray-dark: #1A1A1A;
     --gray-mid: #242424;
     --gray-light: #888;
-    --white: #F5F0EB;
+    --white: #FFFFFF;
     --border: #2E2E2E;
   }
 
     [data-theme="light"] {
-      --orange:       #D95E18;
-      --orange-light: #E87733;
-      --black:        #F5F0EB;
+      --orange:       #E74302;
+      --orange-light: #f68026;
+      --black:        #FFFFFF;
       --gray-dark:    #FFFFFF;
       --gray-mid:     #F0ECE7;
       --white:        #111111;
@@ -48,7 +48,7 @@
 
   /* HEADER */
   .header {
-    background: linear-gradient(135deg, #0D0D0D 0%, #1a1a1a 60%, #2a1500 100%);
+    background: linear-gradient(135deg, #0D0D0D 0%, #1a1a1a 60%, #280c00 100%);
     border-bottom: 3px solid var(--orange);
     padding: 48px 40px 36px;
     position: relative;
@@ -59,7 +59,7 @@
     position: absolute;
     top: -50px; right: -50px;
     width: 280px; height: 280px;
-    border: 36px solid rgba(242,106,27,0.07);
+    border: 36px solid rgba(231,67,2,0.07);
     border-radius: 50%;
   }
   .header-inner {
@@ -96,8 +96,8 @@
     align-items: center;
     gap: 8px;
     margin-top: 18px;
-    background: rgba(242,106,27,0.1);
-    border: 1px solid rgba(242,106,27,0.2);
+    background: rgba(231,67,2,0.1);
+    border: 1px solid rgba(231,67,2,0.2);
     border-radius: 4px;
     padding: 8px 16px;
     font-size: 13px;
@@ -358,7 +358,7 @@
   }
 
   /* ── Light mode: element overrides (must be LAST to win cascade) ── */
-  [data-theme="light"] .header-title { color: #F5F0EB; }
+  [data-theme="light"] .header-title { color: #FFFFFF; }
   [data-theme="light"] .header-sub   { color: #B8B0A8; }
   [data-theme="light"] .tool-card    { box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
 </style>
