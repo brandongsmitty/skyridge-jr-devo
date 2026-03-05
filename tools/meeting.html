@@ -16,17 +16,17 @@
 <script src="../assets/js/auth.js"></script>
 <style>
   :root {
-  --orange:       #F26A1B;
-  --orange-light: #FF8C42;
-  --orange-pale:  rgba(242,106,27,0.12);
-  --orange-mid:   rgba(242,106,27,0.22);
+  --orange:       #E74302;
+  --orange-light: #f68026;
+  --orange-pale:  rgba(231,67,2,0.12);
+  --orange-mid:   rgba(231,67,2,0.22);
   --black:        #111111;
   --gray-dark:    #1A1A1A;
   --gray-mid:     #888888;
   --gray-light:   #555555;
   --gray-bg:      #111111;
   --gray-line:    rgba(255,255,255,0.08);
-  --white:        #F5F0EB;
+  --white:        #FFFFFF;
   --green:        #2D7D52;
   --green-pale:   rgba(45,125,82,0.12);
   --green-mid:    rgba(45,125,82,0.25);
@@ -40,8 +40,8 @@
   --blue-pale:    rgba(58,110,168,0.12);
 }
 [data-theme="light"] {
-  --orange:       #E85D0C;
-  --orange-light: #F97316;
+  --orange:       #E74302;
+  --orange-light: #f68026;
   --orange-pale:  #FFF0E6;
   --orange-mid:   #FDDCCA;
   --black:        #111111;
@@ -83,7 +83,7 @@
   }
 
   .header {
-    background: linear-gradient(135deg, #111 0%, #1c1c1c 60%, #2a1500 100%);
+    background: linear-gradient(135deg, #111 0%, #1c1c1c 60%, #280c00 100%);
     border-bottom: 3px solid var(--orange);
     padding: 28px 40px 22px;
     position: relative;
@@ -93,7 +93,7 @@
     content: '';
     position: absolute; top: -40px; right: -40px;
     width: 200px; height: 200px;
-    border: 28px solid rgba(242,106,27,0.07);
+    border: 28px solid rgba(231,67,2,0.07);
     border-radius: 50%;
   }
   .header-inner { max-width: 1200px; margin: 0 auto; position: relative; }
@@ -105,14 +105,14 @@
   .header-title {
     font-family: 'Barlow Condensed', sans-serif;
     font-size: 36px; font-weight: 800; line-height: 1;
-    color: #F5F0EB; text-transform: uppercase;
+    color: #FFFFFF; text-transform: uppercase;
   }
   .header-title span { color: var(--orange); }
   .header-sub { font-size: 13px; color: #888; margin-top: 8px; }
   .header-meta { display: flex; gap: 12px; margin-top: 14px; flex-wrap: wrap; }
   .header-stat {
-    background: rgba(242,106,27,0.1);
-    border: 1px solid rgba(242,106,27,0.2);
+    background: rgba(231,67,2,0.1);
+    border: 1px solid rgba(231,67,2,0.2);
     border-radius: 4px; padding: 7px 14px;
   }
   .header-stat.green {
@@ -457,12 +457,12 @@
   }
   .modal-title {
     font-family: 'Barlow Condensed', sans-serif;
-    font-size: 22px; font-weight: 800; text-transform: uppercase; color: #F5F0EB;
+    font-size: 22px; font-weight: 800; text-transform: uppercase; color: #FFFFFF;
   }
   .modal-sub { font-size: 13px; color: #888; }
   .modal-text {
     background: #111; border: 1px solid #2E2E2E; border-radius: 4px;
-    padding: 16px; font-size: 12px; color: #F5F0EB;
+    padding: 16px; font-size: 12px; color: #FFFFFF;
     font-family: monospace; line-height: 1.7;
     overflow-y: auto; flex: 1; white-space: pre-wrap;
   }
@@ -470,7 +470,7 @@
   .modal-actions .btn-close {
     font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 700;
     letter-spacing: 1px; text-transform: uppercase;
-    background: transparent; color: #F5F0EB; border: 1px solid #2E2E2E; border-radius: 4px;
+    background: transparent; color: #FFFFFF; border: 1px solid #2E2E2E; border-radius: 4px;
     padding: 10px 20px; cursor: pointer;
   }
   .modal-actions .btn-close:hover { border-color: var(--orange); color: var(--orange); }
@@ -529,7 +529,7 @@
 
   /* ── PARENT KICKOFF TAB ── */
   .parent-header {
-    background: linear-gradient(135deg, #111 0%, #1a1a1a 60%, #2a1500 100%);
+    background: linear-gradient(135deg, #111 0%, #1a1a1a 60%, #280c00 100%);
     border-bottom: 3px solid var(--orange);
     padding: 36px 40px 28px;
     position: relative;
@@ -540,7 +540,7 @@
     position: absolute;
     top: -40px; right: -40px;
     width: 220px; height: 220px;
-    border: 30px solid rgba(242,106,27,0.08);
+    border: 30px solid rgba(231,67,2,0.08);
     border-radius: 50%;
   }
   .parent-header-inner { max-width: 1200px; margin: 0 auto; position: relative; }
@@ -552,7 +552,7 @@
   .parent-header-title {
     font-family: 'Barlow Condensed', sans-serif;
     font-size: 32px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase;
-    color: #F5F0EB; line-height: 1.1;
+    color: #FFFFFF; line-height: 1.1;
   }
   .parent-header-title span { color: var(--orange); }
   .parent-header-sub { font-size: 13px; color: #888; margin-top: 6px; }
@@ -564,7 +564,7 @@
     font-size: 13px; letter-spacing: 0.5px; text-transform: uppercase;
     color: #aaa;
   }
-  .parent-meta-item strong { color: #F5F0EB; }
+  .parent-meta-item strong { color: #FFFFFF; }
 
   .parent-page-wrap {
     max-width: 1200px;
@@ -964,7 +964,7 @@
           <div class="coach-name">Brandon Smith</div>
           <div class="coach-meta">Head Coach · 4+ Years · All Strengths</div>
         </div>
-        <div class="coach-status-tag" style="background:rgba(242,106,27,0.15);border:1px solid rgba(242,106,27,0.3);color:var(--orange);font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:3px 9px;border-radius:2px;">Head Coach</div>
+        <div class="coach-status-tag" style="background:rgba(231,67,2,0.15);border:1px solid rgba(231,67,2,0.3);color:var(--orange);font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:3px 9px;border-radius:2px;">Head Coach</div>
       </div>
       <div class="coach-card-body">
         <div class="cc-row">
