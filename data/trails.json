@@ -1,0 +1,4073 @@
+{
+  "version": "1.0.0",
+  "generated": "2026-03-22",
+  "source": "openstreetmap-overpass",
+  "trailheads": [
+    {
+      "id": "lambert-park",
+      "name": "Lambert Park",
+      "area": "Alpine, UT",
+      "address": "E 4600 N, Alpine, UT 84004",
+      "coordinates": {
+        "lat": 40.4615,
+        "lng": -111.7698
+      },
+      "distance_from_skyridge_mi": 7.9,
+      "trailforks_region_id": null,
+      "parking_notes": "Gravel lot at trailhead on E 4600 N. Limited parking on busy days.",
+      "trails": [
+        {
+          "id": "lambert-park--corkscrew-trail",
+          "trailforks_id": null,
+          "name": "Corkscrew Trail",
+          "difficulty": "blue",
+          "length_mi": 0.34,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "lambert-park--flank-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "lambert-park--dr-pepper-trail",
+          "trailforks_id": null,
+          "name": "Dr. Pepper Trail",
+          "difficulty": "blue",
+          "length_mi": 0.6,
+          "elevation_gain_ft": null,
+          "direction": "downhill",
+          "surface": "dirt",
+          "connects_to": [
+            "lambert-park--middle-trail",
+            "lambert-park--zag-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "lambert-park--flank-trail",
+          "trailforks_id": null,
+          "name": "Flank Trail",
+          "difficulty": "blue",
+          "length_mi": 0.36,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "lambert-park--corkscrew-trail",
+            "lambert-park--indian-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "lambert-park--high-bench-trail",
+          "trailforks_id": null,
+          "name": "High Bench Trail",
+          "difficulty": "blue",
+          "length_mi": 0.79,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "lambert-park--river-trail",
+            "lambert-park--lambert-s-luge-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "lambert-park--indian-trail",
+          "trailforks_id": null,
+          "name": "Indian Trail",
+          "difficulty": "blue",
+          "length_mi": 0.14,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "lambert-park--flank-trail",
+            "lambert-park--shell-shocked-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "lambert-park--lambert-s-luge-trail",
+          "trailforks_id": null,
+          "name": "Lambert's Luge Trail",
+          "difficulty": "blue",
+          "length_mi": 0.28,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "lambert-park--high-bench-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "lambert-park--middle",
+          "trailforks_id": null,
+          "name": "Middle",
+          "difficulty": "blue",
+          "length_mi": 0.04,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "lambert-park--shell-shocked-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "lambert-park--middle-trail",
+          "trailforks_id": null,
+          "name": "Middle Trail",
+          "difficulty": "blue",
+          "length_mi": 0.16,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "lambert-park--poppy-trail",
+            "lambert-park--dr-pepper-trail",
+            "lambert-park--ruin-trail",
+            "lambert-park--ruin"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "lambert-park--north-point-connector-trail",
+          "trailforks_id": null,
+          "name": "North Point Connector Trail",
+          "difficulty": "blue",
+          "length_mi": 0.81,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "lambert-park--stoney-way-trail",
+            "lambert-park--vista-ridge-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "lambert-park--poppy-trail",
+          "trailforks_id": null,
+          "name": "Poppy Trail",
+          "difficulty": "blue",
+          "length_mi": 0.25,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "lambert-park--zag-trail",
+            "lambert-park--middle-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "lambert-park--redford-run-trail",
+          "trailforks_id": null,
+          "name": "Redford Run Trail",
+          "difficulty": "green",
+          "length_mi": 0.0,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "lambert-park--river-trail",
+          "trailforks_id": null,
+          "name": "River Trail",
+          "difficulty": "blue",
+          "length_mi": 0.18,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "lambert-park--high-bench-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "lambert-park--ruin",
+          "trailforks_id": null,
+          "name": "Ruin",
+          "difficulty": "blue",
+          "length_mi": 0.01,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "lambert-park--ruin-trail",
+            "lambert-park--middle-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "lambert-park--ruin-trail",
+          "trailforks_id": null,
+          "name": "Ruin Trail",
+          "difficulty": "blue",
+          "length_mi": 0.4,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "lambert-park--middle-trail",
+            "lambert-park--ruin"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "lambert-park--shell-shocked-trail",
+          "trailforks_id": null,
+          "name": "Shell Shocked Trail",
+          "difficulty": "blue",
+          "length_mi": 0.58,
+          "elevation_gain_ft": null,
+          "direction": "downhill",
+          "surface": "dirt",
+          "connects_to": [
+            "lambert-park--middle",
+            "lambert-park--indian-trail",
+            "lambert-park--zag-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "lambert-park--stoney-way-trail",
+          "trailforks_id": null,
+          "name": "Stoney Way Trail",
+          "difficulty": "blue",
+          "length_mi": 1.32,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "lambert-park--trail-1301144781",
+            "lambert-park--north-point-connector-trail",
+            "lambert-park--vista-ridge-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "lambert-park--vista-ridge-trail",
+          "trailforks_id": null,
+          "name": "Vista Ridge Trail",
+          "difficulty": "blue",
+          "length_mi": 0.96,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "lambert-park--stoney-way-trail",
+            "lambert-park--north-point-connector-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "lambert-park--zag-trail",
+          "trailforks_id": null,
+          "name": "Zag Trail",
+          "difficulty": "blue",
+          "length_mi": 1.09,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "lambert-park--poppy-trail",
+            "lambert-park--dr-pepper-trail",
+            "lambert-park--shell-shocked-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "lambert-park--trail-1301144781",
+          "trailforks_id": null,
+          "name": "Trail 1301144781",
+          "difficulty": "blue",
+          "length_mi": 0.08,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "lambert-park--stoney-way-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "hogs-hollow",
+      "name": "Hogs Hollow",
+      "area": "Alpine, UT",
+      "address": "Hogs Hollow Rd, Alpine, UT 84004",
+      "coordinates": {
+        "lat": 40.476,
+        "lng": -111.7735
+      },
+      "distance_from_skyridge_mi": 9.1,
+      "trailforks_region_id": null,
+      "parking_notes": "Small dirt lot at Hogs Hollow trailhead. Street parking available nearby.",
+      "trails": [
+        {
+          "id": "hogs-hollow--alpine-slide-trail",
+          "trailforks_id": null,
+          "name": "Alpine Slide Trail",
+          "difficulty": "black",
+          "length_mi": 0.55,
+          "elevation_gain_ft": null,
+          "direction": "downhill",
+          "surface": "dirt",
+          "connects_to": [
+            "hogs-hollow--easy-breezy-trail",
+            "hogs-hollow--last-chance-trail",
+            "hogs-hollow--bodily-harm-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "hogs-hollow--bodily-harm-trail",
+          "trailforks_id": null,
+          "name": "Bodily Harm Trail",
+          "difficulty": "blue",
+          "length_mi": 1.69,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "hogs-hollow--three-falls-trail",
+            "hogs-hollow--easy-breezy-trail",
+            "hogs-hollow--more-effort-trail",
+            "hogs-hollow--stoney-way-trail",
+            "hogs-hollow--valley-view-trail",
+            "hogs-hollow--alpine-slide-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "hogs-hollow--corkscrew-trail",
+          "trailforks_id": null,
+          "name": "Corkscrew Trail",
+          "difficulty": "blue",
+          "length_mi": 0.34,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "hogs-hollow--flank-trail",
+            "hogs-hollow--invincible-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "hogs-hollow--dr-pepper-trail",
+          "trailforks_id": null,
+          "name": "Dr. Pepper Trail",
+          "difficulty": "blue",
+          "length_mi": 0.6,
+          "elevation_gain_ft": null,
+          "direction": "downhill",
+          "surface": "dirt",
+          "connects_to": [
+            "hogs-hollow--zag-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "hogs-hollow--easy-breezy-trail",
+          "trailforks_id": null,
+          "name": "Easy Breezy Trail",
+          "difficulty": "black",
+          "length_mi": 0.78,
+          "elevation_gain_ft": null,
+          "direction": "downhill",
+          "surface": "dirt",
+          "connects_to": [
+            "hogs-hollow--bodily-harm-trail",
+            "hogs-hollow--last-chance-trail",
+            "hogs-hollow--alpine-slide-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "hogs-hollow--flank-trail",
+          "trailforks_id": null,
+          "name": "Flank Trail",
+          "difficulty": "blue",
+          "length_mi": 0.36,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "hogs-hollow--corkscrew-trail",
+            "hogs-hollow--indian-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "hogs-hollow--forbidden",
+          "trailforks_id": null,
+          "name": "Forbidden",
+          "difficulty": "blue",
+          "length_mi": 0.01,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "hogs-hollow--lower-forbidden-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "hogs-hollow--forbidden-trail",
+          "trailforks_id": null,
+          "name": "Forbidden Trail",
+          "difficulty": "blue",
+          "length_mi": 2.01,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "hogs-hollow--more-effort-trail",
+            "hogs-hollow--three-falls-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "hogs-hollow--high-bench-trail",
+          "trailforks_id": null,
+          "name": "High Bench Trail",
+          "difficulty": "blue",
+          "length_mi": 0.79,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "hogs-hollow--lambert-s-luge-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "hogs-hollow--indian-trail",
+          "trailforks_id": null,
+          "name": "Indian Trail",
+          "difficulty": "blue",
+          "length_mi": 0.14,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "hogs-hollow--shell-shocked-trail",
+            "hogs-hollow--flank-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "hogs-hollow--invincible-trail",
+          "trailforks_id": null,
+          "name": "Invincible Trail",
+          "difficulty": "blue",
+          "length_mi": 0.15,
+          "elevation_gain_ft": null,
+          "direction": "downhill",
+          "surface": "dirt",
+          "connects_to": [
+            "hogs-hollow--ziggy-trail",
+            "hogs-hollow--corkscrew-trail",
+            "hogs-hollow--shell-shocked-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "hogs-hollow--lambert-s-luge",
+          "trailforks_id": null,
+          "name": "Lambert's Luge",
+          "difficulty": "blue",
+          "length_mi": 0.0,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "hogs-hollow--lambert-s-luge-trail",
+          "trailforks_id": null,
+          "name": "Lambert's Luge Trail",
+          "difficulty": "blue",
+          "length_mi": 0.28,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "hogs-hollow--high-bench-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "hogs-hollow--last-chance-trail",
+          "trailforks_id": null,
+          "name": "Last Chance Trail",
+          "difficulty": "black",
+          "length_mi": 0.7,
+          "elevation_gain_ft": null,
+          "direction": "downhill",
+          "surface": "dirt",
+          "connects_to": [
+            "hogs-hollow--three-falls-trail",
+            "hogs-hollow--easy-breezy-trail",
+            "hogs-hollow--alpine-slide-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "hogs-hollow--lower-forbidden-trail",
+          "trailforks_id": null,
+          "name": "Lower Forbidden Trail",
+          "difficulty": "blue",
+          "length_mi": 0.91,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "hogs-hollow--more-effort-trail",
+            "hogs-hollow--forbidden"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "hogs-hollow--middle",
+          "trailforks_id": null,
+          "name": "Middle",
+          "difficulty": "blue",
+          "length_mi": 0.0,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "hogs-hollow--middle-spring-trail",
+          "trailforks_id": null,
+          "name": "Middle Spring Trail",
+          "difficulty": "blue",
+          "length_mi": 0.6,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "hogs-hollow--rodeo-down-trail",
+            "hogs-hollow--north-spring-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "hogs-hollow--middle-trail",
+          "trailforks_id": null,
+          "name": "Middle Trail",
+          "difficulty": "blue",
+          "length_mi": 0.03,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "hogs-hollow--rodeo-up-trail",
+            "hogs-hollow--rodeo-down-trail",
+            "hogs-hollow--spring-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "hogs-hollow--more-effort-trail",
+          "trailforks_id": null,
+          "name": "More Effort Trail",
+          "difficulty": "blue",
+          "length_mi": 0.63,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "hogs-hollow--lower-forbidden-trail",
+            "hogs-hollow--forbidden-trail",
+            "hogs-hollow--bodily-harm-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "hogs-hollow--north-point-connector-trail",
+          "trailforks_id": null,
+          "name": "North Point Connector Trail",
+          "difficulty": "blue",
+          "length_mi": 0.81,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "hogs-hollow--vista-ridge-trail",
+            "hogs-hollow--stoney-way-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "hogs-hollow--north-spring",
+          "trailforks_id": null,
+          "name": "North Spring",
+          "difficulty": "blue",
+          "length_mi": 0.02,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "hogs-hollow--north-spring-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "hogs-hollow--north-spring-trail",
+          "trailforks_id": null,
+          "name": "North Spring Trail",
+          "difficulty": "blue",
+          "length_mi": 0.73,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "hogs-hollow--rodeo-trailhead-connector",
+            "hogs-hollow--middle-spring-trail",
+            "hogs-hollow--rodeo-trailhead-connector-trail",
+            "hogs-hollow--north-spring"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "hogs-hollow--poppy-trail",
+          "trailforks_id": null,
+          "name": "Poppy Trail",
+          "difficulty": "blue",
+          "length_mi": 0.4,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "hogs-hollow--ruin-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "hogs-hollow--river",
+          "trailforks_id": null,
+          "name": "River",
+          "difficulty": "blue",
+          "length_mi": 0.0,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "hogs-hollow--river-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "hogs-hollow--river-trail",
+          "trailforks_id": null,
+          "name": "River Trail",
+          "difficulty": "blue",
+          "length_mi": 0.04,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "hogs-hollow--river"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "hogs-hollow--rodeo-down-trail",
+          "trailforks_id": null,
+          "name": "Rodeo Down Trail",
+          "difficulty": "blue",
+          "length_mi": 0.48,
+          "elevation_gain_ft": null,
+          "direction": "downhill",
+          "surface": "dirt",
+          "connects_to": [
+            "hogs-hollow--rodeo-trailhead-connector-trail",
+            "hogs-hollow--middle-spring-trail",
+            "hogs-hollow--middle-trail",
+            "hogs-hollow--rodeo-up-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "hogs-hollow--rodeo-trailhead-connector",
+          "trailforks_id": null,
+          "name": "Rodeo Trailhead Connector",
+          "difficulty": "blue",
+          "length_mi": 0.0,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "hogs-hollow--rodeo-trailhead-connector-trail",
+            "hogs-hollow--north-spring-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "hogs-hollow--rodeo-trailhead-connector-trail",
+          "trailforks_id": null,
+          "name": "Rodeo Trailhead Connector Trail",
+          "difficulty": "blue",
+          "length_mi": 0.14,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "hogs-hollow--rodeo-trailhead-connector",
+            "hogs-hollow--rodeo-down-trail",
+            "hogs-hollow--north-spring-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "hogs-hollow--rodeo-up-trail",
+          "trailforks_id": null,
+          "name": "Rodeo Up Trail",
+          "difficulty": "blue",
+          "length_mi": 0.12,
+          "elevation_gain_ft": null,
+          "direction": "downhill",
+          "surface": "dirt",
+          "connects_to": [
+            "hogs-hollow--middle-trail",
+            "hogs-hollow--rodeo-down-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "hogs-hollow--ruin",
+          "trailforks_id": null,
+          "name": "Ruin",
+          "difficulty": "blue",
+          "length_mi": 0.01,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "hogs-hollow--ruin-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "hogs-hollow--ruin-trail",
+          "trailforks_id": null,
+          "name": "Ruin Trail",
+          "difficulty": "blue",
+          "length_mi": 0.4,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "hogs-hollow--ruin",
+            "hogs-hollow--poppy-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "hogs-hollow--shell-shocked-trail",
+          "trailforks_id": null,
+          "name": "Shell Shocked Trail",
+          "difficulty": "blue",
+          "length_mi": 0.58,
+          "elevation_gain_ft": null,
+          "direction": "downhill",
+          "surface": "dirt",
+          "connects_to": [
+            "hogs-hollow--zag-trail",
+            "hogs-hollow--indian-trail",
+            "hogs-hollow--invincible-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "hogs-hollow--spring",
+          "trailforks_id": null,
+          "name": "Spring",
+          "difficulty": "blue",
+          "length_mi": 0.04,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "hogs-hollow--spring-trail",
+          "trailforks_id": null,
+          "name": "Spring Trail",
+          "difficulty": "blue",
+          "length_mi": 0.05,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "hogs-hollow--middle-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "hogs-hollow--stoney-way-trail",
+          "trailforks_id": null,
+          "name": "Stoney Way Trail",
+          "difficulty": "blue",
+          "length_mi": 1.32,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "hogs-hollow--north-point-connector-trail",
+            "hogs-hollow--trail-1301144781",
+            "hogs-hollow--vista-ridge-trail",
+            "hogs-hollow--bodily-harm-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "hogs-hollow--three-falls-trail",
+          "trailforks_id": null,
+          "name": "Three Falls Trail",
+          "difficulty": "blue",
+          "length_mi": 2.65,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "hogs-hollow--last-chance-trail",
+            "hogs-hollow--forbidden-trail",
+            "hogs-hollow--vista-ridge-trail",
+            "hogs-hollow--bodily-harm-trail",
+            "hogs-hollow--trail-1306042165"
+          ],
+          "capacity_max_riders": null,
+          "notes": "Singletrack, mostly shaded",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "hogs-hollow--valley-view-trail",
+          "trailforks_id": null,
+          "name": "Valley View Trail",
+          "difficulty": "blue",
+          "length_mi": 0.23,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "hogs-hollow--bodily-harm-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "hogs-hollow--vista-ridge-trail",
+          "trailforks_id": null,
+          "name": "Vista Ridge Trail",
+          "difficulty": "blue",
+          "length_mi": 0.96,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "hogs-hollow--north-point-connector-trail",
+            "hogs-hollow--stoney-way-trail",
+            "hogs-hollow--three-falls-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "hogs-hollow--zag-trail",
+          "trailforks_id": null,
+          "name": "Zag Trail",
+          "difficulty": "blue",
+          "length_mi": 1.09,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "hogs-hollow--ziggy-trail",
+            "hogs-hollow--dr-pepper-trail",
+            "hogs-hollow--shell-shocked-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "hogs-hollow--ziggy-trail",
+          "trailforks_id": null,
+          "name": "Ziggy Trail",
+          "difficulty": "blue",
+          "length_mi": 0.43,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "hogs-hollow--zag-trail",
+            "hogs-hollow--invincible-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "hogs-hollow--trail-1301144781",
+          "trailforks_id": null,
+          "name": "Trail 1301144781",
+          "difficulty": "blue",
+          "length_mi": 0.08,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "hogs-hollow--stoney-way-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "hogs-hollow--trail-1306042165",
+          "trailforks_id": null,
+          "name": "Trail 1306042165",
+          "difficulty": "blue",
+          "length_mi": 0.03,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "hogs-hollow--three-falls-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "Singletrack, mostly shaded",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "three-falls",
+      "name": "Three Falls (Alpine)",
+      "area": "Alpine, UT",
+      "address": "Grove Creek Dr, Alpine, UT 84004",
+      "coordinates": {
+        "lat": 40.482,
+        "lng": -111.768
+      },
+      "distance_from_skyridge_mi": 9.8,
+      "trailforks_region_id": null,
+      "parking_notes": "Park along Grove Creek Dr. No formal lot \u2014 be respectful of residents.",
+      "trails": [
+        {
+          "id": "three-falls--alpine-slide-trail",
+          "trailforks_id": null,
+          "name": "Alpine Slide Trail",
+          "difficulty": "black",
+          "length_mi": 0.55,
+          "elevation_gain_ft": null,
+          "direction": "downhill",
+          "surface": "dirt",
+          "connects_to": [
+            "three-falls--last-chance-trail",
+            "three-falls--bodily-harm-trail",
+            "three-falls--easy-breezy-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "three-falls--bodily-harm-trail",
+          "trailforks_id": null,
+          "name": "Bodily Harm Trail",
+          "difficulty": "blue",
+          "length_mi": 1.69,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "three-falls--stoney-way-trail",
+            "three-falls--three-falls-trail",
+            "three-falls--alpine-slide-trail",
+            "three-falls--valley-view-trail",
+            "three-falls--more-effort-trail",
+            "three-falls--easy-breezy-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "three-falls--corkscrew-trail",
+          "trailforks_id": null,
+          "name": "Corkscrew Trail",
+          "difficulty": "blue",
+          "length_mi": 0.34,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "three-falls--invincible-trail",
+            "three-falls--redford-run-trail",
+            "three-falls--flank-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "three-falls--dr-pepper-trail",
+          "trailforks_id": null,
+          "name": "Dr. Pepper Trail",
+          "difficulty": "blue",
+          "length_mi": 0.6,
+          "elevation_gain_ft": null,
+          "direction": "downhill",
+          "surface": "dirt",
+          "connects_to": [
+            "three-falls--zag-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "three-falls--easy-breezy-trail",
+          "trailforks_id": null,
+          "name": "Easy Breezy Trail",
+          "difficulty": "black",
+          "length_mi": 0.78,
+          "elevation_gain_ft": null,
+          "direction": "downhill",
+          "surface": "dirt",
+          "connects_to": [
+            "three-falls--last-chance-trail",
+            "three-falls--alpine-slide-trail",
+            "three-falls--bodily-harm-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "three-falls--flank-trail",
+          "trailforks_id": null,
+          "name": "Flank Trail",
+          "difficulty": "blue",
+          "length_mi": 0.36,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "three-falls--indian-trail",
+            "three-falls--corkscrew-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "three-falls--forbidden",
+          "trailforks_id": null,
+          "name": "Forbidden",
+          "difficulty": "blue",
+          "length_mi": 0.01,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "three-falls--forbidden-trail",
+          "trailforks_id": null,
+          "name": "Forbidden Trail",
+          "difficulty": "blue",
+          "length_mi": 2.01,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "three-falls--lower-forbidden-trail",
+            "three-falls--more-effort-trail",
+            "three-falls--three-falls-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "three-falls--high-bench-trail",
+          "trailforks_id": null,
+          "name": "High Bench Trail",
+          "difficulty": "blue",
+          "length_mi": 0.0,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "three-falls--indian-trail",
+          "trailforks_id": null,
+          "name": "Indian Trail",
+          "difficulty": "blue",
+          "length_mi": 0.14,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "three-falls--flank-trail",
+            "three-falls--shell-shocked-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "three-falls--invincible-trail",
+          "trailforks_id": null,
+          "name": "Invincible Trail",
+          "difficulty": "blue",
+          "length_mi": 0.15,
+          "elevation_gain_ft": null,
+          "direction": "downhill",
+          "surface": "dirt",
+          "connects_to": [
+            "three-falls--ziggy-trail",
+            "three-falls--corkscrew-trail",
+            "three-falls--shell-shocked-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "three-falls--jacob-s-traverse-road",
+          "trailforks_id": null,
+          "name": "Jacob's Traverse Road",
+          "difficulty": "blue",
+          "length_mi": 1.92,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "three-falls--turkey-road",
+            "three-falls--three-falls",
+            "three-falls--peak-view-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "three-falls--lambert-s-luge",
+          "trailforks_id": null,
+          "name": "Lambert's Luge",
+          "difficulty": "blue",
+          "length_mi": 0.0,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "three-falls--lambert-s-luge-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "three-falls--lambert-s-luge-trail",
+          "trailforks_id": null,
+          "name": "Lambert's Luge Trail",
+          "difficulty": "blue",
+          "length_mi": 0.25,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "three-falls--poppy-trail",
+            "three-falls--lambert-s-luge",
+            "three-falls--ruin-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "three-falls--last-chance-trail",
+          "trailforks_id": null,
+          "name": "Last Chance Trail",
+          "difficulty": "black",
+          "length_mi": 0.7,
+          "elevation_gain_ft": null,
+          "direction": "downhill",
+          "surface": "dirt",
+          "connects_to": [
+            "three-falls--easy-breezy-trail",
+            "three-falls--alpine-slide-trail",
+            "three-falls--three-falls-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "three-falls--lower-forbidden-trail",
+          "trailforks_id": null,
+          "name": "Lower Forbidden Trail",
+          "difficulty": "blue",
+          "length_mi": 0.22,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "three-falls--forbidden-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "three-falls--lower-hog-hollow-creek-trail",
+          "trailforks_id": null,
+          "name": "Lower Hog Hollow Creek Trail",
+          "difficulty": "blue",
+          "length_mi": 0.59,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "three-falls--trail-1301033072"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "three-falls--middle",
+          "trailforks_id": null,
+          "name": "Middle",
+          "difficulty": "blue",
+          "length_mi": 0.0,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "three-falls--middle-spring-trail",
+          "trailforks_id": null,
+          "name": "Middle Spring Trail",
+          "difficulty": "blue",
+          "length_mi": 0.6,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "three-falls--north-spring-trail",
+            "three-falls--rodeo-down-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "three-falls--middle-trail",
+          "trailforks_id": null,
+          "name": "Middle Trail",
+          "difficulty": "blue",
+          "length_mi": 0.03,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "three-falls--rodeo-up-trail",
+            "three-falls--rodeo-down-trail",
+            "three-falls--spring-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "three-falls--more-effort-trail",
+          "trailforks_id": null,
+          "name": "More Effort Trail",
+          "difficulty": "blue",
+          "length_mi": 0.63,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "three-falls--forbidden-trail",
+            "three-falls--bodily-harm-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "three-falls--north-point-connector-trail",
+          "trailforks_id": null,
+          "name": "North Point Connector Trail",
+          "difficulty": "blue",
+          "length_mi": 0.81,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "three-falls--stoney-way-trail",
+            "three-falls--vista-ridge-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "three-falls--north-spring",
+          "trailforks_id": null,
+          "name": "North Spring",
+          "difficulty": "blue",
+          "length_mi": 0.02,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "three-falls--north-spring-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "three-falls--north-spring-trail",
+          "trailforks_id": null,
+          "name": "North Spring Trail",
+          "difficulty": "blue",
+          "length_mi": 0.73,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "three-falls--rodeo-trailhead-connector-trail",
+            "three-falls--rodeo-trailhead-connector",
+            "three-falls--middle-spring-trail",
+            "three-falls--north-spring"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "three-falls--peacemaker-trail",
+          "trailforks_id": null,
+          "name": "Peacemaker Trail",
+          "difficulty": "blue",
+          "length_mi": 1.0,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "three-falls--turkey-road",
+            "three-falls--pork-u-pine-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "three-falls--peak-view-trail",
+          "trailforks_id": null,
+          "name": "Peak View Trail",
+          "difficulty": "blue",
+          "length_mi": 0.34,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "three-falls--three-falls",
+            "three-falls--jacob-s-traverse-road"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "three-falls--poppy-trail",
+          "trailforks_id": null,
+          "name": "Poppy Trail",
+          "difficulty": "blue",
+          "length_mi": 0.4,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "three-falls--ruin-trail",
+            "three-falls--lambert-s-luge-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "three-falls--pork-u-pine-trail",
+          "trailforks_id": null,
+          "name": "Pork U Pine Trail",
+          "difficulty": "blue",
+          "length_mi": 0.96,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "ground",
+          "connects_to": [
+            "three-falls--peacemaker-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "three-falls--redford-run-trail",
+          "trailforks_id": null,
+          "name": "Redford Run Trail",
+          "difficulty": "green",
+          "length_mi": 0.17,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "three-falls--corkscrew-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "three-falls--river",
+          "trailforks_id": null,
+          "name": "River",
+          "difficulty": "blue",
+          "length_mi": 0.0,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "three-falls--river-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "three-falls--river-trail",
+          "trailforks_id": null,
+          "name": "River Trail",
+          "difficulty": "blue",
+          "length_mi": 0.04,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "three-falls--river"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "three-falls--rodeo-down-trail",
+          "trailforks_id": null,
+          "name": "Rodeo Down Trail",
+          "difficulty": "blue",
+          "length_mi": 0.48,
+          "elevation_gain_ft": null,
+          "direction": "downhill",
+          "surface": "dirt",
+          "connects_to": [
+            "three-falls--rodeo-up-trail",
+            "three-falls--middle-trail",
+            "three-falls--rodeo-trailhead-connector-trail",
+            "three-falls--middle-spring-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "three-falls--rodeo-trailhead-connector",
+          "trailforks_id": null,
+          "name": "Rodeo Trailhead Connector",
+          "difficulty": "blue",
+          "length_mi": 0.0,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "three-falls--north-spring-trail",
+            "three-falls--rodeo-trailhead-connector-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "three-falls--rodeo-trailhead-connector-trail",
+          "trailforks_id": null,
+          "name": "Rodeo Trailhead Connector Trail",
+          "difficulty": "blue",
+          "length_mi": 0.14,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "three-falls--rodeo-down-trail",
+            "three-falls--rodeo-trailhead-connector",
+            "three-falls--north-spring-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "three-falls--rodeo-up-trail",
+          "trailforks_id": null,
+          "name": "Rodeo Up Trail",
+          "difficulty": "blue",
+          "length_mi": 0.12,
+          "elevation_gain_ft": null,
+          "direction": "downhill",
+          "surface": "dirt",
+          "connects_to": [
+            "three-falls--middle-trail",
+            "three-falls--rodeo-down-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "three-falls--ruin",
+          "trailforks_id": null,
+          "name": "Ruin",
+          "difficulty": "blue",
+          "length_mi": 0.01,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "three-falls--ruin-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "three-falls--ruin-trail",
+          "trailforks_id": null,
+          "name": "Ruin Trail",
+          "difficulty": "blue",
+          "length_mi": 0.4,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "three-falls--poppy-trail",
+            "three-falls--ruin",
+            "three-falls--lambert-s-luge-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "three-falls--shell-shocked-trail",
+          "trailforks_id": null,
+          "name": "Shell Shocked Trail",
+          "difficulty": "blue",
+          "length_mi": 0.58,
+          "elevation_gain_ft": null,
+          "direction": "downhill",
+          "surface": "dirt",
+          "connects_to": [
+            "three-falls--indian-trail",
+            "three-falls--invincible-trail",
+            "three-falls--zag-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "three-falls--spring",
+          "trailforks_id": null,
+          "name": "Spring",
+          "difficulty": "blue",
+          "length_mi": 0.04,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "three-falls--spring-trail",
+          "trailforks_id": null,
+          "name": "Spring Trail",
+          "difficulty": "blue",
+          "length_mi": 0.05,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "three-falls--middle-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "three-falls--stoney-way-trail",
+          "trailforks_id": null,
+          "name": "Stoney Way Trail",
+          "difficulty": "blue",
+          "length_mi": 1.32,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "three-falls--trail-1301144781",
+            "three-falls--north-point-connector-trail",
+            "three-falls--vista-ridge-trail",
+            "three-falls--bodily-harm-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "three-falls--three-falls",
+          "trailforks_id": null,
+          "name": "Three Falls",
+          "difficulty": "blue",
+          "length_mi": 0.08,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "three-falls--jacob-s-traverse-road",
+            "three-falls--peak-view-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "Singletrack, mostly shaded",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "three-falls--three-falls-trail",
+          "trailforks_id": null,
+          "name": "Three Falls Trail",
+          "difficulty": "blue",
+          "length_mi": 2.65,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "three-falls--last-chance-trail",
+            "three-falls--trail-1306042165",
+            "three-falls--forbidden-trail",
+            "three-falls--vista-ridge-trail",
+            "three-falls--bodily-harm-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "Singletrack, mostly shaded",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "three-falls--turkey-road",
+          "trailforks_id": null,
+          "name": "Turkey Road",
+          "difficulty": "blue",
+          "length_mi": 0.01,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "ground",
+          "connects_to": [
+            "three-falls--peacemaker-trail",
+            "three-falls--jacob-s-traverse-road"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "three-falls--valley-view-trail",
+          "trailforks_id": null,
+          "name": "Valley View Trail",
+          "difficulty": "blue",
+          "length_mi": 0.23,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "three-falls--bodily-harm-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "three-falls--vista-ridge-trail",
+          "trailforks_id": null,
+          "name": "Vista Ridge Trail",
+          "difficulty": "blue",
+          "length_mi": 0.96,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "three-falls--north-point-connector-trail",
+            "three-falls--stoney-way-trail",
+            "three-falls--three-falls-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "three-falls--zag-trail",
+          "trailforks_id": null,
+          "name": "Zag Trail",
+          "difficulty": "blue",
+          "length_mi": 1.09,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "three-falls--ziggy-trail",
+            "three-falls--dr-pepper-trail",
+            "three-falls--shell-shocked-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "three-falls--ziggy-trail",
+          "trailforks_id": null,
+          "name": "Ziggy Trail",
+          "difficulty": "blue",
+          "length_mi": 0.43,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "three-falls--invincible-trail",
+            "three-falls--zag-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "three-falls--trail-1301033072",
+          "trailforks_id": null,
+          "name": "Trail 1301033072",
+          "difficulty": "blue",
+          "length_mi": 0.09,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "three-falls--lower-hog-hollow-creek-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "three-falls--trail-1301033073",
+          "trailforks_id": null,
+          "name": "Trail 1301033073",
+          "difficulty": "blue",
+          "length_mi": 0.03,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "three-falls--trail-1301033075"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "three-falls--trail-1301033075",
+          "trailforks_id": null,
+          "name": "Trail 1301033075",
+          "difficulty": "blue",
+          "length_mi": 0.03,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "three-falls--trail-1301033073"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "three-falls--trail-1301144781",
+          "trailforks_id": null,
+          "name": "Trail 1301144781",
+          "difficulty": "blue",
+          "length_mi": 0.08,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "three-falls--stoney-way-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "three-falls--trail-1306042165",
+          "trailforks_id": null,
+          "name": "Trail 1306042165",
+          "difficulty": "blue",
+          "length_mi": 0.03,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "three-falls--three-falls-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "Singletrack, mostly shaded",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "sensei-hidden-canyon",
+      "name": "Sensei (Hidden Canyon TH)",
+      "area": "Lehi, UT",
+      "address": "Hidden Canyon Rd, Lehi, UT 84043",
+      "coordinates": {
+        "lat": 40.4298,
+        "lng": -111.8665
+      },
+      "distance_from_skyridge_mi": 5.2,
+      "trailforks_region_id": null,
+      "parking_notes": "New Hidden Canyon Trailhead with paved parking. Overflow parking at upper roundabout.",
+      "trails": [
+        {
+          "id": "sensei-hidden-canyon--broadband-trail",
+          "trailforks_id": null,
+          "name": "Broadband Trail",
+          "difficulty": "blue",
+          "length_mi": 1.5,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "sensei-hidden-canyon--dial-up-trail",
+          "trailforks_id": null,
+          "name": "Dial Up Trail",
+          "difficulty": "blue",
+          "length_mi": 0.15,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "sensei-hidden-canyon--lolo-trail",
+          "trailforks_id": null,
+          "name": "Lolo Trail",
+          "difficulty": "blue",
+          "length_mi": 2.64,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "sensei-hidden-canyon--mayors-trail",
+          "trailforks_id": null,
+          "name": "Mayors' Trail",
+          "difficulty": "blue",
+          "length_mi": 0.0,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "sensei-hidden-canyon--raptor-trail",
+          "trailforks_id": null,
+          "name": "Raptor Trail",
+          "difficulty": "blue",
+          "length_mi": 1.47,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "sensei-hidden-canyon--sensei-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "sensei-hidden-canyon--sensei-trail",
+          "trailforks_id": null,
+          "name": "Sensei Trail",
+          "difficulty": "blue",
+          "length_mi": 0.33,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "sensei-hidden-canyon--raptor-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "andy-ballard",
+      "name": "Andy Ballard Arena (Draper)",
+      "area": "Draper, UT",
+      "address": "14220 S Minuteman Dr, Draper, UT 84020",
+      "coordinates": {
+        "lat": 40.505,
+        "lng": -111.862
+      },
+      "distance_from_skyridge_mi": 14.2,
+      "trailforks_region_id": null,
+      "parking_notes": "Large paved lot at Andy Ballard Equestrian Park. Access trails from south end of parking lot.",
+      "trails": [
+        {
+          "id": "andy-ballard--ann-s-trail",
+          "trailforks_id": null,
+          "name": "Ann's Trail",
+          "difficulty": "blue",
+          "length_mi": 0.03,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "andy-ballard--bonneville-shoreline-trail-draper-section",
+          "trailforks_id": null,
+          "name": "Bonneville Shoreline Trail - Draper Section",
+          "difficulty": "blue",
+          "length_mi": 0.07,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "andy-ballard--bonneville-shoreline-trail-oak-hollow-section",
+          "trailforks_id": null,
+          "name": "Bonneville Shoreline Trail - Oak Hollow Section",
+          "difficulty": "blue",
+          "length_mi": 0.07,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "andy-ballard--bonneville-shoreline-trail-steep-mountain-section",
+          "trailforks_id": null,
+          "name": "Bonneville Shoreline Trail - Steep Mountain Section",
+          "difficulty": "blue",
+          "length_mi": 0.22,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "andy-ballard--bonneville-shoreline-trail-upper-oak-hollow-section",
+          "trailforks_id": null,
+          "name": "Bonneville Shoreline Trail - Upper Oak Hollow Section",
+          "difficulty": "blue",
+          "length_mi": 0.0,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "andy-ballard--canyon-hollow-connector",
+          "trailforks_id": null,
+          "name": "Canyon Hollow Connector",
+          "difficulty": "blue",
+          "length_mi": 0.06,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "andy-ballard--canyon-hollow-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "andy-ballard--canyon-hollow-trail",
+          "trailforks_id": null,
+          "name": "Canyon Hollow Trail",
+          "difficulty": "blue",
+          "length_mi": 0.5,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "andy-ballard--canyon-hollow-connector"
+          ],
+          "capacity_max_riders": null,
+          "notes": "Single track multi use trail. Tends to get a fair amount of mountain bike traffic. Incredibly beautiful trail. Great for trail running.",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "andy-ballard--clarks-trail",
+          "trailforks_id": null,
+          "name": "Clarks Trail",
+          "difficulty": "blue",
+          "length_mi": 0.0,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [],
+          "capacity_max_riders": null,
+          "notes": "Bikes uphill only. Foot and horse traffic allowed both ways",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "andy-ballard--creek-view-connector-trail",
+          "trailforks_id": null,
+          "name": "Creek View Connector Trail",
+          "difficulty": "blue",
+          "length_mi": 0.0,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "andy-ballard--gas-line-trail",
+          "trailforks_id": null,
+          "name": "Gas Line Trail",
+          "difficulty": "blue",
+          "length_mi": 0.31,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "andy-ballard--ghost-falls-trail",
+          "trailforks_id": null,
+          "name": "Ghost Falls Trail",
+          "difficulty": "blue",
+          "length_mi": 0.41,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "ground",
+          "connects_to": [
+            "andy-ballard--lower-rattler-connector-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "andy-ballard--lexi-ethan",
+          "trailforks_id": null,
+          "name": "Lexi & Ethan",
+          "difficulty": "blue",
+          "length_mi": 0.65,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "andy-ballard--red-potato-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "andy-ballard--little-valley-c-line-trail",
+          "trailforks_id": null,
+          "name": "Little Valley C-line Trail",
+          "difficulty": "blue",
+          "length_mi": 0.11,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "andy-ballard--little-valley-main-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "andy-ballard--little-valley-d-line-trail",
+          "trailforks_id": null,
+          "name": "Little Valley D-Line Trail",
+          "difficulty": "blue",
+          "length_mi": 0.17,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "andy-ballard--little-valley-main-trail",
+            "andy-ballard--little-valley-loop-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "andy-ballard--little-valley-loop-trail",
+          "trailforks_id": null,
+          "name": "Little Valley Loop Trail",
+          "difficulty": "blue",
+          "length_mi": 0.68,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "andy-ballard--little-valley-trail",
+            "andy-ballard--little-valley-d-line-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "andy-ballard--little-valley-main-trail",
+          "trailforks_id": null,
+          "name": "Little Valley Main Trail",
+          "difficulty": "blue",
+          "length_mi": 0.2,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "andy-ballard--little-valley-c-line-trail",
+            "andy-ballard--little-valley-d-line-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "andy-ballard--little-valley-trail",
+          "trailforks_id": null,
+          "name": "Little Valley Trail",
+          "difficulty": "green",
+          "length_mi": 0.01,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "andy-ballard--little-valley-loop-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "andy-ballard--lower-rattler-connector-trail",
+          "trailforks_id": null,
+          "name": "Lower Rattler Connector Trail",
+          "difficulty": "blue",
+          "length_mi": 0.19,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "ground",
+          "connects_to": [
+            "andy-ballard--ghost-falls-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "andy-ballard--oak-hollow-trailhead-connector",
+          "trailforks_id": null,
+          "name": "Oak Hollow Trailhead Connector",
+          "difficulty": "blue",
+          "length_mi": 0.11,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "andy-ballard--potato-hill-trail",
+          "trailforks_id": null,
+          "name": "Potato Hill Trail",
+          "difficulty": "blue",
+          "length_mi": 0.49,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "andy-ballard--red-potato-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "andy-ballard--red-potato-trail",
+          "trailforks_id": null,
+          "name": "Red Potato Trail",
+          "difficulty": "blue",
+          "length_mi": 0.84,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "andy-ballard--potato-hill-trail",
+            "andy-ballard--lexi-ethan"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "andy-ballard--spring-hollow-trail",
+          "trailforks_id": null,
+          "name": "Spring Hollow Trail",
+          "difficulty": "blue",
+          "length_mi": 0.83,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "andy-ballard--sweet-caroline-trail",
+          "trailforks_id": null,
+          "name": "Sweet Caroline Trail",
+          "difficulty": "blue",
+          "length_mi": 0.6,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "ground",
+          "connects_to": [
+            "andy-ballard--trail-1487033215"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "andy-ballard--upper-rattler-connector-trail",
+          "trailforks_id": null,
+          "name": "Upper Rattler Connector Trail",
+          "difficulty": "blue",
+          "length_mi": 0.1,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "ground",
+          "connects_to": [],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "andy-ballard--trail-1301437639",
+          "trailforks_id": null,
+          "name": "Trail 1301437639",
+          "difficulty": "blue",
+          "length_mi": 0.01,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "unpaved",
+          "connects_to": [
+            "andy-ballard--trail-1487033215"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "andy-ballard--trail-1301437644",
+          "trailforks_id": null,
+          "name": "Trail 1301437644",
+          "difficulty": "blue",
+          "length_mi": 0.01,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "asphalt",
+          "connects_to": [
+            "andy-ballard--trail-1487033215"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "andy-ballard--trail-1487033215",
+          "trailforks_id": null,
+          "name": "Trail 1487033215",
+          "difficulty": "blue",
+          "length_mi": 0.0,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "unpaved",
+          "connects_to": [
+            "andy-ballard--trail-1301437639",
+            "andy-ballard--trail-1301437644",
+            "andy-ballard--sweet-caroline-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "andy-ballard--trail-356687596",
+          "trailforks_id": null,
+          "name": "Trail 356687596",
+          "difficulty": "black",
+          "length_mi": 0.25,
+          "elevation_gain_ft": null,
+          "direction": "downhill",
+          "surface": "ground",
+          "connects_to": [],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "valley-vista",
+      "name": "Valley Vista (Pleasant Grove)",
+      "area": "Pleasant Grove, UT",
+      "address": "Battle Creek Dr, Pleasant Grove, UT 84062",
+      "coordinates": {
+        "lat": 40.366,
+        "lng": -111.736
+      },
+      "distance_from_skyridge_mi": 8.7,
+      "trailforks_region_id": null,
+      "parking_notes": "Battle Creek Canyon area. Park at the trailhead lot off Battle Creek Dr.",
+      "trails": [
+        {
+          "id": "valley-vista--battle-creek-trail",
+          "trailforks_id": null,
+          "name": "Battle Creek Trail",
+          "difficulty": "black",
+          "length_mi": 0.05,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "gravel",
+          "connects_to": [],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "valley-vista--connector-trail",
+          "trailforks_id": null,
+          "name": "Connector Trail",
+          "difficulty": "black",
+          "length_mi": 0.13,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "ground",
+          "connects_to": [
+            "valley-vista--mahogany-bench-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "valley-vista--grove-creek-trail",
+          "trailforks_id": null,
+          "name": "Grove Creek Trail",
+          "difficulty": "black",
+          "length_mi": 1.81,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "ground",
+          "connects_to": [
+            "valley-vista--mahogany-bench-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "valley-vista--mahogany-bench-trail",
+          "trailforks_id": null,
+          "name": "Mahogany Bench Trail",
+          "difficulty": "blue",
+          "length_mi": 1.41,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "ground",
+          "connects_to": [
+            "valley-vista--grove-creek-trail",
+            "valley-vista--connector-trail",
+            "valley-vista--mahogany-bench-trail-direct",
+            "valley-vista--mahogany-mountain-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "valley-vista--mahogany-bench-trail-direct",
+          "trailforks_id": null,
+          "name": "Mahogany Bench Trail - Direct",
+          "difficulty": "blue",
+          "length_mi": 0.33,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "ground",
+          "connects_to": [
+            "valley-vista--mahogany-bench-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "valley-vista--mahogany-mountain-trail",
+          "trailforks_id": null,
+          "name": "Mahogany Mountain Trail",
+          "difficulty": "black",
+          "length_mi": 1.14,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "ground",
+          "connects_to": [
+            "valley-vista--sneaky-trail",
+            "valley-vista--mahogany-bench-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "valley-vista--molly-s-trail",
+          "trailforks_id": null,
+          "name": "Molly's Trail",
+          "difficulty": "blue",
+          "length_mi": 0.82,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "valley-vista--sneaky-trail",
+          "trailforks_id": null,
+          "name": "Sneaky Trail",
+          "difficulty": "blue",
+          "length_mi": 2.05,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "ground",
+          "connects_to": [
+            "valley-vista--mahogany-mountain-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "south-maple-hollow",
+      "name": "South Maple Hollow",
+      "area": "Alpine, UT",
+      "address": "South Maple Hollow, Alpine, UT 84004",
+      "coordinates": {
+        "lat": 40.405,
+        "lng": -111.764
+      },
+      "distance_from_skyridge_mi": 6.3,
+      "trailforks_region_id": null,
+      "parking_notes": "Limited roadside parking. Arrive early.",
+      "trails": [
+        {
+          "id": "south-maple-hollow--mahogany-mountain-trail",
+          "trailforks_id": null,
+          "name": "Mahogany Mountain Trail",
+          "difficulty": "black",
+          "length_mi": 0.13,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "ground",
+          "connects_to": [],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "south-maple-hollow--molly-s-trail",
+          "trailforks_id": null,
+          "name": "Molly's Trail",
+          "difficulty": "blue",
+          "length_mi": 0.82,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "south-maple-hollow--sneaky-trail",
+          "trailforks_id": null,
+          "name": "Sneaky Trail",
+          "difficulty": "blue",
+          "length_mi": 2.05,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "ground",
+          "connects_to": [],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "peak-view",
+      "name": "Peak View",
+      "area": "Lehi, UT",
+      "address": "Peak View Dr, Lehi, UT 84043",
+      "coordinates": {
+        "lat": 40.449,
+        "lng": -111.835
+      },
+      "distance_from_skyridge_mi": 4.5,
+      "trailforks_region_id": null,
+      "parking_notes": "Neighborhood trailhead. Street parking on Peak View Dr.",
+      "trails": [
+        {
+          "id": "peak-view--dial-up-trail",
+          "trailforks_id": null,
+          "name": "Dial Up Trail",
+          "difficulty": "blue",
+          "length_mi": 0.15,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "peak-view--eagle-crest-trail",
+          "trailforks_id": null,
+          "name": "Eagle Crest Trail",
+          "difficulty": "blue",
+          "length_mi": 1.71,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "peak-view--woods-hollow-trail",
+            "peak-view--trail-1301026774"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "peak-view--fango-access-trail",
+          "trailforks_id": null,
+          "name": "Fango Access Trail",
+          "difficulty": "blue",
+          "length_mi": 0.25,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "peak-view--fango-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "peak-view--fango-trail",
+          "trailforks_id": null,
+          "name": "Fango Trail",
+          "difficulty": "blue",
+          "length_mi": 2.33,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "peak-view--fango-access-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "peak-view--lolo-trail",
+          "trailforks_id": null,
+          "name": "Lolo Trail",
+          "difficulty": "blue",
+          "length_mi": 2.64,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "peak-view--lower-hog-hollow-creek-trail",
+          "trailforks_id": null,
+          "name": "Lower Hog Hollow Creek Trail",
+          "difficulty": "blue",
+          "length_mi": 0.38,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "peak-view--mayors-trail",
+          "trailforks_id": null,
+          "name": "Mayors' Trail",
+          "difficulty": "blue",
+          "length_mi": 0.0,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "peak-view--raptor-trail",
+          "trailforks_id": null,
+          "name": "Raptor Trail",
+          "difficulty": "blue",
+          "length_mi": 1.47,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "peak-view--sensei-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "peak-view--sensei-trail",
+          "trailforks_id": null,
+          "name": "Sensei Trail",
+          "difficulty": "blue",
+          "length_mi": 0.33,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "peak-view--raptor-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "peak-view--south-maple-hollow-south",
+          "trailforks_id": null,
+          "name": "South Maple Hollow South",
+          "difficulty": "blue",
+          "length_mi": 0.0,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "ground",
+          "connects_to": [],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "peak-view--south-maple-hollow-trail",
+          "trailforks_id": null,
+          "name": "South Maple Hollow Trail",
+          "difficulty": "blue",
+          "length_mi": 1.19,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "peak-view--woods-hollow-trail",
+          "trailforks_id": null,
+          "name": "Woods Hollow Trail",
+          "difficulty": "blue",
+          "length_mi": 1.77,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "peak-view--eagle-crest-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "peak-view--trail-1301026774",
+          "trailforks_id": null,
+          "name": "Trail 1301026774",
+          "difficulty": "blue",
+          "length_mi": 0.04,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "peak-view--eagle-crest-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "peak-view--trail-1301033072",
+          "trailforks_id": null,
+          "name": "Trail 1301033072",
+          "difficulty": "blue",
+          "length_mi": 0.09,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "peak-view--trail-1301033073",
+          "trailforks_id": null,
+          "name": "Trail 1301033073",
+          "difficulty": "blue",
+          "length_mi": 0.03,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "peak-view--trail-1301033075"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "peak-view--trail-1301033075",
+          "trailforks_id": null,
+          "name": "Trail 1301033075",
+          "difficulty": "blue",
+          "length_mi": 0.03,
+          "elevation_gain_ft": null,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "peak-view--trail-1301033073"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "eagle-mountain",
+      "name": "Eagle Mountain (Time Trial)",
+      "area": "Eagle Mountain, UT",
+      "address": "Stagecoach Park, Eagle Mountain, UT 84005",
+      "coordinates": {
+        "lat": 40.3149,
+        "lng": -111.9658
+      },
+      "distance_from_skyridge_mi": 16.5,
+      "trailforks_region_id": null,
+      "parking_notes": "Time Trial course \u2014 check current staging area with coaching staff before practice.",
+      "trails": [
+        {
+          "id": "eagle-mountain--time-trial-course",
+          "trailforks_id": null,
+          "name": "Time Trial Course",
+          "difficulty": "blue",
+          "length_mi": 4.8,
+          "elevation_gain_ft": 620,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "eagle-mountain--lower-loop",
+            "eagle-mountain--upper-connector"
+          ],
+          "capacity_max_riders": null,
+          "notes": "Garmin: https://connect.garmin.com/modern/course/365486654 | Strava: https://strava.app.link/PuRfbAm80Tb",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "eagle-mountain--lower-loop",
+          "trailforks_id": null,
+          "name": "Lower Loop",
+          "difficulty": "green",
+          "length_mi": 2.1,
+          "elevation_gain_ft": 180,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "eagle-mountain--time-trial-course"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "eagle-mountain--upper-connector",
+          "trailforks_id": null,
+          "name": "Upper Connector",
+          "difficulty": "blue",
+          "length_mi": 1.3,
+          "elevation_gain_ft": 310,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "eagle-mountain--time-trial-course"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "corner-canyon-ghost-falls",
+      "name": "Corner Canyon – Ghost Falls TH",
+      "area": "Draper, UT (Salt Lake County)",
+      "address": "Corner Canyon Rd & 14600 S, Draper, UT 84020",
+      "coordinates": {
+        "lat": 40.4973,
+        "lng": -111.8382
+      },
+      "distance_from_skyridge_mi": 18.4,
+      "trailforks_region_id": null,
+      "parking_notes": "Paved lot on Corner Canyon Rd. Can fill quickly on weekends. Arrive early for weekday morning practices.",
+      "trails": [
+        {
+          "id": "corner-canyon-ghost-falls--bonneville-shoreline-trail",
+          "trailforks_id": null,
+          "name": "Bonneville Shoreline Trail",
+          "difficulty": "green",
+          "length_mi": 2.1,
+          "elevation_gain_ft": 180,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "corner-canyon-ghost-falls--corner-canyon-trail",
+            "corner-canyon-ghost-falls--ann-s-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "Good warm-up trail. Runs the base of the canyon along the bench.",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "corner-canyon-ghost-falls--corner-canyon-trail",
+          "trailforks_id": null,
+          "name": "Corner Canyon Trail",
+          "difficulty": "green",
+          "length_mi": 3.2,
+          "elevation_gain_ft": 420,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "corner-canyon-ghost-falls--bonneville-shoreline-trail",
+            "corner-canyon-ghost-falls--ghost-falls-trail",
+            "corner-canyon-ghost-falls--jacob-s-ladder",
+            "corner-canyon-ghost-falls--brock-s-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "Main artery of the system. Accessible to all skill levels.",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "corner-canyon-ghost-falls--ann-s-trail",
+          "trailforks_id": null,
+          "name": "Ann's Trail",
+          "difficulty": "blue",
+          "length_mi": 1.2,
+          "elevation_gain_ft": 210,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "corner-canyon-ghost-falls--bonneville-shoreline-trail",
+            "corner-canyon-ghost-falls--canyon-hollow-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "corner-canyon-ghost-falls--canyon-hollow-trail",
+          "trailforks_id": null,
+          "name": "Canyon Hollow Trail",
+          "difficulty": "blue",
+          "length_mi": 1.8,
+          "elevation_gain_ft": 320,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "corner-canyon-ghost-falls--ann-s-trail",
+            "corner-canyon-ghost-falls--ghost-falls-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "corner-canyon-ghost-falls--ghost-falls-trail",
+          "trailforks_id": null,
+          "name": "Ghost Falls Trail",
+          "difficulty": "black",
+          "length_mi": 1.8,
+          "elevation_gain_ft": 480,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "corner-canyon-ghost-falls--corner-canyon-trail",
+            "corner-canyon-ghost-falls--canyon-hollow-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "Namesake trail for this TH. Rocky, exposed moves near the top.",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "corner-canyon-ghost-falls--brock-s-trail",
+          "trailforks_id": null,
+          "name": "Brock's Trail",
+          "difficulty": "blue",
+          "length_mi": 0.9,
+          "elevation_gain_ft": 160,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "corner-canyon-ghost-falls--corner-canyon-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "corner-canyon-ghost-falls--jacob-s-ladder",
+          "trailforks_id": null,
+          "name": "Jacob's Ladder",
+          "difficulty": "black",
+          "length_mi": 1.4,
+          "elevation_gain_ft": 440,
+          "direction": "uphill",
+          "surface": "dirt",
+          "connects_to": [
+            "corner-canyon-ghost-falls--corner-canyon-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "Steep sustained climb. Primarily used as an uphill connector.",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "corner-canyon-rush",
+      "name": "Corner Canyon – Rush TH",
+      "area": "Draper, UT (Salt Lake County)",
+      "address": "Steep Mountain Ln, Draper, UT 84020",
+      "coordinates": {
+        "lat": 40.4885,
+        "lng": -111.8325
+      },
+      "distance_from_skyridge_mi": 18.9,
+      "trailforks_region_id": null,
+      "parking_notes": "Smaller dirt lot. Overflow parking on Steep Mountain Ln. Higher elevation start than Ghost Falls TH.",
+      "trails": [
+        {
+          "id": "corner-canyon-rush--clark-s-trail",
+          "trailforks_id": null,
+          "name": "Clark's Trail",
+          "difficulty": "blue",
+          "length_mi": 1.3,
+          "elevation_gain_ft": 240,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "corner-canyon-rush--rush-trail",
+            "corner-canyon-rush--natural-alignment-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "Popular intermediate trail. Good flow.",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "corner-canyon-rush--natural-alignment-trail",
+          "trailforks_id": null,
+          "name": "Natural Alignment Trail",
+          "difficulty": "blue",
+          "length_mi": 0.8,
+          "elevation_gain_ft": 130,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "corner-canyon-rush--clark-s-trail",
+            "corner-canyon-rush--rattlesnake-gulch"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "corner-canyon-rush--rattlesnake-gulch",
+          "trailforks_id": null,
+          "name": "Rattlesnake Gulch",
+          "difficulty": "blue",
+          "length_mi": 1.1,
+          "elevation_gain_ft": 190,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "corner-canyon-rush--natural-alignment-trail",
+            "corner-canyon-rush--rush-trail"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "corner-canyon-rush--rush-trail",
+          "trailforks_id": null,
+          "name": "Rush Trail",
+          "difficulty": "black",
+          "length_mi": 2.1,
+          "elevation_gain_ft": 520,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "corner-canyon-rush--clark-s-trail",
+            "corner-canyon-rush--rattlesnake-gulch",
+            "corner-canyon-rush--upper-rush",
+            "corner-canyon-rush--frank"
+          ],
+          "capacity_max_riders": null,
+          "notes": "Technical black. Exposed rocky sections, loose over hardpack in places.",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "corner-canyon-rush--upper-rush",
+          "trailforks_id": null,
+          "name": "Upper Rush",
+          "difficulty": "black",
+          "length_mi": 1.6,
+          "elevation_gain_ft": 380,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "corner-canyon-rush--rush-trail",
+            "corner-canyon-rush--frank"
+          ],
+          "capacity_max_riders": null,
+          "notes": "",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        },
+        {
+          "id": "corner-canyon-rush--frank",
+          "trailforks_id": null,
+          "name": "Frank",
+          "difficulty": "black",
+          "length_mi": 1.8,
+          "elevation_gain_ft": 460,
+          "direction": "both",
+          "surface": "dirt",
+          "connects_to": [
+            "corner-canyon-rush--rush-trail",
+            "corner-canyon-rush--upper-rush"
+          ],
+          "capacity_max_riders": null,
+          "notes": "Sustained technical climbing. Connects Rush and Upper Rush at the top of the system.",
+          "conditions": {
+            "status": "unknown",
+            "updated_at": null,
+            "updated_by": null
+          }
+        }
+      ]
+    }
+  ]
+}

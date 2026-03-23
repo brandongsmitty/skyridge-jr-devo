@@ -1,0 +1,1347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trail Planner — Skyridge Jr Devo</title>
+<link rel="icon" href="../assets/images/skyridge_jr-devo_logo.png" type="image/png">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/shared.css">
+<script src="../assets/js/theme.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+<script src="../assets/js/firebase-config.js"></script>
+<script src="../assets/js/trail-store.js"></script>
+<script src="../assets/js/auth.js"></script>
+<style>
+  :root {
+    --orange:     #E74302;
+    --orange-light: #f68026;
+    --black:      #0D0D0D;
+    --gray-dark:  #1A1A1A;
+    --gray-mid:   #242424;
+    --gray-light: #888;
+    --white:      #FFFFFF;
+    --border:     #2E2E2E;
+    --green:      #2D7D52;
+    --blue-var:   #2A6DB5;
+    --red:        #C0392B;
+
+    /* Difficulty */
+    --diff-green:      #2D7D52;
+    --diff-green-bg:   rgba(45,125,82,0.15);
+    --diff-blue:       #2A6DB5;
+    --diff-blue-bg:    rgba(42,109,181,0.15);
+    --diff-black:      #999;
+    --diff-black-bg:   rgba(150,150,150,0.12);
+    --diff-dblblack:   #ccc;
+    --diff-dblblack-bg:rgba(100,100,100,0.2);
+
+    /* Conditions */
+    --cond-dry:     #2D7D52;
+    --cond-muddy:   #8B5E3C;
+    --cond-wet:     #2A6DB5;
+    --cond-snow:    #8899aa;
+    --cond-closed:  #C0392B;
+    --cond-unknown: #555;
+  }
+
+  [data-theme="light"] {
+    --orange:       #E74302;
+    --orange-light: #f68026;
+    --black:        #FFFFFF;
+    --gray-dark:    #FFFFFF;
+    --gray-mid:     #F0ECE7;
+    --white:        #111111;
+    --gray-light:   #666666;
+    --border:       #E4E0DA;
+    --cond-unknown: #999;
+    --diff-black:   #666;
+    --diff-black-bg:rgba(100,100,100,0.1);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Barlow', sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* ── HEADER ─────────────────────────────────────────────────────────────── */
+  .header {
+    background: linear-gradient(135deg, #0D0D0D 0%, #1a1a1a 60%, #280c00 100%);
+    border-bottom: 3px solid var(--orange);
+    padding: 40px 40px 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -50px; right: -50px;
+    width: 280px; height: 280px;
+    border: 36px solid rgba(231,67,2,0.07);
+    border-radius: 50%;
+  }
+  .header-inner {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 0 4px;
+    position: relative;
+  }
+  .header-eyebrow {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 8px;
+  }
+  .header-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 46px;
+    font-weight: 800;
+    line-height: 1;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .header-title span { color: var(--orange); }
+  .header-sub {
+    font-size: 13px;
+    color: var(--gray-light);
+    margin-top: 10px;
+  }
+  .admin-badge {
+    display: none;
+    align-items: center;
+    gap: 8px;
+    margin-top: 16px;
+    background: rgba(231,67,2,0.1);
+    border: 1px solid rgba(231,67,2,0.25);
+    border-radius: 4px;
+    padding: 7px 14px;
+    font-size: 12px;
+    color: var(--orange);
+    font-family: 'Barlow Condensed', sans-serif;
+    letter-spacing: 0.5px;
+    width: fit-content;
+  }
+  .admin-badge.visible { display: inline-flex; }
+
+  /* ── MAIN LAYOUT ─────────────────────────────────────────────────────────── */
+  .page-wrap {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 0 16px 80px;
+  }
+
+  /* ── TRAILHEAD SELECTOR ──────────────────────────────────────────────────── */
+  .trailhead-section {
+    margin-top: 28px;
+  }
+  .section-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gray-light);
+    margin-bottom: 10px;
+  }
+  .trailhead-select-wrap {
+    position: relative;
+  }
+  .trailhead-select-wrap::after {
+    content: '▾';
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--orange);
+    font-size: 14px;
+    pointer-events: none;
+  }
+  select#trailhead-select {
+    width: 100%;
+    background: var(--gray-dark);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--white);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    padding: 13px 40px 13px 16px;
+    appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+    transition: border-color 0.15s;
+  }
+  select#trailhead-select:focus {
+    outline: none;
+    border-color: var(--orange);
+  }
+  .trailhead-meta {
+    display: flex;
+    gap: 20px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+  }
+  .th-meta-item {
+    font-size: 12px;
+    color: var(--gray-light);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .th-meta-item strong {
+    color: var(--white);
+    font-weight: 500;
+  }
+
+  /* ── FILTER PILLS ────────────────────────────────────────────────────────── */
+  .filter-section {
+    margin-top: 24px;
+  }
+  .filter-pills {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 4px;
+    scrollbar-width: none;
+  }
+  .filter-pills::-webkit-scrollbar { display: none; }
+  .filter-pill {
+    flex-shrink: 0;
+    padding: 7px 14px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    background: var(--gray-mid);
+    color: var(--gray-light);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: all 0.15s;
+    white-space: nowrap;
+    min-height: 36px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    user-select: none;
+  }
+  .filter-pill:hover { border-color: var(--orange); color: var(--white); }
+  .filter-pill.active {
+    border-color: var(--orange);
+    color: var(--white);
+    background: rgba(231,67,2,0.08);
+  }
+  .filter-pill .pill-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .filter-pill .pill-square {
+    width: 8px; height: 8px;
+    flex-shrink: 0;
+  }
+  .filter-pill .pill-diamond {
+    width: 8px; height: 8px;
+    transform: rotate(45deg);
+    flex-shrink: 0;
+  }
+
+  /* ── TRAIL CARDS ─────────────────────────────────────────────────────────── */
+  .trails-section { margin-top: 24px; }
+  .trails-count {
+    font-size: 12px;
+    color: var(--gray-light);
+    margin-bottom: 12px;
+    font-family: 'Barlow Condensed', sans-serif;
+    letter-spacing: 1px;
+  }
+  .trail-card {
+    background: var(--gray-dark);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    transition: border-color 0.15s;
+  }
+  .trail-card.closed { border-left: 3px solid var(--cond-closed); }
+  .trail-card.highlighted { border-color: var(--orange); box-shadow: 0 0 0 2px rgba(231,67,2,0.15); }
+
+  .trail-card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    cursor: pointer;
+    min-height: 56px;
+    user-select: none;
+  }
+  .trail-card-header:hover .trail-name { color: var(--orange); }
+
+  .diff-badge {
+    flex-shrink: 0;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    padding: 4px 9px;
+    border-radius: 4px;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    min-width: 68px;
+    justify-content: center;
+  }
+  .diff-badge.green {
+    background: var(--diff-green-bg);
+    color: var(--diff-green);
+    border: 1px solid var(--diff-green);
+  }
+  .diff-badge.blue {
+    background: var(--diff-blue-bg);
+    color: var(--diff-blue);
+    border: 1px solid var(--diff-blue);
+  }
+  .diff-badge.black {
+    background: var(--diff-black-bg);
+    color: var(--diff-black);
+    border: 1px solid #555;
+  }
+  .diff-badge.dbl-black {
+    background: var(--diff-dblblack-bg);
+    color: var(--diff-dblblack);
+    border: 1px solid #666;
+  }
+  [data-theme="light"] .diff-badge.black { color: #333; border-color: #999; }
+  [data-theme="light"] .diff-badge.dbl-black { color: #222; border-color: #888; }
+
+  .trail-header-info { flex: 1; min-width: 0; }
+  .trail-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--white);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: color 0.15s;
+    letter-spacing: 0.2px;
+  }
+  .trail-card.closed .trail-name { color: var(--gray-light); text-decoration: line-through; }
+  .trail-stats {
+    font-size: 12px;
+    color: var(--gray-light);
+    margin-top: 2px;
+  }
+
+  .trail-header-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+  }
+  .cond-pill {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    padding: 3px 9px;
+    border-radius: 12px;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .cond-pill.dry     { background: rgba(45,125,82,0.18);  color: var(--cond-dry); }
+  .cond-pill.muddy   { background: rgba(139,94,60,0.18);  color: var(--cond-muddy); }
+  .cond-pill.wet     { background: rgba(42,109,181,0.18); color: var(--cond-wet); }
+  .cond-pill.snow    { background: rgba(136,153,170,0.18);color: var(--cond-snow); }
+  .cond-pill.closed  { background: rgba(192,57,43,0.18);  color: var(--cond-closed); font-weight: 800; }
+  .cond-pill.unknown { background: rgba(80,80,80,0.2);    color: var(--cond-unknown); }
+
+  .chevron {
+    color: var(--gray-light);
+    font-size: 12px;
+    transition: transform 0.2s;
+    flex-shrink: 0;
+  }
+  .trail-card.expanded .chevron { transform: rotate(180deg); }
+
+  /* ── EXPANDED BODY ────────────────────────────────────────────────────────── */
+  .trail-card-body {
+    display: none;
+    padding: 0 16px 16px;
+    border-top: 1px solid var(--border);
+    padding-top: 14px;
+  }
+  .trail-card.expanded .trail-card-body { display: block; }
+
+  .body-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+  .body-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gray-light);
+    min-width: 90px;
+    padding-top: 3px;
+    flex-shrink: 0;
+  }
+  .body-value {
+    font-size: 13px;
+    color: var(--white);
+    flex: 1;
+  }
+  .connects-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+  }
+  .connect-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 10px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--gray-light);
+    cursor: pointer;
+    transition: all 0.15s;
+    background: var(--gray-mid);
+    text-decoration: none;
+    min-height: 32px;
+  }
+  .connect-pill:hover {
+    border-color: var(--orange);
+    color: var(--white);
+  }
+  .connect-pill.diff-green  { border-color: rgba(45,125,82,0.4);   color: var(--diff-green); }
+  .connect-pill.diff-blue   { border-color: rgba(42,109,181,0.4);  color: var(--diff-blue); }
+  .connect-pill.diff-black  { border-color: rgba(150,150,150,0.4); color: var(--diff-black); }
+  .connect-pill.diff-dbl-black { border-color: rgba(100,100,100,0.4); color: var(--diff-dblblack); }
+
+  .updated-text {
+    font-size: 11px;
+    color: var(--gray-light);
+    font-style: italic;
+    margin-top: 4px;
+  }
+
+  .trail-notes-text {
+    font-size: 13px;
+    color: var(--gray-light);
+    line-height: 1.5;
+  }
+
+  /* ── ADMIN SECTION ──────────────────────────────────────────────────────── */
+  .admin-section {
+    display: none;
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(231,67,2,0.2);
+  }
+  .admin-section.visible { display: block; }
+  .admin-eyebrow {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 12px;
+    opacity: 0.8;
+  }
+  .admin-capacity {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+  .capacity-number {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--orange);
+    line-height: 1;
+  }
+  .capacity-label {
+    font-size: 12px;
+    color: var(--gray-light);
+    line-height: 1.3;
+  }
+  .admin-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .admin-row {
+    display: flex;
+    gap: 10px;
+    align-items: flex-end;
+    flex-wrap: wrap;
+  }
+  .admin-field {
+    flex: 1;
+    min-width: 140px;
+  }
+  .admin-field label {
+    display: block;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--gray-light);
+    margin-bottom: 5px;
+  }
+  .admin-select, .admin-textarea {
+    width: 100%;
+    background: var(--gray-mid);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--white);
+    font-family: 'Barlow', sans-serif;
+    font-size: 13px;
+    padding: 8px 10px;
+    transition: border-color 0.15s;
+  }
+  .admin-select { appearance: none; cursor: pointer; }
+  .admin-select:focus, .admin-textarea:focus { outline: none; border-color: var(--orange); }
+  .admin-textarea { resize: vertical; min-height: 54px; }
+  .admin-save-btn {
+    background: var(--orange);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 9px 18px;
+    cursor: pointer;
+    min-height: 36px;
+    transition: background 0.15s;
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+  .admin-save-btn:hover { background: var(--orange-light); }
+  .admin-save-btn:active { transform: scale(0.97); }
+  .save-feedback {
+    font-size: 11px;
+    color: var(--diff-green);
+    font-family: 'Barlow Condensed', sans-serif;
+    letter-spacing: 0.5px;
+    margin-top: 4px;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .save-feedback.show { opacity: 1; }
+
+  /* ── CONNECTION MAP ──────────────────────────────────────────────────────── */
+  .map-section { margin-top: 28px; }
+  .map-toggle {
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--gray-light);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 8px 14px;
+    cursor: pointer;
+    transition: all 0.15s;
+    width: 100%;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .map-toggle:hover { border-color: var(--orange); color: var(--white); }
+  .map-toggle .toggle-icon { font-size: 10px; transition: transform 0.2s; }
+  .map-toggle.open .toggle-icon { transform: rotate(180deg); }
+  .map-container {
+    display: none;
+    margin-top: 12px;
+    background: var(--gray-dark);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    padding: 16px;
+  }
+  .map-container.visible { display: block; }
+  .map-container svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .map-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    color: var(--gray-light);
+    font-family: 'Barlow Condensed', sans-serif;
+    letter-spacing: 0.5px;
+  }
+  .legend-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* ── SHARE BUTTON + MODAL ────────────────────────────────────────────────── */
+  .share-section { margin-top: 28px; text-align: center; padding-bottom: 24px; }
+  .share-btn {
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--gray-light);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: all 0.15s;
+    min-height: 44px;
+  }
+  .share-btn:hover { border-color: var(--orange); color: var(--white); }
+
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.8);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: var(--gray-dark);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 28px 24px;
+    max-width: 320px;
+    width: 100%;
+    text-align: center;
+    position: relative;
+  }
+  .modal-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 18px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--white);
+    margin-bottom: 6px;
+  }
+  .modal-sub {
+    font-size: 13px;
+    color: var(--gray-light);
+    margin-bottom: 20px;
+  }
+  .modal img { border-radius: 6px; max-width: 200px; }
+  .modal-url {
+    font-size: 11px;
+    color: var(--gray-light);
+    word-break: break-all;
+    margin-top: 12px;
+    padding: 8px 10px;
+    background: var(--gray-mid);
+    border-radius: 4px;
+    font-family: monospace;
+  }
+  .modal-close {
+    position: absolute;
+    top: 12px; right: 14px;
+    background: none;
+    border: none;
+    color: var(--gray-light);
+    font-size: 20px;
+    cursor: pointer;
+    padding: 4px;
+    line-height: 1;
+    min-height: 36px; min-width: 36px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .modal-copy-btn {
+    margin-top: 10px;
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--gray-light);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    padding: 7px 14px;
+    cursor: pointer;
+    transition: all 0.15s;
+    min-height: 36px;
+  }
+  .modal-copy-btn:hover { border-color: var(--orange); color: var(--white); }
+
+  /* ── EMPTY STATES ────────────────────────────────────────────────────────── */
+  .empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--gray-light);
+    font-size: 14px;
+  }
+  .empty-state .empty-icon { font-size: 36px; margin-bottom: 10px; }
+  .loading-state {
+    padding: 32px 0;
+    color: var(--gray-light);
+    font-style: italic;
+    font-size: 14px;
+  }
+
+  /* ── MOBILE TWEAKS ───────────────────────────────────────────────────────── */
+  @media (max-width: 480px) {
+    .header { padding: 28px 20px 20px; }
+    .header-title { font-size: 36px; }
+    .page-wrap { padding: 0 12px 80px; }
+    .trail-card-header { padding: 12px 14px; }
+    .diff-badge { min-width: 60px; font-size: 10px; }
+  }
+
+  /* ── LIGHT MODE OVERRIDES ────────────────────────────────────────────────── */
+  [data-theme="light"] .header-title { color: #fff; }
+  [data-theme="light"] .header-sub   { color: #B8B0A8; }
+  [data-theme="light"] .trail-card   { box-shadow: 0 1px 4px rgba(0,0,0,0.07); }
+  [data-theme="light"] .admin-select,
+  [data-theme="light"] .admin-textarea { color: #111; }
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="site-nav-inner">
+    <a href="../index.html" class="site-nav-brand">
+      <img src="../assets/images/skyridge_jr-devo_logo.png" alt="" class="site-nav-logo">
+      Skyridge Jr Devo
+    </a>
+    <a href="../tools/agenda.html" class="site-nav-link">Agendas</a>
+    <a href="../tools/roles.html" class="site-nav-link">Roles</a>
+    <a href="../tools/tracker.html" class="site-nav-link">Tracker</a>
+    <a href="../tools/meeting.html" class="site-nav-link">Meetings</a>
+    <a href="../tools/resources.html" class="site-nav-link">Resources</a>
+    <a href="../tools/trail-planner.html" class="site-nav-link active">Trails</a>
+  </div>
+</nav>
+
+<div class="header">
+  <div class="header-inner">
+    <div class="header-eyebrow">Coaching Hub</div>
+    <div class="header-title">Trail <span>Planner</span></div>
+    <div class="header-sub">Trail conditions &nbsp;·&nbsp; Connections &nbsp;·&nbsp; Capacity</div>
+    <div class="admin-badge" id="admin-badge">&#9679; Head Coach View</div>
+  </div>
+</div>
+
+<div class="page-wrap">
+
+  <!-- TRAILHEAD SELECTOR -->
+  <div class="trailhead-section">
+    <div class="section-label">Select Trailhead</div>
+    <div class="trailhead-select-wrap">
+      <select id="trailhead-select">
+        <option value="">— Choose a practice location —</option>
+      </select>
+    </div>
+    <div class="trailhead-meta" id="trailhead-meta" style="display:none;">
+      <div class="th-meta-item">&#128205; <strong id="th-area"></strong></div>
+      <div class="th-meta-item" id="th-dist-wrap">&#127939; <strong id="th-dist"></strong> from Skyridge HS</div>
+      <div class="th-meta-item" id="th-parking-wrap">&#128663; <span id="th-parking"></span></div>
+    </div>
+  </div>
+
+  <!-- DIFFICULTY FILTER -->
+  <div class="filter-section" id="filter-section" style="display:none;">
+    <div class="section-label">Filter by Difficulty</div>
+    <div class="filter-pills">
+      <div class="filter-pill active" data-filter="all">ALL</div>
+      <div class="filter-pill" data-filter="green">
+        <span class="pill-dot" style="background:var(--diff-green)"></span> GREEN
+      </div>
+      <div class="filter-pill" data-filter="blue">
+        <span class="pill-square" style="background:var(--diff-blue)"></span> BLUE
+      </div>
+      <div class="filter-pill" data-filter="black">
+        <span class="pill-diamond" style="background:var(--diff-black)"></span> BLACK
+      </div>
+      <div class="filter-pill" data-filter="dbl-black">
+        <span class="pill-diamond" style="background:var(--diff-dblblack)"></span>
+        <span class="pill-diamond" style="background:var(--diff-dblblack); margin-left:-4px;"></span>
+        DBL BLACK
+      </div>
+    </div>
+  </div>
+
+  <!-- TRAIL CARDS -->
+  <div class="trails-section" id="trails-section">
+    <div class="empty-state">
+      <div class="empty-icon">&#127937;</div>
+      <div>Select a trailhead above to see trail information.</div>
+    </div>
+  </div>
+
+  <!-- CONNECTION MAP -->
+  <div class="map-section" id="map-section" style="display:none;">
+    <button class="map-toggle" id="map-toggle">
+      <span>Trail Connection Map</span>
+      <span class="toggle-icon">&#9660;</span>
+    </button>
+    <div class="map-container" id="map-container"></div>
+    <div class="map-legend" id="map-legend" style="display:none;">
+      <div class="legend-item"><div class="legend-dot" style="background:var(--diff-green)"></div> Green</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--diff-blue)"></div> Blue</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--diff-black)"></div> Black</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--diff-dblblack);border:1px solid #666"></div> Dbl Black</div>
+    </div>
+  </div>
+
+  <!-- SHARE -->
+  <div class="share-section" id="share-section" style="display:none;">
+    <button class="share-btn" id="share-btn">&#128279; Share This Trailhead</button>
+  </div>
+
+</div>
+
+<!-- QR MODAL -->
+<div class="modal-overlay" id="share-modal">
+  <div class="modal">
+    <button class="modal-close" id="modal-close">&#215;</button>
+    <div class="modal-title" id="modal-th-name">Trailhead</div>
+    <div class="modal-sub">Scan to open on any device</div>
+    <img id="modal-qr" src="" alt="QR Code" width="200" height="200">
+    <div class="modal-url" id="modal-url"></div>
+    <button class="modal-copy-btn" id="modal-copy">Copy Link</button>
+  </div>
+</div>
+
+<script src="../data/trail-fetcher.js"></script>
+<script>
+// ─────────────────────────────────────────────────────────────────────────────
+//  Trail Planner — main page logic
+// ─────────────────────────────────────────────────────────────────────────────
+
+let ALL_TRAILS_DATA = null;      // full trails.json object
+let CURRENT_TH = null;           // current trailhead object
+let LIVE_CONDITIONS = {};        // Firebase overrides: { trailId: {status, updated_at, updated_by, notes} }
+let ACTIVE_FILTER = 'all';
+let PAGE_IS_ADMIN = false;
+let CURRENT_USER_EMAIL = '';
+
+const DIFF_LABELS  = { green: '● GREEN', blue: '■ BLUE', black: '◆ BLACK', 'dbl-black': '◆◆ DBL-BLACK' };
+const DIFF_SYMBOLS = { green: '●', blue: '■', black: '◆', 'dbl-black': '◆◆' };
+const COND_LABELS  = { dry: 'DRY', muddy: 'MUDDY', wet: 'WET', snow: 'SNOW', closed: 'CLOSED', unknown: 'Unknown' };
+const DIFF_COLORS  = {
+  green:     'var(--diff-green)',
+  blue:      'var(--diff-blue)',
+  black:     'var(--diff-black)',
+  'dbl-black': 'var(--diff-dblblack)'
+};
+
+// ── Helpers ──────────────────────────────────────────────────────────────────
+function timeAgo(iso) {
+  if (!iso) return null;
+  const diff = (Date.now() - new Date(iso)) / 1000;
+  if (diff < 60) return 'just now';
+  if (diff < 3600) return `${Math.round(diff/60)}m ago`;
+  if (diff < 86400) return `${Math.round(diff/3600)}h ago`;
+  return `${Math.round(diff/86400)}d ago`;
+}
+
+function escHtml(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ── Effective condition for a trail (Firebase overrides static JSON) ──────────
+function effectiveCondition(trail) {
+  const live = LIVE_CONDITIONS[trail.id];
+  if (live && live.status) return { ...trail.conditions, ...live };
+  return trail.conditions;
+}
+
+// ── Build trail ID → trail object index for current trailhead ─────────────────
+function buildIndex(trails) {
+  const idx = {};
+  trails.forEach(t => idx[t.id] = t);
+  return idx;
+}
+
+// ── Render difficulty badge HTML ──────────────────────────────────────────────
+function diffBadge(difficulty) {
+  const label = DIFF_LABELS[difficulty] || difficulty.toUpperCase();
+  return `<span class="diff-badge ${difficulty}">${label}</span>`;
+}
+
+// ── Render condition pill HTML ────────────────────────────────────────────────
+function condPill(status) {
+  const label = COND_LABELS[status] || status;
+  return `<span class="cond-pill ${status || 'unknown'}">${label}</span>`;
+}
+
+// ── Render trail cards ────────────────────────────────────────────────────────
+function renderTrails() {
+  if (!CURRENT_TH) return;
+  const trails = CURRENT_TH.trails;
+  const trailIndex = buildIndex(trails);
+  const section = document.getElementById('trails-section');
+
+  const filtered = trails.filter(t => {
+    if (ACTIVE_FILTER === 'all') return true;
+    // Always show closed trails regardless of filter
+    const cond = effectiveCondition(t);
+    if (cond.status === 'closed') return true;
+    return t.difficulty === ACTIVE_FILTER;
+  });
+
+  const count = document.createElement('div');
+  count.className = 'trails-count';
+  count.textContent = `${filtered.length} TRAIL${filtered.length !== 1 ? 'S' : ''} ${ACTIVE_FILTER !== 'all' ? '· FILTERED' : ''}`;
+
+  section.innerHTML = '';
+  section.appendChild(count);
+
+  if (filtered.length === 0) {
+    section.innerHTML += `<div class="empty-state"><div>No trails match this filter.</div></div>`;
+    return;
+  }
+
+  filtered.forEach(trail => {
+    const cond = effectiveCondition(trail);
+    const isClosed = cond.status === 'closed';
+    const updatedAt = timeAgo(cond.updated_at);
+    const updatedBy = cond.updated_by ? cond.updated_by.split('@')[0] : '';
+
+    // Connections within this trailhead
+    const connHtml = trail.connects_to
+      .map(cid => {
+        const ct = trailIndex[cid];
+        if (!ct) return '';
+        const sym = DIFF_SYMBOLS[ct.difficulty] || '●';
+        return `<span class="connect-pill diff-${ct.difficulty}" data-target="${cid}" role="button" tabindex="0">${sym} ${escHtml(ct.name)}</span>`;
+      }).filter(Boolean).join('');
+
+    // Stats
+    const stats = [
+      trail.length_mi ? `${trail.length_mi} mi` : null,
+      trail.elevation_gain_ft ? `+${trail.elevation_gain_ft} ft` : null,
+      trail.direction !== 'both' ? trail.direction : null,
+    ].filter(Boolean).join(' · ');
+
+    // Admin section
+    const capacity = trail.capacity_max_riders;
+    const adminHtml = `
+      <div class="admin-section${PAGE_IS_ADMIN ? ' visible' : ''}" data-trail-id="${trail.id}">
+        <div class="admin-eyebrow">&#9670; Head Coach</div>
+        ${capacity !== null ? `
+          <div class="admin-capacity">
+            <div class="capacity-number">${capacity}</div>
+            <div class="capacity-label">max riders<br><span style="font-size:10px;color:var(--gray-light)">land-owner reported</span></div>
+          </div>` : `
+          <div style="font-size:12px;color:var(--gray-light);margin-bottom:12px;">Capacity: not yet set — provide sheet when available</div>`
+        }
+        <div class="admin-fields">
+          <div class="admin-row">
+            <div class="admin-field">
+              <label>Condition</label>
+              <select class="admin-select admin-cond-select">
+                <option value="unknown">Unknown</option>
+                <option value="dry">Dry</option>
+                <option value="muddy">Muddy</option>
+                <option value="wet">Wet</option>
+                <option value="snow">Snow</option>
+                <option value="closed">Closed</option>
+              </select>
+            </div>
+            <button class="admin-save-btn">Save</button>
+          </div>
+          <div class="admin-field">
+            <label>Notes</label>
+            <textarea class="admin-textarea admin-notes-field" placeholder="Conditions note…" rows="2"></textarea>
+          </div>
+          <div class="save-feedback">&#10003; Saved</div>
+        </div>
+      </div>`;
+
+    const card = document.createElement('div');
+    card.className = `trail-card${isClosed ? ' closed' : ''}`;
+    card.dataset.trailId = trail.id;
+    card.dataset.difficulty = trail.difficulty;
+    card.innerHTML = `
+      <div class="trail-card-header" role="button" tabindex="0" aria-expanded="false">
+        ${diffBadge(trail.difficulty)}
+        <div class="trail-header-info">
+          <div class="trail-name">${escHtml(trail.name)}</div>
+          ${stats ? `<div class="trail-stats">${stats}</div>` : ''}
+        </div>
+        <div class="trail-header-right">
+          ${condPill(cond.status)}
+          <span class="chevron">&#9660;</span>
+        </div>
+      </div>
+      <div class="trail-card-body">
+        ${connHtml ? `
+          <div class="body-row">
+            <div class="body-label">Connects To</div>
+            <div class="body-value"><div class="connects-pills">${connHtml}</div></div>
+          </div>` : ''}
+        ${(updatedAt || cond.notes) ? `
+          <div class="body-row">
+            <div class="body-label">Conditions</div>
+            <div class="body-value">
+              ${cond.notes ? `<div>${escHtml(cond.notes)}</div>` : ''}
+              ${updatedAt ? `<div class="updated-text">Updated ${updatedAt}${updatedBy ? ` by ${escHtml(updatedBy)}` : ''}</div>` : ''}
+            </div>
+          </div>` : ''}
+        ${trail.notes ? `
+          <div class="body-row">
+            <div class="body-label">Notes</div>
+            <div class="body-value trail-notes-text">${escHtml(trail.notes)}</div>
+          </div>` : ''}
+        ${adminHtml}
+      </div>`;
+
+    // Pre-fill admin fields with current live condition
+    const condSelect = card.querySelector('.admin-cond-select');
+    const notesField = card.querySelector('.admin-notes-field');
+    if (condSelect) condSelect.value = cond.status || 'unknown';
+    if (notesField) notesField.value = cond.notes || '';
+
+    section.appendChild(card);
+  });
+
+  // Render map if ≥3 trails
+  if (CURRENT_TH.trails.length >= 3) {
+    renderMap(CURRENT_TH.trails, trailIndex);
+    document.getElementById('map-section').style.display = '';
+  } else {
+    document.getElementById('map-section').style.display = 'none';
+  }
+}
+
+// ── Re-render just condition pills without full rebuild ───────────────────────
+function updateConditionPills() {
+  if (!CURRENT_TH) return;
+  CURRENT_TH.trails.forEach(trail => {
+    const card = document.querySelector(`.trail-card[data-trail-id="${trail.id}"]`);
+    if (!card) return;
+    const cond = effectiveCondition(trail);
+    const isClosed = cond.status === 'closed';
+    const pill = card.querySelector('.cond-pill');
+    if (pill) {
+      pill.className = `cond-pill ${cond.status || 'unknown'}`;
+      pill.textContent = COND_LABELS[cond.status] || cond.status;
+    }
+    card.classList.toggle('closed', isClosed);
+    const nameEl = card.querySelector('.trail-name');
+    if (nameEl) nameEl.style.opacity = isClosed ? '0.5' : '';
+
+    // Update admin fields to reflect live
+    const condSelect = card.querySelector('.admin-cond-select');
+    const notesField = card.querySelector('.admin-notes-field');
+    const updatedRow = card.querySelector('.updated-text');
+    if (condSelect && document.activeElement !== condSelect) condSelect.value = cond.status || 'unknown';
+    if (notesField && document.activeElement !== notesField) notesField.value = cond.notes || '';
+    if (updatedRow) {
+      const ago = timeAgo(cond.updated_at);
+      const by = cond.updated_by ? cond.updated_by.split('@')[0] : '';
+      updatedRow.textContent = ago ? `Updated ${ago}${by ? ` by ${by}` : ''}` : '';
+    }
+  });
+}
+
+// ── Connection Map (SVG) ──────────────────────────────────────────────────────
+function renderMap(trails, trailIndex) {
+  const container = document.getElementById('map-container');
+  const legend = document.getElementById('map-legend');
+
+  // Position nodes in a grid
+  const cols = Math.min(trails.length, 4);
+  const rows = Math.ceil(trails.length / cols);
+  const cellW = 110, cellH = 80, pad = 30;
+  const W = cols * cellW + pad * 2;
+  const H = rows * cellH + pad * 2;
+
+  const positions = {};
+  trails.forEach((t, i) => {
+    const col = i % cols;
+    const row = Math.floor(i / cols);
+    positions[t.id] = {
+      x: pad + col * cellW + cellW / 2,
+      y: pad + row * cellH + cellH / 2
+    };
+  });
+
+  const DIFF_SVG_COLORS = {
+    green: '#2D7D52', blue: '#2A6DB5', black: '#888', 'dbl-black': '#ccc'
+  };
+
+  let svgLines = '';
+  let svgNodes = '';
+  const drawnEdges = new Set();
+
+  trails.forEach(trail => {
+    const p1 = positions[trail.id];
+    trail.connects_to.forEach(cid => {
+      const edgeKey = [trail.id, cid].sort().join('|');
+      if (drawnEdges.has(edgeKey)) return;
+      drawnEdges.add(edgeKey);
+      const p2 = positions[cid];
+      if (!p2) return;
+      svgLines += `<line x1="${p1.x}" y1="${p1.y}" x2="${p2.x}" y2="${p2.y}" stroke="#2E2E2E" stroke-width="1.5"/>`;
+    });
+  });
+
+  trails.forEach(trail => {
+    const p = positions[trail.id];
+    const color = DIFF_SVG_COLORS[trail.difficulty] || '#888';
+    const label = trail.name.length > 12 ? trail.name.slice(0, 11) + '…' : trail.name;
+    svgNodes += `
+      <g class="map-node" data-trail-id="${trail.id}" role="button" tabindex="0" cursor="pointer">
+        <circle cx="${p.x}" cy="${p.y}" r="14" fill="${color}" fill-opacity="0.25" stroke="${color}" stroke-width="1.5"/>
+        <text x="${p.x}" y="${p.y + 28}" text-anchor="middle" font-family="Barlow Condensed, sans-serif" font-size="10" font-weight="600" fill="#888">${escHtml(label)}</text>
+      </g>`;
+  });
+
+  const svgStr = `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg">${svgLines}${svgNodes}</svg>`;
+  container.innerHTML = svgStr;
+  legend.style.display = 'flex';
+
+  // SVG node click → scroll to card and highlight
+  container.querySelectorAll('.map-node').forEach(node => {
+    const handler = () => {
+      const tid = node.dataset.trailId;
+      scrollToTrailCard(tid);
+    };
+    node.addEventListener('click', handler);
+    node.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') handler(); });
+  });
+}
+
+// ── Scroll to and highlight a trail card ─────────────────────────────────────
+function scrollToTrailCard(trailId) {
+  const card = document.querySelector(`.trail-card[data-trail-id="${trailId}"]`);
+  if (!card) return;
+  // Expand if collapsed
+  if (!card.classList.contains('expanded')) {
+    card.classList.add('expanded');
+    const header = card.querySelector('.trail-card-header');
+    if (header) header.setAttribute('aria-expanded', 'true');
+  }
+  card.classList.add('highlighted');
+  card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  setTimeout(() => card.classList.remove('highlighted'), 2000);
+}
+
+// ── Load trailhead data ───────────────────────────────────────────────────────
+function loadTrailhead(thId) {
+  if (!ALL_TRAILS_DATA || !thId) {
+    CURRENT_TH = null;
+    document.getElementById('trails-section').innerHTML = '<div class="empty-state"><div class="empty-icon">&#127937;</div><div>Select a trailhead above to see trail information.</div></div>';
+    document.getElementById('filter-section').style.display = 'none';
+    document.getElementById('map-section').style.display = 'none';
+    document.getElementById('share-section').style.display = 'none';
+    document.getElementById('trailhead-meta').style.display = 'none';
+    return;
+  }
+
+  CURRENT_TH = ALL_TRAILS_DATA.trailheads.find(t => t.id === thId) || null;
+
+  if (!CURRENT_TH) return;
+
+  // Update meta row
+  document.getElementById('th-area').textContent = CURRENT_TH.area;
+  document.getElementById('th-dist').textContent = `${CURRENT_TH.distance_from_skyridge_mi} mi`;
+  if (CURRENT_TH.parking_notes) {
+    document.getElementById('th-parking').textContent = CURRENT_TH.parking_notes;
+    document.getElementById('th-parking-wrap').style.display = '';
+  } else {
+    document.getElementById('th-parking-wrap').style.display = 'none';
+  }
+  document.getElementById('trailhead-meta').style.display = 'flex';
+
+  // Reset filter
+  ACTIVE_FILTER = 'all';
+  document.querySelectorAll('.filter-pill').forEach(p => p.classList.toggle('active', p.dataset.filter === 'all'));
+
+  document.getElementById('filter-section').style.display = CURRENT_TH.trails.length > 0 ? '' : 'none';
+  document.getElementById('share-section').style.display = '';
+
+  renderTrails();
+
+  // Update URL param without reload
+  const url = new URL(window.location);
+  url.searchParams.set('trailhead', thId);
+  history.replaceState({}, '', url);
+}
+
+// ── Populate trailhead selector ───────────────────────────────────────────────
+function populateSelector(data) {
+  const sel = document.getElementById('trailhead-select');
+  sel.innerHTML = '<option value="">— Choose a practice location —</option>';
+  data.trailheads.forEach(th => {
+    const opt = document.createElement('option');
+    opt.value = th.id;
+    opt.textContent = `${th.name} (${th.area})`;
+    sel.appendChild(opt);
+  });
+
+  sel.addEventListener('change', () => loadTrailhead(sel.value));
+
+  // Auto-select from URL param
+  const param = new URLSearchParams(window.location.search).get('trailhead');
+  if (param) {
+    sel.value = param;
+    if (sel.value) loadTrailhead(param);
+  }
+}
+
+// ── Filter pills ──────────────────────────────────────────────────────────────
+document.querySelectorAll('.filter-pill').forEach(pill => {
+  pill.addEventListener('click', () => {
+    ACTIVE_FILTER = pill.dataset.filter;
+    document.querySelectorAll('.filter-pill').forEach(p => p.classList.toggle('active', p === pill));
+    renderTrails();
+  });
+});
+
+// ── Trail card interaction (expand/collapse + connections) ────────────────────
+document.getElementById('trails-section').addEventListener('click', e => {
+  // Header toggle
+  const header = e.target.closest('.trail-card-header');
+  if (header) {
+    const card = header.closest('.trail-card');
+    const isExpanded = card.classList.toggle('expanded');
+    header.setAttribute('aria-expanded', isExpanded);
+    return;
+  }
+  // Connection pill → jump to card
+  const pill = e.target.closest('.connect-pill');
+  if (pill) {
+    scrollToTrailCard(pill.dataset.target);
+    return;
+  }
+  // Admin save button
+  const saveBtn = e.target.closest('.admin-save-btn');
+  if (saveBtn && PAGE_IS_ADMIN) {
+    const section = saveBtn.closest('.admin-section');
+    const trailId = section.dataset.trailId;
+    const status = section.querySelector('.admin-cond-select').value;
+    const notes = section.querySelector('.admin-notes-field').value;
+    TrailStore.saveTrailCondition(trailId, { status, notes, updatedBy: CURRENT_USER_EMAIL });
+    const fb = section.querySelector('.save-feedback');
+    if (fb) { fb.classList.add('show'); setTimeout(() => fb.classList.remove('show'), 2500); }
+  }
+});
+
+// Keyboard accessibility for card headers
+document.getElementById('trails-section').addEventListener('keydown', e => {
+  if (e.key === 'Enter' || e.key === ' ') {
+    const header = e.target.closest('.trail-card-header');
+    if (header) { e.preventDefault(); header.click(); }
+  }
+});
+
+// ── Map toggle ────────────────────────────────────────────────────────────────
+document.getElementById('map-toggle').addEventListener('click', () => {
+  const toggle = document.getElementById('map-toggle');
+  const container = document.getElementById('map-container');
+  const legend = document.getElementById('map-legend');
+  const open = toggle.classList.toggle('open');
+  container.classList.toggle('visible', open);
+  if (legend) legend.style.display = open ? 'flex' : 'none';
+});
+
+// ── Share / QR modal ──────────────────────────────────────────────────────────
+document.getElementById('share-btn').addEventListener('click', () => {
+  if (!CURRENT_TH) return;
+  const url = new URL(window.location);
+  url.searchParams.set('trailhead', CURRENT_TH.id);
+  const shareUrl = url.toString();
+  const qrUrl = `https://chart.googleapis.com/chart?chs=200x200&cht=qr&chl=${encodeURIComponent(shareUrl)}&choe=UTF-8`;
+  document.getElementById('modal-th-name').textContent = CURRENT_TH.name;
+  document.getElementById('modal-qr').src = qrUrl;
+  document.getElementById('modal-url').textContent = shareUrl;
+  document.getElementById('share-modal').classList.add('open');
+});
+document.getElementById('modal-close').addEventListener('click', () => {
+  document.getElementById('share-modal').classList.remove('open');
+});
+document.getElementById('share-modal').addEventListener('click', e => {
+  if (e.target === e.currentTarget) e.currentTarget.classList.remove('open');
+});
+document.getElementById('modal-copy').addEventListener('click', () => {
+  const url = document.getElementById('modal-url').textContent;
+  navigator.clipboard.writeText(url).then(() => {
+    const btn = document.getElementById('modal-copy');
+    btn.textContent = '✓ Copied!';
+    setTimeout(() => btn.textContent = 'Copy Link', 2000);
+  });
+});
+
+// ── Auth state + admin role + data load ───────────────────────────────────────
+firebase.auth().onAuthStateChanged(user => {
+  if (!user) return; // auth.js handles redirect
+
+  CURRENT_USER_EMAIL = user.email || '';
+
+  // Check admin role, then load data
+  TrailStore.checkAdminRole(user.uid).then(isAdmin => {
+    PAGE_IS_ADMIN = isAdmin;
+    if (isAdmin) {
+      document.getElementById('admin-badge').classList.add('visible');
+    }
+
+    // Load trail data
+    TrailFetcher.load().then(data => {
+      ALL_TRAILS_DATA = data;
+      populateSelector(data);
+
+      // Start live condition listener (overlays static JSON)
+      TrailStore.onTrailConditions(conditions => {
+        LIVE_CONDITIONS = conditions;
+        if (CURRENT_TH) updateConditionPills();
+      });
+    }).catch(err => {
+      console.error('Trail data load failed:', err);
+      document.getElementById('trails-section').innerHTML =
+        '<div class="empty-state"><div>Unable to load trail data. Please refresh.</div></div>';
+    });
+  });
+});
+</script>
+</body>
+</html>

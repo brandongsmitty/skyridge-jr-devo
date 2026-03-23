@@ -1,0 +1,9 @@
+# Firebase CLI cache
+.firebase/
+
+# Claude Code internal state
+.claude/
+
+# OS / editor
+.DS_Store
+*.swp

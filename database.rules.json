@@ -2,7 +2,10 @@
   "rules": {
     "skyridge-jr-devo": {
       ".read": "auth != null",
-      ".write": "auth != null"
+      ".write": "auth != null",
+      "trail_conditions": {
+        ".write": "auth != null && root.child('skyridge-jr-devo/admins').child(auth.uid).exists()"
+      }
     }
   }
 }
